@@ -1,6 +1,6 @@
 SCREENLENGTH = 40
-BACK = "B - Back"
-QUIT = "Q - Quit"
+BACK_STR = "B - Back"
+QUIT_STR = "Q - Quit"
 
 
 def printLine():
