@@ -30,7 +30,6 @@ def display(choice_list):
 #         to_add_to_crew_list = line.split(",")
 #         crew_list.append(to_add_to_crew_list)
 #         return crew_list
-
         
 def open_file(file_name):
     try:
