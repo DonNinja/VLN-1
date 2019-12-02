@@ -20,7 +20,27 @@ def display(choice_list):
         print(line)
     printLine()
 
+<<<<<<< HEAD
 def display_employee_screen():
+=======
+def create_crew_list(file_stream):
+    crew_list = []
+    for line in file_stream:
+        crew_list.append() = line.split(",")
+    return crew_list
+
+        
+def open_file(file_name):
+    try:
+        file_stream = open(file_name, "r")
+        return file_stream
+    except FileNotFoundError:
+        return None
+
+file_name = "crew.csv"
+file_stream = open_file(file_name)
+display_crew = create_crew_list(file_stream)
+>>>>>>> 06ede953d0139431840f8cb31dea824a899337a1
 
 
 
@@ -47,5 +67,6 @@ filter_work_trips_screen = ["1- Show All Work Trips", "2 - Show For Day", "3 - S
 
 
 display(choice_list)
+ #geggjað comment
 
-# Böddi löpp
+#hello world
