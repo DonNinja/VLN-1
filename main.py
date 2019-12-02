@@ -25,8 +25,3 @@ choice_list = ["1 - Single Kek", "2 - Double kek",
                "3 - Triple kek", BACK_STR, QUIT_STR]
 
 display(choice_list)
-
-# This is a dummy line, for GIT testing
-# Þið eruð rosa flottir strákar
-
-# GIT ER AWESOME
