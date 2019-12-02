@@ -1,4 +1,6 @@
 SCREENLENGTH = 40
+BACK = "B - Back"
+QUIT = "Q - Quit"
 
 
 def printLine():
@@ -20,6 +22,6 @@ def display(choice_list):
 
 
 choice_list = ["1 - Single Kek", "2 - Double kek",
-               "3 - Triple kek", "B - Back", "Q - Quit"]
+               "3 - Triple kek", BACK, QUIT]
 
 display(choice_list)
