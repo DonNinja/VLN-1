@@ -43,6 +43,11 @@ file_name = "crew.csv"
 file_stream = open_file(file_name)
 # display_crew = create_crew_list(file_stream)
     
+def input_check(inp,choice_dict):
+    for i in choice_dict:
+        if inp == i:
+            return True
+
 def startScreen():
     #valid_inputs = 123 q b
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
@@ -50,7 +55,12 @@ def startScreen():
     display(choice_list)
     inp = askForInput()
     #Check if input is valid
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking == True:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        startScreen()
 
 def employeeScreen():
     choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", QUIT_STR]
