@@ -26,5 +26,6 @@ choice_list = ["1 - Single Kek", "2 - Double kek",
 
 display(choice_list)
 # geggjað comment
+# Silli Sæti
 
 # hello world
