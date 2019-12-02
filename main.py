@@ -22,6 +22,8 @@ def display(choice_list):
 
 
 choice_list = ["1 - Single Kek", "2 - Double kek",
-               "3 - Triple kek", BACK, QUIT]
+               "3 - Triple kek", BACK_STR, QUIT_STR]
 
 display(choice_list)
+
+#hello world
