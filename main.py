@@ -22,7 +22,12 @@ def display(choice_list):
 
 
 choice_list = ["1 - Single Kek", "2 - Double kek",
-               "3 - Triple kek", BACK, QUIT]
+               "3 - Triple kek", BACK_STR, QUIT_STR]
 
 display(choice_list)
+<<<<<<< HEAD
  #geggjað comment
+=======
+
+#hello world
+>>>>>>> dfc8263662b3413315c658096132a36008d750b5
