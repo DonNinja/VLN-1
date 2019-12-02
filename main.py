@@ -24,37 +24,12 @@ def display(choice_list):
         print(line)
     printLine()
     
-<<<<<<< HEAD
-def startScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {1 : employeeScreen(), 2 : airplaneScreen(), 3 : airplaneScreen(), "Q" : exit()}
-    display(choice_list)
-    inp = askForInput()
-    choice(choice_dict, inp)
-
-
-def employeeScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {1 : employeeScreen(), 2 : airplaneScreen(), 3 : airplaneScreen(), "Q" : exit()}
-    choice_dict = {}
-    display(choice_list)
-    inp = askForInput()
-    choice(choice_dict, inp)
-    pass
-
-def create_crew_list(file_stream):
-    crew_list = []
-    for line in file_stream:
-        crew_list.append() = line.split(",")
-    return crew_list
-=======
 # def create_crew_list(file_stream):
 #     crew_list = []
 #     for line in file_stream:
 #         to_add_to_crew_list = line.split(",")
 #         crew_list.append(to_add_to_crew_list)
 #         return crew_list
->>>>>>> b04d5f2f74302d809d2869745125f28707c0e970
 
         
 def open_file(file_name):
@@ -66,9 +41,6 @@ def open_file(file_name):
 
 file_name = "crew.csv"
 file_stream = open_file(file_name)
-<<<<<<< HEAD
-display_crew = create_crew_list(file_stream)
-=======
 # display_crew = create_crew_list(file_stream)
     
 def startScreen():
@@ -101,7 +73,6 @@ def addPilotScreen():
     inp = askForInput()
     choice_dict.get(inp)
     pass
->>>>>>> b04d5f2f74302d809d2869745125f28707c0e970
 
 def addAttendantScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
