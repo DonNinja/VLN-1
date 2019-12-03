@@ -8,11 +8,40 @@ def askForInput():
 def back():
     return ""
 
+def printHeaderUpperLine():
+    line = ""
+    while len(line) < SCREENLENGTH:
+        line += "_"
+    print(line)
+    
+def printHeaderUnderLine():
+    line = ""
+    while len(line) < SCREENLENGTH:
+        line += "‾"
+    print(line)
+
+
 def printLine():
     line = ""
     while len(line) < SCREENLENGTH:
         line += "="
     print(line)
+    
+def headerDisplay(screen_name):
+    printHeaderUpperLine()
+    half_screen_length = round(SCREENLENGTH/2, 0)
+    half_screen_name_length = round(len(screen_name)/2, 0)
+    screen_length_center = half_screen_length - half_screen_name_length
+    line = "|"
+    while len(line) < screen_length_center:
+        line += " "
+    line += screen_name
+    while len(line) < SCREENLENGTH-1:
+        line += " "
+    line += "|"
+    print(line)
+    printHeaderUnderLine()
+    
 
 def display(choice_list):
     printLine()
@@ -48,7 +77,8 @@ def input_check(inp,choice_dict):
             return True
 
 def startScreen():
-    #valid_inputs = 123 q b
+    headerDisplay("Starting screen")
+    #valid_inputs = 123 q
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
     choice_dict = {"1" : employeeScreen, "2" : airplaneScreen, "3" : tripAndLocScreen, "Q" : exit}
     display(choice_list)
@@ -59,7 +89,7 @@ def startScreen():
         choice_dict.get(inp)()
     else:
         print("Input is invalid!")
-        startScreen()
+        # startScreen()
 
 def employeeScreen():
     choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", BACK_STR, QUIT_STR]
@@ -77,30 +107,28 @@ def addEmployeeScreen():
         choice_dict.get(inp)()
 
 def addMiscEmpScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {}
+    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
 
 def addPilotScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {}
+    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
-    pass
 
 def addAttendantScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {}
+    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
-    pass
 
 def showEmpScreen():
-    choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", QUIT_STR]
+    choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
     choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
@@ -108,32 +136,32 @@ def showEmpScreen():
     
     
 def editEmpScreen():
-    choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", QUIT_STR]
-    choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen}
+    choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
     
     
 def miscFilterScreen():
-    choice_list = ["1 - Show All Employees", "2 - Show Employees at work on day/week", "3 - Show Employees not at work on day/week", "4 - Look for Employee bt SSN", QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen }
+    choice_list = ["1 - Show All Employees", "2 - Show Employees at work on day/week", "3 - Show Employees not at work on day/week", "4 - Look for Employee bt SSN", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
     
     
 def attFilterScreen():
-    choice_list = ["1 - Show All Attendants", "2 - Show Attendants at work on day/week", "3 - Show Attendants not at work on day/week", "4 - Look for Attendant bt SSN", QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen }
+    choice_list = ["1 - Show All Attendants", "2 - Show Attendants at work on day/week", "3 - Show Attendants not at work on day/week", "4 - Look for Attendant bt SSN", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
     
     
 def pilotFilterScreen():
-    choice_list = ["1 - Show All Pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot bt SSN", QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen }
+    choice_list = ["1 - Show All Pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot bt SSN", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
@@ -149,7 +177,7 @@ def atWorkScreen():
     
 def notAtWorkScreen():
     choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
@@ -157,7 +185,7 @@ def notAtWorkScreen():
     
 def airplaneScreen():
     choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
@@ -165,7 +193,7 @@ def airplaneScreen():
     
 def tripAndLocScreen():
     choice_list = ["1 - Locations", "2 - Work Trips", QUIT_STR]
-    choice_dict = {"1" : locationScreen, "2" : workTripsScreen}
+    choice_dict = {"1" : locationScreen, "2" : workTripsScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
@@ -173,7 +201,7 @@ def tripAndLocScreen():
     
 def workTripsScreen():
     choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", QUIT_STR]
-    choice_dict = {"2" : filterWorkTripsScreen}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
@@ -181,7 +209,7 @@ def workTripsScreen():
     
 def locationScreen():
     choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
@@ -189,15 +217,15 @@ def locationScreen():
     
 def whileEditingScreen():
     choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
     
     
 def phoneEditScreen():
-    choice_list = ["1 - Change Home Phone Number", "2 - Change Mobile Number", QUIT_STR]
-    choice_dict = {}
+    choice_list = ["1 - Change Home Phone Number", "2 - Change Mobile Number", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
@@ -205,15 +233,14 @@ def phoneEditScreen():
     
 def filterWorkTripsScreen():
     choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
-    pass
     
 def dayWeekScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {}
+    choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
