@@ -173,7 +173,7 @@ def showEmpScreen():
         choice_dict.get(inp)()
     else:
         print("Input is invalid!")
-        show_employee_screen()
+        showEmpScreen()
     
     
 def editEmpScreen():
