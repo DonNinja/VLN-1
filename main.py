@@ -112,26 +112,17 @@ def employeeScreen():
         employeeScreen()
 
 def addEmployeeScreen():
-<<<<<<< HEAD
-    while True:
-        choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR, QUIT_STR]
-        choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            choice_dict.get(inp)()
-        else:
-            print("Input is invalid!")
-            addEmployeeScreen()
-=======
     headerDisplay("Add employee screen")
     choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR,QUIT_STR]
     choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back,"Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
->>>>>>> 46b349cf65753dc42c40bfae7004299a1008d4e1
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        addEmployeeScreen()
 
 def addMiscEmpScreen():
     headerDisplay(" screen")
