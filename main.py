@@ -5,9 +5,6 @@ path_list = []
 SCREENLENGTH = 60
 BACK_STR = "B - Back"
 QUIT_STR = "Q - Quit"
-
-def restart():
-    os.execl(sys.executable, sys.executable, * sys.argv)
     
 def back():
     return
@@ -168,7 +165,7 @@ def editEmpScreen():
     while inp != "B":
         headerDisplay("Edit employees screen")
         choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
+        choice_dict = {"1" :whileEditingEmpScreen, "2" :whileEditingEmpScreen, "3" :whileEditingEmpScreen, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
         checking = input_check(inp,choice_dict)
@@ -303,7 +300,7 @@ def locationScreen():
     while inp != "B":
         headerDisplay("Locations screen")
         choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        choice_dict = {"1" : None, "2" : whileEditingLocScreen, "3" : None, "4" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
         checking = input_check(inp,choice_dict)
@@ -313,12 +310,27 @@ def locationScreen():
         else:
             print("Input is invalid!")
     
-def whileEditingScreen():
+def whileEditingEmpScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Editing employee screen")
         choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
+def whileEditingLocScreen():
+    inp = ""
+    while inp != "B":
+        headerDisplay("Editing employee screen")
+        choice_list = ["1 - Change emergency contact name", "2 - Change emergency contact phone number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
         checking = input_check(inp,choice_dict)
