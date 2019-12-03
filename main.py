@@ -85,18 +85,23 @@ def startScreen():
     inp = askForInput()
     #Check if input is valid
     checking = input_check(inp,choice_dict)
-    if checking == True:
+    if checking:
         choice_dict.get(inp)()
     else:
         print("Input is invalid!")
-        # startScreen()
+        startScreen()
 
 def employeeScreen():
     choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", BACK_STR, QUIT_STR]
     choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        employeeScreen()
 
 def addEmployeeScreen():
     while True:
@@ -104,35 +109,61 @@ def addEmployeeScreen():
         choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
-        choice_dict.get(inp)()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            choice_dict.get(inp)()
+        else:
+            print("Input is invalid!")
+            addEmployeeScreen()
 
 def addMiscEmpScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
     choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        addMiscEmpScreen()    
 
 def addPilotScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        addPilotScreen()
 
 def addAttendantScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        addAttendantScreen()
+    
 
 def showEmpScreen():
     choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
     choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        show_employee_screen()
     
     
 def editEmpScreen():
@@ -140,7 +171,12 @@ def editEmpScreen():
     choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        editEmpScreen()
     
     
 def miscFilterScreen():
@@ -148,7 +184,12 @@ def miscFilterScreen():
     choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        miscFilterScreen()
     
     
 def attFilterScreen():
@@ -156,7 +197,12 @@ def attFilterScreen():
     choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        attFilterScreen()
     
     
 def pilotFilterScreen():
@@ -164,7 +210,12 @@ def pilotFilterScreen():
     choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        pilotFilterScreen()
     
     
 def atWorkScreen():
@@ -172,7 +223,12 @@ def atWorkScreen():
     choice_dict = {}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        atWorkScreen()
     
     
 def notAtWorkScreen():
@@ -180,7 +236,12 @@ def notAtWorkScreen():
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        notAtWorkScreen()
     
     
 def airplaneScreen():
@@ -188,7 +249,12 @@ def airplaneScreen():
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        airplaneScreen()
     
     
 def tripAndLocScreen():
@@ -196,7 +262,12 @@ def tripAndLocScreen():
     choice_dict = {"1" : locationScreen, "2" : workTripsScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        tripAndLocScreen()
     
     
 def workTripsScreen():
@@ -204,7 +275,12 @@ def workTripsScreen():
     choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        workTripsScreen()
     
     
 def locationScreen():
@@ -212,7 +288,12 @@ def locationScreen():
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        locationScreen()
     
     
 def whileEditingScreen():
@@ -220,7 +301,12 @@ def whileEditingScreen():
     choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)()
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        whileEditingScreen()
     
     
 def phoneEditScreen():
@@ -228,7 +314,12 @@ def phoneEditScreen():
     choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        phoneEditScreen()
 
     
 def filterWorkTripsScreen():
@@ -237,13 +328,24 @@ def filterWorkTripsScreen():
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        filterWorkTripsScreen()
     
 def dayWeekScreen():
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
     choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
-    choice_dict.get(inp)
+    checking = input_check(inp,choice_dict)
+    if checking:
+        choice_dict.get(inp)()
+    else:
+        print("Input is invalid!")
+        dayWeekScreen()
 
 startScreen()
 
