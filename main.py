@@ -1,6 +1,7 @@
 import os
 import sys
 
+path_list = []
 SCREENLENGTH = 60
 BACK_STR = "B - Back"
 QUIT_STR = "Q - Quit"
@@ -8,11 +9,11 @@ QUIT_STR = "Q - Quit"
 def restart():
     os.execl(sys.executable, sys.executable, * sys.argv)
     
+def back():
+    return
+
 def askForInput():
     return input("Enter a choice: ").upper()
-
-def back():
-    return ""
 
 def printHeaderUpperLine():
     line = ""
@@ -47,7 +48,6 @@ def headerDisplay(screen_name):
     line += "|"
     print(line)
     printHeaderUnderLine()
-    
 
 def display(choice_list):
     printLine()
@@ -59,23 +59,23 @@ def display(choice_list):
         print(line)
     printLine()
     
-# def create_crew_list(file_stream):
-#     crew_list = []
-#     for line in file_stream:
-#         to_add_to_crew_list = line.split(",")
-#         crew_list.append(to_add_to_crew_list)
-#         return crew_list
-        
+def create_crew_list(file_stream):
+    crew_list = []
+    for line in file_stream:
+        to_add_to_crew_list = line.split(",")
+        crew_list.append(to_add_to_crew_list)
+        return crew_list
+
 def open_file(file_name):
     try:
         file_stream = open(file_name, "r")
         return file_stream
     except FileNotFoundError:
-        return None
+        return "None"
 
 file_name = "crew.csv"
 file_stream = open_file(file_name)
-# display_crew = create_crew_list(file_stream)
+display_crew = create_crew_list(file_stream)
     
 def input_check(inp,choice_dict):
     for i in choice_dict:
@@ -83,6 +83,7 @@ def input_check(inp,choice_dict):
             return True
 
 def startScreen():
+<<<<<<< HEAD
     headerDisplay("Starting screen")
     #valid_inputs = 123 q
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
@@ -114,266 +115,334 @@ def employeeScreen():
     else:
         print("Input is invalid!")
         employeeScreen()
+=======
+    while True:
+        path_list = []
+        headerDisplay("Starting screen")
+        #valid_inputs = 123 q
+        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
+        choice_dict = {"1" : employeeScreen, "2" : airplaneScreen, "3" : tripAndLocScreen, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        #Check if input is valid
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
+def employeeScreen():
+    inp = ""
+    while inp != "B":
+        headerDisplay("Employee screen")
+        choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            choice_dict.get(inp)()
+        else:
+            print("Input is invalid!")
+>>>>>>> eaefb60cedde3532e936709f282f37d294504aba
 
 def addEmployeeScreen():
-    headerDisplay("Add employee screen")
-    choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR,QUIT_STR]
-    choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back,"Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        addEmployeeScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Add employee screen")
+        choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR,QUIT_STR]
+        choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back,"Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
 
 def addMiscEmpScreen():
-    headerDisplay(" screen")
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        addMiscEmpScreen()    
+    inp = ""
+    while inp != "B":
+        headerDisplay(" screen")
+        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
 
 def addPilotScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        addPilotScreen()
+    inp = ""
+    while inp != "B":
+        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
 
 def addAttendantScreen():
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        addAttendantScreen()
+    inp = ""
+    while inp != "B":
+        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
 
 def showEmpScreen():
-    headerDisplay("Show employees screen")
-    choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
-    choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        showEmpScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Show employees screen")
+        choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
+        choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def editEmpScreen():
-    headerDisplay("Edit employees screen")
-    choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        editEmpScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Edit employees screen")
+        choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def miscFilterScreen():
-    headerDisplay("Filter employee screen")
-    choice_list = ["1 - Show All Employees", "2 - Show Employees at work on day/week", "3 - Show Employees not at work on day/week", "4 - Look for Employee bt SSN", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        miscFilterScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Filter employee screen")
+        choice_list = ["1 - Show All Employees", "2 - Show Employees at work on day/week", "3 - Show Employees not at work on day/week", "4 - Look for Employee bt SSN", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def attFilterScreen():
-    headerDisplay("Filter flight attendant screen")
-    choice_list = ["1 - Show All Attendants", "2 - Show Attendants at work on day/week", "3 - Show Attendants not at work on day/week", "4 - Look for Attendant bt SSN", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        attFilterScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Filter flight attendant screen")
+        choice_list = ["1 - Show All Attendants", "2 - Show Attendants at work on day/week", "3 - Show Attendants not at work on day/week", "4 - Look for Attendant bt SSN", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def pilotFilterScreen():
-    headerDisplay("Filter pilot screen")
-    choice_list = ["1 - Show All Pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot bt SSN", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        pilotFilterScreen()
-    
+    inp = ""
+    while inp != "B":
+        headerDisplay("Filter pilot screen")
+        choice_list = ["1 - Show All Pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot bt SSN", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "3" : notAtWorkScreen, "4" : atWorkScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
 def atWorkScreen():
-    headerDisplay("At work screen")
-    choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
-    choice_dict = {}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        atWorkScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("At work screen")
+        choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
+        choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def notAtWorkScreen():
-    headerDisplay("Not at work screen")
-    choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        notAtWorkScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Not at work screen")
+        choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def airplaneScreen():
-    headerDisplay("Airplane screen")
-    choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        airplaneScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Airplane screen")
+        choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def tripAndLocScreen():
-    headerDisplay("Trips and locations screen")
-    choice_list = ["1 - Locations", "2 - Work Trips", QUIT_STR]
-    choice_dict = {"1" : locationScreen, "2" : workTripsScreen, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        tripAndLocScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Trips and locations screen")
+        choice_list = ["1 - Locations", "2 - Work Trips", QUIT_STR]
+        choice_dict = {"1" : locationScreen, "2" : workTripsScreen, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def workTripsScreen():
-    headerDisplay("Work trips screen")
-    choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", QUIT_STR]
-    choice_dict = {"1" : None, "2" : filterWorkTripsScreen, "3" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        workTripsScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Work trips screen")
+        choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", QUIT_STR]
+        choice_dict = {"1" : None, "2" : filterWorkTripsScreen, "3" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def locationScreen():
-    headerDisplay("Locations screen")
-    choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        locationScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Locations screen")
+        choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
     
 def whileEditingScreen():
-    headerDisplay("Editing employee screen")
-    choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        whileEditingScreen()
-    
+    inp = ""
+    while inp != "B":
+        headerDisplay("Editing employee screen")
+        choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
     
 def phoneEditScreen():
-    headerDisplay("Editing employee phone screen")
-    choice_list = ["1 - Change Home Phone Number", "2 - Change Mobile Number", BACK_STR, QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        phoneEditScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Editing employee phone screen")
+        choice_list = ["1 - Change Home Phone Number", "2 - Change Mobile Number", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
 
     
 def filterWorkTripsScreen():
-    headerDisplay("Filter work trips screen")
-    choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    choice_dict.get(inp)
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        filterWorkTripsScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Filter work trips screen")
+        choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        choice_dict.get(inp)
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
     
 def dayWeekScreen():
-    headerDisplay("Day/Week screen")
-    choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
-    display(choice_list)
-    inp = askForInput()
-    checking = input_check(inp,choice_dict)
-    if checking:
-        choice_dict.get(inp)()
-    else:
-        print("Input is invalid!")
-        dayWeekScreen()
+    inp = ""
+    while inp != "B":
+        headerDisplay("Day/Week screen")
+        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
 
 startScreen()
 
