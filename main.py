@@ -83,7 +83,6 @@ def input_check(inp,choice_dict):
             return True
 
 def startScreen():
-    
     headerDisplay("Starting screen")
     #valid_inputs = 123 q
     choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
