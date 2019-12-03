@@ -7,9 +7,7 @@ QUIT_STR = "Q - Quit"
 
 def restart():
     os.execl(sys.executable, sys.executable, * sys.argv)
-
-#Hitler was right
-
+    
 def askForInput():
     return input("Enter a choice: ").upper()
 
