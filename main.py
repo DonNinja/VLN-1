@@ -59,12 +59,12 @@ def startScreen():
     if checking == True:
         choice_dict.get(inp)()
     else:
-        print("Input is invalid!")
+        print("Input is invalid")
         startScreen()
 
 def employeeScreen():
-    choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", QUIT_STR]
-    choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "Q" : exit}
+    choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", "B - Go Back", QUIT_STR]
+    choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "B" : startScreen, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
