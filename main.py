@@ -291,7 +291,7 @@ def tripAndLocScreen():
 def workTripsScreen():
     headerDisplay("Work trips screen")
     choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", QUIT_STR]
-    choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
+    choice_dict = {"1" : None, "2" : filterWorkTripsScreen, "3" : None, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     checking = input_check(inp,choice_dict)
