@@ -62,8 +62,8 @@ def startScreen():
         startScreen()
 
 def employeeScreen():
-    choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", QUIT_STR]
-    choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "Q" : exit}
+    choice_list = ["1 - Add Employee", "2 - Show Employee", "3 - Edit Employee", BACK_STR, QUIT_STR]
+    choice_dict = {"1" : addEmployeeScreen, "2" : showEmpScreen, "3" : editEmpScreen, "B" : back, "Q" : exit}
     display(choice_list)
     inp = askForInput()
     choice_dict.get(inp)()
@@ -72,7 +72,6 @@ def addEmployeeScreen():
     while True:
         choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR, QUIT_STR]
         choice_dict = {"1": addMiscEmpScreen, "2" : addPilotScreen, "3" : addAttendantScreen, "B" : back, "Q" : exit}
-        choice_dict = {}
         display(choice_list)
         inp = askForInput()
         choice_dict.get(inp)()
