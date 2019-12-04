@@ -1,15 +1,17 @@
+from LogicLayer.Logic import DataAPI
+
 SCREENLENGTH = 60
 BACK_STR = "B - Back"
 QUIT_STR = "Q - Quit"
 
 class UserUI:
-    
     def __init__(self):
+        self.__data_worker = DataAPI()
         pass
 
     def doNothing(self):
         pass
-        
+
     def back(self):
         return
 
@@ -37,7 +39,6 @@ class UserUI:
         line = ""
         while len(line) < SCREENLENGTH:
             line += "‾"
-            #line += "‾"
         print(line)
 
     def headerDisplay(self, screen_name):
@@ -142,9 +143,9 @@ class UserUI:
             else:
                 print("Input is invalid!")
                 
-    #def enterEmpSSN(self):
-        #ssn = input("Enter employee's Social Security Number (Kennitala): ")
-        #self.editEmpScreen(ssn)
+    # def enterEmpSSN(self):
+    #     ssn = input("Enter employee's Social Security Number (Kennitala): ")
+    #     self.doNothing()
         
     def whileEditingEmpScreen(self):
         inp = ""
@@ -280,7 +281,7 @@ class UserUI:
                 next_screen()
             else:
                 print("Input is invalid!")
-        
+    
     def workTripsScreen(self):
         inp = ""
         while inp != "B":
@@ -371,6 +372,3 @@ class UserUI:
                 next_screen()
             else:
                 print("Input is invalid!")
-
-run_ui = UserUI()
-run_ui.startScreen()

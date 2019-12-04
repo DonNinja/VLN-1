@@ -19,7 +19,8 @@
 from UILayer.UserUI import UserUI
 
 def main():
-    ui = UserUI
-    ui.startScreen
+    ui = UserUI()
+    ui.startScreen()
 
-main()
+if __name__ == "__main__":
+    main()
