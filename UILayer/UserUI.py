@@ -145,7 +145,11 @@ class UserUI:
                 
     # def enterEmpSSN(self):
     #     ssn = input("Enter employee's Social Security Number (Kennitala): ")
+<<<<<<< HEAD
     #     self.doNothing()
+=======
+    #     self.editEmpScreen(ssn)
+>>>>>>> edea8f7e2b8dc99953250b65f28c2e0c4991d0d8
         
     def whileEditingEmpScreen(self):
         inp = ""
@@ -257,7 +261,7 @@ class UserUI:
         while inp != "B":
             self.headerDisplay("Airplane screen")
             choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
+            choice_dict = {"1" : self.showAllAirplanes, "2" : self.addAirplane, "3" : self.showPilotsSortedByPlanes, "4" : self.showPilotForSpecificPlane, "B" : self.back, "Q" : exit}
             self.display(choice_list)
             inp = self.askForInput()
             checking = self.input_check(inp,choice_dict)
@@ -266,6 +270,19 @@ class UserUI:
                 next_screen()
             else:
                 print("Input is invalid!")
+    def showAllAirplanes(self):
+        # Showing all airplanes
+        pass
+        
+    def addAirplane(self):
+        # Adding Airplane
+        pass
+    def showPilotsSortedByPlanes(self):
+        # Show pilots sorted by plane make
+        pass
+    def showPilotForSpecificPlane(self):
+        # ShowPilotsForSpecificPlane
+        pass
         
     def tripAndLocScreen(self):
         inp = ""
