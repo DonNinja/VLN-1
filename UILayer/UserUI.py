@@ -1,4 +1,4 @@
-from LogicLayer.Logic import DataAPI
+from LogicLayer.Logic import LogicAPI
 
 SCREENLENGTH = 60
 BACK_STR = "B - Back"
@@ -6,7 +6,7 @@ QUIT_STR = "Q - Quit"
 
 class UserUI:
     def __init__(self):
-        self.__data_worker = DataAPI()
+        self.__data_worker = LogicAPI()
         pass
 
     def doNothing(self):
@@ -29,19 +29,38 @@ class UserUI:
     def askForInput(self):
         return input("Enter a choice: ").upper()
 
-    def pilotDataInput(self):
-        inp = ""
-        ssn,name,role,rank,lisens,address,mobile_number,home_number = "","","","","","","",""
-        data_to_enter_list = ["SSN (kennitala)", "name", "role", "rank", "license", "address", "phone number", "home phone number"]
-        data_list = [ssn, name, role, rank, lisens, address, mobile_number, home_number]
-        i = 0
-        while inp != "B" or i <= 7:
-            inp_str = "Enter the pilot's " + data_to_enter_list[i] + ": "
-            inp = input(inp_str)
-            inp = inp.upper()
-            data_list[i] = inp.capitalize()
-            i += 1
+    def empDataInput(self, type=""):
+        data_list = []
+        print()
+        ssn = input("Enter new ssn: ").capitalize()
+        #if LogicAPI.checkSSN(ssn):
+        data_list.append(ssn)
+        name = input("Enter new name: ").capitalize()
+        #if LogicAPI.checkName(name)
+        data_list.append(name)
+        role = input("Enter new role: ").capitalize()
+        #if LogicAPI.checkRole(role)
+        data_list.append(role)
+        rank = input("Enter new rank: ").capitalize()
+        #if LogicAPI.checkRank(rank)
+        data_list.append(rank)
+        if type != "flight attendant":
+            licens = input("Enter new license: ").capitalize()
+            #if LogicAPI.checkLicense(licens)
+            data_list.append(licens)
+        else:
+            licens = "N/A"
+        address = input("Enter new address: ").capitalize()
+        #if LogicAPI.checkAddress(address)
+        data_list.append(address)
+        mobile = input("Enter new mobile number: ").capitalize()
+        #if LogicAPI.checkMobile(mobile)
+        data_list.append(mobile)
+        home_phone = input("Enter new home phone number: ").capitalize()
+        #if LogicAPI.checkHomePhone(home_phone)
+        data_list.append(home_phone)
         print(data_list)
+        input("Press enter to continue...")
 
     def printHeaderUpperLine(self):
         line = ""
@@ -82,7 +101,6 @@ class UserUI:
 
     def startScreen(self):
         while True:
-            self.path_list = []
             self.headerDisplay("Starting screen")
             #valid_inputs = 123 q
             choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
@@ -127,16 +145,15 @@ class UserUI:
                 print("Input is invalid!")
 
     def addMiscEmpScreen(self):
-        #This is a function call to add an employee to the roster, not a screen to navigate to/from
+        pilot_data_list = self.empDataInput("employee")
         pass
 
     def addPilotScreen(self):
-        pilot_data_list = self.pilotDataInput()
-        print(pilot_data_list)
-        return
+        pilot_data_list = self.empDataInput("pilot")
+        pass
 
     def addAttendantScreen(self):
-        #This is a function call to add an employee to the roster, not a screen to navigate to/from
+        pilot_data_list = self.empDataInput("flight attendant")
         pass
 
     def showHardestWorking(self):
