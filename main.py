@@ -5,9 +5,6 @@ path_list = []
 SCREENLENGTH = 60
 BACK_STR = "B - Back"
 QUIT_STR = "Q - Quit"
-
-def restart():
-    os.execl(sys.executable, sys.executable, * sys.argv)
     
 def back():
     return
@@ -163,71 +160,27 @@ def addEmployeeScreen():
             print("Input is invalid!")
 
 def addMiscEmpScreen():
-    inp = ""
-    while inp != "B":
-        headerDisplay(" screen")
-        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            next_screen = choice_dict.get(inp)
-            next_screen()
-        else:
-            print("Input is invalid!")
+    #This is a function call to add an employee to the roster, not a screen to navigate to/from
+    pass
 
 def addPilotScreen():
-    inp = ""
-    while inp != "B":
-        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            next_screen = choice_dict.get(inp)
-            next_screen()
-        else:
-            print("Input is invalid!")
+    #This is a function call to add an employee to the roster, not a screen to navigate to/from
+    pass
 
 def addAttendantScreen():
-    inp = ""
-    while inp != "B":
-        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            next_screen = choice_dict.get(inp)
-            next_screen()
-        else:
-            print("Input is invalid!")
-    
+    #This is a function call to add an employee to the roster, not a screen to navigate to/from
+    pass
 
-def showEmpScreen():
-    inp = ""
-    while inp != "B":
-        headerDisplay("Show employees screen")
-        choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
-        choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            next_screen = choice_dict.get(inp)
-            next_screen()
-        else:
-            print("Input is invalid!")
-    
+def showHardestWorking():
+    #This just displays the hardest working employee
+    pass
     
 def editEmpScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Edit employees screen")
         choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
-        choice_dict = {"1" : whileEditingScreen, "2" : whileEditingScreen, "3" : whileEditingScreen, "B" : back, "Q" : exit}
+        choice_dict = {"1" :whileEditingEmpScreen, "2" :whileEditingEmpScreen, "3" :whileEditingEmpScreen, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
         checking = input_check(inp,choice_dict)
@@ -236,8 +189,41 @@ def editEmpScreen():
             next_screen()
         else:
             print("Input is invalid!")
+            
+def enterEmpSSN():
+    ssn = input("Enter employee's Social Security Number (Kennitala): ")
+    editEmpScreen(ssn)
     
-    
+def whileEditingEmpScreen():
+    inp = ""
+    while inp != "B":
+        headerDisplay("Editing employee screen")
+        choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
+def showEmpScreen():
+    inp = ""
+    while inp != "B":
+        headerDisplay("Show employees screen")
+        choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show Hardest Working Employee", BACK_STR, QUIT_STR]
+        choice_dict = {"1": miscFilterScreen, "2" : pilotFilterScreen, "3" : attFilterScreen, "4" : showHardestWorking, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
 def miscFilterScreen():
     inp = ""
     while inp != "B":
@@ -253,7 +239,6 @@ def miscFilterScreen():
         else:
             print("Input is invalid!")
     
-    
 def attFilterScreen():
     inp = ""
     while inp != "B":
@@ -268,7 +253,6 @@ def attFilterScreen():
             next_screen()
         else:
             print("Input is invalid!")
-    
     
 def pilotFilterScreen():
     inp = ""
@@ -289,7 +273,7 @@ def atWorkScreen():
     inp = ""
     while inp != "B":
         headerDisplay("At work screen")
-        choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
+        choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
         choice_dict = {"1" : atWorkScreen , "2" : atWorkScreen, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -300,12 +284,11 @@ def atWorkScreen():
         else:
             print("Input is invalid!")
     
-    
 def notAtWorkScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Not at work screen")
-        choice_list = ["1 - Show By Day", "2 - Show By Week", QUIT_STR]
+        choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -315,13 +298,12 @@ def notAtWorkScreen():
             next_screen()
         else:
             print("Input is invalid!")
-    
     
 def airplaneScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Airplane screen")
-        choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", QUIT_STR]
+        choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -332,12 +314,11 @@ def airplaneScreen():
         else:
             print("Input is invalid!")
     
-    
 def tripAndLocScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Trips and locations screen")
-        choice_list = ["1 - Locations", "2 - Work Trips", QUIT_STR]
+        choice_list = ["1 - Locations", "2 - Work Trips", BACK_STR, QUIT_STR]
         choice_dict = {"1" : locationScreen, "2" : workTripsScreen, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -348,12 +329,11 @@ def tripAndLocScreen():
         else:
             print("Input is invalid!")
     
-    
 def workTripsScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Work trips screen")
-        choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", QUIT_STR]
+        choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : filterWorkTripsScreen, "3" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -364,29 +344,12 @@ def workTripsScreen():
         else:
             print("Input is invalid!")
     
-    
 def locationScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Locations screen")
-        choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
-        display(choice_list)
-        inp = askForInput()
-        checking = input_check(inp,choice_dict)
-        if checking:
-            next_screen = choice_dict.get(inp)
-            next_screen()
-        else:
-            print("Input is invalid!")
-    
-    
-def whileEditingScreen():
-    inp = ""
-    while inp != "B":
-        headerDisplay("Editing employee screen")
-        choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", QUIT_STR]
-        choice_dict = {"1" : None, "2" : None, "3" : None, "4" : None, "B" : back, "Q" : exit}
+        choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : whileEditingLocScreen, "3" : None, "4" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
         checking = input_check(inp,choice_dict)
@@ -396,7 +359,21 @@ def whileEditingScreen():
         else:
             print("Input is invalid!")
 
-    
+def whileEditingLocScreen():
+    inp = ""
+    while inp != "B":
+        headerDisplay("Editing employee screen")
+        choice_list = ["1 - Change emergency contact name", "2 - Change emergency contact phone number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
+        choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
+        display(choice_list)
+        inp = askForInput()
+        checking = input_check(inp,choice_dict)
+        if checking:
+            next_screen = choice_dict.get(inp)
+            next_screen()
+        else:
+            print("Input is invalid!")
+
 def phoneEditScreen():
     inp = ""
     while inp != "B":
@@ -411,13 +388,12 @@ def phoneEditScreen():
             next_screen()
         else:
             print("Input is invalid!")
-
     
 def filterWorkTripsScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Filter work trips screen")
-        choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", QUIT_STR]
+        choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : None, "3" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -433,7 +409,7 @@ def dayWeekScreen():
     inp = ""
     while inp != "B":
         headerDisplay("Day/Week screen")
-        choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
+        choice_list = ["1 - Show by day", "2 - Show by week", BACK_STR, QUIT_STR]
         choice_dict = {"1" : None, "2" : None, "B" : back, "Q" : exit}
         display(choice_list)
         inp = askForInput()
@@ -445,20 +421,3 @@ def dayWeekScreen():
             print("Input is invalid!")
 
 startScreen()
-
-employee_screen = ["1 - Add Employees", "2 - Show Employees", "3 - Edit Employee", BACK_STR, QUIT_STR]
-add_employee_screen = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR, QUIT_STR]
-show_employee_screen = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show Hardest Working Employee", BACK_STR, QUIT_STR]
-filter_employee_screen = ["1 - Show All X", "2 - Show x At Work On Day/Week", "3 - Show x Not At Work On Day/Week", "4 - Look For x By SSN", BACK_STR, QUIT_STR]
-employee_at_work_screen = ["1 - Show By Day", "2 - Show By Week" , BACK_STR, QUIT_STR]
-employee_not_at_work_screen = ["1 - Show By Day,", "2 - Show By Week", BACK_STR, QUIT_STR]
-edit_employee_screen = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
-while_editing_employee = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type Rights", BACK_STR, QUIT_STR]
-while_editing_phone_number = ["1 - Change Home Phone Number", "2 - Change Mobile Number", BACK_STR, QUIT_STR]
-
-airplane_screen = ["1 - Show All Airplanes", "2 - Add Airplane", "3 - Show Pilots Sorted By Plane Make", "4 - Show Pilots For Specific Plane Make", BACK_STR, QUIT_STR]
-
-trips_and_location_screen = ["1 - Locations", "2 - Work Trips", BACK_STR, QUIT_STR]
-location_screen = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-work_trips_screen = ["1 - Add Work Trip", "2 - Show Work Trip" , "3 - Show Employee's Work Trip", BACK_STR, QUIT_STR]
-filter_work_trips_screen = ["1- Show All Work Trips", "2 - Show For Day", "3 - Show For Week", BACK_STR, QUIT_STR]
