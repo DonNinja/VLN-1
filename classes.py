@@ -177,9 +177,10 @@ def getpastflights():
         return PastFlightdict
 
 
-def newemployee(crewdict):
+def newemployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_phone):
     with open('crew.csv', 'a',newline='') as newFile:
         newFileWriter = csv.writer(newFile)
+<<<<<<< HEAD
         ssn = input("Enter new ssn: ")
         name = input("Enter new name: ")
         role = input("Enter new role: ")
@@ -190,6 +191,10 @@ def newemployee(crewdict):
         homephonenum = input("Enter new phonenumber: ")
         newFileWriter.writerow([ssn,name,role,rank,licens,address,mobilephonenum,homephonenum])
         crewdict[ssn] = crew(ssn,name,role,rank,licens,address,mobilephonenum,homephonenum)
+=======
+        newFileWriter.writerow([ssn,name,role,rank,licens,address, mobile, home_phone])
+        crewdict[ssn] = crew(ssn,name,role,rank,licens,address, mobile, home_phone)
+>>>>>>> 19fb65da4cf48138b8972281fb9bc57a64b6fc17
         return crewdict
 
 dict1 = getcrew()

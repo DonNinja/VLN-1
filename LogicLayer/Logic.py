@@ -1,6 +1,6 @@
 from DataLayer.Data import Data
 
-class DataAPI():
+class LogicAPI():
     def __init__(self):
         pass
 
