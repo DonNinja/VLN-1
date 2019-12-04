@@ -145,11 +145,7 @@ class UserUI:
                 
     # def enterEmpSSN(self):
     #     ssn = input("Enter employee's Social Security Number (Kennitala): ")
-<<<<<<< HEAD
     #     self.doNothing()
-=======
-    #     self.editEmpScreen(ssn)
->>>>>>> edea8f7e2b8dc99953250b65f28c2e0c4991d0d8
         
     def whileEditingEmpScreen(self):
         inp = ""
@@ -270,6 +266,7 @@ class UserUI:
                 next_screen()
             else:
                 print("Input is invalid!")
+
     def showAllAirplanes(self):
         # Showing all airplanes
         pass
