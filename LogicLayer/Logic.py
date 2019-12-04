@@ -1,4 +1,4 @@
-from DataLayer.Data import Data
+from DataLayer.Data import DataAPI
 
 class LogicAPI():
     def __init__(self):
