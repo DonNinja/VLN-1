@@ -1,13 +1,14 @@
 import csv
 class crew():
-    def __init__(self,ssn,name,role,rank,licens,address,phonenumber):
+    def __init__(self,ssn,name,role,rank,licens,address,homephonenum,mobilephonenum):
         self.ssn = ssn
         self.name = name
         self.role = role
         self.rank = rank
         self.licens = licens
         self.address = address
-        self.phonenumber = phonenumber
+        self.homephonenum = homephonenum
+        self.mobilephonenum = mobilephonenum
 
     def __str__(self):
         return "{}\n{}\n{}\n{}\n{}\n{}\n{}".format(self.ssn,self.name,self.role,self.rank,self.licens,self.address,self.phonenumber) 
@@ -102,7 +103,7 @@ def getupcomingflights():
         return UpcomingFlightsdict
 
 def getcrew():
-    filename = "Crew.csv"
+    filename = "c:/Users/Notandi/Documents/3 Vikna kúrs/3 Vikna clone/VLN-1/STUDENTDATA/Crew.csv"
   
     lis = []
     crewdict = {}
@@ -113,7 +114,7 @@ def getcrew():
             lis.append("crewmember"+str(counter))
             ssn,name,role,rank,licenc,address,mobilephonenum,homephonenum = row
 
-            lis[counter] = crew(ssn,name,role,rank,licenc,address,phonenumber)
+            lis[counter] = crew(ssn,name,role,rank,licenc,address,mobilephonenum,homephonenum)
             crewdict[ssn] = lis[counter]
             counter = counter + 1 
         return crewdict
@@ -185,11 +186,11 @@ def newemployee(crewdict):
         rank = input("Enter new rank: ")
         licens = input("Enter new licens: ")
         address = input("Enter new address: ")
-        phonenumber = input("Enter new phonenumber: ")
-        newFileWriter.writerow([ssn,name,role,rank,licens,address,phonenumber])
-        crewdict[ssn] = crew(ssn,name,role,rank,licens,address,phonenumber)
+        mobilephonenum = input("Enter new phonenumber: ")
+        homephonenum = input("Enter new phonenumber: ")
+        newFileWriter.writerow([ssn,name,role,rank,licens,address,mobilephonenum,homephonenum])
+        crewdict[ssn] = crew(ssn,name,role,rank,licens,address,mobilephonenum,homephonenum)
         return crewdict
-
 
 dict1 = getcrew()
 newemployee(dict1)   
