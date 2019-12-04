@@ -444,8 +444,13 @@ startScreen()
 from UILayer.UserUI import UserUI
 
 def main():
-    ui = UserUI
-    ui.startScreen
+    ui = UserUI()
+    ui.startScreen()
 
+<<<<<<< HEAD
 main()
 >>>>>>> 55835b987756ccd5b145144017ba9178eaf37474
+=======
+if __name__ == "__main__":
+    main()
+>>>>>>> 663f6a2260e12e0450a0ca63755fc37ae08601c2
