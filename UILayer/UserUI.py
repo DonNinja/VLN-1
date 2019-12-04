@@ -29,6 +29,20 @@ class UserUI:
     def askForInput(self):
         return input("Enter a choice: ").upper()
 
+    def pilotDataInput(self):
+        inp = ""
+        ssn,name,role,rank,lisens,address,mobile_number,home_number = "","","","","","","",""
+        data_to_enter_list = ["SSN (kennitala)", "name", "role", "rank", "license", "address", "phone number", "home phone number"]
+        data_list = [ssn, name, role, rank, lisens, address, mobile_number, home_number]
+        i = 0
+        while inp != "B" or i <= 7:
+            inp_str = "Enter the pilot's " + data_to_enter_list[i] + ": "
+            inp = input(inp_str)
+            inp = inp.upper()
+            data_list[i] = inp.capitalize()
+            i += 1
+        print(data_list)
+
     def printHeaderUpperLine(self):
         line = ""
         while len(line) < SCREENLENGTH:
@@ -117,8 +131,9 @@ class UserUI:
         pass
 
     def addPilotScreen(self):
-        #This is a function call to add an employee to the roster, not a screen to navigate to/from
-        pass
+        pilot_data_list = self.pilotDataInput()
+        print(pilot_data_list)
+        return
 
     def addAttendantScreen(self):
         #This is a function call to add an employee to the roster, not a screen to navigate to/from
