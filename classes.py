@@ -111,7 +111,7 @@ def getcrew():
         counter = 0
         for row in csvreader:
             lis.append("crewmember"+str(counter))
-            ssn,name,role,rank,licenc,address,phonenumber = row
+            ssn,name,role,rank,licenc,address,mobilephonenum,homephonenum = row
 
             lis[counter] = crew(ssn,name,role,rank,licenc,address,phonenumber)
             crewdict[ssn] = lis[counter]
