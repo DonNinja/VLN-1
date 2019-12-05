@@ -1,4 +1,4 @@
-from UILayer.UserInputCheck import UserInputCheck
+from UILayer.UserInput import UserInput
 from UILayer.UIPrinter import UIPrinter
 
 BACK_STR = "B - Back"
@@ -6,7 +6,7 @@ QUIT_STR = "Q - Quit"
 
 class UserUI:
     def __init__(self):
-        self.__inputCheck = UserInputCheck()
+        self.__inputter = UserInput()
         self.__printer = UIPrinter()
         pass
 
@@ -27,7 +27,6 @@ class UserUI:
     def startScreen(self):
         while True:
             self.__printer.headerDisplay("Starting screen")
-            #valid_inputs = 123 q
             choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
             choice_dict = {"1" : self.employeeScreen, "2" : self.airplaneScreen, "3" : self.tripAndLocScreen, "Q" : exit}
             self.__printer.display(choice_list)
@@ -50,7 +49,8 @@ class UserUI:
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                choice_dict.get(inp)()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -58,8 +58,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Add employee screen")
-            choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR,QUIT_STR]
-            choice_dict = {"1": self.addMiscEmpScreen, "2" : self.addPilotScreen, "3" : self.addAttendantScreen, "B" : self.back,"Q" : exit}
+            choice_list = ["1 - Add Pilot", "2 - Add Flight Attendant", BACK_STR,QUIT_STR]
+            choice_dict = {"1" : self.addPilotScreen, "2" : self.addAttendantScreen, "B" : self.back,"Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -69,16 +69,12 @@ class UserUI:
             else:
                 print("Input is invalid!")
 
-    def addMiscEmpScreen(self):
-        emp_data_list = self.__inputCheck.empDataInput("employee")
-        pass
-
     def addPilotScreen(self):
-        pilot_data_list = self.__inputCheck.empDataInput("pilot")
+        pilot_data_list = self.__inputter.addEmp("pilot")
         pass
 
     def addAttendantScreen(self):
-        att_data_list = self.__inputCheck.empDataInput("flight attendant")
+        att_data_list = self.__inputter.addEmp("flight attendant")
         pass
 
     def showHardestWorking(self):
@@ -271,7 +267,7 @@ class UserUI:
         while inp != "B":
             self.__printer.headerDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
+            choice_dict = {"1" : self.__inputter.addLocation, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)

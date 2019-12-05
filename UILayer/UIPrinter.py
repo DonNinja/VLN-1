@@ -4,7 +4,7 @@ class UIPrinter:
     def __init__(self):
         pass
 
-    def printUpperLine(self):
+    def printHeaderSeparator(self):
         line = "╟"
         while len(line) < SCREENLENGTH-1:
             line += "─"
@@ -25,14 +25,6 @@ class UIPrinter:
             line += "═"
         line += "╗"
         print(line)
-        
-    def printHeaderUnderLine(self):
-        # line = "╚"
-        # while len(line) < SCREENLENGTH-1:
-        #     line += "═"
-        # line += "╝"
-        # print(line)
-        pass
 
     def headerDisplay(self, screen_name):
         self.printHeaderUpperLine()
@@ -47,10 +39,9 @@ class UIPrinter:
             line += " "
         line += "║"
         print(line)
-        self.printHeaderUnderLine()
 
     def display(self, choice_list):
-        self.printUpperLine()
+        self.printHeaderSeparator()
         for choice in choice_list:
             line = "║    " + choice
             while len(line) < SCREENLENGTH-1:
