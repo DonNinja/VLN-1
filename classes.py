@@ -111,9 +111,9 @@ def getcrew():
         counter = 0
         for row in csvreader:
             lis.append("crewmember"+str(counter))
-            ssn,name,role,rank,licenc,address,mobilephonenum,homephonenum = row
+            ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num = row
 
-            lis[counter] = crew(ssn,name,role,rank,licenc,address,phonenumber)
+            lis[counter] = crew(ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num)
             crewdict[ssn] = lis[counter]
             counter = counter + 1 
         return crewdict
@@ -131,7 +131,6 @@ def getplanetype():
         for row in csvreader:
             lis.append("planetype"+str(counter))
             planeTypeId,planeType,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = row
-            
             lis[counter] = planeType(planeTypeId,planeType,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
             planeTypedict[planeTypeId] = lis[counter]
             counter = counter + 1 
