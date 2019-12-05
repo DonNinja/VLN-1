@@ -136,8 +136,6 @@ def getplanetype():
             counter = counter + 1 
         return planeTypedict
 
-
-
 def getplane():
     filename = "Aircraft.csv"
     
@@ -161,7 +159,7 @@ def getpastflights():
     filename = "PastFlights.csv"
  
     lis = []
-    PastFlightdict = {}
+    past_flight_dict = {}
     with open(filename, 'r') as csvfile:
         csvreader = csv.reader(csvfile)
         counter = 0
@@ -170,12 +168,12 @@ def getpastflights():
             flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2 = row
 
             lis[counter] = PastFlight(flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2)
-            PastFlightdict[flightNumber] = lis[counter]
+            past_flight_dict[flightNumber] = lis[counter]
             counter = counter + 1 
-        return PastFlightdict
+        return past_flight_dict
 
 
-def newemployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_phone):
+def newEmployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_phone):
     with open('crew.csv', 'a',newline='') as newFile:
         newFileWriter = csv.writer(newFile)
         newFileWriter.writerow([ssn,name,role,rank,licens,address, mobile, home_phone])
@@ -184,7 +182,7 @@ def newemployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_p
 
 
 dict1 = getcrew()
-newemployee(dict1)   
+newEmployee(dict1)   
 print(dict1["0111992249"])
 
 

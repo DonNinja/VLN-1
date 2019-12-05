@@ -4,7 +4,7 @@ class UserInput():
     def __init__(self):
         self.__checker = UserInputCheck()
     
-    def addEmp(self, emp_type=""):
+    def addEmp(self, emp_type):
         data_list = []
         print()
         ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
@@ -57,3 +57,8 @@ class UserInput():
         print(loc_data_list)
         input("Press enter to continue...")
         return loc_data_list
+
+    def enterSSN(self, emp_type):
+        ssn = input("Enter a{}'s SSN: ".format(emp_type))
+        
+        return

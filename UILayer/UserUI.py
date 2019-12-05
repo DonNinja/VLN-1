@@ -85,8 +85,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Edit employees screen")
-            choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.whileEditingEmpScreen, "2" : self.whileEditingEmpScreen, "3" : self.whileEditingEmpScreen, "B" : self.back, "Q" : exit}
+            choice_list = ["1 - Edit any employee", "2 - Edit pilot", "3 - Edit flight attendant", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.anyEmpSSN, "2" : self.pilotSSN, "3" : self.attendantSSN, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -95,7 +95,19 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-        
+    
+    def anyEmpSSN(self):
+        ssn = self.__inputter.enterSSN("ny employee")
+        pass
+
+    def pilotSSN(self):
+        ssn = self.__inputter.enterSSN(" pilot")
+        pass
+
+    def attendantSSN(self):
+        ssn = self.__inputter.enterSSN(" flight attendant")
+        pass
+
     def whileEditingEmpScreen(self):
         inp = ""
         while inp != "B":
@@ -115,7 +127,7 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Show employees screen")
-            choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show Hardest Working Employee", BACK_STR, QUIT_STR]
+            choice_list = ["1 - All employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show Hardest Working Employee", BACK_STR, QUIT_STR]
             choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen, "4" : self.showHardestWorking, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
