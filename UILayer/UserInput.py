@@ -64,14 +64,25 @@ class UserInput():
         return ssn
     
     def addWorkTrip(self):
-        extra_pilot_list = []
-        input("Enter a destination: ")
-        input("Enter a departure date (DD/MM/YYYY): ")
-        input("Enter a departure time (HH:MM): ")
-        input("Enter the Pilot's SSN: ")
-        input("Enter the Co-Pilot's SSN: ")
+        work_trip_data_list = []
+        # extra_pilot_list = []
+        work_destination = input("Enter a destination: ")
+        work_trip_data_list.append(work_destination)
+        work_departure_date = input("Enter a departure date (DD/MM/YYYY): ")
+        work_trip_data_list.append(work_departure_date)
+        work_departure_time = input("Enter a departure time (HH:MM): ")
+        work_trip_data_list.append(work_departure_time)
+        work_pilot_ssn = input("Enter the Pilot's SSN: ")
+        work_trip_data_list.append(work_pilot_ssn)
+        work_copilot_ssn = input("Enter the Co-Pilot's SSN: ")
+        work_trip_data_list.append(work_copilot_ssn)
         more_pilots = input("Would you like to enter more pilots? (Y/N): ")
-        while more_pilots:
-            more_pilots = input("Would you like to enter more pilots? (Y/N): ")
-            
+        while more_pilots == 'Y' or 'y':
+            return
+        # Fatta ekki hvernig ég runa aftur fyrir fleiri flugmenn
+
         input("")
+        print(work_trip_data_list)
+        input("Press enter to continue...")
+        return work_trip_data_list
+

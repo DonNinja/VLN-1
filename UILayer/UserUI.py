@@ -264,7 +264,7 @@ class UserUI:
         while inp != "B":
             self.__printer.headerDisplay("Work trips screen")
             choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : exit}
+            choice_dict = {"1" : self.__inputter.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
