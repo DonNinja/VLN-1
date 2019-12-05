@@ -1,6 +1,6 @@
 SCREENLENGTH = 60
+
 class UIPrinter:
-    
     def __init__(self):
         pass
 

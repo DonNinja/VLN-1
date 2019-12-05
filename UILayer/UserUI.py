@@ -1,4 +1,3 @@
-from LogicLayer.Logic import LogicAPI
 from UILayer.UserInputCheck import UserInputCheck
 from UILayer.UIPrinter import UIPrinter
 
@@ -7,8 +6,7 @@ QUIT_STR = "Q - Quit"
 
 class UserUI:
     def __init__(self):
-        self.__data_worker = LogicAPI()
-        self.__input_check = UserInputCheck()
+        self.__inputCheck = UserInputCheck()
         self.__printer = UIPrinter()
         pass
 
@@ -18,7 +16,7 @@ class UserUI:
     def back(self):
         return
 
-    def input_check(self, inp, choice_dict):
+    def inputCheck(self, inp, choice_dict):
         for i in choice_dict:
             if inp == i:
                 return True
@@ -35,10 +33,10 @@ class UserUI:
             self.__printer.display(choice_list)
             inp = self.askForInput()
             #Check if input is valid
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -50,7 +48,7 @@ class UserUI:
             choice_dict = {"1" : self.addEmployeeScreen, "2" : self.showEmpScreen, "3" : self.editEmpScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
                 choice_dict.get(inp)()
             else:
@@ -64,23 +62,23 @@ class UserUI:
             choice_dict = {"1": self.addMiscEmpScreen, "2" : self.addPilotScreen, "3" : self.addAttendantScreen, "B" : self.back,"Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
     def addMiscEmpScreen(self):
-        emp_data_list = self.__input_check.empDataInput("employee")
+        emp_data_list = self.__inputCheck.empDataInput("employee")
         pass
 
     def addPilotScreen(self):
-        pilot_data_list = self.__input_check.empDataInput("pilot")
+        pilot_data_list = self.__inputCheck.empDataInput("pilot")
         pass
 
     def addAttendantScreen(self):
-        att_data_list = self.__input_check.empDataInput("flight attendant")
+        att_data_list = self.__inputCheck.empDataInput("flight attendant")
         pass
 
     def showHardestWorking(self):
@@ -95,10 +93,10 @@ class UserUI:
             choice_dict = {"1" : self.whileEditingEmpScreen, "2" : self.whileEditingEmpScreen, "3" : self.whileEditingEmpScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -110,10 +108,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -125,10 +123,10 @@ class UserUI:
             choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen, "4" : self.showHardestWorking, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -140,10 +138,10 @@ class UserUI:
             choice_dict = {"1" : self.atWorkScreen , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -155,10 +153,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -170,10 +168,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -185,10 +183,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing , "2" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -200,10 +198,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -215,10 +213,10 @@ class UserUI:
             choice_dict = {"1" : self.showAllAirplanes, "2" : self.addAirplane, "3" : self.showPilotsSortedByPlanes, "4" : self.showPilotForSpecificPlane, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -246,10 +244,10 @@ class UserUI:
             choice_dict = {"1" : self.locationScreen, "2" : self.workTripsScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
     
@@ -261,10 +259,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -276,10 +274,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -291,10 +289,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -306,10 +304,10 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -322,10 +320,10 @@ class UserUI:
             self.__printer.display(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
         
@@ -337,9 +335,9 @@ class UserUI:
             choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
-            checking = self.input_check(inp,choice_dict)
+            checking = self.inputCheck(inp,choice_dict)
             if checking:
-                next_screen = choice_dict.get(inp)
-                next_screen()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")

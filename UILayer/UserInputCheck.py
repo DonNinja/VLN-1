@@ -1,5 +1,8 @@
+from LogicLayer.Logic import LogicAPI
+
 class UserInputCheck:
     def __init__(self):
+        self.__data_worker = LogicAPI()
         pass
 
     def empDataInput(self, type=""):
