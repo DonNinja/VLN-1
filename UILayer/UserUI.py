@@ -50,7 +50,8 @@ class UserUI:
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                choice_dict.get(inp)()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
