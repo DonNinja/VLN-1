@@ -60,5 +60,18 @@ class UserInput():
 
     def enterSSN(self, emp_type):
         ssn = input("Enter a{}'s SSN: ".format(emp_type))
-        
-        return
+        #Check hvort að kennitalan tilheyri einhverjum starfsmanni
+        return ssn
+    
+    def addWorkTrip(self):
+        extra_pilot_list = []
+        input("Enter a destination: ")
+        input("Enter a departure date (DD/MM/YYYY): ")
+        input("Enter a departure time (HH:MM): ")
+        input("Enter the Pilot's SSN: ")
+        input("Enter the Co-Pilot's SSN: ")
+        more_pilots = input("Would you like to enter more pilots? (Y/N): ")
+        while more_pilots:
+            more_pilots = input("Would you like to enter more pilots? (Y/N): ")
+            
+        input("")

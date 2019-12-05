@@ -157,7 +157,6 @@ def getplane():
 
 def getpastflights():
     filename = "PastFlights.csv"
- 
     lis = []
     past_flight_dict = {}
     with open(filename, 'r') as csvfile:
