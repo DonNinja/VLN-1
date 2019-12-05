@@ -4,22 +4,32 @@ class UIPrinter:
     def __init__(self):
         pass
 
-    def printLine(self):
-        line = ""
-        while len(line) < SCREENLENGTH:
-            line += "="
+    def printUpperLine(self):
+        line = "╔"
+        while len(line) < SCREENLENGTH-1:
+            line += "═"
+        line += "╗"
+        print(line)
+    
+    def printLowerLine(self):
+        line = "╚"
+        while len(line) < SCREENLENGTH-1:
+            line += "═"
+        line += "╝"
         print(line)
 
     def printHeaderUpperLine(self):
-        line = ""
-        while len(line) < SCREENLENGTH:
-            line += "_"
+        line = "┌"
+        while len(line) < SCREENLENGTH-1:
+            line += "─"
+        line += "┐"
         print(line)
         
     def printHeaderUnderLine(self):
-        line = ""
-        while len(line) < SCREENLENGTH:
-            line += "‾"
+        line = "└"
+        while len(line) < SCREENLENGTH-1:
+            line += "─"
+        line += "┘"
         print(line)
 
     def headerDisplay(self, screen_name):
@@ -38,11 +48,11 @@ class UIPrinter:
         self.printHeaderUnderLine()
 
     def display(self, choice_list):
-        self.printLine()
+        self.printUpperLine()
         for choice in choice_list:
-            line = "|    " + choice
+            line = "║    " + choice
             while len(line) < SCREENLENGTH-1:
                 line += " "
-            line += "|"
+            line += "║"
             print(line)
-        self.printLine()
+        self.printLowerLine()
