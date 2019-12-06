@@ -78,9 +78,109 @@ class PastFlight():
 
     def __str__(self):
         return "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(self.flightNumber,self.departingFrom,self.arrivingAt,self.departure,self.arrival,self.aircraftID,self.captain,self.copilot,self.fsm,self.fa1,self.fa2)
+<<<<<<< HEAD
 
 
 
+#function that takes csv files and converts the information to 
+#instances of a class stored in a dictionary, for example ssn 
+#gives an employee
+
+def getupcomingflights():
+    filename = "UpcomingFlights.csv"
+    
+    lis = []
+    UpcomingFlightsdict = {}
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        counter = 0
+        for row in csvreader:
+            flightNumber,DepartingFrom,arrivingAt,Departure,arrival = row
+            lis.append("upcomingflights"+str(counter))
+            lis[counter] = UpcomingFlights(flightNumber,DepartingFrom,arrivingAt,Departure,arrival)
+            UpcomingFlightsdict[flightNumber] = lis[counter]
+            counter = counter + 1
+        return UpcomingFlightsdict
+
+def getcrew():
+    filename = "Crew.csv"
+  
+    lis = []
+    crewdict = {}
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        counter = 0
+        for row in csvreader:
+            lis.append("crewmember"+str(counter))
+            ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num = row
+
+            lis[counter] = crew(ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num)
+            crewdict[ssn] = lis[counter]
+            counter = counter + 1 
+        return crewdict
+
+
+
+def getplanetype():
+    filename = "AircraftType.csv"
+    
+    lis = []
+    planeTypedict = {}
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        counter = 0
+        for row in csvreader:
+            lis.append("planetype"+str(counter))
+            planeTypeId,planeType,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan = row
+            lis[counter] = planeType(planeTypeId,planeType,model,capacity,emptyWeight,maxTakeoffWeight,unitThrust,serviceCeiling,length,height,wingspan)
+            planeTypedict[planeTypeId] = lis[counter]
+            counter = counter + 1 
+        return planeTypedict
+
+
+
+def getplane():
+    filename = "Aircraft.csv"
+    
+    lis = []
+    planedict = {}
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        counter = 0
+        for row in csvreader:
+            lis.append("plane"+str(counter))
+            planeInsignia,planeTypeId = row
+
+            lis[counter] = plane(planeInsignia,planeTypeId)
+            planedict[planeInsignia] = lis[counter]
+            counter = counter + 1 
+        return planedict
+
+
+
+def getpastflights():
+    filename = "PastFlights.csv"
+ 
+    lis = []
+    PastFlightdict = {}
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        counter = 0
+        for row in csvreader:
+            lis.append("pastflight"+ str(counter))
+            flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2 = row
+=======
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
+
+            lis[counter] = PastFlight(flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2)
+            PastFlightdict[flightNumber] = lis[counter]
+            counter = counter + 1 
+        return PastFlightdict
+
+
+<<<<<<< HEAD
+def newemployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_phone):
+=======
 #function that takes csv files and converts the information to 
 #instances of a class stored in a dictionary, for example ssn 
 #gives an employee
@@ -173,13 +273,25 @@ def getpastflights():
 
 
 def newEmployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_phone):
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
     with open('crew.csv', 'a',newline='') as newFile:
         newFileWriter = csv.writer(newFile)
         newFileWriter.writerow([ssn,name,role,rank,licens,address, mobile, home_phone])
         crewdict[ssn] = crew(ssn,name,role,rank,licens,address, mobile, home_phone)
         return crewdict
+<<<<<<< HEAD
+
+
+dict1 = getcrew()
+newemployee(dict1)   
+print(dict1["0111992249"])
+
+
+        
+=======
 
 
 dict1 = getcrew()
 newEmployee(dict1)   
 print(dict1["0111992249"])
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
