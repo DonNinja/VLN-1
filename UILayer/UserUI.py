@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from UILayer.UserInputCheck import UserInputCheck
+=======
+from UILayer.UserInput import UserInput
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
 from UILayer.UIPrinter import UIPrinter
 
 BACK_STR = "B - Back"
@@ -6,7 +10,11 @@ QUIT_STR = "Q - Quit"
 
 class UserUI:
     def __init__(self):
+<<<<<<< HEAD
         self.__inputCheck = UserInputCheck()
+=======
+        self.__inputter = UserInput()
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
         self.__printer = UIPrinter()
         pass
 
@@ -27,7 +35,10 @@ class UserUI:
     def startScreen(self):
         while True:
             self.__printer.headerDisplay("Starting screen")
+<<<<<<< HEAD
             #valid_inputs = 123 q
+=======
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             choice_list = ["1 - Employees", "2 - Airplanes", "3 - Trips and locations", QUIT_STR]
             choice_dict = {"1" : self.employeeScreen, "2" : self.airplaneScreen, "3" : self.tripAndLocScreen, "Q" : exit}
             self.__printer.display(choice_list)
@@ -50,7 +61,8 @@ class UserUI:
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                choice_dict.get(inp)()
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
             else:
                 print("Input is invalid!")
 
@@ -58,8 +70,13 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Add employee screen")
+<<<<<<< HEAD
             choice_list = ["1 - Add Misc Employee", "2 - Add Pilot", "3 - Add Flight Attendant", BACK_STR,QUIT_STR]
             choice_dict = {"1": self.addMiscEmpScreen, "2" : self.addPilotScreen, "3" : self.addAttendantScreen, "B" : self.back,"Q" : exit}
+=======
+            choice_list = ["1 - Add Pilot", "2 - Add Flight Attendant", BACK_STR,QUIT_STR]
+            choice_dict = {"1" : self.addPilotScreen, "2" : self.addAttendantScreen, "B" : self.back,"Q" : exit}
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -69,6 +86,7 @@ class UserUI:
             else:
                 print("Input is invalid!")
 
+<<<<<<< HEAD
     def addMiscEmpScreen(self):
         emp_data_list = self.__inputCheck.empDataInput("employee")
         pass
@@ -79,6 +97,14 @@ class UserUI:
 
     def addAttendantScreen(self):
         att_data_list = self.__inputCheck.empDataInput("flight attendant")
+=======
+    def addPilotScreen(self):
+        pilot_data_list = self.__inputter.addEmp("pilot")
+        pass
+
+    def addAttendantScreen(self):
+        att_data_list = self.__inputter.addEmp("flight attendant")
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
         pass
 
     def showHardestWorking(self):
@@ -89,8 +115,13 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Edit employees screen")
+<<<<<<< HEAD
             choice_list = ["1 - Edit Any Employee", "2 - Edit Pilot", "3 - Edit Attendant", BACK_STR, QUIT_STR]
             choice_dict = {"1" : self.whileEditingEmpScreen, "2" : self.whileEditingEmpScreen, "3" : self.whileEditingEmpScreen, "B" : self.back, "Q" : exit}
+=======
+            choice_list = ["1 - Edit any employee", "2 - Edit pilot", "3 - Edit flight attendant", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.anyEmpSSN, "2" : self.pilotSSN, "3" : self.attendantSSN, "B" : self.back, "Q" : exit}
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -99,7 +130,23 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+<<<<<<< HEAD
         
+=======
+    
+    def anyEmpSSN(self):
+        ssn = self.__inputter.enterSSN("ny employee")
+        pass
+
+    def pilotSSN(self):
+        ssn = self.__inputter.enterSSN(" pilot")
+        pass
+
+    def attendantSSN(self):
+        ssn = self.__inputter.enterSSN(" flight attendant")
+        pass
+
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
     def whileEditingEmpScreen(self):
         inp = ""
         while inp != "B":
@@ -134,7 +181,11 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Filter employee screen")
+<<<<<<< HEAD
             choice_list = ["1 - Show All Employees", "2 - Show Employees at work on day/week", "3 - Show Employees not at work on day/week", "4 - Look for Employee bt SSN", BACK_STR, QUIT_STR]
+=======
+            choice_list = ["1 - Show all employees", "2 - Show employees at work on day/week", "3 - Show employees not at work on day/week", "4 - Look for employee by SSN", BACK_STR, QUIT_STR]
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             choice_dict = {"1" : self.atWorkScreen , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
@@ -149,7 +200,11 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Filter flight attendant screen")
+<<<<<<< HEAD
             choice_list = ["1 - Show All Attendants", "2 - Show Attendants at work on day/week", "3 - Show Attendants not at work on day/week", "4 - Look for Attendant bt SSN", BACK_STR, QUIT_STR]
+=======
+            choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day/week", "3 - Show attendants not at work on day/week", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR]
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
@@ -164,7 +219,11 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__printer.headerDisplay("Filter pilot screen")
+<<<<<<< HEAD
             choice_list = ["1 - Show All Pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot bt SSN", BACK_STR, QUIT_STR]
+=======
+            choice_list = ["1 - Show all pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot by SSN", BACK_STR, QUIT_STR]
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.doNothing, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
@@ -256,7 +315,11 @@ class UserUI:
         while inp != "B":
             self.__printer.headerDisplay("Work trips screen")
             choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
+<<<<<<< HEAD
             choice_dict = {"1" : self.doNothing, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : exit}
+=======
+            choice_dict = {"1" : self.__inputter.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : exit}
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -271,7 +334,11 @@ class UserUI:
         while inp != "B":
             self.__printer.headerDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
+<<<<<<< HEAD
             choice_dict = {"1" : self.doNothing, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
+=======
+            choice_dict = {"1" : self.__inputter.addLocation, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : exit}
+>>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
