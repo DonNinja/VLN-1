@@ -1,6 +1,6 @@
 from LogicLayer.UserInputCheck import UserInputCheck
 
-class UserInput():
+class UserInput:
     def __init__(self):
         self.__checker = UserInputCheck()
     
