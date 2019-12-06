@@ -183,6 +183,3 @@ def newEmployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_p
 dict1 = getcrew()
 newEmployee(dict1)   
 print(dict1["0111992249"])
-
-
-        

@@ -70,8 +70,9 @@ class UserInput():
         input("Enter a departure time (HH:MM): ")
         input("Enter the Pilot's SSN: ")
         input("Enter the Co-Pilot's SSN: ")
-        more_pilots = input("Would you like to enter more pilots? (Y/N): ")
-        while more_pilots:
-            more_pilots = input("Would you like to enter more pilots? (Y/N): ")
-            
+        more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
+        while more_pilots == "Y":
+            input("Enter another pilot's SSN")
+            more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
+        
         input("")
