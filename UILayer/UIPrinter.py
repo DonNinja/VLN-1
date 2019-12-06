@@ -18,7 +18,7 @@ class UIPrinter:
         line += "╝"
         print(line)
 
-    def printHeaderUpperLine(self):
+    def printUpperLine(self):
         print()
         line = "╔"
         while len(line) < SCREENLENGTH-1:
@@ -27,7 +27,7 @@ class UIPrinter:
         print(line)
 
     def headerDisplay(self, screen_name):
-        self.printHeaderUpperLine()
+        self.printUpperLine()
         half_screen_length = round(SCREENLENGTH/2, 0)
         half_screen_name_length = round(len(screen_name)/2, 0)
         screen_length_center = half_screen_length - half_screen_name_length

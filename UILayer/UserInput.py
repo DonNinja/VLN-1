@@ -78,15 +78,15 @@ class UserInput():
         more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
         while more_pilots == "Y":
             work_extra_pilot_ssn = input("Enter another pilot's SSN")
-            work_trip_data_list.append()
+            work_trip_data_list.append(work_extra_pilot_ssn)
             more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
         work_attendant = input("Enter a flight attendant's SSN: ")
         work_trip_data_list.append(work_attendant)
         more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
         while more_attendants == "Y":
-            work_extra_attendant = input("Enter another flight attendant's SSN: ")
+            work_extra_attendant_ssn = input("Enter another flight attendant's SSN: ")
             more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
-            work_trip_data_list.append(work_extra_attendant)
+            work_trip_data_list.append(work_extra_attendant_ssn)
         print(work_trip_data_list)
         input("Press enter to continue...")
         return work_trip_data_list

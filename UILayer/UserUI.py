@@ -218,13 +218,28 @@ class UserUI:
         while inp != "B":
             self.__printer.headerDisplay("Airplane screen")
             choice_list = ["1 - Show All Airplanes", "2 - Add Airplanes", "3 - Show Pilots Sorted by plane make", "4 - Show Pilots For Specific Plane Make", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.showAllAirplanes, "2" : self.addAirplane, "3" : self.showPilotsSortedByPlanes, "4" : self.showPilotForSpecificPlane, "B" : self.back, "Q" : exit}
+            choice_dict = {"1" : self.showAllAirplanes, "2" : self.addAirplane, "3" : self.showPilotsSortedByPlanes, "4" : self.specificPlaneScreen, "B" : self.back, "Q" : exit}
             self.__printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
                 nextScreen = choice_dict.get(inp)
                 nextScreen()
+            else:
+                print("Input is invalid!")
+        
+    def specificPlaneScreen(self):
+        inp = ""
+        while inp != "B":
+            self.__printer.headerDisplay("Choose a plane make")
+            choice_list = ["1 - BAE146", "2 - Fokker F28", "3 - Fokker 100", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : "NABAE146", "2" : "NAFokkerF28", "3" : "NAFokker100", "B" : self.back, "Q" : exit}
+            self.__printer.display(choice_list)
+            inp = self.askForInput()
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                plane_type = choice_dict.get(inp)
+                self.showPilotForSpecificPlane(plane_type)
             else:
                 print("Input is invalid!")
 
