@@ -1,4 +1,4 @@
-from LogicLayer.Logic import LogicAPI #pylint: disable=import-error
+from LogicLayer.Logic import LogicAPI
 
 class UserInputCheck:
     def __init__(self):
