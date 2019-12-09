@@ -172,7 +172,7 @@ class UserUI:
         while inp != "B":
             self.__ui_printer.headerDisplay("Filter employee screen")
             choice_list = ["1 - Show all employees", "2 - Show employees at work on day/week", "3 - Show employees not at work on day/week", "4 - Look for employee by SSN", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__data_printer.printAllEmps , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__data_printer.printAllEmps , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showEmployeeSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -181,6 +181,11 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+    
+    def showEmployeeSSN(self):
+        ssn = input("Enter a pilot's SSN (kennitala): ")
+        self.__data_printer.printEmpSSN(ssn)
+        pass
 
     def attFilterScreen(self):
         ''' This is the flight attendant show screen, here a user can choose what he wants to display, whether it's every flight attendant or a specific flight attendant (searched by SSN) '''
@@ -188,7 +193,7 @@ class UserUI:
         while inp != "B":
             self.__ui_printer.headerDisplay("Filter flight attendant screen")
             choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day/week", "3 - Show attendants not at work on day/week", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__data_printer.printAllAttendants , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__data_printer.printAllAttendants , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -197,6 +202,11 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+    
+    def showAttendantSSN(self):
+        ssn = input("Enter a pilot's SSN (kennitala): ")
+        self.__data_printer.printAttendantSSN(ssn)
+        pass
         
     def pilotFilterScreen(self):
         ''' This is the pilot show screen, here a user can choose what he wants to display, whether it's every pilot or a specific pilot (searched by SSN) '''
@@ -216,7 +226,7 @@ class UserUI:
     
     def showPilotSSN(self):
         ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__data_printer.printPilotSSN(ssn)
+        self.__data_printer.printAttendantSSN(ssn)
         pass
         
     def dayWeekScreen(self):

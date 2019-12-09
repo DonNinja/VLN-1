@@ -23,6 +23,14 @@ class LogicAPI():
     def showPilotSSN(self, ssn):
         all_emps = self.__data_getter.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
+    
+    def showAttendantSSN(self, ssn):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortAttendantSSN(all_emps, ssn)
+    
+    def showEmpSSN(self, ssn):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortEmployeeSSN(all_emps, ssn)
 
 # import re
 # class Employee:

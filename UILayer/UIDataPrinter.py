@@ -66,5 +66,25 @@ class UIDataPrinter:
             print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(pilot['ssn'], pilot['name'], pilot['role'], pilot['rank'], pilot['licence'], pilot['address'], pilot['mobilephonenumber'], pilot['homephonenumber']))
             self.printBotLine(len(line))
         else:
-            print("Invalid SSN!")
+            print("\nInvalid SSN!")
+        input("\nPress enter to continue...")
+    
+    def printAttendantSSN(self, ssn):
+        attendant = self.__data_getter.showAttendantSSN(ssn)
+        if attendant:
+            line = self.printCrewTop()
+            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(attendant['ssn'], attendant['name'], attendant['role'], attendant['rank'], attendant['licence'], attendant['address'], attendant['mobilephonenumber'], attendant['homephonenumber']))
+            self.printBotLine(len(line))
+        else:
+            print("\nInvalid SSN!")
+        input("\nPress enter to continue...")
+    
+    def printEmpSSN(self, ssn):
+        employee = self.__data_getter.showEmpSSN(ssn)
+        if employee:
+            line = self.printCrewTop()
+            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(employee['ssn'], employee['name'], employee['role'], employee['rank'], employee['licence'], employee['address'], employee['mobilephonenumber'], employee['homephonenumber']))
+            self.printBotLine(len(line))
+        else:
+            print("\nInvalid SSN!")
         input("\nPress enter to continue...")

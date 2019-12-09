@@ -18,8 +18,20 @@ class SortData:
                 ret_list.append(item)
         return ret_list
     
+    def sortEmployeeSSN(self, data, ssn):
+        for item in data: # Iterates through every item in the crew list
+            if item['ssn'] == ssn: # Checks if the SSN is correct and returns it if so, else returns none
+                return item
+        return None
+    
     def sortPilotSSN(self, data, ssn):
         for item in data: # Iterates through every item in the crew list
             if item['role'] == "Pilot" and item['ssn'] == ssn: # Checks if the role == Pilot and the SSN is correct and returns it if so, else returns none
+                return item
+        return None
+    
+    def sortAttendantSSN(self, data, ssn):
+        for item in data: # Iterates through every item in the crew list
+            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
