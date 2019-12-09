@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from LogicLayer.Logic import LogicAPI 
 import re
+=======
+from LogicLayer.Logic import LogicAPI #pylint: disable=import-error
+>>>>>>> 65a3c4f0d4ebbd0aa462180a6cb56171adfc89f3
 
 class UserInputCheck:
     def __init__(self):
