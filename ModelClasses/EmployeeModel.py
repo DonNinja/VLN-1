@@ -1,4 +1,3 @@
-from LogicLayer import addpilot 
 
 class Employee():
     def __init__(self, ssn, name, role, rank, licence, address, mobile_phone_number, home_phone_number):
