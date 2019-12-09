@@ -295,11 +295,12 @@ class UserUI:
                 print("Input is invalid!")
 
     def showAllAirplanes(self):
-        # Showing all airplanes
-        pass
+        # Show all airplanes
+        #Path ready, just needs to be called
         
     def addAirplane(self):
         # Adding Airplane
+    
         pass
 
     def showPilotsSortedByPlanes(self):

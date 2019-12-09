@@ -12,3 +12,13 @@ class DataPrinter:
                 print(data, end=" ")
             # print()
         input("\nPress enter to continue...")
+
+    def printAllAirplanes(self):
+        all_airplanes_list = self.__data_getter.showAllAirplanes()
+        for plane in all_airplanes_list:
+            for data in plane:
+                print(data, end=" ")
+            # print()
+        input("\nPress enter to continue...")
+
+    
