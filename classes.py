@@ -1,13 +1,14 @@
 import csv
 class crew():
-    def __init__(self,ssn,name,role,rank,licens,address,phonenumber):
+    def __init__(self,ssn,name,role,rank,licens,address,homephonenum,mobilephonenum):
         self.ssn = ssn
         self.name = name
         self.role = role
         self.rank = rank
         self.licens = licens
         self.address = address
-        self.phonenumber = phonenumber
+        self.homephonenum = homephonenum
+        self.mobilephonenum = mobilephonenum
 
     def __str__(self):
         return "{}\n{}\n{}\n{}\n{}\n{}\n{}".format(self.ssn,self.name,self.role,self.rank,self.licens,self.address,self.phonenumber) 
@@ -103,7 +104,7 @@ def getupcomingflights():
         return UpcomingFlightsdict
 
 def getcrew():
-    filename = "Crew.csv"
+    filename = "c:/Users/Notandi/Documents/3 Vikna kúrs/3 Vikna clone/VLN-1/STUDENTDATA/Crew.csv"
   
     lis = []
     crewdict = {}
@@ -114,7 +115,11 @@ def getcrew():
             lis.append("crewmember"+str(counter))
             ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num = row
 
+<<<<<<< HEAD
+            lis[counter] = crew(ssn,name,role,rank,licenc,address,mobilephonenum,homephonenum)
+=======
             lis[counter] = crew(ssn,name,role,rank,licenc,address,mobile_phone_num,home_phone_num)
+>>>>>>> 8fabe53da3e63a30d7076c71adb00e0e2d5add0c
             crewdict[ssn] = lis[counter]
             counter = counter + 1 
         return crewdict
@@ -276,11 +281,23 @@ def newEmployee(crewdict, ssn, name, role, rank, licens, address, mobile, home_p
 >>>>>>> 41a3b8be5f5d4982726b233e349d0d9fa9f472f3
     with open('crew.csv', 'a',newline='') as newFile:
         newFileWriter = csv.writer(newFile)
+<<<<<<< HEAD
+        ssn = input("Enter new ssn: ")
+        name = input("Enter new name: ")
+        role = input("Enter new role: ")
+        rank = input("Enter new rank: ")
+        licens = input("Enter new licens: ")
+        address = input("Enter new address: ")
+        mobilephonenum = input("Enter new phonenumber: ")
+        homephonenum = input("Enter new phonenumber: ")
+        newFileWriter.writerow([ssn,name,role,rank,licens,address,mobilephonenum,homephonenum])
+        crewdict[ssn] = crew(ssn,name,role,rank,licens,address,mobilephonenum,homephonenum)
+=======
         newFileWriter.writerow([ssn,name,role,rank,licens,address, mobile, home_phone])
         crewdict[ssn] = crew(ssn,name,role,rank,licens,address, mobile, home_phone)
+>>>>>>> 19fb65da4cf48138b8972281fb9bc57a64b6fc17
         return crewdict
 <<<<<<< HEAD
-
 
 dict1 = getcrew()
 newemployee(dict1)   

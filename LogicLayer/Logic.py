@@ -4,6 +4,7 @@ class LogicAPI():
     def __init__(self):
         self.__data_getter = DataAPI()
         pass
+    
 
     def showAllEmps(self):
         all_emp_list = self.__data_getter.getEmps()
