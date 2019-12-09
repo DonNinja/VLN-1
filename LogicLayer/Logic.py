@@ -3,6 +3,7 @@ from DataLayer.Data import Data
 class LogicAPI():
     def __init__(self):
         pass
+    
 
 import re
 class Employee:
