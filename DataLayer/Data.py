@@ -7,6 +7,7 @@ from ModelClasses.WorkTripModel import WorkTrip
 
 class DataAPI:
     def __init__(self):
+<<<<<<< HEAD
         self.file_stream = open(".\\STUDENTDATA\\Crew.csv", "r")
         self.file_stream_crew = open(".\\STUDENTDATA\\Crew.csv", "r")
         self.file_stream_airplanes = open(".\\STUDENTDATA\\Aircraft.csv", "r")
@@ -29,3 +30,14 @@ class DataAPI:
         self.__data = []
         self.__reader = ReadData()
         pass
+=======
+        self.__data = []
+        self.__reader = ReadData()
+        pass
+
+    def getEmps(self):
+        return self.__reader.readCrew()
+    
+    def getAirplanes(self):
+        return self.__reader.readAircraft()
+>>>>>>> a701bb8781f4ce2de1f6e72c6bb1f11302bf7411
