@@ -14,11 +14,15 @@ class UserInput:
         if self.__checker.checkName(name):
             data_list.append(name)
         role = emp_type.capitalize()
-        if self.__checker.checkRole(role):
-            data_list.append(role)
-        rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
-        if self.__checker.checkRank(rank, role):
-            data_list.append(rank)
+        data_list.append(role)
+        if role == 'Pilot':
+            rank = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
+            if self.__checker.checkRank(rank, role):
+                data_list.append(rank)
+        if role == 'Flight attendant':
+            rank = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+            if self.__checker.checkRank(rank, role):
+                data_list.append(rank)
         if emp_type != "flight attendant":
             licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
             #if __checker.checkLicense(licens)
@@ -26,8 +30,8 @@ class UserInput:
         else:
             licens = "N/A"
         address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        #if __checker.checkAddress(address)
-        data_list.append(address)
+        if self.__checker.checkAddress(address):
+            data_list.append(address)
         mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
         #if __checker.checkMobile(mobile)
         data_list.append(mobile)

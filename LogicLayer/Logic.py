@@ -1,28 +1,9 @@
 from DataLayer.Data import DataAPI
-<<<<<<< HEAD
-import string
-=======
 from LogicLayer.SortData import SortData
->>>>>>> a701bb8781f4ce2de1f6e72c6bb1f11302bf7411
 
 class LogicAPI():
     def __init__(self):
         self.__data_getter = DataAPI()
-<<<<<<< HEAD
-        
-    
-
-    def showAllEmps(self):
-        all_emp_list = self.__data_getter.getEmps()
-        return all_emp_list
-
-    def checkEmpRole(self, data, num):
-        all_emp_list = self.__data_getter.getEmps()
-        for row in all_emp_list: 
-            if row[num] == data:
-                return True
-        
-=======
         self.__data_sorter = SortData()
 
     def showAllEmps(self):
@@ -42,6 +23,8 @@ class LogicAPI():
     def showPilotSSN(self, ssn):
         all_emps = self.__data_getter.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
+    
+
 
 # import re
 # class Employee:
@@ -103,4 +86,3 @@ class LogicAPI():
 #         name = str(input("What is your name? "))
 #         print(name.isalpha()) 
 #         return name.isalpha()
->>>>>>> a701bb8781f4ce2de1f6e72c6bb1f11302bf7411

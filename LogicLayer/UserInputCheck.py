@@ -1,5 +1,9 @@
 from LogicLayer.Logic import LogicAPI 
 import re
+COPILOT = 'Copilot'
+CAPTAIN = 'Captain'
+FLIGHTSMANAGER = 'Flight Service Manager'
+FLIGHTATT = 'Flight Attendant'
 
 class UserInputCheck:
     def __init__(self):
@@ -17,21 +21,26 @@ class UserInputCheck:
         if check:
             return True
 
-    def checkRole(self, role):
-        num = 2
-        if self.__data_checker.checkEmpRole(role, num):
-            print("Role is valid")
-            return True
-
     def checkRank(self, rank, role):
-        num = 3
-        if self.__data_checker.checkEmpRole(rank, num):
-            if emp_role == 'Pilot' and rank == 'Captain' or 'Copilot':
-                print("Rank is valid")
-                return True
-            if emp_role == 'Cabincrew' and rank == 'Flight Service Manager' or 'Flight Attendant':
-                print("Rank is valid")
-                return True
+        if self.digit_check(rank):
+            if rank == '1' and role == 'Pilot':
+                rank = CAPTAIN
+            if rank == '2' and role == 'Pilot':
+                rank = COPILOT
+            if rank == '1' and role == 'Flight attendant':
+                rank = FLIGHTATT
+            if rank == '2' and role == 'Flight attendant':
+                rank = FLIGHTSMANAGER
+        print(rank)
+        return rank
+
+
+    def checkAdress(self, adress):
+        list_adress = adress.split(" ")
+        if list_adress[0] == 'Fellsmúli':
+            print('Valid')
+        else:
+            print('Not in Fellsmúli??')
 
     def digit_check(self, data):
         try:

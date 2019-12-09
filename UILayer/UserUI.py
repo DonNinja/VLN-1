@@ -301,12 +301,8 @@ class UserUI:
 
     def showAllAirplanes(self):
         # Show all airplanes
-<<<<<<< HEAD
         #Path ready, just needs to be called
         pass
-=======
-        self.__data_printer.printAllPlanes()
->>>>>>> a701bb8781f4ce2de1f6e72c6bb1f11302bf7411
         
     def addAirplane(self):
         # Adding Airplane
