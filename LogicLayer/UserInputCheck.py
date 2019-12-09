@@ -17,10 +17,10 @@ class UserInputCheck:
         if check:
             return True
 
-def checkRole(self, role):
-    num = 2
-    if self.__data_checker.EmpRole(role, num):
-        return role
+    def checkRole(self, role):
+        num = 2
+        if __data_checker.EmpRole(role, num):
+            return role
 
     def digit_check(self, data):
         try:
