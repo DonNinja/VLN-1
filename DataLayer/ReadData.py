@@ -6,7 +6,7 @@ class ReadData():
 
     def readCrew(self):
         self.__data.clear()
-        with open(".\\STUDENTDATA\\Crew.csv", "r") as crew_file:
+        with open("./STUDENTDATA/Crew.csv", "r") as crew_file:
             crew_reader = csv.DictReader(crew_file)
             for line in crew_reader:
                 self.__data.append(line)
