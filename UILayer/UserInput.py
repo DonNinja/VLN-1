@@ -14,8 +14,8 @@ class UserInput:
         if self.__checker.checkName(name):
             data_list.append(name)
         role = emp_type.capitalize()
-        #if __checker.checkRole(role)
-        data_list.append(role)
+        if __checker.checkRole(role):
+            data_list.append(role)
         rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
         #if __checker.checkRank(rank)
         data_list.append(rank)
