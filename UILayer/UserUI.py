@@ -188,7 +188,7 @@ class UserUI:
         while inp != "B":
             self.__ui_printer.headerDisplay("Filter flight attendant screen")
             choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day/week", "3 - Show attendants not at work on day/week", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__data_printer.printAllAttendants , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.atWorkScreen, "B" : self.back, "Q" : sys.exit}
             self.__ui_printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -204,7 +204,7 @@ class UserUI:
         while inp != "B":
             self.__ui_printer.headerDisplay("Filter pilot screen")
             choice_list = ["1 - Show all pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot by SSN", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__data_printer.printAllPilots , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -213,6 +213,11 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+    
+    def showPilotSSN(self):
+        ssn = input("Enter a pilot's SSN (kennitala): ")
+        self.__data_printer.printPilotSSN(ssn)
+        pass
         
     def dayWeekScreen(self):
         ''' This asks the user if he wants to display employees working or not working for day or for week '''
@@ -229,7 +234,7 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-        
+
     def atWorkScreen(self):
         ''' This is the screen that leads to displaying every employee/pilot/flight attendant that's at work on a chosen day or a chosen week '''
         inp = ""
@@ -296,11 +301,10 @@ class UserUI:
 
     def showAllAirplanes(self):
         # Show all airplanes
-        #Path ready, just needs to be called
+        self.__data_printer.printAllPlanes()
         
     def addAirplane(self):
         # Adding Airplane
-    
         pass
 
     def showPilotsSortedByPlanes(self):
