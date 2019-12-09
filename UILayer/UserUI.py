@@ -297,10 +297,10 @@ class UserUI:
     def showAllAirplanes(self):
         # Show all airplanes
         #Path ready, just needs to be called
+        pass
         
     def addAirplane(self):
         # Adding Airplane
-    
         pass
 
     def showPilotsSortedByPlanes(self):
