@@ -19,8 +19,19 @@ class UserInputCheck:
 
     def checkRole(self, role):
         num = 2
-        if __data_checker.EmpRole(role, num):
-            return role
+        if self.__data_checker.checkEmpRole(role, num):
+            print("Role is valid")
+            return True
+
+    def checkRank(self, rank, role):
+        num = 3
+        if self.__data_checker.checkEmpRole(rank, num):
+            if emp_role == 'Pilot' and rank == 'Captain' or 'Copilot':
+                print("Rank is valid")
+                return True
+            if emp_role == 'Cabincrew' and rank == 'Flight Service Manager' or 'Flight Attendant':
+                print("Rank is valid")
+                return True
 
     def digit_check(self, data):
         try:

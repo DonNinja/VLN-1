@@ -14,11 +14,11 @@ class UserInput:
         if self.__checker.checkName(name):
             data_list.append(name)
         role = emp_type.capitalize()
-        if __checker.checkRole(role):
+        if self.__checker.checkRole(role):
             data_list.append(role)
         rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
-        #if __checker.checkRank(rank)
-        data_list.append(rank)
+        if self.__checker.checkRank(rank, role):
+            data_list.append(rank)
         if emp_type != "flight attendant":
             licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
             #if __checker.checkLicense(licens)

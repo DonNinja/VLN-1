@@ -29,7 +29,3 @@ class DataAPI:
         self.__data = []
         self.__reader = ReadData()
         pass
-
-    def getEmps(self):
-        return self.__reader.readCrew()
-
