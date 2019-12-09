@@ -1,6 +1,6 @@
 from UILayer.UserInput import UserInput
 from UILayer.UIPrinter import UIPrinter
-from UILayer.DataPrinter import DataPrinter
+from UILayer.UIDataPrinter import UIDataPrinter
 import sys
 
 BACK_STR = "B - Back"
@@ -10,7 +10,7 @@ class UserUI:
     def __init__(self):
         self.__inputter = UserInput()
         self.__ui_printer = UIPrinter()
-        self.__data_printer = DataPrinter()
+        self.__data_printer = UIDataPrinter()
 
     def doNothing(self):
         pass

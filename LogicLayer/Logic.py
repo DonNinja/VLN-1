@@ -7,8 +7,7 @@ class LogicAPI():
         pass
 
     def showAllEmps(self):
-        all_emp_list = self.__data_getter.getEmps()
-        return all_emp_list
+        return self.__data_getter.getEmps()
 
 # import re
 # class Employee:
