@@ -78,7 +78,9 @@ class UserUI:
 
     def addPilotScreen(self):
         ''' Calls a function that asks the user to input values for a new pilot '''
-        pilot_data_list = self.__inputter.addEmp("pilot")
+        #pilot_data_list = 
+        self.__inputter.addEmp("pilot")
+        #logicAPI().addPilots(pilot_data_list)
         pass
 
     def addAttendantScreen(self):
@@ -319,6 +321,7 @@ class UserUI:
         
     def addAirplane(self):
         # Adding Airplane
+        self.__inputter.addPlane()
         pass
 
     def showPilotsSortedByPlanes(self):

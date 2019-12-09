@@ -43,6 +43,17 @@ class LogicAPI():
         all_emps = self.__data_getter.getEmps()
         return self.__data_sorter.sortPilotsByPlane(all_emps, plane_type)
 
+    def addEmpLL(self,data_list):
+        self.__data_getter.registerNewData(data_list)
+        pass
+
+    def addPlane(self,data_list):
+        self.__data_getter.registerPlanes(data_list)
+
+        
+
+
+
 # import re
 # class Employee:
 
