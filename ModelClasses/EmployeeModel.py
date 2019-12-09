@@ -1,3 +1,5 @@
+from LogicLayer import addpilot 
+
 class Employee():
     def __init__(self, ssn, name, role, rank, licence, address, mobile_phone_number, home_phone_number):
         self.__ssn = ssn
@@ -56,6 +58,7 @@ class Employee():
 
     def setHomePhoneNumber(self,newhomephonenumber):
         self.__home_phone_number = newhomephonenumber
+
 
     def __str__(self):
         return "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(self.__ssn,
