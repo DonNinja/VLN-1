@@ -1,12 +1,28 @@
 from DataLayer.Data import DataAPI
+from LogicLayer.SortData import SortData
 
 class LogicAPI():
     def __init__(self):
         self.__data_getter = DataAPI()
-        pass
+        self.__data_sorter = SortData()
 
     def showAllEmps(self):
         return self.__data_getter.getEmps()
+    
+    def showAllPilots(self):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only flight attendants
+    
+    def showAllAttendants(self):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
+    
+    def showAllPlanes(self):
+        return self.__data_getter.getAirplanes()
+    
+    def showPilotSSN(self, ssn):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
 # import re
 # class Employee:
