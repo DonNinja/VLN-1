@@ -1,36 +1,39 @@
-from LogicLayer.Logic import LogicAPI
+from LogicLayer.Logic import LogicAPI 
+import re
 
 class UserInputCheck:
     def __init__(self):
         self.__data_checker = LogicAPI()
-        self.__ssn = self.checkSSN(ssn)
 
     def checkSSN(self, ssn):
-        status = True
-        while status == True:
-            check_int = self.digit_ssn(ssn)
-            check_len = self.len_ssn(check_int)
-            check_date = self.date_check_ssn(ssn)
-            if check_int and check_len and check_date:
-                status = False
-                return ssn
+        check_int = self.digit_check(ssn)
+        check_len = self.len_ssn(ssn)
+        check_date = self.date_check_ssn(ssn)
+        if check_int and check_len and check_date:
+            return True
+    
+    def checkName(self, name):
+        check = self.name_check(name)
+        if check:
+            return True
 
 
 
-    def digit_check(data):
+    def digit_check(self, data):
         try:
-            ssn = [str(int(i)) for i in ssn.split()]
+            ssn = [str(int(i)) for i in data.split()]
             return True
         except:
             ValueError
             print('Error, only numbers allowed')
             return False
 
-    def len_ssn(check):
-        if len(check) == 10:
+    def len_ssn(self, check):
+        ssn = [str(int(i)) for i in check.split()]
+        if len(ssn) == 10:
             return True
 
-    def date_check_ssn(ssn):
+    def date_check_ssn(self, ssn):
         #ssn_ints = [int(i) for i in ssn]
         #dates = ssn_ints[0] + ssn_ints[1]
         #month = ssn_ints[2] + ssn_ints[3]
@@ -40,6 +43,16 @@ class UserInputCheck:
         else:
             print("SSN is invalid")
             return False
+
+    def name_check(self, name):
+        name_strip = name.replace(" ", "")
+        if name_strip.isalpha():
+            print("Valid")
+            return True
+        else:
+            print("Name is not in the right format")
+            return False
+
 
 
     def addLocationCountry(self):

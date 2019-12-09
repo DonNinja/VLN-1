@@ -8,11 +8,11 @@ class UserInput:
         data_list = []
         print()
         ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
-        #if __checker.checkSSN(ssn):
-        data_list.append(ssn)
+        if self.__checker.checkSSN(ssn):
+            data_list.append(ssn)
         name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        # self.__checker.checkName(name)
-        data_list.append(name)
+        if self.__checker.checkName(name):
+            data_list.append(name)
         role = emp_type.capitalize()
         #if __checker.checkRole(role)
         data_list.append(role)
