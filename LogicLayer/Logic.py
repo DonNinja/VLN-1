@@ -1,10 +1,10 @@
 from DataLayer.Data import DataAPI
-import string
 
 class LogicAPI():
     def __init__(self):
         self.__data_getter = DataAPI()
         pass
+    
 
     def showAllEmps(self):
         return self.__data_getter.getEmps()
