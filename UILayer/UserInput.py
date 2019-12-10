@@ -106,3 +106,6 @@ class UserInput:
 
     def enterEmail(self):
         return input("Enter a new email: ")
+    
+    def enterAddress(self):
+        return input("Enter a new address: ")

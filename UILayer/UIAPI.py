@@ -60,3 +60,8 @@ class UIAPI:
         new_email = self.inputter.enterEmail()
         self.logic.updateEmp(data, new_email, 'homephonenumber')
         self.showSpecificEmp(data['ssn'])
+
+    def editAddress(self, data):
+        new_address = self.inputter.enterAddress()
+        self.logic.updateEmp(data, new_address, 'address')
+        self.showSpecificEmp(data['ssn'])
