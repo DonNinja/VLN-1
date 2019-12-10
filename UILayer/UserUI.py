@@ -106,15 +106,25 @@ class UserUI:
     
     def anyEmpSSN(self):
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what employee we want to change '''
-        ssn = self.__ui_api.inputter.enterSSN("ny employee") # The string that's sent in is "ny employee" because the input command has "a" + the string that's sent in so we can reuse the same command for each of the employee types
+        if self.showEmployeeSSN():
+            self.whileEditingEmpScreen()
+        else :
+            pass
+        #ssn = self.__ui_api.inputter.enterSSN("ny employee") # The string that's sent in is "ny employee" because the input command has "a" + the string that's sent in so we can reuse the same command for each of the employee types
 
     def pilotSSN(self):
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what pilot we want to change '''
-        ssn = self.__ui_api.inputter.enterSSN(" pilot")
+        if self.showPilotSSN():
+            self.whileEditingEmpScreen()
+        else:
+            pass
 
     def attendantSSN(self):
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what flight attendant we want to change '''
-        ssn = self.__ui_api.inputter.enterSSN(" flight attendant")
+        if self.showAttendantSSN():
+            self.whileEditingEmpScreen()
+        else:
+            pass
 
     def whileEditingEmpScreen(self):
         ''' This asks the user what he would like to change '''
@@ -181,9 +191,8 @@ class UserUI:
                 print("Input is invalid!")
     
     def showEmployeeSSN(self):
-        ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.showSpecificEmp(ssn)
-        pass
+        ssn = input("Enter an employee's SSN (kennitala): ")
+        return self.__ui_api.showSpecificEmp(ssn)
 
     def attFilterScreen(self):
         ''' This is the flight attendant show screen, here a user can choose what he wants to display, whether it's every flight attendant or a specific flight attendant (searched by SSN) '''
@@ -202,9 +211,8 @@ class UserUI:
                 print("Input is invalid!")
     
     def showAttendantSSN(self):
-        ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.showSpecificAttendant(ssn)
-        pass
+        ssn = input("Enter a flight attendant's SSN (kennitala): ")
+        return self.__ui_api.showSpecificAttendant(ssn)
         
     def pilotFilterScreen(self):
         ''' This is the pilot show screen, here a user can choose what he wants to display, whether it's every pilot or a specific pilot (searched by SSN) '''
@@ -224,8 +232,7 @@ class UserUI:
     
     def showPilotSSN(self):
         ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.showSpecificPilot(ssn)
-        pass
+        return self.__ui_api.showSpecificPilot(ssn)
         
     def dayWeekScreen(self):
         ''' This asks the user if he wants to display employees working or not working for day or for week '''

@@ -46,12 +46,12 @@ class UIAPI:
     
     def showSpecificEmp(self, ssn):
         emp = self.logic.showEmpSSN(ssn)
-        self.data_printer.printEmpSSN(emp)
+        return self.data_printer.printEmpSSN(emp)
     
     def showSpecificPilot(self, ssn):
         emp = self.logic.showPilotSSN(ssn)
-        self.data_printer.printEmpSSN(emp)
+        return self.data_printer.printEmpSSN(emp)
     
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
-        self.data_printer.printEmpSSN(emp)
+        return self.data_printer.printEmpSSN(emp)
