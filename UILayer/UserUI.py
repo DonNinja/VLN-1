@@ -116,23 +116,26 @@ class UserUI:
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what flight attendant we want to change '''
         ssn = self.__ui_api.inputter.enterSSN(" flight attendant")
 
-    def whileEditingEmpScreen(self):
+    def whileEditingEmpScreen(self, data):
         ''' This asks the user what he would like to change '''
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing employee screen")
             choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.phoneEditScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.doNothing, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
                 nextScreen = choice_dict.get(inp)
-                nextScreen()
+                if inp != "3" or inp != "B" or inp != "Q":
+                    nextScreen(data)
+                else:
+                    nextScreen()
             else:
                 print("Input is invalid!")
 
-    def phoneEditScreen(self):
+    def phoneEditScreen(self, data):
         ''' This shows the user what phones he can change. '''
         inp = ""
         while inp != "B":

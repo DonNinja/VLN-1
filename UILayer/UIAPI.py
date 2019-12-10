@@ -55,3 +55,6 @@ class UIAPI:
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
         self.data_printer.printEmpSSN(emp)
+    
+    def editEmail(self, data):
+        
