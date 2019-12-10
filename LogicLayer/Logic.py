@@ -25,7 +25,6 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
     
 
-
 # import re
 # class Employee:
 
