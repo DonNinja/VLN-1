@@ -23,8 +23,8 @@ class DataAPI:
         """ Calls a function, which returns the complete list of Airplanes, then it returns that. """
         return self.__reader.readAircraft()
 
-    def registerNewData(self,data_list):
+    def registerNewData(self, data_list):
         self.__register.registeremployee(data_list)
 
-    def registerPlanes(self,data_list):
+    def registerPlanes(self, data_list):
         self.__register.registerPlane(data_list)

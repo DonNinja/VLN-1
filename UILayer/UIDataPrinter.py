@@ -27,24 +27,7 @@ class UIDataPrinter:
         print(line)
 
     def printAllEmps(self, data_list):
-        """ This prints every employee and formats it nicely """
-        # all_emp_list = self.__ui_api.logic.showAllEmps()
-        line = self.printCrewTop()
-        for emp in data_list:
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(emp['ssn'], emp['name'], emp['role'], emp['rank'], emp['licence'], emp['address'], emp['mobilephonenumber'], emp['homephonenumber']))
-        self.printBotLine(len(line))
-        input("\nPress enter to continue...")
-    
-    def printAllPilots(self, data_list):
-        """ This prints every pilot and formats it nicely """
-        line = self.printCrewTop()
-        for emp in data_list:
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(emp['ssn'], emp['name'], emp['role'], emp['rank'], emp['licence'], emp['address'], emp['mobilephonenumber'], emp['homephonenumber']))
-        self.printBotLine(len(line))
-        input("\nPress enter to continue...")
-    
-    def printAllAttendants(self, data_list):
-        """ This prints every flight attendant and formats it nicely """
+        """ This prints every employee in the given data list and formats it nicely """
         line = self.printCrewTop()
         for emp in data_list:
             print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(emp['ssn'], emp['name'], emp['role'], emp['rank'], emp['licence'], emp['address'], emp['mobilephonenumber'], emp['homephonenumber']))
@@ -61,35 +44,18 @@ class UIDataPrinter:
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
     
-    def printPilotSSN(self, pilot):
-        """ This calls a function to find a pilot by their SSN then prints out their information, if the pilot is not found, then it prints out 'Invalid SSN!' """
-        if pilot:
-            line = self.printCrewTop()
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(pilot['ssn'], pilot['name'], pilot['role'], pilot['rank'], pilot['licence'], pilot['address'], pilot['mobilephonenumber'], pilot['homephonenumber']))
-            self.printBotLine(len(line))
-        else:
-            print("\nInvalid SSN!")
-        input("\nPress enter to continue...")
-    
-    def printAttendantSSN(self, attendant):
-        """ This calls a function to find a flight attendant by their SSN then prints out their information, if the flight attendant is not found, then it prints out 'Invalid SSN!' """
-        if attendant:
-            line = self.printCrewTop()
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(attendant['ssn'], attendant['name'], attendant['role'], attendant['rank'], attendant['licence'], attendant['address'], attendant['mobilephonenumber'], attendant['homephonenumber']))
-            self.printBotLine(len(line))
-        else:
-            print("\nInvalid SSN!")
-        input("\nPress enter to continue...")
-    
     def printEmpSSN(self, employee):
         """ This calls a function to find any employee by their SSN then prints out their information, if the employee does not exists, it prints out 'Invalid SSN' """
         if employee:
             line = self.printCrewTop()
             print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(employee['ssn'], employee['name'], employee['role'], employee['rank'], employee['licence'], employee['address'], employee['mobilephonenumber'], employee['homephonenumber']))
             self.printBotLine(len(line))
+            ret_cond = True
         else:
             print("\nInvalid SSN!")
+            ret_cond = False
         input("\nPress enter to continue...")
+        return ret_cond
 
     def printPilotForPlane(self, data_list):
         """ This calls a function that searches employees by whether they fly a specific plane type """

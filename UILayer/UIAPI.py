@@ -54,4 +54,4 @@ class UIAPI:
     
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
-        self.data_printer.printAttendantSSN(emp)
+        self.data_printer.printEmpSSN(emp)
