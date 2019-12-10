@@ -94,7 +94,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Edit employees screen")
             choice_list = ["1 - Edit any employee", "2 - Edit pilot", "3 - Edit flight attendant", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.anyEmpSSN, "2" : self.pilotSSN, "3" : self.attendantSSN, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.anyEmpSSN, "2" : self.editPilot, "3" : self.attendantSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -407,3 +407,7 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+
+    def editPilot(self):
+        ssn = input("Enter a pilot's SSN (kennitala): ")
+        self.__ui_api.editPilot(ssn)

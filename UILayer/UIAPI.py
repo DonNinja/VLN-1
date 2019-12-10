@@ -55,3 +55,10 @@ class UIAPI:
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
         self.data_printer.printAttendantSSN(emp)
+
+    def editemp(self,ssn,emp_type):
+        emp = self.logic.showPilotSSN(ssn)
+        pilot_data = list(emp.values())
+        updated_emp = self.inputter.editemp(pilot_data,emp_type)
+        self.logic.editemp(updated_emp)
+
