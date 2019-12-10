@@ -1,11 +1,12 @@
+from DataLayer.ReadData import ReadData
+from ModelClasses.AirplaneModel import Airplane
+from ModelClasses.EmployeeModel import Employee
+from ModelClasses.FlightModel import Flight
+from ModelClasses.LocationModel import Location
+from ModelClasses.WorkTripModel import WorkTrip
+from DataLayer.registerData import RegisterData
+
 class DataAPI:
-    from DataLayer.ReadData import ReadData
-    from ModelClasses.AirplaneModel import Airplane
-    from ModelClasses.EmployeeModel import Employee
-    from ModelClasses.FlightModel import Flight
-    from ModelClasses.LocationModel import Location
-    from ModelClasses.WorkTripModel import WorkTrip
-    from DataLayer.registerData import RegisterData
     import csv
     
     def __init__(self, data_list=[]):

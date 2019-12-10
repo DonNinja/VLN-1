@@ -313,7 +313,7 @@ class UserUI:
 
     def showAllAirplanes(self):
         # Show all airplanes
-        self.__ui_api.data_printer.printAllPlanes()
+        self.__ui_api.showAllPlanes()
         
     def addAirplane(self):
         # Adding Airplane
@@ -325,7 +325,7 @@ class UserUI:
 
     def showPilotsForPlaneType(self, plane_type):
         # ShowPilotsForSpecificPlane
-        self.__ui_api.data_printer.printPilotForPlane(plane_type)
+        self.__ui_api.showPilotsForPlane(plane_type)
         
     def tripAndLocScreen(self):
         ''' This is a screen that allows the user to choose between showing work trips or locations screens '''

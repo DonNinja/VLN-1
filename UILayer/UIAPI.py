@@ -40,6 +40,10 @@ class UIAPI:
         data_list = self.logic.showAllPlanes()
         self.data_printer.printAllPlanes(data_list)
     
+    def showPilotsForPlane(self, plane_type):
+        data_list = self.logic.showPilotByPlane(plane_type)
+        self.data_printer.printPilotForPlane(data_list)
+    
     def showSpecificEmp(self, ssn):
         emp = self.logic.showEmpSSN(ssn)
         self.data_printer.printEmpSSN(emp)
