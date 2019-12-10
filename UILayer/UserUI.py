@@ -78,7 +78,9 @@ class UserUI:
 
     def addPilotScreen(self):
         ''' Calls a function that asks the user to input values for a new pilot '''
-        pilot_data_list = self.__inputter.addEmp("pilot")
+        #pilot_data_list = 
+        self.__inputter.addEmp("pilot")
+        #logicAPI().addPilots(pilot_data_list)
         pass
 
     def addAttendantScreen(self):
@@ -298,14 +300,18 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_printer.headerDisplay("Choose a plane make")
-            choice_list = ["1 - BAE146", "2 - Fokker F28", "3 - Fokker 100", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : "NABAE146", "2" : "NAFokkerF28", "3" : "NAFokker100", "B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - BAE146", "2 - Fokker F28", "3 - Fokker F100", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : "NABAE146", "2" : "NAFokkerF28", "3" : "NAFokkerF100", "B" : self.back, "Q" : sys.exit}
             self.__ui_printer.display(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                plane_type = choice_dict.get(inp)
-                self.showPilotForSpecificPlane(plane_type)
+                if inp == "B" or inp == "Q": # So that it doesn't display an empty box when enter back or quit
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    plane_type = choice_dict.get(inp)
+                    self.showPilotsForPlaneType(plane_type)
             else:
                 print("Input is invalid!")
 
@@ -316,15 +322,15 @@ class UserUI:
         
     def addAirplane(self):
         # Adding Airplane
+        self.__inputter.addPlane()
         pass
 
     def showPilotsSortedByPlanes(self):
-        # Show pilots sorted by plane make
         pass
 
-    def showPilotForSpecificPlane(self, plane_type):
+    def showPilotsForPlaneType(self, plane_type):
         # ShowPilotsForSpecificPlane
-        pass
+        self.__data_printer.printPilotForPlane(plane_type)
         
     def tripAndLocScreen(self):
         ''' This is a screen that allows the user to choose between showing work trips or locations screens '''

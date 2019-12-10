@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 from LogicLayer.Logic import LogicAPI 
 import re
 COPILOT = 'Copilot'
 CAPTAIN = 'Captain'
 FLIGHTSMANAGER = 'Flight Service Manager'
 FLIGHTATT = 'Flight Attendant'
+=======
+from LogicLayer.Logic import LogicAPI
+>>>>>>> aec5afdb6039c063e8a71f49241b65eabe1c29c9
 
 class UserInputCheck:
     def __init__(self):
