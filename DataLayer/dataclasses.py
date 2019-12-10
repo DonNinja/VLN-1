@@ -1,5 +1,5 @@
-
 import csv
+
 class crew():
     def __init__(self,ssn,name,role,rank,licens,address,phonenumber):
         self.ssn = ssn

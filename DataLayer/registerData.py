@@ -14,7 +14,7 @@ class RegisterData:
         self.mobile_phone_number = data_list[6]
         self.home_phone_number = data_list[7]
 
-        with open("./STUDENTDATA/Crew.csv", 'a',newline='') as newFile:
+        with open("./STUDENTDATA/Crew.csv", 'a',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)
             newFileWriter.writerow([self.ssn,self.name,self.role,self.rank,self.licence,self.address,self.mobile_phone_number,self.home_phone_number])
 
@@ -22,7 +22,7 @@ class RegisterData:
         self.planeID = data_list[0]
         self.insignia = data_list[1]
 
-        with open("./STUDENTDATA/Aircraft.csv", 'a',newline='') as newFile:
+        with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)
             newFileWriter.writerow([self.planeID,self.insignia])
 
