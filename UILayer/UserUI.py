@@ -132,7 +132,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing employee screen")
             choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.editAddress, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editAddress, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "4" : self.__ui_api.editLicense, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp, choice_dict)
@@ -151,7 +151,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing employee phone screen")
             choice_list = ["1 - Change Home Phone Number", "2 - Change Mobile Number", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editHomePhone, "2" : self.__ui_api.editMobilePhone, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)

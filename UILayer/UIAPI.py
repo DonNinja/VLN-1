@@ -57,11 +57,26 @@ class UIAPI:
         return self.data_printer.printEmpSSN(emp), emp
 
     def editEmail(self, data):
-        new_email = self.inputter.enterEmail()
-        self.logic.updateEmp(data, new_email, 'homephonenumber')
+        new_var = self.inputter.enterVariable('email')
+        self.logic.updateEmp(data, new_var, 'email')
         self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
-        new_address = self.inputter.enterAddress()
-        self.logic.updateEmp(data, new_address, 'address')
+        new_var = self.inputter.enterVariable('address')
+        self.logic.updateEmp(data, new_var, 'address')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editHomePhone(self, data):
+        new_var = self.inputter.enterVariable('home phone number')
+        self.logic.updateEmp(data, new_var, 'homephonenumber')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editMobilePhone(self, data):
+        new_var = self.inputter.enterVariable('mobile phone number')
+        self.logic.updateEmp(data, new_var, 'mobilephonenumber')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editLicense(self, data):
+        new_var = self.inputter.enterVariable('plane license')
+        self.logic.updateEmp(data, new_var, 'licence')
         self.showSpecificEmp(data['ssn'])

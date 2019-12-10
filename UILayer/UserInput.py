@@ -104,8 +104,5 @@ class UserInput:
         print(plane_data_list)
         return plane_data_list
 
-    def enterEmail(self):
-        return input("Enter a new email: ")
-    
-    def enterAddress(self):
-        return input("Enter a new address: ")
+    def enterVariable(self, to_enter):
+        return input("Enter a new {}: ".format(to_enter))
