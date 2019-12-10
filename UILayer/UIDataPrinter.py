@@ -48,7 +48,7 @@ class UIDataPrinter:
         """ This calls a function to find any employee by their SSN then prints out their information, if the employee does not exists, it prints out 'Invalid SSN' """
         if employee:
             line = self.printCrewTop()
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^19} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(employee['ssn'], employee['name'], employee['role'], employee['rank'], employee['licence'], employee['address'], employee['mobilephonenumber'], employee['homephonenumber']))
+            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^19} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(employee['ssn'], employee['name'], employee['role'], employee['rank'], employee['email'], employee['licence'], employee['address'], employee['mobilephonenumber'], employee['homephonenumber']))
             self.printBotLine(len(line))
             ret_cond = True
         else:
