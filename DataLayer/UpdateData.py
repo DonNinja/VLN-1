@@ -6,7 +6,7 @@ class UpdateData:
 
     def updateEmployee(self, data):
         ''' This writes every value of the data into the crew file again, updating it. '''
-        with open("./STUDENTDATA/Crew.csv", 'w',newline='\n') as newFile:
+        with open("C:\\HR\\Fyrsta_onn\\VLN-1\\STUDENTDATA\\Crew.csv", 'w',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)
             newFileWriter.writerow(['ssn', 'name', 'role', 'rank', 'licence', 'address', 'mobilephonenumber', 'homephonenumber'])
             for item in data:

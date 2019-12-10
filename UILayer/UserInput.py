@@ -104,4 +104,5 @@ class UserInput:
         print(plane_data_list)
         return plane_data_list
 
-
+    def enterEmail(self):
+        return input("Enter a new email: ")

@@ -7,7 +7,7 @@ class ReadData():
     def readCrew(self):
         """ This reads the Crew.csv file and returns the ordered dictionary """
         self.__data.clear()
-        with open("./STUDENTDATA/Crew.csv", "r") as crew_file:
+        with open("C:\\HR\\Fyrsta_onn\\VLN-1\\STUDENTDATA\\Crew.csv", "r") as crew_file:
             crew_reader = csv.DictReader(crew_file)
             for line in crew_reader:
                 self.__data.append(line)

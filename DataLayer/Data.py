@@ -31,9 +31,11 @@ class DataAPI:
     def registerPlanes(self, data_list):
         self.__register.registerPlane(data_list)
     
-    def updateEmp(self, data):
+    def updateEmp(self, data, new_data, field):
+        data[field] = new_data
         crew_list = self.__reader.readCrew()
         for item in crew_list:
             if item['ssn'] == data['ssn']:
-                item = data
+                item.update(data)
+                break
         self.__updater.updateEmployee(crew_list)
