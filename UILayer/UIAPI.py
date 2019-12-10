@@ -46,14 +46,15 @@ class UIAPI:
     
     def showSpecificEmp(self, ssn):
         emp = self.logic.showEmpSSN(ssn)
-        self.data_printer.printEmpSSN(emp)
+        return self.data_printer.printEmpSSN(emp), emp
     
     def showSpecificPilot(self, ssn):
         emp = self.logic.showPilotSSN(ssn)
-        self.data_printer.printEmpSSN(emp)
+        return self.data_printer.printEmpSSN(emp), emp
     
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
+<<<<<<< HEAD
         self.data_printer.printAttendantSSN(emp)
 
     def editemp(self,ssn,emp_type):
@@ -62,3 +63,31 @@ class UIAPI:
         updated_emp = self.inputter.editemp(pilot_data,emp_type)
         self.logic.editemp(updated_emp)
 
+=======
+        return self.data_printer.printEmpSSN(emp), emp
+
+    def editEmail(self, data):
+        new_var = self.inputter.enterVariable('email')
+        self.logic.updateEmp(data, new_var, 'email')
+        self.showSpecificEmp(data['ssn'])
+
+    def editAddress(self, data):
+        new_var = self.inputter.enterVariable('address')
+        self.logic.updateEmp(data, new_var, 'address')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editHomePhone(self, data):
+        new_var = self.inputter.enterVariable('home phone number')
+        self.logic.updateEmp(data, new_var, 'homephonenumber')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editMobilePhone(self, data):
+        new_var = self.inputter.enterVariable('mobile phone number')
+        self.logic.updateEmp(data, new_var, 'mobilephonenumber')
+        self.showSpecificEmp(data['ssn'])
+    
+    def editLicense(self, data):
+        new_var = self.inputter.enterVariable('plane license')
+        self.logic.updateEmp(data, new_var, 'licence')
+        self.showSpecificEmp(data['ssn'])
+>>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21

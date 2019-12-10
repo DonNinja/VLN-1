@@ -3,51 +3,52 @@ from LogicLayer.SortData import SortData
 
 class LogicAPI():
     def __init__(self):
-        self.__data_getter = DataAPI()
+        self.__data = DataAPI()
         self.__data_sorter = SortData()
 
     def showAllEmps(self):
         """ This returns a collection of every employee to the UI so it can print them out """
-        return self.__data_getter.getEmps()
+        return self.__data.getEmps()
     
     def showAllPilots(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just pilots and returns that """
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only flight attendants
     
     def showAllAttendants(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just flight attendants and returns that """
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
     
     def showAllPlanes(self):
         """ This returns a list of every plane so the UI can print them out """
-        return self.__data_getter.getAirplanes()
+        return self.__data.getAirplanes()
     
     def showPilotSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that is both a pilot and has the inputted SSN and returns him if it finds him, but returns None if he finds nothing """
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
     
     def showAttendantSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that is both a flight attendant and has the inputted SSN and returns him if it finds him, but returns None if he finds nothing """
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendantSSN(all_emps, ssn)
     
     def showEmpSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that has the inputted SSN and returns him, but returns None if he finds nothing """
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortEmployeeSSN(all_emps, ssn)
     
     def showPilotByPlane(self, plane_type):
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotsByPlane(all_emps, plane_type)
 
     def addEmpLL(self,data_list):
-        self.__data_getter.registerNewData(data_list)
+        self.__data.registerNewData(data_list)
         pass
 
     def addPlane(self,data_list):
+<<<<<<< HEAD
         self.__data_getter.registerPlanes(data_list)
 
     def editPilot(self,ssn):
@@ -55,7 +56,12 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
         
+=======
+        self.__data.registerPlanes(data_list)
+>>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21
 
+    def updateEmp(self, data, new_data, field):
+        self.__data.updateEmp(data, new_data, field)
 
 
 # import re
