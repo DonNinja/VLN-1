@@ -1,6 +1,7 @@
 from LogicLayer.UserInputCheck import UserInputCheck
 from LogicLayer.Logic import LogicAPI
 
+
 class UserInput:
     def __init__(self):
         self.__checker = UserInputCheck()
@@ -10,37 +11,52 @@ class UserInput:
         data_list = []
         print()
         ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
-        if self.__checker.checkSSN(ssn):
-            data_list.append(ssn)
+        while self.__checker.checkSSN(ssn) != True:
+                ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
+        data_list.append(ssn)
+
         name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        if self.__checker.checkName(name):
-            data_list.append(name)
+        while self.__checker.checkName(name) != True:
+            name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
+        data_list.append(name)
         role = emp_type.capitalize()
         data_list.append(role)
         if role == 'Pilot':
-            rank = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
-            if self.__checker.checkRank(rank, role):
-                data_list.append(rank)
+            rank_input = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
+            rank = self.__checker.checkRank(rank_input, role)
+            while rank == False:
+                rank_input = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
+                rank = self.__checker.checkRank(rank_input, role)
+            data_list.append(rank)
         if role == 'Flight attendant':
-            rank = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
-            if self.__checker.checkRank(rank, role):
-                data_list.append(rank)
+            rank_input = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+            rank = self.__checker.checkRank(rank_input, role)
+            while rank == False:
+               rank_input = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+               rank = self.__checker.checkRank(rank_input, role)
+            data_list.append(rank)
         if emp_type != "flight attendant":
-            licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
-            #if __checker.checkLicense(licens)
+            licens_input = input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
+            licens = self.__checker.checkLicense(licens_input)
+            while licens == False:
+                licens_input = input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
+                licens = self.__checker.checkLicense(licens_input)
             data_list.append(licens)
         else:
             licens = "N/A"
         address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        if self.__checker.checkAddress(address):
-            data_list.append(address)
+        while self.__checker.checkAddress(address) != True:
+            address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
+        data_list.append(address)
         mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        #if __checker.checkMobile(mobile)
+        while self.__checker.checkPhone(mobile) != True:
+            mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
         data_list.append(mobile)
         home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        #if __checker.checkHomePhone(home_phone)
+        while self.__checker.checkPhone(home_phone) != True:
+            home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
         data_list.append(home_phone)
-        
+    
         self.__insert.addEmpLL(data_list)
         
         print(data_list)

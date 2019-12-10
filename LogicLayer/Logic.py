@@ -29,8 +29,6 @@ class LogicAPI():
         all_emps = self.__data_getter.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
     
-<<<<<<< HEAD
-=======
     def showAttendantSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that is both a flight attendant and has the inputted SSN and returns him if it finds him, but returns None if he finds nothing """
         all_emps = self.__data_getter.getEmps()
@@ -55,7 +53,6 @@ class LogicAPI():
         
 
 
->>>>>>> aec5afdb6039c063e8a71f49241b65eabe1c29c9
 
 # import re
 # class Employee:
