@@ -46,3 +46,10 @@ class SortData:
             if item['role'] == "Pilot" and item['licence'] == plane_type: # Checks if employee is pilot and if they have an active licence for the chosen plane
                 ret_list.append(item)
         return ret_list
+    
+    def sortEmpTrips(self, data_list, ssn):
+        ret_list = []
+        for item in data_list:
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+                ret_list.append(item)
+        return ret_list

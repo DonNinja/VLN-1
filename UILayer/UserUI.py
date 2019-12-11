@@ -224,6 +224,7 @@ class UserUI:
                 print("Input is invalid!")
     
     def showAttendantSSN(self):
+        ''' This asks for an input and checks if the SSN corresponds to a flight attendant '''
         ssn = input("Enter a flight attendant's SSN (kennitala): ")
         return self.__ui_api.showSpecificAttendant(ssn)
         
@@ -244,6 +245,7 @@ class UserUI:
                 print("Input is invalid!")
     
     def showPilotSSN(self):
+        ''' This asks for an input and checks if the SSN corresponds to a pilot '''
         ssn = input("Enter a pilot's SSN (kennitala): ")
         return self.__ui_api.showSpecificPilot(ssn)
         
@@ -333,13 +335,11 @@ class UserUI:
 
     def showAllAirplanes(self):
         # Show all airplanes
-        #Path ready, just needs to be called
-        pass
+        self.__ui_api.showAllPlanes()
         
     def addAirplane(self):
         # Adding Airplane
         self.__ui_api.addPlane()
-        pass
 
     def showPilotsSortedByPlanes(self):
         pass
@@ -347,7 +347,7 @@ class UserUI:
     def showPilotsForPlaneType(self, plane_type):
         # ShowPilotsForSpecificPlane
         self.__ui_api.showPilotsForPlane(plane_type)
-        
+
     def tripAndLocScreen(self):
         ''' This is a screen that allows the user to choose between showing work trips or locations screens '''
         inp = ""
@@ -379,7 +379,11 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-        
+    
+    def showEmpsWorkTrips(self, ssn):
+        ssn = input("Enter a pilot's SSN (kennitala): ")
+        self.__ui_api.
+
     def locationScreen(self):
         ''' This shows the user the choices he can make with locations '''
         inp = ""

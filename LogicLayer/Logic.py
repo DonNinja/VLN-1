@@ -90,6 +90,11 @@ class LogicAPI():
     def showAllWorkTrips(self):
         """ This gets a list of every work trip and returns it """
         return self.__data.getTrips()
+    
+    def showEmpsWorkTrips(self, ssn):
+        ''' This gets a list of all work trips, then calls a function that only returns the flights including the SSN '''
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.sortEmpTrips(all_trips, ssn)
 
 # import re
 # class Employee:

@@ -206,3 +206,6 @@ class UIAPI:
     def showAllWorkTrips(self):
         data_list = self.__logic.showAllWorkTrips()
         self.__data_printer.printAllWorkTrips(data_list)
+    
+    def showEmpsWorkTrips(self, ssn):
+        self.__logic.
