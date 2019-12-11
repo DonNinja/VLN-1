@@ -148,7 +148,7 @@ class UIAPI:
         email_input = self.__inputter.addEmpEmail(emp_type)
         email = self.__logic.checkEmail(email_input)
         while not(email):
-            email_input = self.__inputter.addEmpAddress(emp_type)
+            email_input = self.__inputter.addEmpEmail(emp_type)
             email = self.__logic.checkEmail(email_input)
         else:
             return email
@@ -161,7 +161,6 @@ class UIAPI:
             licens_input = self.__inputter.addEmpLicens(emp_type)
             licens = self.__logic.checkLicens(licens_input)
         else:
-            print(licens)
             return licens
 
     def checkAddress(self, emp_type): #Virkar 

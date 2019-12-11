@@ -13,11 +13,11 @@ class UserInputCheck:
 
     def checkSSN(self, ssn, data):
         """ This checks for multiple varies of SSN """
-        check_data = self.checking_if_in_data(data, ssn)
+       # check_data = self.checking_if_in_data(data, ssn)
         check_int = self.digit_check(ssn)
         check_len = self.len_ssn(ssn)
         check_date = self.date_check_ssn(ssn)
-        if check_int and check_len and check_date and check_data:
+        if check_int and check_len and check_date: #and check_data:
             return True
 
     # def checking_if_in_data(self, data, ssn):
@@ -53,14 +53,9 @@ class UserInputCheck:
 
 
     def checkLicens(self, licens):
-<<<<<<< HEAD
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
                 return licens
-=======
-        if licens == "N/A":
-            return licens
->>>>>>> 4f3bc9a121e7c2931364b584ecb63c51da1594a9
         if self.digit_check(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100

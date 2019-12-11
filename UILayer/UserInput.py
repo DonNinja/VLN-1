@@ -24,12 +24,7 @@ class UserInput:
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
-<<<<<<< HEAD
             return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
-=======
-            print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
-            return input("\nChoose a plane license: ")
->>>>>>> 4f3bc9a121e7c2931364b584ecb63c51da1594a9
         else:
             return "N/A"
 
