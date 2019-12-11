@@ -17,7 +17,6 @@ class UserInputCheck:
         check_date = self.date_check_ssn(ssn)
         if check_int and check_len and check_date:
             return True
-
     
     def checkName(self,name):
         check = self.name_check(name)
@@ -115,9 +114,6 @@ class UserInputCheck:
             return True
 
     def date_check_ssn(self, ssn):
-        #ssn_ints = [int(i) for i in ssn]
-        #dates = ssn_ints[0] + ssn_ints[1]
-        #month = ssn_ints[2] + ssn_ints[3]
         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
             print("SSN is valid")
             return True

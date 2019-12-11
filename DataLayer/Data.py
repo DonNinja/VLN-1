@@ -46,4 +46,4 @@ class DataAPI:
         return self.__reader.readDestinations()
     
     def getTrips(self):
-        return self.__reader.readPastFlights()
+        return self.__reader.readAllFlights()
