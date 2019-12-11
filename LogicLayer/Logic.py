@@ -55,10 +55,10 @@ class LogicAPI():
         self.__data.registerNewEmp(data_list)
 
     def addPlane(self,data_list):
-        self.__data_getter.registerPlanes(data_list)
+        self.__data.registerPlanes(data_list)
 
     def editPilot(self,ssn):
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
     def checkSSN(self, ssn, data):
