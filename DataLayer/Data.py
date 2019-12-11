@@ -5,7 +5,6 @@ from ModelClasses.FlightModel import Flight
 from ModelClasses.LocationModel import Location
 from ModelClasses.WorkTripModel import WorkTrip
 from DataLayer.registerData import RegisterData
-from DataLayer.UpdateData import UpdateData
 
 class DataAPI:
     import csv
@@ -14,7 +13,6 @@ class DataAPI:
         self.__data = []
         self.__reader = ReadData()
         self.__register = RegisterData(data_list)
-        self.__updater = UpdateData()
         pass
 
     def getEmps(self):
@@ -25,17 +23,11 @@ class DataAPI:
         """ Calls a function, which returns the complete list of Airplanes, then it returns that. """
         return self.__reader.readAircraft()
 
-    def registerNewData(self, data_list):
+    def registerNewData(self,data_list):
         self.__register.registeremployee(data_list)
 
-    def registerPlanes(self, data_list):
+    def editemp(self,data_list):
+        self.__register.editemp(data_list)
+
+    def registerPlanes(self,data_list):
         self.__register.registerPlane(data_list)
-    
-    def updateEmp(self, data, new_data, field):
-        data[field] = new_data
-        crew_list = self.__reader.readCrew()
-        for item in crew_list:
-            if item['ssn'] == data['ssn']:
-                item.update(data)
-                break
-        self.__updater.updateEmployee(crew_list)

@@ -104,7 +104,6 @@ class UserInput:
         print(plane_data_list)
         return plane_data_list
 
-<<<<<<< HEAD
     def editemp(self,pilot_list,emp_type):
         edit_emp_list = []
         print()
@@ -142,7 +141,3 @@ class UserInput:
 
 
 
-=======
-    def enterVariable(self, to_enter):
-        return input("Enter a new {}: ".format(to_enter))
->>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21
