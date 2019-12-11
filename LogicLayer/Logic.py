@@ -61,8 +61,9 @@ class LogicAPI():
         all_emps = self.__data_getter.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
-    def checkSSN(self, ssn):
-        return self.__user_check.checkSSN(ssn)
+    def checkSSN(self, ssn, data):
+        return self.__user_check.checkSSN(ssn, data)
+
 
     def checkName(self, name):
         return self.__user_check.checkName(name)

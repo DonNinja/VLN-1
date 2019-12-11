@@ -11,14 +11,18 @@ class UserInputCheck:
     def __init__(self):
         pass
 
-    def checkSSN(self, ssn):
+    def checkSSN(self, ssn, data):
+        """ This checks for multiple varies of SSN """
+        check_data = self.checking_if_in_data(data, ssn)
         check_int = self.digit_check(ssn)
         check_len = self.len_ssn(ssn)
         check_date = self.date_check_ssn(ssn)
-        if check_int and check_len and check_date:
+        if check_int and check_len and check_date and check_data:
             return True
+        return False
     
     def checkName(self,name):
+        """ This forwards to a function for check """
         check = self.name_check(name)
         if check:
             return check
@@ -26,6 +30,7 @@ class UserInputCheck:
             return False
 
     def checkPhone(self, num):
+        """ This checks if phonenum is ints and checks length of list """
         list_num = []
         int_check = self.digit_check(num)
         if int_check:
@@ -40,8 +45,14 @@ class UserInputCheck:
 
 
     def checkLicens(self, licens):
+<<<<<<< HEAD
+        """ This checks if licens is valid. If licens is N/A it returns it right away """
+        if licens == 'N/A':
+                return licens
+=======
         if licens == "N/A":
             return licens
+>>>>>>> 4f3bc9a121e7c2931364b584ecb63c51da1594a9
         if self.digit_check(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100
@@ -56,6 +67,7 @@ class UserInputCheck:
                 return False
         
     def checkEmail(self, email):
+        """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
         email_list = []
         for line in email:
             for ch in line:
@@ -72,6 +84,7 @@ class UserInputCheck:
        
 
     def checkRank(self, rank, role):
+        """ This takes input int from user and turns it into the desired rank """
         if self.digit_check(rank):
             if rank == '1' and role == 'Pilot':
                 rank = CAPTAIN
@@ -90,6 +103,7 @@ class UserInputCheck:
 
 
     def checkAddress(self, address):
+        """ This forwards to a check function """
         check = self.address_check(address)
         if check:
             return check
@@ -97,6 +111,7 @@ class UserInputCheck:
             return False
 
     def digit_check(self, data):
+        """ This checks for int """
         try:
             ssn = [str(int(i)) for i in data.split()]
             return True
@@ -106,6 +121,7 @@ class UserInputCheck:
             return False
 
     def len_ssn(self, check):
+        """ This checks length of SSN """
         list_ssn = []
         for row in check:
             for i in row:
@@ -114,6 +130,13 @@ class UserInputCheck:
             return True
 
     def date_check_ssn(self, ssn):
+<<<<<<< HEAD
+=======
+        """ This checks if SSN is valid """
+        #ssn_ints = [int(i) for i in ssn]
+        #dates = ssn_ints[0] + ssn_ints[1]
+        #month = ssn_ints[2] + ssn_ints[3]
+>>>>>>> 48618c8db80aa720d0c380489fe533dcb6637fa8
         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
             print("SSN is valid")
             return True
@@ -122,6 +145,7 @@ class UserInputCheck:
             return False
 
     def address_check(self, address):
+        """ This splits adress in two parts, checks if alpha in [0], checks int in [-1] """
         address_list = address.split(" ")
         first_address = address_list[0]
         digit_address = address_list[-1]
@@ -139,6 +163,7 @@ class UserInputCheck:
             return False
 
     def name_check(self, name):
+        """ This splits name and checks in two parts (only takes first and last name) only alpha """
         name_list = name.split(" ")
         first_name = name_list[0]
         last_name = name_list[-1]
