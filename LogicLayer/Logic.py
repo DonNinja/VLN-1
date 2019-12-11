@@ -42,14 +42,17 @@ class LogicAPI():
         return self.__data_sorter.sortEmployeeSSN(all_emps, ssn)
     
     def showPilotByPlane(self, plane_type):
+        """ This gets a list of every employee, then cuts it down so it's just pilots who can fly the chose plane type and returns it """
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotsByPlane(all_emps, plane_type)
     
     def showAllLocations(self):
+        """ This gets a list of every location and returns it """
         return self.__data.getLocations()
 
     def addEmpLL(self,data_list):
-        self.__data.registerNewData(data_list)
+        """ This calls the dataAPI to add a new employee to the crew.csv file """
+        self.__data.registerNewEmp(data_list)
 
     def addPlane(self,data_list):
         self.__data_getter.registerPlanes(data_list)
@@ -77,8 +80,12 @@ class LogicAPI():
         return self.__user_check.checkPhone(phonenum)
 
     def updateEmp(self, data, new_data, field):
+        """ This calls the dataAPI to update an employee with the new data """
         self.__data.updateEmp(data, new_data, field)
 
+    def showAllWorkTrips(self):
+        """ This gets a list of every work trip and returns it """
+        return self.__data.getTrips()
 
 # import re
 # class Employee:

@@ -81,7 +81,7 @@ class UserUI:
 
     def addAttendantScreen(self):
         ''' Calls a function that asks the user to input values for a new flight attendant '''
-        att_data_list = self.__ui_api.addEmp("Flight Attendant")
+        att_data_list = self.__ui_api.addEmp("Cabincrew")
         pass
 
     def showHardestWorking(self):
@@ -369,7 +369,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Work trips screen")
             choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.inputter.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -417,7 +417,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Filter work trips screen")
             choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" :self.doNothing, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showAllWorkTrips, "2" :self.doNothing, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
@@ -427,3 +427,6 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+
+
+    

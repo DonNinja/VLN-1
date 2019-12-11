@@ -26,7 +26,7 @@ class DataAPI:
         """ Calls a function, which returns the complete list of Airplanes, then it returns that. """
         return self.__reader.readAircraft()
 
-    def registerNewData(self, data_list):
+    def registerNewEmp(self, data_list):
         self.__register.registeremployee(data_list)
 
     def registerPlanes(self, data_list):
@@ -44,3 +44,6 @@ class DataAPI:
     def getLocations(self):
         """ Returns a list of items of every destination """
         return self.__reader.readDestinations()
+    
+    def getTrips(self):
+        return self.__reader.readPastFlights()
