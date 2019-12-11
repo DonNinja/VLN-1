@@ -420,7 +420,3 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-
-    def editPilot(self):
-        ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.editPilot(ssn)
