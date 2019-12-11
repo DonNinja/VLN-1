@@ -72,11 +72,7 @@ class UIDataPrinter:
         line = self.printCrewTop()
         self.printSeparator(len(line))
         for pilot in data_list:
-<<<<<<< HEAD
-            print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^19} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(pilot['ssn'], pilot['name'], pilot['role'], pilot['rank'], pilot['email'], pilot['licence'], pilot['address'], pilot['mobilephonenumber'], pilot['homephonenumber']))
-=======
             print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^19} │ {:^12} │ {:^20} │ {:^19} │ {:^17} ║'.format(pilot['ssn'], pilot['name'], pilot['role'], pilot['rank'], pilot['email'], pilot['licence'], pilot['address'], pilot['mobilephonenumber'], pilot['homephonenumber']))
->>>>>>> f32ae50523d56bf7831dbd404fa9cf2e94272863
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
     

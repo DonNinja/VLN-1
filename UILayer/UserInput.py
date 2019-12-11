@@ -65,10 +65,12 @@ class UserInput:
         work_trip_data_list = []
         work_destination = input("Enter a destination: ")
         work_trip_data_list.append(work_destination)
+
         work_departure_date = input("Enter a departure date (DD/MM/YYYY): ")
         work_trip_data_list.append(work_departure_date)
         work_departure_time = input("Enter a departure time (hh:mm): ")
         work_trip_data_list.append(work_departure_time)
+
         work_pilot_ssn = input("Enter the Pilot's SSN: ")
         work_trip_data_list.append(work_pilot_ssn)
         work_copilot_ssn = input("Enter the Co-Pilot's SSN: ")

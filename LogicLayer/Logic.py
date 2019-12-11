@@ -51,12 +51,6 @@ class LogicAPI():
 
     def addPlane(self,data_list):
         self.__data.registerPlanes(data_list)
-<<<<<<< HEAD
-
-        
-        
-=======
->>>>>>> f32ae50523d56bf7831dbd404fa9cf2e94272863
 
     def updateEmp(self, data, new_data, field):
         self.__data.updateEmp(data, new_data, field)
