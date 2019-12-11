@@ -26,13 +26,7 @@ class RegisterData:
         self.insignia = data_list[0]
         self.planeID = data_list[1]
 
-<<<<<<< HEAD
-        with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as newFile:
-            newFileWriter = csv.writer(newFile)
-            newFileWriter.writerow([self.planeID,self.insignia])
-=======
         with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the plane into it
             newFileWriter = csv.writer(file_stream)
             newFileWriter.writerow([self.planeID,self.insignia])
         file_stream.close()
->>>>>>> b2b2787270d01932368bfa445c9c272e61d5357e

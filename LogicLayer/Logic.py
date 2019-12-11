@@ -64,6 +64,8 @@ class LogicAPI():
         """ This gets a list of every work trip and returns it """
         return self.__data.getTrips()
 
+        
+
 # import re
 # class Employee:
 

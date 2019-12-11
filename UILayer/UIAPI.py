@@ -116,3 +116,4 @@ class UIAPI:
     def addWorkTrip(self):
         """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
         data_list = self.__inputter.addWorkTrip()
+        
