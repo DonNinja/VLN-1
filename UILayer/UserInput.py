@@ -45,7 +45,7 @@ class UserInput:
         loc_data_list.append(loc_airport_name)
         loc_flight_time_hours = input("\nEnter the new location's flight time (Hours): ")
         loc_flight_time_mins = input("\nEnter the new location's flight time (Minutes): ")
-        loc_flight_time = '.'.join(loc_flight_time_hours, loc_flight_time_mins)
+        loc_flight_time = '.'.join([loc_flight_time_hours, loc_flight_time_mins])
         loc_data_list.append(loc_flight_time)
         loc_distance = input("\nEnter the distance from Iceland (Kilometers): ")
         loc_data_list.append(loc_distance)

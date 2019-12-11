@@ -81,7 +81,8 @@ class UserUI:
 
     def addAttendantScreen(self):
         ''' Calls a function that asks the user to input values for a new flight attendant '''
-        att_data_list = self.__ui_api.addEmp("Cabincrew")
+        # att_data_list = 
+        self.__ui_api.addEmp("Cabincrew")
         pass
 
     def showHardestWorking(self):
