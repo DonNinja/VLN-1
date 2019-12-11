@@ -53,9 +53,14 @@ class UserInputCheck:
 
 
     def checkLicens(self, licens):
+<<<<<<< HEAD
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
                 return licens
+=======
+        if licens == "N/A":
+            return licens
+>>>>>>> 4f3bc9a121e7c2931364b584ecb63c51da1594a9
         if self.digit_check(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100
@@ -68,7 +73,7 @@ class UserInputCheck:
                 return licens
             if licens != '1' or '2' or '3':
                 return False
-
+        
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
         email_list = []
@@ -112,9 +117,6 @@ class UserInputCheck:
             return check
         else:
             return False
-
-
-            
 
     def digit_check(self, data):
         """ This checks for int """

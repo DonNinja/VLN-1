@@ -81,7 +81,6 @@ class UIDataPrinter:
     
     def printLocations(self, data_list):
         """ This prints every location from the data list """
-        #destination,country,airport,flightTime,distanceFromIceland,contactName,contactPhone
         line = '║{:^13}│{:^13}│{:^20}│{:^11}│{:^19}│{:^20}│{:^20}║'.format('City', 'Country', 'Airport name', 'Flight time', 'Flight distance(km)', 'Contact name', 'Contact phone number')
         self.printTopLine(len(line))
         print(line)
@@ -115,8 +114,6 @@ class UIDataPrinter:
             arr_time_clock = parsed_arr_time.time()
             correct_arr_time = "{:02d}.{}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
             
-            # correct_arr_time = str(parsed_arr_time.day()), parsed_arr_time.month, parsed_arr_time.year + " " + str(parsed_arr_time.time)
-            # print(correct_arr_time)
             print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2']))
         self.printBotLine(len(line))
         input("\nPress enter to continue...")

@@ -8,40 +8,41 @@ class UserInput:
         return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
 
     def addEmpName(self, emp_type):
-        return input("Enter {} first and last name (Non-Icelandic letters): ".format(emp_type))
+        return input("Enter {} first and last name (Non-Icelandic characters): ".format(emp_type))
 
     def addEmpRank(self, emp_type):
-        if emp_type == 'Pilot':
-            return input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
-        if emp_type == 'Cabincrew':
-            return input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+        if emp_type == "Pilot":
+            print("\n1: Captain\n2: Copilot")
+            return input("\nChoose a rank: ")
+        else:
+            print("\n1: Flight Service Manager\n2: Flight Attendant")
+            return input("\nChoose a rank: ")
+                
 
     def addEmpEmail(self, emp_type):
         return input("Enter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
+<<<<<<< HEAD
             return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
+=======
+            print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
+            return input("\nChoose a plane license: ")
+>>>>>>> 4f3bc9a121e7c2931364b584ecb63c51da1594a9
         else:
             return "N/A"
 
     def addEmpAddress(self, emp_type):
-        return input("Enter the new {}'s address: ".format(emp_type)).capitalize()
+        return input("Enter the new {}'s address (Non-Icelandic characters): ".format(emp_type)).capitalize()
 
     def addEmpMobile(self, emp_type):
-        return input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
+        return input("Enter the new {}'s mobile number (7 digits): ".format(emp_type)).capitalize()
     
     def addHomePhone(self, emp_type):
-        return input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-    '''
-        self.__insert.addEmpLL(data_list)
-        
-        print(data_list)
-        input("Press enter to continue...")
-        return data_list
-        '''
+        return input("Enter the new {}'s home phone number (7 digits): ".format(emp_type)).capitalize()
     
-    def addLocation(self):
+    def addLocationCountry(self):
         loc_data_list = []
         loc_country = input("\nEnter the new location's country: ").capitalize()
         loc_data_list.append(loc_country)
@@ -57,7 +58,6 @@ class UserInput:
         loc_data_list.append(loc_contact_name)
         loc_emer_num = input("\nEnter the new location's emergency phone number: ")
         loc_data_list.append(loc_emer_num)
-        print(loc_data_list)
         input("\nPress enter to continue...")
         return loc_data_list
 
@@ -113,10 +113,9 @@ class UserInput:
         #if __checker.planeinsignia(planeinsignia)
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
-
-        print(plane_data_list)
-        # print(plane_data_list)
         return plane_data_list
+    
+
 
     def editemp(self,pilot_list,emp_type):
         edit_emp_list = []
