@@ -111,8 +111,9 @@ class UIAPI:
 
     def checkSSN(self, emp_type): #Virkar
         """ This checks if SSN is in valid format """
+        data = self.__logic.showAllEmps()
         ssn = self.__inputter.addEmpSSN(emp_type)
-        while not(self.__logic.checkSSN(ssn)):
+        while not(self.__logic.checkSSN(ssn, data)):
             ssn = self.__inputter.addEmpSSN(emp_type)
         else:
             return ssn

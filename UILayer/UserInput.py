@@ -20,7 +20,7 @@ class UserInput:
         return input("Enter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
 
     def addEmpLicens(self, emp_type):          
-        if emp_type != "flight attendant":
+        if emp_type != "Cabincrew":
             return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
         else:
             return "N/A"
