@@ -45,7 +45,11 @@ class DataAPI:
         return self.__reader.readDestinations()
     
     def getTrips(self):
+<<<<<<< HEAD
         return self.__reader.readPastFlights()
 
     def registerWorkTrip(self,data_list):
         self.register.registerWorkTrip(data_list)
+=======
+        return self.__reader.readAllFlights()
+>>>>>>> 1b9734f83ddafb5f0cd233bc0b19ad718aa54de6

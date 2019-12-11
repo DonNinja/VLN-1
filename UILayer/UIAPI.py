@@ -62,6 +62,10 @@ class UIAPI:
         """ This gets a single attendant and calls the printer to print them out """
         emp = self.__logic.showAttendantSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
+    
+    def showAllLocations(self):
+        data_list = self.__logic.showAllLocations()
+        self.__data_printer.printLocations(data_list)
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
@@ -194,6 +198,7 @@ class UIAPI:
             print(home_phone_num)
             return home_phone_num
 
+<<<<<<< HEAD
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
@@ -203,3 +208,14 @@ class UIAPI:
         """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
         data_list = self.__inputter.addWorkTrip()
         
+=======
+    def addLocation(self):
+        pass
+
+    def addWorkTrip(self):
+        pass
+    
+    def showAllWorkTrips(self):
+        data_list = self.__logic.showAllWorkTrips()
+        self.__data_printer.printAllWorkTrips(data_list)
+>>>>>>> 1b9734f83ddafb5f0cd233bc0b19ad718aa54de6
