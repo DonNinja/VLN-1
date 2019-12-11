@@ -5,6 +5,7 @@ from ModelClasses.FlightModel import Flight
 from ModelClasses.LocationModel import Location
 from ModelClasses.WorkTripModel import WorkTrip
 from DataLayer.registerData import RegisterData
+from DataLayer.UpdateData import UpdateData
 
 class DataAPI:
     import csv
@@ -13,6 +14,7 @@ class DataAPI:
         self.__data = []
         self.__reader = ReadData()
         self.__register = RegisterData(data_list)
+        self.__updater = UpdateData()
         pass
 
     def getEmps(self):
