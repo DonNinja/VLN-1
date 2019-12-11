@@ -24,6 +24,9 @@ class UIAPI:
         data_list = self.inputter.addPlane()
         self.logic.addPlane(data_list)
     
+    def addLocation(self):
+        pass
+    
     def showAllEmps(self):
         data_list = self.logic.showAllEmps()
         self.data_printer.printAllEmps(data_list)
@@ -80,3 +83,7 @@ class UIAPI:
         new_var = self.inputter.enterVariable('plane license')
         self.logic.updateEmp(data, new_var, 'licence')
         self.showSpecificEmp(data['ssn'])
+    
+    def showAllLocations(self):
+        data_list = self.logic.showAllLocations()
+        self.data_printer.printLocations(data_list)

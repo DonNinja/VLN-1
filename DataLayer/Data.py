@@ -31,3 +31,16 @@ class DataAPI:
 
     def registerPlanes(self,data_list):
         self.__register.registerPlane(data_list)
+    
+    def updateEmp(self, data, new_data, field):
+        data[field] = new_data
+        crew_list = self.__reader.readCrew()
+        for item in crew_list:
+            if item['ssn'] == data['ssn']:
+                item.update(data)
+                break
+        self.__updater.updateEmployee(crew_list)
+    
+    def getLocations(self):
+        """ Returns a list of items of every destination """
+        return self.__reader.readDestinations()

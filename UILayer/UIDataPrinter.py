@@ -64,3 +64,15 @@ class UIDataPrinter:
             print('║ {:^10} │ {:^20} │ {:^9} │ {:^22} │ {:^19} │ {:^12} │ {:^12} │ {:^19} │ {:^17} ║'.format(pilot['ssn'], pilot['name'], pilot['role'], pilot['rank'], pilot['licence'], pilot['address'], pilot['mobilephonenumber'], pilot['homephonenumber']))
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
+    
+    def printLocations(self, data_list):
+        """ This prints every location from the data list """
+        #destination,country,airport,flightTime,distanceFromIceland,contactName,contactPhone
+        line = '║ {:^13} │ {:^13} │ {:^20} │ {:^11} │ {:^19} │ {:^20} │ {:^20} ║'.format('City', 'Country', 'Airport name', 'Flight time', 'Flight distance(km)', 'Contact name', 'Contact phone number')
+        self.printTopLine(len(line))
+        print(line)
+        for dest in data_list:
+            dest_hour, dest_min = dest['flightTime'].split(".")
+            print('║ {:^13} │ {:^13} │ {:^20} │    {}h{:02d}m    │ {:^19} │ {:^20} │ {:^20} ║'.format(dest['destination'], dest['country'], dest['airport'], dest_hour, int(dest_min), dest['distanceFromIceland'], dest['contactName'], dest['contactPhone']))
+        self.printBotLine(len(line))
+        input("\nPress enter to continue...")

@@ -42,10 +42,12 @@ class LogicAPI():
     def showPilotByPlane(self, plane_type):
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotsByPlane(all_emps, plane_type)
+    
+    def showAllLocations(self):
+        return self.__data.getLocations()
 
     def addEmpLL(self,data_list):
         self.__data.registerNewData(data_list)
-        pass
 
     def addPlane(self,data_list):
         self.__data.registerPlanes(data_list)
@@ -55,7 +57,11 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
         
+<<<<<<< HEAD
         #self.__data.registerPlanes(data_list)
+=======
+        # self.__data.registerPlanes(data_list)
+>>>>>>> 62e08f9b80364661dcb8abb984b874aeb37e8814
 
     def updateEmp(self, data, new_data, field):
         self.__data.updateEmp(data, new_data, field)
