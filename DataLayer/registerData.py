@@ -20,8 +20,8 @@ class RegisterData:
             newFileWriter.writerow([self.ssn,self.name,self.role,self.rank,self.email,self.licence,self.address,self.mobile_phone_number,self.home_phone_number])
 
     def registerPlane(self, data_list):
-        self.planeID = data_list[0]
-        self.insignia = data_list[1]
+        self.insignia = data_list[0]
+        self.planeID = data_list[1]
 
         with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)

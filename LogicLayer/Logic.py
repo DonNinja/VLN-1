@@ -50,7 +50,7 @@ class LogicAPI():
         self.__data.registerNewData(data_list)
 
     def addPlane(self,data_list):
-        self.__data_getter.registerPlanes(data_list)
+        self.__data.registerPlanes(data_list)
 
     def updateEmp(self, data, new_data, field):
         self.__data.updateEmp(data, new_data, field)
