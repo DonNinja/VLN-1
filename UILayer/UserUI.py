@@ -385,7 +385,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.inputter.addLocation, "2" : self.whileEditingLocScreen, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.addLocation, "2" : self.whileEditingLocScreen, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)

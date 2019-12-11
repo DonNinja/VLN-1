@@ -109,8 +109,9 @@ class UserInput:
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
         return plane_data_list
-    
 
+    def enterVariable(self, to_enter):
+        return input("Enter a new {}: ".format(to_enter))
 
     def editemp(self,pilot_list,emp_type):
         edit_emp_list = []

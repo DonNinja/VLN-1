@@ -193,3 +193,12 @@ class UIAPI:
             print(home_phone_num)
             return home_phone_num
 
+    def addLocation(self):
+        pass
+
+    def addWorkTrip(self):
+        pass
+    
+    def showAllWorkTrips(self):
+        data_list = self.__logic.showAllWorkTrips()
+        self.__data_printer.printAllWorkTrips(data_list)

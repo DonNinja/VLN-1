@@ -19,15 +19,7 @@ class UserInputCheck:
         check_date = self.date_check_ssn(ssn)
         if check_int and check_len and check_date: #and check_data:
             return True
-
-    # def checking_if_in_data(self, data, ssn):
-    #     for item in data:
-    #         if item['ssn'] == ssn:
-    #             print("Hey, that's illegal")
-    #             return False
-    #         else:
-    #             return True
-
+        return False
     
     def checkName(self,name):
         """ This forwards to a function for check """
@@ -133,10 +125,13 @@ class UserInputCheck:
             return True
 
     def date_check_ssn(self, ssn):
+<<<<<<< HEAD
+=======
         """ This checks if SSN is valid """
         #ssn_ints = [int(i) for i in ssn]
         #dates = ssn_ints[0] + ssn_ints[1]
         #month = ssn_ints[2] + ssn_ints[3]
+>>>>>>> 48618c8db80aa720d0c380489fe533dcb6637fa8
         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
             print("SSN is valid")
             return True
