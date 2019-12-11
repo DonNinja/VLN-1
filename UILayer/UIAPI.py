@@ -99,12 +99,14 @@ class UIAPI:
         else:
             return ssn
 
-    def checkName(self, emp_type): #Virkar ekki
-        first_name, last_name = self.inputter.addEmpName(emp_type)
-        while not(self.logic.checkName(first_name, last_name)):
-            first_name, last_name = self.inputter.addEmpName(emp_type)
+    def checkName(self, emp_type): #Virkar semi
+        name_input = self.inputter.addEmpName(emp_type)
+        name = self.logic.checkName(name_input)
+        while not (name):
+            name_input = self.inputter.addEmpName(emp_type)
+            name = self.logic.checkName(name_input)
         else:
-            return first_name.capitalize(), last_name.capitalize()
+            return name
 
     def checkRole(self, emp_type): #Virkar
         return emp_type
@@ -123,16 +125,18 @@ class UIAPI:
         licens_input = self.inputter.addEmpLicens(emp_type)
         licens = self.logic.checkLicens(licens_input)
         while not(licens):
-            licens_input = self.inputter.addEmpLicens
+            licens_input = self.inputter.addEmpLicens(emp_type)
             licens = self.logic.checkLicens(licens_input)
         else:
             print(licens)
             return licens
 
     def checkAddress(self, emp_type): #Virkar ekki
-        address = self.inputter.addEmpAddress(emp_type)
-        while not(self.logic.checkAddress(address)):
-            address = self.inputter.addEmpAddress
+        address_input = self.inputter.addEmpAddress(emp_type)
+        address = self.logic.checkAddress(address_input)
+        while not(address):
+            address_input = self.inputter.addEmpAddress(emp_type)
+            address = self.logic.checkAddress(address_input)
         else:
             print(address)
             return address
@@ -140,7 +144,7 @@ class UIAPI:
     def checkMobile(self, emp_type): # Virkar ekki
         mobile = self.inputter.addEmpMobile(emp_type)
         while not(self.logic.checkPhone(mobile)):
-            mobile = self.inputter.addEmpMobile
+            mobile = self.inputter.addEmpMobile(emp_type)
         else:
             print(mobile)
             return mobile
@@ -148,7 +152,7 @@ class UIAPI:
     def checkHomenum(self,emp_type): # Virkar ekki
         home_phone_num = self.inputter.addHomePhone(emp_type)
         while not(self.logic.checkPhone(home_phone_num)):
-            mobile = self.inputter.addEmpHomePhone
+            mobile = self.inputter.addEmpHomePhone(emp_type)
 
         else:
             print(home_phone_num)

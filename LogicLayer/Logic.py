@@ -61,8 +61,8 @@ class LogicAPI():
     def checkSSN(self, ssn):
         return self.__user_check.checkSSN(ssn)
 
-    def checkName(self, first_name, last_name):
-        return self.__user_check.checkName(first_name, last_name)
+    def checkName(self, name):
+        return self.__user_check.checkName(name)
     
     def checkRank(self, rank, emp_type):
         return self.__user_check.checkRank(rank, emp_type)

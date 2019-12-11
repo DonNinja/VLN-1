@@ -8,7 +8,7 @@ class UserInput:
         return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
 
     def addEmpName(self, emp_type):
-        return input("Enter {} first name and last name: ".format(emp_type)).split()
+        return input("Enter {} first and last name (Non-Icelandic letters): ".format(emp_type))
 
     def addEmpRank(self, emp_type):
         if emp_type == 'Pilot':

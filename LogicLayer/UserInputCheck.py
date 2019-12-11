@@ -19,10 +19,10 @@ class UserInputCheck:
             return True
 
     
-    def checkName(self, first_name, last_name):
-        check = self.name_check(first_name, last_name)
+    def checkName(self,name):
+        check = self.name_check(name)
         if check:
-            return True
+            return check
         else:
             return False
 
@@ -35,6 +35,9 @@ class UserInputCheck:
                     list_num.append(i)
         if len(list_num) == 7:
             return True
+        else:
+            print("Not a valid phone number")
+            return False
 
 
     def checkLicens(self, licens):
@@ -71,18 +74,12 @@ class UserInputCheck:
 
 
     def checkAddress(self, address):
-        try:
-            address_list = address.split()
-            address_alpha = address_list[0] # Checka len á þessu
-            address_int = address_list[1] # Checka len á þessu
-            if len(address_list) == 2:
-                if self.address_check(address_alpha):
-                    if self.digit_check(address_int):
-                        return True
-        except IndexError:
-            print("Address not in the right format!")
+        check = self.address_check(address)
+        if check:
+            return check
+        else:
             return False
-    
+
 
             
 
@@ -115,18 +112,37 @@ class UserInputCheck:
             return False
 
     def address_check(self, address):
-        if address.isalpha():
-            return True
+        address_list = address.split(" ")
+        first_address = address_list[0]
+        digit_address = address_list[-1]
+        full_address = ''
+        if first_address.isalpha() and digit_address.isdigit():
+            if first_address == digit_address:
+                print("Address is invalid")
+                return False
+            else:
+                full_address = first_address.capitalize() + " " + digit_address 
+                print("Address is valid")  
+                return full_address
         else:
+            print("Address is invalid")
             return False
 
-    def name_check(self, first_name, last_name):
-        if first_name.isalpha():
-            if last_name.isalpha():
-                print("Name is valid")
-                return True
+    def name_check(self, name):
+        name_list = name.split(" ")
+        first_name = name_list[0]
+        last_name = name_list[-1]
+        full_name = ''
+        if first_name.isalpha() and last_name.isalpha():
+            if first_name == last_name:
+                print("Name is invalid")
+                return False
+            else:
+                full_name = first_name.capitalize() + " " + last_name.capitalize() 
+                print("Name is valid")  
+                return full_name
         else:
-            print("Name in wrong format!")
+            print("Name is invalid")
             return False
                 
 
