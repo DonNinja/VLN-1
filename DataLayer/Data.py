@@ -39,3 +39,7 @@ class DataAPI:
                 item.update(data)
                 break
         self.__updater.updateEmployee(crew_list)
+    
+    def getLocations(self):
+        """ Returns a list of items of every destination """
+        return self.__reader.readDestinations()

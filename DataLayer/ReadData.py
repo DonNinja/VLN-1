@@ -32,9 +32,9 @@ class ReadData():
         return self.__data
     
     def readDestinations(self):
-        """ This reads the Destination file and returns the ordered dictionary """
+        """ This reads the Destinations file and returns the ordered dictionary """
         self.__data.clear()
-        with open("./STUDENTDATA/Destination.csv", "r") as crew_file:
+        with open("./STUDENTDATA/Destinations.csv", "r") as crew_file:
             crew_reader = csv.DictReader(crew_file)
             for line in crew_reader:
                 self.__data.append(line)
@@ -57,3 +57,4 @@ class ReadData():
             for line in crew_reader:
                 self.__data.append(line)
         return self.__data
+        
