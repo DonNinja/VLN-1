@@ -46,3 +46,6 @@ class SortData:
             if item['role'] == "Pilot" and item['licence'] == plane_type: # Checks if employee is pilot and if they have an active licence for the chosen plane
                 ret_list.append(item)
         return ret_list
+
+    def sortworkTripNumber(self):
+        

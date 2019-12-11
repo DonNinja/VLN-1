@@ -18,20 +18,10 @@ class UIAPI:
         """ This calls the printer to print out the header for the current screen """
         self.__ui_printer.headerDisplay(title)
     
-    def addEmp(self, role):
-        """ This calls the inputter so the user can input the employee's data, then calls logicAPI to add it to the file """
-        data_list = self.__inputter.addEmp(role)
-        self.__logic.addEmpLL(data_list)
-    
     def addPlane(self):
-        """ This calls the inputter so the user can input the plane's data, then calls logicAPI to add it to the file """
+        """ This calls the __inputter so the user can input the plane's data, then calls logicAPI to add it to the file """
         data_list = self.__inputter.addPlane()
         self.__logic.addPlane(data_list)
-    
-    def addLocation(self):
-        """ This calls the inputter so the user can input the location's data, then calls logicAPI to add it to the file """
-        data_list = self.__inputter.addLocation()
-        # self.__logic
     
     def showAllEmps(self):
         """ This gets a list of every employee from logicAPI, then calls the printer to print out every employee for the user """
@@ -74,39 +64,135 @@ class UIAPI:
         return self.__data_printer.printEmpSSN(emp), emp
 
     def editEmail(self, data):
-        """ This calls the inputter and calls logic to update the file, then calls a function to show the updated employee """
+        """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('email')
         self.__logic.updateEmp(data, new_var, 'email')
         self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
-        """ This calls the inputter and calls logic to update the file, then calls a function to show the updated employee """
+        """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
         self.__logic.updateEmp(data, new_var, 'address')
         self.showSpecificEmp(data['ssn'])
     
     def editHomePhone(self, data):
-        """ This calls the inputter and calls logic to update the file, then calls a function to show the updated employee """
+        """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('home phone number')
         self.__logic.updateEmp(data, new_var, 'homephonenumber')
         self.showSpecificEmp(data['ssn'])
     
     def editMobilePhone(self, data):
-        """ This calls the inputter and calls logic to update the file, then calls a function to show the updated employee """
+        """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('mobile phone number')
         self.__logic.updateEmp(data, new_var, 'mobilephonenumber')
         self.showSpecificEmp(data['ssn'])
     
     def editLicense(self, data):
-        """ This calls the inputter and calls logic to update the file, then calls a function to show the updated employee """
-        new_var = self.__inputter.enterLicense()
+        new_var = self.__inputter.enterVariable('plane license')
         self.__logic.updateEmp(data, new_var, 'licence')
         self.showSpecificEmp(data['ssn'])
     
-    def showAllLocations(self):
-        """ This gets a list of every location from logicAPI, then calls the printer to print out every location for the user """
-        data_list = self.__logic.showAllLocations()
-        self.__data_printer.printLocations(data_list)
+    def addEmp(self, role):
+        """ This add all items to list after they pass checks """
+        data_list = []
+        data_list.append(self.checkSSN(role))
+        data_list.append(self.checkName(role))
+        data_list.append(self.checkRole(role))
+        data_list.append(self.checkRank(role))
+        data_list.append(self.checkEmail(role))
+        data_list.append(self.checkLicens(role))
+        data_list.append(self.checkAddress(role))
+        data_list.append(self.checkMobile(role))
+        data_list.append(self.checkHomenum(role))
+        #
+        #
+        #
+        self.__logic.addEmpLL(data_list)
+
+    def checkSSN(self, emp_type): #Virkar
+        """ This checks if SSN is in valid format """
+        data = self.__logic.showAllEmps()
+        ssn = self.__inputter.addEmpSSN(emp_type)
+        while not(self.__logic.checkSSN(ssn, data)):
+            ssn = self.__inputter.addEmpSSN(emp_type)
+        else:
+            return ssn
+
+    def checkName(self, emp_type): #Virkar semi
+        """ This checks if name is in valid format (first and last name), also capitilizes first letters in seperate names """
+        name_input = self.__inputter.addEmpName(emp_type)
+        name = self.__logic.checkName(name_input)
+        while not (name):
+            name_input = self.__inputter.addEmpName(emp_type)
+            name = self.__logic.checkName(name_input)
+        else:
+            return name
+
+    def checkRole(self, emp_type):
+        """ This add employ type to the list cabincrew/pilot (already been selcted through employee screen) """
+        return emp_type
+
+    def checkRank(self, emp_type): #Virkar
+        """ This checks if employee rank is valid and returs valid rank """
+        rank_input = self.__inputter.addEmpRank(emp_type)
+        rank = self.__logic.checkRank(rank_input, emp_type)
+        while not (rank):
+            rank_input = self.__inputter.addEmpRank(emp_type)
+            rank = self.__logic.checkRank(rank_input, emp_type)
+        else:
+            print(rank)
+            return rank
+
+    def checkEmail(self, emp_type):
+        """ This checks if email is in valid format """
+        email_input = self.__inputter.addEmpEmail(emp_type)
+        email = self.__logic.checkEmail(email_input)
+        while not(email):
+            email_input = self.__inputter.addEmpAddress(emp_type)
+            email = self.__logic.checkEmail(email_input)
+        else:
+            return email
+
+    def checkLicens(self,emp_type): #Virkar
+        """ This checks if licens is valid and returns right licens"""
+        licens_input = self.__inputter.addEmpLicens(emp_type)
+        licens = self.__logic.checkLicens(licens_input)
+        while not(licens):
+            licens_input = self.__inputter.addEmpLicens(emp_type)
+            licens = self.__logic.checkLicens(licens_input)
+        else:
+            print(licens)
+            return licens
+
+    def checkAddress(self, emp_type): #Virkar 
+        """ This checks if address is valid and returns it in the right format if street name is not capitalized """
+        address_input = self.__inputter.addEmpAddress(emp_type)
+        address = self.__logic.checkAddress(address_input)
+        while not(address):
+            address_input = self.__inputter.addEmpAddress(emp_type)
+            address = self.__logic.checkAddress(address_input)
+        else:
+            print(address)
+            return address
+
+    def checkMobile(self, emp_type): # Virkar
+        """ This checks if number is only digit and length of 7 """
+        mobile = self.__inputter.addEmpMobile(emp_type)
+        while not(self.__logic.checkPhone(mobile)):
+            mobile = self.__inputter.addEmpMobile(emp_type)
+        else:
+            print(mobile)
+            return mobile
+
+    def checkHomenum(self,emp_type): # Virkar
+        """ This checks if number is only digit and length of 7 """
+        home_phone_num = self.__inputter.addHomePhone(emp_type)
+        while not(self.__logic.checkPhone(home_phone_num)):
+            mobile = self.__inputter.addEmpHomePhone(emp_type)
+
+        else:
+            print(home_phone_num)
+            return home_phone_num
 
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """

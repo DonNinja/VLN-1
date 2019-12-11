@@ -1,69 +1,44 @@
+
 class UserInput:
     def __init__(self):
         pass
     
-    def addEmp(self, emp_type):
-        data_list = []
-        ssn = input("\nEnter the new {}'s ssn: ".format(emp_type)).capitalize()
-        #if __checker.checkSSN(ssn):
-        data_list.append(ssn)
-        name = input("\nEnter the new {}'s name: ".format(emp_type)).capitalize()
-        # self.__checker.checkName(name)
-        data_list.append(name)
-        role = emp_type.capitalize()
-        #if __checker.checkRole(role)
-        data_list.append(role)
+    def addEmpSSN(self, emp_type):
+        print()
+        return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
+
+    def addEmpName(self, emp_type):
+        return input("Enter {} first and last name (Non-Icelandic characters): ".format(emp_type))
+
+    def addEmpRank(self, emp_type):
         if emp_type == "Pilot":
-            while True:
-                print("\n1: Captain\n2: Copilot")
-                rank_choice = input("\nChoose a rank: ")
-                rank_dict = {"1":"Captain","2":"Copilot"}
-                try:
-                    rank = rank_dict[rank_choice]
-                    break
-                except:
-                    print("Invalid choice")
+            print("\n1: Captain\n2: Copilot")
+            return input("\nChoose a rank: ")
         else:
-            while True:
-                print("\n1: Flight Service Manager\n2: Flight Attendant")
-                rank_choice = input("\nChoose a rank: ")
-                rank_dict = {"1":"Flight Service Manager","2":"Flight Attendant"}
-                try:
-                    rank = rank_dict[rank_choice]
-                    break
-                except:
-                    print("Invalid choice")
-        #if __checker.checkRank(rank)
-        data_list.append(rank)
-        email = input("\nEnter the new {}'s email (*you input*@nanair.is): ".format(emp_type))
-        email = email + "@nanair.is"
-        data_list.append(email)
+            print("\n1: Flight Service Manager\n2: Flight Attendant")
+            return input("\nChoose a rank: ")
+                
+
+    def addEmpEmail(self, emp_type):
+        return input("Enter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
+
+    def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
-            while True:
-                print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
-                choice = input("\nChoose a plane license: ")
-                planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
-                try:
-                    licens = planedict[choice]
-                    break
-                except:
-                    print("Invalid choice")
+            print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
+            return input("\nChoose a plane license: ")
         else:
-            licens = "N/A"
-        data_list.append(licens)
-        address = input("\nEnter the new {}'s address: ".format(emp_type)).capitalize()
-        #if __checker.checkAddress(address)
-        data_list.append(address)
-        mobile = input("\nEnter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        #if __checker.checkMobile(mobile)
-        data_list.append(mobile)
-        home_phone = input("\nEnter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        #if __checker.checkHomePhone(home_phone)
-        data_list.append(home_phone)
-        input("\nPress enter to continue...")
-        return data_list
+            return "N/A"
+
+    def addEmpAddress(self, emp_type):
+        return input("Enter the new {}'s address (Non-Icelandic characters): ".format(emp_type)).capitalize()
+
+    def addEmpMobile(self, emp_type):
+        return input("Enter the new {}'s mobile number (7 digits): ".format(emp_type)).capitalize()
     
-    def addLocation(self):
+    def addHomePhone(self, emp_type):
+        return input("Enter the new {}'s home phone number (7 digits): ".format(emp_type)).capitalize()
+    
+    def addLocationCountry(self):
         loc_data_list = []
         loc_country = input("\nEnter the new location's country: ").capitalize()
         loc_data_list.append(loc_country)
@@ -79,7 +54,6 @@ class UserInput:
         loc_data_list.append(loc_contact_name)
         loc_emer_num = input("\nEnter the new location's emergency phone number: ")
         loc_data_list.append(loc_emer_num)
-        print(loc_data_list)
         input("\nPress enter to continue...")
         return loc_data_list
 
@@ -92,7 +66,8 @@ class UserInput:
         work_trip_data_list = []
         work_destination = input("\nEnter a destination: ")
         work_trip_data_list.append(work_destination)
-        work_departure_date = input("\nEnter a departure date (DD/MM/YYYY): ")
+
+        work_departure_date = input("Enter a departure date (DD/MM/YYYY): ")
         work_trip_data_list.append(work_departure_date)
         work_departure_time = input("\nEnter a departure time (hh:mm): ")
         work_trip_data_list.append(work_departure_time)
@@ -134,21 +109,44 @@ class UserInput:
         #if __checker.planeinsignia(planeinsignia)
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
-
-        print(plane_data_list)
-        # print(plane_data_list)
         return plane_data_list
-
-    def enterVariable(self, to_enter):
-        return input("\nEnter a new {}: ".format(to_enter))
     
-    def enterLicense(self):
-        while True:
-            print("\n1: FokkerF100 2: FokkerF28 3: BAE146")
-            choice = input("\nChoose a new plane type: ")
-            planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
-            try:
-                plane_type = planedict[choice]
-                return plane_type
-            except:
-                print("Input invalid")
+
+
+    def editemp(self,pilot_list,emp_type):
+        edit_emp_list = []
+        print()
+        ssn = pilot_list[0]
+        #if __checker.checkSSN(ssn):
+        edit_emp_list.append(ssn)
+        name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
+        # self.__checker.checkName(name)
+        edit_emp_list.append(name)
+        role = emp_type.capitalize()
+        #if __checker.checkRole(role)
+        edit_emp_list.append(role)
+        rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
+        #if __checker.checkRank(rank)
+        edit_emp_list.append(rank)
+        if emp_type != "flight attendant":
+            licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
+            #if __checker.checkLicense(licens)
+            edit_emp_list.append(licens)
+        else:
+            licens = "N/A"
+        address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
+        #if __checker.checkAddress(address)
+        edit_emp_list.append(address)
+        mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
+        #if __checker.checkMobile(mobile)
+        edit_emp_list.append(mobile)
+        home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
+        #if __checker.checkHomePhone(home_phone)
+        edit_emp_list.append(home_phone)
+        print(edit_emp_list)
+        input("Press enter to continue...")
+        return edit_emp_list
+        
+
+
+
