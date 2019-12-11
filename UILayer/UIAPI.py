@@ -216,4 +216,8 @@ class UIAPI:
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
+
+    def showWorkTripsLastWeek(self):
+        '''Getting work trips for last 7 days'''
+        pass
         
