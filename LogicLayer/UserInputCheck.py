@@ -17,15 +17,18 @@ class UserInputCheck:
         check_date = self.date_check_ssn(ssn)
         if check_int and check_len and check_date:
             return True
+
     
-    def checkName(self, name):
-        check = self.name_check(name)
+    def checkName(self, first_name, last_name):
+        check = self.name_check(first_name, last_name)
         if check:
             return True
+        else:
+            return False
 
     def checkPhone(self, num):
         list_num = []
-        int_check = digit_check(num)
+        int_check = self.digit_check(num)
         if int_check:
             for line in num:
                 for i in line:
@@ -73,7 +76,7 @@ class UserInputCheck:
             address_alpha = address_list[0] # Checka len á þessu
             address_int = address_list[1] # Checka len á þessu
             if len(address_list) == 2:
-                if self.name_check(address_alpha):
+                if self.address_check(address_alpha):
                     if self.digit_check(address_int):
                         return True
         except IndexError:
@@ -111,14 +114,22 @@ class UserInputCheck:
             print("SSN is invalid")
             return False
 
-    def name_check(self, name):
-        name_strip = name.replace(" ", "")
-        if name_strip.isalpha():
-            print("Valid")
+    def address_check(self, address):
+        if address.isalpha():
             return True
         else:
-            print("Name is not in the right format")
             return False
+
+    def name_check(self, first_name, last_name):
+        if first_name.isalpha():
+            if last_name.isalpha():
+                print("Name is valid")
+                return True
+        else:
+            print("Name in wrong format!")
+            return False
+                
+
 
 
 

@@ -79,8 +79,13 @@ ssn,name,role,rank,email,licence,address,mobilephonenumber,homephonenumber
 1110732819,Arthur Karr,Cabincrew,Flight Attendant,arthur@nanair.is,N/A,Fellsmuli 33,8998833,5642333
 2602806942,Teresa Thruman,Cabincrew,Flight Attendant,teresa@nanair.is,N/A,Fellsmuli 34,8998834,5642334
 1107951952,Elizabeth Mcfadden,Cabincrew,Flight Attendant,elizabeth@nanair.is,N/A,Fellsmuli 35,8998835,5642335
+<<<<<<< HEAD
 1,Yngvi Thrainsson,Cabincrew,Flight Attendant,yngvi@nanair.is,N/A,Fifusel 20,8972148,5885522
 2,Lorem Ipsum,Pilot,Copilot,lorem@nanair.is,N/A,Fellsmuli 36,8888888,5882211
 >>>>>>> 64a786b76e2fabf31f017f7deafa1b82999ecc33
 2004932229,Sigvaldi,Pilot,1,1,Fellsmuli 15,8663484,5883004
 2004932229,Sigvaldi,Pilot,Captain,NAFokkerF100,Fellsmuli 15,8663484,5883004
+=======
+1,Yngvi Thrainsson,Cabincrew,Flight Attendant,ylth@nanair.is,N/A,eaoijjgroij 203,8972148,5885522
+2,Lorem Ipsum,Pilot,Copilot,lorem@nanair.is,NAFokkerF100,Fellsmuli 36,8888888,5882211
+>>>>>>> f32ae50523d56bf7831dbd404fa9cf2e94272863

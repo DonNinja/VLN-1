@@ -100,11 +100,11 @@ class UIAPI:
             return ssn
 
     def checkName(self, emp_type): #Virkar ekki
-        name = self.inputter.addEmpName(emp_type)
-        while not(self.logic.checkName(name)):
-            name = self.inputter.addEmpName
+        first_name, last_name = self.inputter.addEmpName(emp_type)
+        while not(self.logic.checkName(first_name, last_name)):
+            first_name, last_name = self.inputter.addEmpName(emp_type)
         else:
-            return name
+            return first_name.capitalize(), last_name.capitalize()
 
     def checkRole(self, emp_type): #Virkar
         return emp_type
@@ -137,7 +137,7 @@ class UIAPI:
             print(address)
             return address
 
-    def checkMobile(self, emp_type):
+    def checkMobile(self, emp_type): # Virkar ekki
         mobile = self.inputter.addEmpMobile(emp_type)
         while not(self.logic.checkPhone(mobile)):
             mobile = self.inputter.addEmpMobile
@@ -145,7 +145,7 @@ class UIAPI:
             print(mobile)
             return mobile
 
-    def checkHomenum(self,emp_type):
+    def checkHomenum(self,emp_type): # Virkar ekki
         home_phone_num = self.inputter.addHomePhone(emp_type)
         while not(self.logic.checkPhone(home_phone_num)):
             mobile = self.inputter.addEmpHomePhone

@@ -8,7 +8,7 @@ class UserInput:
         return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
 
     def addEmpName(self, emp_type):
-        return input("Enter the new {}'s name: ".format(emp_type)).capitalize()
+        return input("Enter {} first name and last name: ".format(emp_type)).split()
 
     def addEmpRank(self, emp_type):
         if emp_type == 'Pilot':
@@ -46,7 +46,7 @@ class UserInput:
         loc_data_list.append(loc_airport_name)
         loc_flight_time_hours = input("Enter the new location's flight time (Hours): ")
         loc_flight_time_mins = input("Enter the new location's flight time (Minutes): ")
-        loc_flight_time = "{}:{}:00".format(loc_flight_time_hours, loc_flight_time_mins)
+        loc_flight_time = '.'.join(loc_flight_time_hours, loc_flight_time_mins)
         loc_data_list.append(loc_flight_time)
         loc_distance = input("Enter the distance from Iceland (Kilometers): ")
         loc_data_list.append(loc_distance)
@@ -93,17 +93,23 @@ class UserInput:
 
     def addPlane(self):
         plane_data_list = []
-        print()
-        choose = input("choose 1 = FokkerF100 2 =AFokkerF28 3 = BAE146")
-        planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
-        planeid = planedict[choose]
-        plane_data_list.append(planeid)
+        while True:
+            print("\n1: FokkerF100 2: FokkerF28 3: BAE146")
+            choice = input("\nChoose a plane type: ")
+            planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
+            try:
+                plane_type = planedict[choice]
+                break
+            except:
+                print("Input invalid")
+        plane_data_list.append(plane_type)
 
-        planeinsignia = input("Enter plane Insignia: ")
+        planeinsignia = input("Enter plane Insignia (3 letters): ")
         #if __checker.planeinsignia(planeinsignia)
+        planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
 
-        print(plane_data_list)
+        # print(plane_data_list)
         return plane_data_list
 
     def editemp(self,pilot_list,emp_type):

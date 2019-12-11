@@ -44,10 +44,12 @@ class LogicAPI():
     def showPilotByPlane(self, plane_type):
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotsByPlane(all_emps, plane_type)
+    
+    def showAllLocations(self):
+        return self.__data.getLocations()
 
     def addEmpLL(self,data_list):
         self.__data.registerNewData(data_list)
-        pass
 
     def addPlane(self,data_list):
         self.__data_getter.registerPlanes(data_list)
@@ -59,8 +61,8 @@ class LogicAPI():
     def checkSSN(self, ssn):
         return self.__user_check.checkSSN(ssn)
 
-    def checkName(self, name):
-        return self.__user_check.checkName(name)
+    def checkName(self, first_name, last_name):
+        return self.__user_check.checkName(first_name, last_name)
     
     def checkRank(self, rank, emp_type):
         return self.__user_check.checkRank(rank, emp_type)

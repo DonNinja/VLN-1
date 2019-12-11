@@ -94,7 +94,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Edit employees screen")
             choice_list = ["1 - Edit any employee", "2 - Edit pilot", "3 - Edit flight attendant", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.anyEmpSSN, "2" : self.editPilot, "3" : self.attendantSSN, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.anyEmpSSN, "2" : self.pilotSSN, "3" : self.attendantSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -108,31 +108,37 @@ class UserUI:
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what employee we want to change '''
         is_emp, data = self.showEmployeeSSN()
         if is_emp:
-            self.whileEditingEmpScreen(data)
+            self.whileEditingEmpScreen(data, data['role'])
         else :
             pass
 
     def pilotSSN(self):
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what pilot we want to change '''
-        if self.showPilotSSN():
-            self.whileEditingEmpScreen("keks")
+        is_pilot, data = self.showPilotSSN()
+        if is_pilot:
+            self.whileEditingEmpScreen(data, data['role'])
         else:
             pass
 
     def attendantSSN(self):
         ''' Calls a function that asks the user to input a SSN (kennitala) so we can choose what flight attendant we want to change '''
-        if self.showAttendantSSN():
-            self.whileEditingEmpScreen("ekks")
+        is_attendant, data = self.showAttendantSSN()
+        if is_attendant:
+            self.whileEditingEmpScreen(data, data['role'])
         else:
             pass
 
-    def whileEditingEmpScreen(self, data):
+    def whileEditingEmpScreen(self, data, role):
         ''' This asks the user what he would like to change '''
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing employee screen")
-            choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane Type", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.editAddress, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "4" : self.__ui_api.editLicense, "B" : self.back, "Q" : sys.exit}
+            if role == 'Cabincrew':
+                choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", BACK_STR, QUIT_STR]
+                choice_dict = {"1" : self.__ui_api.editAddress, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "B" : self.back, "Q" : sys.exit}
+            else:
+                choice_list = ["1 - Change Home Address", "2 - Change Phone Number", "3 - Change Email", "4 - Change Plane License", BACK_STR, QUIT_STR]
+                choice_dict = {"1" : self.__ui_api.editAddress, "2" : self.phoneEditScreen, "3" : self.__ui_api.editEmail, "4" : self.__ui_api.editLicense, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp, choice_dict)
@@ -379,7 +385,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.inputter.addLocation, "2" : self.whileEditingLocScreen, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.inputter.addLocation, "2" : self.whileEditingLocScreen, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -421,7 +427,3 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-
-    def editPilot(self):
-        ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.editPilot(ssn)
