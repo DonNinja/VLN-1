@@ -60,7 +60,7 @@ class UserInputCheck:
                 return licens
             if licens != '1' or '2' or '3':
                 return False
-        
+
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
         email_list = []
