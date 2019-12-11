@@ -91,11 +91,16 @@ class UserInput:
 
     def addPlane(self):
         plane_data_list = []
-        print()
-        choice = input("1: FokkerF100 2: FokkerF28 3: BAE146")
-        planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
-        planeid = planedict[choice]
-        plane_data_list.append(planeid)
+        while True:
+            print("\n1: FokkerF100 2: FokkerF28 3: BAE146")
+            choice = input("\nChoose a plane type: ")
+            planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
+            try:
+                plane_type = planedict[choice]
+                break
+            except:
+                print("Input invalid")
+        plane_data_list.append(plane_type)
 
         planeinsignia = input("Enter plane Insignia (3 letters): ")
         #if __checker.planeinsignia(planeinsignia)
@@ -112,7 +117,7 @@ class UserInput:
     def enterLicense(self):
         while True:
             print("\n1: FokkerF100 2: FokkerF28 3: BAE146")
-            choice = input("\nChoose a plane type: ")
+            choice = input("\nChoose a new plane type: ")
             planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
             try:
                 plane_type = planedict[choice]
