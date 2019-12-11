@@ -62,6 +62,10 @@ class UIAPI:
         """ This gets a single attendant and calls the printer to print them out """
         emp = self.__logic.showAttendantSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
+    
+    def showAllLocations(self):
+        data_list = self.__logic.showAllLocations()
+        self.__data_printer.printLocations(data_list)
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
