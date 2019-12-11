@@ -370,7 +370,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Work trips screen")
             choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.showEmpsWorkTrips, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -380,9 +380,9 @@ class UserUI:
             else:
                 print("Input is invalid!")
     
-    def showEmpsWorkTrips(self, ssn):
-        ssn = input("Enter a pilot's SSN (kennitala): ")
-        self.__ui_api.
+    def showEmpsWorkTrips(self):
+        ssn = input("Enter an employee's SSN (kennitala): ")
+        self.__ui_api.showEmpsWorkTrips(ssn)
 
     def locationScreen(self):
         ''' This shows the user the choices he can make with locations '''
@@ -422,7 +422,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Filter work trips screen")
             choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.showAllWorkTrips, "2" :self.doNothing, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showAllWorkTrips, "2" :self.__ui_api.showWorkTripsByDay, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)

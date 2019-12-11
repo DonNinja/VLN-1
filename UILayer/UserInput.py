@@ -147,6 +147,12 @@ class UserInput:
         input("Press enter to continue...")
         return edit_emp_list
         
-
+    def askForDate(self):
+        '''Asking for a specific date to show work trips by day'''
+        day = input("Enter day (DD): ")
+        month = input("Enter month (MM): ")
+        year = input("Enter year (YYYY): ")
+        date = year + "-" + month + "-" + day
+        return date
 
 

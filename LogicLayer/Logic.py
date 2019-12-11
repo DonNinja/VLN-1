@@ -96,6 +96,12 @@ class LogicAPI():
         all_trips = self.__data.getTrips()
         return self.__data_sorter.sortEmpTrips(all_trips, ssn)
 
+    def showWorkTripsByDay(self, date):
+        '''Shows work trips by day'''
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.dateSorter(all_trips, date)
+        
+
 # import re
 # class Employee:
 

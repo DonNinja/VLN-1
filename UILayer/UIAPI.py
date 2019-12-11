@@ -191,8 +191,7 @@ class UIAPI:
         """ This checks if number is only digit and length of 7 """
         home_phone_num = self.__inputter.addHomePhone(emp_type)
         while not(self.__logic.checkPhone(home_phone_num)):
-            mobile = self.__inputter.addEmpHomePhone(emp_type)
-
+            home_phone_num = self.__inputter.addHomePhone(emp_type)
         else:
             print(home_phone_num)
             return home_phone_num
@@ -208,4 +207,13 @@ class UIAPI:
         self.__data_printer.printAllWorkTrips(data_list)
     
     def showEmpsWorkTrips(self, ssn):
-        self.__logic.
+        ''' This calls a function print out work trips that are included in the data list '''
+        data_list = self.__logic.showEmpsWorkTrips(ssn)
+        self.__data_printer.printAllWorkTrips(data_list)
+
+    def showWorkTripsByDay(self):
+        '''Getting work trips by day '''
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByDay(date)
+        self.__data_printer.printAllWorkTrips(data_list)
+        
