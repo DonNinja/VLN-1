@@ -4,8 +4,7 @@ from LogicLayer.Logic import LogicAPI
 
 class UserInput:
     def __init__(self):
-        self.__checker = UserInputCheck()
-        self.__insert = LogicAPI()
+        pass
     
     def addEmp(self, emp_type):
         data_list = []
@@ -116,12 +115,10 @@ class UserInput:
         input("Press enter to continue...")
         return work_trip_data_list
 
-
-
     def addPlane(self):
         plane_data_list = []
         print()
-        choose = input("choose 1 = NAFokkerF100 2 = NAFokkerF28 3 = NABAE146")
+        choose = input("choose 1 = FokkerF100 2 =AFokkerF28 3 = BAE146")
         planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
         planeid = planedict[choose]
         plane_data_list.append(planeid)
@@ -131,6 +128,10 @@ class UserInput:
         plane_data_list.append(planeinsignia)
 
         print(plane_data_list)
-        self.__insert.addEmpLL(data_list)
+        return plane_data_list
 
-
+    def enterEmail(self):
+        return input("Enter a new email: ")
+    
+    def enterAddress(self):
+        return input("Enter a new address: ")
