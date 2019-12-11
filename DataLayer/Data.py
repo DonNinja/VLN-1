@@ -20,7 +20,8 @@ class DataAPI:
     def getEmps(self):
         """ Calls a function, which returns the complete list of Crew, then it returns that. """
         return self.__reader.readCrew()
-    
+
+
     def getAirplanes(self):
         """ Calls a function, which returns the complete list of Airplanes, then it returns that. """
         return self.__reader.readAircraft()

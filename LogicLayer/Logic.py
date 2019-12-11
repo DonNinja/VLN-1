@@ -1,10 +1,12 @@
 from DataLayer.Data import DataAPI
 from LogicLayer.SortData import SortData
+from LogicLayer.UserInputCheck import UserInputCheck
 
 class LogicAPI():
     def __init__(self):
         self.__data = DataAPI()
         self.__data_sorter = SortData()
+        self.__user_check = UserInputCheck()
 
     def showAllEmps(self):
         """ This returns a collection of every employee to the UI so it can print them out """
@@ -53,8 +55,32 @@ class LogicAPI():
         self.__data.registerNewEmp(data_list)
 
     def addPlane(self,data_list):
-        """ This calls the dataAPI to add a new plane to the aircraft.csv file """
-        self.__data.registerPlanes(data_list)
+        self.__data_getter.registerPlanes(data_list)
+
+    def editPilot(self,ssn):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortPilotSSN(all_emps, ssn)
+
+    def checkSSN(self, ssn):
+        return self.__user_check.checkSSN(ssn)
+
+    def checkName(self, name):
+        return self.__user_check.checkName(name)
+    
+    def checkRank(self, rank, emp_type):
+        return self.__user_check.checkRank(rank, emp_type)
+
+    def checkEmail(self, email):
+        return self.__user_check.checkEmail(email)
+
+    def checkLicens(self, licens):
+        return self.__user_check.checkLicens(licens)
+
+    def checkAddress(self,adress):
+        return self.__user_check.checkAddress(adress)
+
+    def checkPhone(self, phonenum):
+        return self.__user_check.checkPhone(phonenum)
 
     def updateEmp(self, data, new_data, field):
         """ This calls the dataAPI to update an employee with the new data """

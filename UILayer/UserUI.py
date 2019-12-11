@@ -332,7 +332,8 @@ class UserUI:
 
     def showAllAirplanes(self):
         # Show all airplanes
-        self.__ui_api.showAllPlanes()
+        #Path ready, just needs to be called
+        pass
         
     def addAirplane(self):
         # Adding Airplane
@@ -426,3 +427,6 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+
+
+    
