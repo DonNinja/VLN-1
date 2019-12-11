@@ -91,6 +91,12 @@ class LogicAPI():
         """ This gets a list of every work trip and returns it """
         return self.__data.getTrips()
 
+    def showWorkTripsByDay(self, date):
+        '''Shows work trips by day'''
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.dateSorter(all_trips, date)
+        
+
 # import re
 # class Employee:
 
