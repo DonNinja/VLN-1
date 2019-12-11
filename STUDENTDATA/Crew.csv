@@ -82,3 +82,5 @@ ssn,name,role,rank,email,licence,address,mobilephonenumber,homephonenumber
 1,Yngvi Thrainsson,Cabincrew,Flight Attendant,yngvi@nanair.is,N/A,Fifusel 20,8972148,5885522
 2,Lorem Ipsum,Pilot,Copilot,lorem@nanair.is,N/A,Fellsmuli 36,8888888,5882211
 >>>>>>> 64a786b76e2fabf31f017f7deafa1b82999ecc33
+2004932229,Sigvaldi,Pilot,1,1,Fellsmuli 15,8663484,5883004
+2004932229,Sigvaldi,Pilot,Captain,NAFokkerF100,Fellsmuli 15,8663484,5883004

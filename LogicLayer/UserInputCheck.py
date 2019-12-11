@@ -1,4 +1,3 @@
-from LogicLayer.Logic import LogicAPI
 import re
 CAPTAIN = 'Captain'
 COPILOT = 'Copilot'
@@ -10,7 +9,7 @@ LICENSE_NABAE146 = 'NABAE146'
 
 class UserInputCheck:
     def __init__(self):
-        self.__data_checker = LogicAPI()
+        pass
 
     def checkSSN(self, ssn):
         check_int = self.digit_check(ssn)
@@ -24,17 +23,18 @@ class UserInputCheck:
         if check:
             return True
 
-    def checkPhone(self, homephonenum):
-        count = 0
-        for row in homephonenum:
-            for i in row:
-                count += 1
-        if count == 7:
-            return homephonenum
-        else:
-            return False
+    def checkPhone(self, num):
+        list_num = []
+        int_check = digit_check(num)
+        if int_check:
+            for line in num:
+                for i in line:
+                    list_num.append(i)
+        if len(list_num) == 7:
+            return True
 
-    def checkLicense(self, licens):
+
+    def checkLicens(self, licens):
         if self.digit_check(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100

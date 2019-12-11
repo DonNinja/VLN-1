@@ -16,10 +16,6 @@ class UIAPI:
     def UIHeaderDisplay(self, title):
         self.ui_printer.headerDisplay(title)
     
-    def addEmp(self, role):
-        data_list = self.inputter.addEmp(role)
-        self.logic.addEmpLL(data_list)
-    
     def addPlane(self):
         data_list = self.inputter.addPlane()
         self.logic.addPlane(data_list)
@@ -54,16 +50,6 @@ class UIAPI:
     
     def showSpecificAttendant(self, ssn):
         emp = self.logic.showAttendantSSN(ssn)
-<<<<<<< HEAD
-        self.data_printer.printAttendantSSN(emp)
-
-    def editemp(self,ssn,emp_type):
-        emp = self.logic.showPilotSSN(ssn)
-        pilot_data = list(emp.values())
-        updated_emp = self.inputter.editemp(pilot_data,emp_type)
-        self.logic.editemp(updated_emp)
-
-=======
         return self.data_printer.printEmpSSN(emp), emp
 
     def editEmail(self, data):
@@ -90,4 +76,81 @@ class UIAPI:
         new_var = self.inputter.enterVariable('plane license')
         self.logic.updateEmp(data, new_var, 'licence')
         self.showSpecificEmp(data['ssn'])
->>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21
+    
+    def addEmp(self, role):
+        data_list = []
+        data_list.append(self.checkSSN(role))
+        data_list.append(self.checkName(role))
+        data_list.append(self.checkRole(role))
+        data_list.append(self.checkRank(role))
+        data_list.append(self.checkLicens(role))
+        data_list.append(self.checkAddress(role))
+        data_list.append(self.checkMobile(role))
+        data_list.append(self.checkHomenum(role))
+        #
+        #
+        #
+        self.logic.addEmpLL(data_list)
+
+    def checkSSN(self, emp_type): #Virkar
+        ssn = self.inputter.addEmpSSN(emp_type)
+        while not(self.logic.checkSSN(ssn)):
+            ssn = self.inputter.addEmpSSN(emp_type)
+        else:
+            return ssn
+
+    def checkName(self, emp_type): #Virkar ekki
+        name = self.inputter.addEmpName(emp_type)
+        while not(self.logic.checkName(name)):
+            name = self.inputter.addEmpName
+        else:
+            return name
+
+    def checkRole(self, emp_type): #Virkar
+        return emp_type
+
+    def checkRank(self, emp_type): #Virkar
+        rank_input = self.inputter.addEmpRank(emp_type)
+        rank = self.logic.checkRank(rank_input, emp_type)
+        while not (rank):
+            rank_input = self.inputter.addEmpRank(emp_type)
+            rank = self.logic.checkRank(rank_input, emp_type)
+        else:
+            print(rank)
+            return rank
+
+    def checkLicens(self,emp_type): #Virkar
+        licens_input = self.inputter.addEmpLicens(emp_type)
+        licens = self.logic.checkLicens(licens_input)
+        while not(licens):
+            licens_input = self.inputter.addEmpLicens
+            licens = self.logic.checkLicens(licens_input)
+        else:
+            print(licens)
+            return licens
+
+    def checkAddress(self, emp_type): #Virkar ekki
+        address = self.inputter.addEmpAddress(emp_type)
+        while not(self.logic.checkAddress(address)):
+            address = self.inputter.addEmpAddress
+        else:
+            print(address)
+            return address
+
+    def checkMobile(self, emp_type):
+        mobile = self.inputter.addEmpMobile(emp_type)
+        while not(self.logic.checkPhone(mobile)):
+            mobile = self.inputter.addEmpMobile
+        else:
+            print(mobile)
+            return mobile
+
+    def checkHomenum(self,emp_type):
+        home_phone_num = self.inputter.addHomePhone(emp_type)
+        while not(self.logic.checkPhone(home_phone_num)):
+            mobile = self.inputter.addEmpHomePhone
+
+        else:
+            print(home_phone_num)
+            return home_phone_num
+

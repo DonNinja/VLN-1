@@ -1,66 +1,42 @@
-from LogicLayer.UserInputCheck import UserInputCheck
-from LogicLayer.Logic import LogicAPI
-
 
 class UserInput:
     def __init__(self):
         pass
     
-    def addEmp(self, emp_type):
-        data_list = []
+    def addEmpSSN(self, emp_type):
         print()
-        ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
-        while self.__checker.checkSSN(ssn) != True:
-                ssn = input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
-        data_list.append(ssn)
+        return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
 
-        name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        while self.__checker.checkName(name) != True:
-            name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        data_list.append(name)
-        role = emp_type.capitalize()
-        data_list.append(role)
-        if role == 'Pilot':
-            rank_input = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
-            rank = self.__checker.checkRank(rank_input, role)
-            while rank == False:
-                rank_input = input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
-                rank = self.__checker.checkRank(rank_input, role)
-            data_list.append(rank)
-        if role == 'Flight attendant':
-            rank_input = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
-            rank = self.__checker.checkRank(rank_input, role)
-            while rank == False:
-               rank_input = input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
-               rank = self.__checker.checkRank(rank_input, role)
-            data_list.append(rank)
+    def addEmpName(self, emp_type):
+        return input("Enter the new {}'s name: ".format(emp_type)).capitalize()
+
+    def addEmpRank(self, emp_type):
+        if emp_type == 'Pilot':
+            return input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
+        if emp_type == 'Flight attendant':
+            return input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+
+    def addEmpLicens(self, emp_type):          
         if emp_type != "flight attendant":
-            licens_input = input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
-            licens = self.__checker.checkLicense(licens_input)
-            while licens == False:
-                licens_input = input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
-                licens = self.__checker.checkLicense(licens_input)
-            data_list.append(licens)
+            return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
         else:
-            licens = "N/A"
-        address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        while self.__checker.checkAddress(address) != True:
-            address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        data_list.append(address)
-        mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        while self.__checker.checkPhone(mobile) != True:
-            mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        data_list.append(mobile)
-        home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        while self.__checker.checkPhone(home_phone) != True:
-            home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        data_list.append(home_phone)
+            return "N/A"
+
+    def addEmpAddress(self, emp_type):
+        return input("Enter the new {}'s address: ".format(emp_type)).capitalize()
+
+    def addEmpMobile(self, emp_type):
+        return input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
     
+    def addHomePhone(self, emp_type):
+        return input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
+    '''
         self.__insert.addEmpLL(data_list)
         
         print(data_list)
         input("Press enter to continue...")
         return data_list
+        '''
     
     def addLocation(self):
         loc_data_list = []
@@ -130,7 +106,6 @@ class UserInput:
         print(plane_data_list)
         return plane_data_list
 
-<<<<<<< HEAD
     def editemp(self,pilot_list,emp_type):
         edit_emp_list = []
         print()
@@ -168,7 +143,3 @@ class UserInput:
 
 
 
-=======
-    def enterVariable(self, to_enter):
-        return input("Enter a new {}: ".format(to_enter))
->>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21
