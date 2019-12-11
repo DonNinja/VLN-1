@@ -63,7 +63,7 @@ class UserInput:
         input("\nPress enter to continue...")
         return data_list
     
-    def addLocation(self):
+    def addLocationCountry(self):
         loc_data_list = []
         loc_country = input("\nEnter the new location's country: ").capitalize()
         loc_data_list.append(loc_country)
@@ -79,7 +79,6 @@ class UserInput:
         loc_data_list.append(loc_contact_name)
         loc_emer_num = input("\nEnter the new location's emergency phone number: ")
         loc_data_list.append(loc_emer_num)
-        print(loc_data_list)
         input("\nPress enter to continue...")
         return loc_data_list
 
@@ -133,9 +132,9 @@ class UserInput:
         #if __checker.planeinsignia(planeinsignia)
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
-
-        # print(plane_data_list)
         return plane_data_list
+    
+
 
     def enterVariable(self, to_enter):
         return input("\nEnter a new {}: ".format(to_enter))
