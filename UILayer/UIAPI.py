@@ -80,7 +80,7 @@ class UIAPI:
         self.showSpecificEmp(data['ssn'])
     
     def editLicense(self, data):
-        new_var = self.inputter.enterVariable('plane license')
+        new_var = self.inputter.enterLicense()
         self.logic.updateEmp(data, new_var, 'licence')
         self.showSpecificEmp(data['ssn'])
     
