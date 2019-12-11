@@ -47,7 +47,11 @@ class UserInputCheck:
     def checkLicens(self, licens):
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
+<<<<<<< HEAD
                 return licens
+=======
+            return licens
+>>>>>>> 1b9734f83ddafb5f0cd233bc0b19ad718aa54de6
         if self.digit_check(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100
@@ -125,13 +129,7 @@ class UserInputCheck:
             return True
 
     def date_check_ssn(self, ssn):
-<<<<<<< HEAD
-=======
         """ This checks if SSN is valid """
-        #ssn_ints = [int(i) for i in ssn]
-        #dates = ssn_ints[0] + ssn_ints[1]
-        #month = ssn_ints[2] + ssn_ints[3]
->>>>>>> 48618c8db80aa720d0c380489fe533dcb6637fa8
         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
             print("SSN is valid")
             return True
@@ -174,11 +172,4 @@ class UserInputCheck:
         else:
             print("Name is invalid")
             return False
-                
-
-
-
-
-
-    def addLocationCountry(self):
-        pass
+        
