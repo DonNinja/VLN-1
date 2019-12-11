@@ -25,8 +25,3 @@ class RegisterData:
         with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)
             newFileWriter.writerow([self.planeID,self.insignia])
-
-
-    
-
-   
