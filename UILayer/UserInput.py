@@ -92,14 +92,15 @@ class UserInput:
     def addPlane(self):
         plane_data_list = []
         print()
-        choose = input("choose 1 = FokkerF100 2 =AFokkerF28 3 = BAE146")
+
+        planeinsignia = input("Enter plane Insignia E.g.(TF-LNQ): ")
+        #if __checker.planeinsignia(planeinsignia)
+        plane_data_list.append(planeinsignia)
+
+        choose = input("choose 1=FokkerF100, 2=AFokkerF28, 3=BAE146: ")
         planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
         planeid = planedict[choose]
         plane_data_list.append(planeid)
-
-        planeinsignia = input("Enter plane Insignia: ")
-        #if __checker.planeinsignia(planeinsignia)
-        plane_data_list.append(planeinsignia)
 
         print(plane_data_list)
         return plane_data_list
