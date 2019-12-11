@@ -13,8 +13,11 @@ class UserInput:
     def addEmpRank(self, emp_type):
         if emp_type == 'Pilot':
             return input("Enter {}'s rank, 1 for Captain, 2 for Copilot: ".format(emp_type)).capitalize()
-        if emp_type == 'Flight attendant':
+        if emp_type == 'Cabincrew':
             return input("Enter {}'s rank, 1 for Flight attendant, 2 for Flight Service Manager: ".format(emp_type)).capitalize()
+
+    def addEmpEmail(self, emp_type):
+        return input("Enter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "flight attendant":

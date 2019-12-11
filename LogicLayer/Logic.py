@@ -70,6 +70,9 @@ class LogicAPI():
     def checkRank(self, rank, emp_type):
         return self.__user_check.checkRank(rank, emp_type)
 
+    def checkEmail(self, email):
+        return self.__user_check.checkEmail(email)
+
     def checkLicens(self, licens):
         return self.__user_check.checkLicens(licens)
 

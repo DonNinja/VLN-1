@@ -53,6 +53,21 @@ class UserInputCheck:
                 return licens
             if licens != '1' or '2' or '3':
                 return False
+
+    def checkEmail(self, email):
+        email_list = []
+        for line in email:
+            for ch in line:
+                email_list.append(ch)
+        if email.isalnum():
+            if len(email_list) < 20:
+                return email
+            else:
+                print("Email is in wrong format")
+                return False
+        else:
+            print("Email is in wrong format")
+            return False
        
 
     def checkRank(self, rank, role):
@@ -63,10 +78,10 @@ class UserInputCheck:
             if rank == '2' and role == 'Pilot':
                 rank = COPILOT
                 return rank
-            if rank == '1' and role == 'Flight attendant':
+            if rank == '1' and role == 'Cabincrew':
                 rank = FLIGHTATT
                 return rank
-            if rank == '2' and role == 'Flight attendant':
+            if rank == '2' and role == 'Cabincrew':
                 rank = FLIGHTSMANAGER
                 return rank
             if rank != '1' or '2':
@@ -145,6 +160,7 @@ class UserInputCheck:
             print("Name is invalid")
             return False
                 
+
 
 
 

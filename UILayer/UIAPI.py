@@ -93,11 +93,13 @@ class UIAPI:
         self.showSpecificEmp(data['ssn'])
     
     def addEmp(self, role):
+        """ This add all items to list after they pass checks """
         data_list = []
         data_list.append(self.checkSSN(role))
         data_list.append(self.checkName(role))
         data_list.append(self.checkRole(role))
         data_list.append(self.checkRank(role))
+        data_list.append(self.checkEmail(role))
         data_list.append(self.checkLicens(role))
         data_list.append(self.checkAddress(role))
         data_list.append(self.checkMobile(role))
@@ -108,6 +110,7 @@ class UIAPI:
         self.__logic.addEmpLL(data_list)
 
     def checkSSN(self, emp_type): #Virkar
+        """ This checks if SSN is in valid format """
         ssn = self.__inputter.addEmpSSN(emp_type)
         while not(self.__logic.checkSSN(ssn)):
             ssn = self.__inputter.addEmpSSN(emp_type)
@@ -115,6 +118,7 @@ class UIAPI:
             return ssn
 
     def checkName(self, emp_type): #Virkar semi
+        """ This checks if name is in valid format (first and last name), also capitilizes first letters in seperate names """
         name_input = self.__inputter.addEmpName(emp_type)
         name = self.__logic.checkName(name_input)
         while not (name):
@@ -123,10 +127,12 @@ class UIAPI:
         else:
             return name
 
-    def checkRole(self, emp_type): #Virkar
+    def checkRole(self, emp_type):
+        """ This add employ type to the list cabincrew/pilot (already been selcted through employee screen) """
         return emp_type
 
     def checkRank(self, emp_type): #Virkar
+        """ This checks if employee rank is valid and returs valid rank """
         rank_input = self.__inputter.addEmpRank(emp_type)
         rank = self.__logic.checkRank(rank_input, emp_type)
         while not (rank):
@@ -136,7 +142,18 @@ class UIAPI:
             print(rank)
             return rank
 
+    def checkEmail(self, emp_type):
+        """ This checks if email is in valid format """
+        email_input = self.__inputter.addEmpEmail(emp_type)
+        email = self.__logic.checkEmail(email_input)
+        while not(email):
+            email_input = self.__inputter.addEmpAddress(emp_type)
+            email = self.__logic.checkEmail(email_input)
+        else:
+            return email
+
     def checkLicens(self,emp_type): #Virkar
+        """ This checks if licens is valid and returns right licens"""
         licens_input = self.__inputter.addEmpLicens(emp_type)
         licens = self.__logic.checkLicens(licens_input)
         while not(licens):
@@ -147,6 +164,7 @@ class UIAPI:
             return licens
 
     def checkAddress(self, emp_type): #Virkar 
+        """ This checks if address is valid and returns it in the right format if street name is not capitalized """
         address_input = self.__inputter.addEmpAddress(emp_type)
         address = self.__logic.checkAddress(address_input)
         while not(address):
@@ -157,6 +175,7 @@ class UIAPI:
             return address
 
     def checkMobile(self, emp_type): # Virkar
+        """ This checks if number is only digit and length of 7 """
         mobile = self.__inputter.addEmpMobile(emp_type)
         while not(self.__logic.checkPhone(mobile)):
             mobile = self.__inputter.addEmpMobile(emp_type)
@@ -165,6 +184,7 @@ class UIAPI:
             return mobile
 
     def checkHomenum(self,emp_type): # Virkar
+        """ This checks if number is only digit and length of 7 """
         home_phone_num = self.__inputter.addHomePhone(emp_type)
         while not(self.__logic.checkPhone(home_phone_num)):
             mobile = self.__inputter.addEmpHomePhone(emp_type)
