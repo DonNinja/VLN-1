@@ -8,7 +8,7 @@ class UpdateData:
         ''' This writes every value of the data into the crew file again, updating it. '''
         with open("./STUDENTDATA/Crew.csv", 'w',newline='\n') as newFile:
             newFileWriter = csv.writer(newFile)
-            newFileWriter.writerow(['ssn', 'name', 'role', 'rank','email', 'licence', 'address', 'mobilephonenumber', 'homephonenumber'])
+            newFileWriter.writerow(['ssn', 'name', 'role', 'rank', 'email', 'licence', 'address', 'mobilephonenumber', 'homephonenumber'])
             for item in data:
                 self.ssn = item['ssn']
                 self.name = item['name']
