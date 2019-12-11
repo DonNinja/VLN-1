@@ -130,8 +130,45 @@ class UserInput:
         print(plane_data_list)
         return plane_data_list
 
-    def enterEmail(self):
-        return input("Enter a new email: ")
-    
-    def enterAddress(self):
-        return input("Enter a new address: ")
+<<<<<<< HEAD
+    def editemp(self,pilot_list,emp_type):
+        edit_emp_list = []
+        print()
+        ssn = pilot_list[0]
+        #if __checker.checkSSN(ssn):
+        edit_emp_list.append(ssn)
+        name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
+        # self.__checker.checkName(name)
+        edit_emp_list.append(name)
+        role = emp_type.capitalize()
+        #if __checker.checkRole(role)
+        edit_emp_list.append(role)
+        rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
+        #if __checker.checkRank(rank)
+        edit_emp_list.append(rank)
+        if emp_type != "flight attendant":
+            licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
+            #if __checker.checkLicense(licens)
+            edit_emp_list.append(licens)
+        else:
+            licens = "N/A"
+        address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
+        #if __checker.checkAddress(address)
+        edit_emp_list.append(address)
+        mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
+        #if __checker.checkMobile(mobile)
+        edit_emp_list.append(mobile)
+        home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
+        #if __checker.checkHomePhone(home_phone)
+        edit_emp_list.append(home_phone)
+        print(edit_emp_list)
+        input("Press enter to continue...")
+        return edit_emp_list
+        
+
+
+
+=======
+    def enterVariable(self, to_enter):
+        return input("Enter a new {}: ".format(to_enter))
+>>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21

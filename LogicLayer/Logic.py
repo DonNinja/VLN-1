@@ -48,7 +48,17 @@ class LogicAPI():
         pass
 
     def addPlane(self,data_list):
+<<<<<<< HEAD
+        self.__data_getter.registerPlanes(data_list)
+
+    def editPilot(self,ssn):
+        all_emps = self.__data_getter.getEmps()
+        return self.__data_sorter.sortPilotSSN(all_emps, ssn)
+
+        
+=======
         self.__data.registerPlanes(data_list)
+>>>>>>> 94327e09f99e8a282e4a4fb9edac9bcea9d77b21
 
     def updateEmp(self, data, new_data, field):
         self.__data.updateEmp(data, new_data, field)
