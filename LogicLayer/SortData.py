@@ -100,3 +100,11 @@ class SortData:
             if item['flightNumber'] == flight_num_list[0] or item['flightNumber'] == flight_num_list[1]:
                 ret_list.append(item)
         return ret_list
+
+    def flightNumberSorter(self, data, all_trips, new_var, field):
+        ret_list = []
+        for line in all_trips:
+            if line['flightNumber'] == 'NA' + data:
+                if line[field] == 'X':
+                    ret_list.append(new_var)
+        return ret_list

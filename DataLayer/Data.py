@@ -51,5 +51,6 @@ class DataAPI:
     def registerWorkTrip(self,data_list):
         self.__register.registerWorkTrip(data_list)
         ''' Returns a list of every flight '''
-        #return self.__reader.readAllFlights()
 
+    def registerLocation(self, data_list):
+        self.__register.registerLocation(data_list)

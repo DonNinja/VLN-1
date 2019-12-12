@@ -105,9 +105,10 @@ class LogicAPI():
         all_trips = self.__data.getTrips()
         return self.__data_sorter.weekSorter(all_trips, date)
 
-    def UpdateFlightCaptain(self, data, new_var, field):
-        return self.__data_sorter.flightNumberSorter(data,new_var, field)
-        
+    def updateFlightCaptain(self, data, new_var, field):
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.flightNumberSorter(data, all_trips, new_var, field)
+
     def updateFlightAircraftID(self, data, new_var, field):
         self.__data.updateWorkTrip(data, new_var, field)
 
@@ -176,3 +177,16 @@ class LogicAPI():
 #         name = str(input("What is your name? "))
 #         print(name.isalpha()) 
 #         return name.isalpha()
+    def sortPilotByPlane(self):
+        data_list = self.__data.getEmps()
+        return self.__data_sorter.sortOrderByPlane(data_list)
+    
+    def checkFlightNum(self, num):
+        return self.__user_check.checkNum(num)
+    
+    def sortTrips(self, flight_num_list):
+        data_list = self.__data.getTrips()
+        return self.__data_sorter.sortForTrip(flight_num_list, data_list)
+    
+    def addLocation(self, data_list):
+        self.__data.registerLocation(data_list)
