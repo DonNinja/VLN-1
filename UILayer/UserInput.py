@@ -24,7 +24,10 @@ class UserInput:
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
-            return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
+            print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
+            choice = input("\nChoose a plane type: ")
+            planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
+            plane_type = planedict[choice]
         else:
             return "N/A"
 
@@ -154,5 +157,3 @@ class UserInput:
         year = input("Enter year (YYYY): ")
         date = year + "-" + month + "-" + day
         return date
-
-

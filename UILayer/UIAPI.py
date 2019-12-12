@@ -221,3 +221,6 @@ class UIAPI:
         '''Getting work trips for last 7 days'''
         pass
         
+    def showSortPilotsByPlane(self):
+        data_list = self.__logic.sortPilotByPlane()
+        self.__data_printer.printAllEmps(data_list)

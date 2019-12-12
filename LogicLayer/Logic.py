@@ -101,6 +101,9 @@ class LogicAPI():
         all_trips = self.__data.getTrips()
         return self.__data_sorter.dateSorter(all_trips, date)
         
+    def sortPilotByPlane(self):
+        data_list = self.__data.getEmps()
+        return self.__data_sorter.sortOrderByPlane(data_list)
 
 # import re
 # class Employee:

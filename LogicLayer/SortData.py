@@ -64,3 +64,16 @@ class SortData:
             if item_date == date:
                 ret_list.append(item)
         return ret_list
+    
+    def sortOrderByPlane(self, data):
+        ret_list = []
+        for item in data:
+            if item['licence'] == 'NABAE146':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF28':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF100':
+                ret_list.append(item)
+        return ret_list
