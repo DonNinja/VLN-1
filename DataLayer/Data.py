@@ -20,8 +20,7 @@ class DataAPI:
     def getEmps(self):
         """ Calls a function, which returns the complete list of Crew, then it returns that. """
         return self.__reader.readCrew()
-
-
+    
     def getAirplanes(self):
         """ Calls a function, which returns the complete list of Airplanes, then it returns that. """
         return self.__reader.readAircraft()
@@ -47,5 +46,10 @@ class DataAPI:
         return self.__reader.readDestinations()
     
     def getTrips(self):
+        return self.__reader.readPastFlights()
+
+    def registerWorkTrip(self,data_list):
+        self.__register.registerWorkTrip(data_list)
         ''' Returns a list of every flight '''
-        return self.__reader.readAllFlights()
+        #return self.__reader.readAllFlights()
+

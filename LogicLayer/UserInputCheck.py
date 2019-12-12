@@ -172,3 +172,10 @@ class UserInputCheck:
 
     def checkPilotAvailability(self):
         pass
+
+    def checkNum(self, num):
+        try:
+            num = int(num)
+            return True
+        except:
+            return False

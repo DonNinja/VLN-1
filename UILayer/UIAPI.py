@@ -53,11 +53,28 @@ class UIAPI:
         emp = self.__logic.showEmpSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
     
+    def showSpecificTrip(self, flight_num):
+        flight_num_check = self.__logic.checkFlightNum(flight_num)
+        while not(flight_num_check):
+            print("Flight number must be 4 digits")
+            flight_num = input("Enter a flight number (4 digits): ")
+            flight_num_check = self.__logic.checkFlightNum(flight_num)
+        dep_flight_num = "NA" + flight_num
+        ret_flight_num = "NA" + str(int(flight_num) + 1).zfill(4)
+        flight_num_list = [dep_flight_num, ret_flight_num]
+        trip_list = self.__logic.sortTrips(flight_num_list)
+        if len(trip_list) > 0:
+            self.__data_printer.printAllWorkTrips(trip_list)
+            return True
+        else:
+            print("There are no trips with that Flight number.")
+            return False
+
     def showSpecificPilot(self, ssn):
         """ This gets a single pilot and calls the printer to print them out """
         emp = self.__logic.showPilotSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
-    
+
     def showSpecificAttendant(self, ssn):
         """ This gets a single attendant and calls the printer to print them out """
         emp = self.__logic.showAttendantSSN(ssn)
@@ -229,16 +246,22 @@ class UIAPI:
         else:
             return home_phone_num
 
+
+    def showAllWorkTrips(self):
+        """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
+        data_list = self.__logic.showAllWorkTrips()
+        self.__data_printer.printAllWorkTrips(data_list)
+    
+    def addWorkTrip(self):
+        """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
+        data_list = self.__inputter.addWorkTrip()
+        self.__logic.addWorkTrip(data_list)
+
+        
+
     def addLocation(self):
         pass
 
-    def addWorkTrip(self):
-        pass
-    
-    def showAllWorkTrips(self):
-        data_list = self.__logic.showAllWorkTrips()
-        self.__data_printer.printAllWorkTrips(data_list)
-        self.__data_printer.printAllWorkTrips(data_list)
     
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''
@@ -251,11 +274,22 @@ class UIAPI:
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
 
+
+    def showWorkTripsLastWeek(self):
+        '''Getting work trips for last 7 days'''
+        pass
+
+    def checktripinp(self,data):
+        # data = self.__logic.checktripinp(data)
+        return data
+
     def showWorkTripsByWeek(self):
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByWeek(date)
         self.__data_printer.printAllWorkTrips(data_list)
         
+
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
+
