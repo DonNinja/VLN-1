@@ -99,6 +99,10 @@ class LogicAPI():
         '''Gets all trips and sends to get sorted by date input'''
         all_trips = self.__data.getTrips()
         return self.__data_sorter.dateSorter(all_trips, date)
+
+    def addWorkTrip(self,data_list):
+        self.__data.registerWorkTrip(data_list)
+
     
     def showWorkTripsByWeek(self, date):
         all_trips = self.__data.getTrips()
