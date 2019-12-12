@@ -1,10 +1,5 @@
 import dateutil
 import datetime
-<<<<<<< HEAD
-from datetime import time
-=======
-
->>>>>>> d79619c7ef5d93c971daf64246b7e42b1676b110
 class SortData:
     def __init__(self):
         pass
@@ -73,10 +68,6 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-<<<<<<< HEAD
-    
-        
-=======
     def weekSorter(self, data , start_date):
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
@@ -89,4 +80,3 @@ class SortData:
                     ret_list.append(item)
             date_obj += datetime.timedelta(days=1)
         return ret_list
->>>>>>> d79619c7ef5d93c971daf64246b7e42b1676b110

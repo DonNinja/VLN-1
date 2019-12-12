@@ -342,7 +342,7 @@ class UserUI:
         self.__ui_api.addPlane()
 
     def showPilotsSortedByPlanes(self):
-        pass
+        self.__ui_api.showSortPilotsByPlane()
 
     def showPilotsForPlaneType(self, plane_type):
         # ShowPilotsForSpecificPlane
