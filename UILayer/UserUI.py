@@ -369,8 +369,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Work trips screen")
-            choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.showEmpsWorkTrips, "B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", "4 - Edit Work Trip", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.showEmpsWorkTrips,"4" : self.whileEditingWorkTripsScreen , "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -432,3 +432,57 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+                
+    def whileEditingWorkTripsScreen(self):
+        ''' This screen shows the user what choices he has for editing work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Edit work trips screen")
+            choice_list = ["1 - Add Aircraft", "2 - Add Pilot", "3 - Add Cabincrew", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.addPilotToWorkTrip, "3" : self.addCCToWorkTrip,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+
+    def addPilotToWorkTrip(self):
+        ''' This screen shows the user what choices he has for adding pilot/s to work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Add pilot to work trip screen")
+            choice_list = ["1 - Add Captain", "2 - Add Copilot",BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+        pass
+
+    def addCCToWorkTrip(self):
+        ''' This screen shows the user what choices he has for adding Cabincrew to work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Add pilot to work trip screen")
+            choice_list = ["1 - Add Service Manager", "2 - Add Flight Attendant",BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+        pass
+        
