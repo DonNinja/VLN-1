@@ -108,10 +108,9 @@ class UIAPI:
         data_list.append(self.checkAddress(role))
         data_list.append(self.checkMobile(role))
         data_list.append(self.checkHomenum(role))
-        #
-        #
-        #
-        self.__logic.addEmpLL(data_list)
+        self.__logic.addEmpLL(data_list) #List with all of the employee info
+
+    
 
     def checkSSN(self, emp_type): #Virkar
         """ This checks if SSN is in valid format """
@@ -144,7 +143,6 @@ class UIAPI:
             rank_input = self.__inputter.addEmpRank(emp_type)
             rank = self.__logic.checkRank(rank_input, emp_type)
         else:
-            print(rank)
             return rank
 
     def checkEmail(self, emp_type):
@@ -175,7 +173,6 @@ class UIAPI:
             address_input = self.__inputter.addEmpAddress(emp_type)
             address = self.__logic.checkAddress(address_input)
         else:
-            print(address)
             return address
 
     def checkMobile(self, emp_type): # Virkar
@@ -184,7 +181,6 @@ class UIAPI:
         while not(self.__logic.checkPhone(mobile)):
             mobile = self.__inputter.addEmpMobile(emp_type)
         else:
-            print(mobile)
             return mobile
 
     def checkHomenum(self,emp_type): # Virkar
@@ -194,7 +190,6 @@ class UIAPI:
             mobile = self.__inputter.addEmpHomePhone(emp_type)
 
         else:
-            print(home_phone_num)
             return home_phone_num
 
     def addLocation(self):
