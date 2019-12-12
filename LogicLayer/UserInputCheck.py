@@ -65,7 +65,10 @@ class UserInputCheck:
                 licens = LICENSE_NABAE146
                 return licens
             if licens != '1' or '2' or '3':
+                print("Must be 1, 2 or 3")
                 return False
+        else:
+           print("Must be 1, 2 or 3")
 
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
@@ -98,8 +101,10 @@ class UserInputCheck:
                 rank = FLIGHTSMANAGER
                 return rank
             if rank != '1' or '2':
+                print("Must be 1 or 2")
                 return False
-
+        else:
+            print("Must be 1 or 2")
 
     def checkAddress(self, address):
         """ This forwards to a check function """
