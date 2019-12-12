@@ -53,11 +53,7 @@ class UserInputCheck:
     def checkLicens(self, licens):
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
-
             return licens
-
-        return licens
-
         if self.digitCheck(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100
@@ -177,3 +173,10 @@ class UserInputCheck:
 
     def checkPilotAvailability(self):
         pass
+
+    def checkNum(self, num):
+        try:
+            num = int(num)
+            return True
+        except:
+            return False
