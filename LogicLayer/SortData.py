@@ -38,7 +38,7 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
+            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     
@@ -65,6 +65,18 @@ class SortData:
             if item_date == date:
                 ret_list.append(item)
         return ret_list
+    
+    def sortOrderByPlane(self, data):
+        ret_list = []
+        for item in data:
+            if item['licence'] == 'NABAE146':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF28':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF100':
+                ret_list.append(item)
 
     def weekSorter(self, data , start_date):
         ret_list = []

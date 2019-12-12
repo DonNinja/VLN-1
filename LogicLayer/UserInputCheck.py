@@ -14,20 +14,27 @@ class UserInputCheck:
     def checkSSN(self, ssn, data):
         """ This checks for multiple varies of SSN """
         # check_data = self.checking_if_in_data(data, ssn)
-        check_int = self.digitCheck(ssn)
-        check_len = self.lenSSN(ssn)
-        check_date = self.dateCheckSSN(ssn)
+        error_list = []
+        check_int, int_error = self.digitCheck(ssn)
+        check_len, length_error = self.lenSSN(ssn)
+        check_date, date_error = self.dateCheckSSN(ssn)
+        if int_error:
+            error_list.append(int_error)
+        if length_error:
+            error_list.append(length_error)
+        if date_error:
+            error_list.append(date_error)
         if check_int and check_len and check_date:# and check_data:
-            return True
-        return False
+            return True, None
+        return False, error_list
     
     def checkName(self,name):
         """ This forwards to a function for check """
-        check = self.nameCheck(name)
+        check, error_msg = self.nameCheck(name)
         if check:
-            return check
+            return check, None
         else:
-            return False
+            return False, error_msg
 
     def checkPhone(self, num):
         """ This checks if phonenum is ints and checks length of list """
@@ -38,10 +45,9 @@ class UserInputCheck:
                 for i in line:
                     list_num.append(i)
         if len(list_num) == 7:
-            return True
+            return True, None
         else:
-            print("Not a valid phone number")
-            return False
+            return False, "Phone number must be 7 numbers"
 
 
     def checkLicens(self, licens):
@@ -59,7 +65,10 @@ class UserInputCheck:
                 licens = LICENSE_NABAE146
                 return licens
             if licens != '1' or '2' or '3':
+                print("Must be 1, 2 or 3")
                 return False
+        else:
+           print("Must be 1, 2 or 3")
 
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
@@ -69,13 +78,11 @@ class UserInputCheck:
                 email_list.append(ch)
         if email.isalnum():
             if len(email_list) < 20:
-                return email
+                return email + "@NaNAir.is", None
             else:
-                print("Email is in wrong format")
-                return False
+                return False, "Email is too long, must be under 20 characters"
         else:
-            print("Email is in wrong format")
-            return False
+            return False, "Email can not be only numbers, or includes forbidden characters"
        
 
     def checkRank(self, rank, role):
@@ -94,26 +101,27 @@ class UserInputCheck:
                 rank = FLIGHTSMANAGER
                 return rank
             if rank != '1' or '2':
+                print("Must be 1 or 2")
                 return False
-
+        else:
+            print("Must be 1 or 2")
 
     def checkAddress(self, address):
         """ This forwards to a check function """
-        check = self.addressCheck(address)
+        check, error_msg = self.addressCheck(address)
         if check:
-            return check
+            return check, None
         else:
-            return False
+            return False, error_msg
 
     def digitCheck(self, data):
         """ This checks for int """
         try:
             [str(int(i)) for i in data.split()]
-            return True
+            return True, None
         except:
             ValueError
-            print('Error, only numbers allowed')
-            return False
+            return False, 'Error, only numbers allowed'
 
     def lenSSN(self, check):
         """ This checks length of SSN """
@@ -122,16 +130,16 @@ class UserInputCheck:
             for i in row:
                 list_ssn.append(i)
         if len(list_ssn) == 10:
-            return True
+            return True, None
+        else:
+            return False, "It's too long or too short, must be 10 characters."
 
     def dateCheckSSN(self, ssn):
-        """ This checks if SSN is valid """
+        """ This checks if SSN date is valid """
         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
-            print("SSN is valid")
-            return True
+            return True, None
         else:
-            print("SSN is invalid")
-            return False
+            return False, "The date is invalid."
 
     def addressCheck(self, address):
         """ This splits adress in two parts, checks if alpha in [0], checks int in [-1] """
@@ -141,15 +149,12 @@ class UserInputCheck:
         full_address = ''
         if first_address.isalpha() and digit_address.isdigit():
             if first_address == digit_address:
-                print("Address is invalid")
-                return False
+                return False, "First and last address can not be same"
             else:
                 full_address = first_address.capitalize() + " " + digit_address 
-                print("Address is valid")  
-                return full_address
+                return full_address, None
         else:
-            print("Address is invalid")
-            return False
+            return False, "Invalid address (example: Fellsmuli 20)"
 
     def nameCheck(self, name):
         """ This splits name and checks in two parts (only takes first and last name) only alpha """
@@ -159,15 +164,12 @@ class UserInputCheck:
         full_name = ''
         if first_name.isalpha() and last_name.isalpha():
             if first_name == last_name:
-                print("Name is invalid")
-                return False
+                return False, "First and last name can not be the same"
             else:
                 full_name = first_name.capitalize() + " " + last_name.capitalize() 
-                print("Name is valid")  
-                return full_name
+                return full_name, None
         else:
-            print("Name is invalid")
-            return False
+            return False, "Names must be all letters"
 
     def checkPilotAvailability(self):
         pass
