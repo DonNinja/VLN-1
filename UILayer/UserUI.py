@@ -422,7 +422,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Filter work trips screen")
             choice_list = ["1 - Show All Trips", "2 - Show For Day", "3 - Show For Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.showAllWorkTrips, "2" :self.__ui_api.showWorkTripsByDay, "3" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showAllWorkTrips, "2" :self.__ui_api.showWorkTripsByDay, "3" : self.__ui_api.showWorkTripsByWeek, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
@@ -432,6 +432,3 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-
-
-    

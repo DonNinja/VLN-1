@@ -1,4 +1,5 @@
 import dateutil
+import datetime
 
 class SortData:
     def __init__(self):
@@ -76,4 +77,16 @@ class SortData:
         for item in data:
             if item['licence'] == 'NAFokkerF100':
                 ret_list.append(item)
+
+    def weekSorter(self, data , start_date):
+        ret_list = []
+        date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        for i in range(8):
+            i = i
+            for item in data:
+                parsed_item_date = dateutil.parser.parse(item['departure'])
+                item_date = str(parsed_item_date.date())
+                if item_date == str(date_obj.date()):
+                    ret_list.append(item)
+            date_obj += datetime.timedelta(days=1)
         return ret_list

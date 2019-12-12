@@ -95,11 +95,16 @@ class LogicAPI():
         ''' This gets a list of all work trips, then calls a function that only returns the flights including the SSN '''
         all_trips = self.__data.getTrips()
         return self.__data_sorter.sortEmpTrips(all_trips, ssn)
-
+        
     def showWorkTripsByDay(self, date):
-        '''Shows work trips by day'''
+        '''Gets all trips and sends to get sorted by date input'''
         all_trips = self.__data.getTrips()
         return self.__data_sorter.dateSorter(all_trips, date)
+    
+    def showWorkTripsByWeek(self, date):
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.weekSorter(all_trips, date)
+        
         
     def sortPilotByPlane(self):
         data_list = self.__data.getEmps()

@@ -76,6 +76,13 @@ class UIAPI:
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
+        address = self.__logic.checkAddress(new_var)
+        while not(address):
+            new_var = self.__inputter.enterVariable('address')
+            address = self.__logic.checkAddress(new_var)
+        else:
+            print(address)
+            return address
         self.__logic.updateEmp(data, new_var, 'address')
         self.showSpecificEmp(data['ssn'])
     
@@ -217,9 +224,10 @@ class UIAPI:
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
 
-    def showWorkTripsLastWeek(self):
-        '''Getting work trips for last 7 days'''
-        pass
+    def showWorkTripsByWeek(self):
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByWeek(date)
+        self.__data_printer.printAllWorkTrips(data_list)
         
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
