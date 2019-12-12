@@ -55,10 +55,10 @@ class LogicAPI():
         self.__data.registerNewEmp(data_list)
 
     def addPlane(self,data_list):
-        self.__data_getter.registerPlanes(data_list)
+        self.__data.registerPlanes(data_list)
 
     def editPilot(self,ssn):
-        all_emps = self.__data_getter.getEmps()
+        all_emps = self.__data.getEmps()
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
     def checkSSN(self, ssn, data):
@@ -90,6 +90,24 @@ class LogicAPI():
     def showAllWorkTrips(self):
         """ This gets a list of every work trip and returns it """
         return self.__data.getTrips()
+    
+    def showEmpsWorkTrips(self, ssn):
+        ''' This gets a list of all work trips, then calls a function that only returns the flights including the SSN '''
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.sortEmpTrips(all_trips, ssn)
+
+    def showWorkTripsByDay(self, date):
+        '''Shows work trips by day'''
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.dateSorter(all_trips, date)
+
+    def addWorkTrip(self,data_list):
+        self.__data.registerWorkTrip(data_list)
+
+    def checktripinp(self,data):
+        data = self.__data_sorter.sortflightduration(data)
+        return data
+        
 
         
 

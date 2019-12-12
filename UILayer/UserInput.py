@@ -1,3 +1,4 @@
+import datetime
 
 class UserInput:
     def __init__(self):
@@ -24,8 +25,7 @@ class UserInput:
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
-            print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
-            return input("\nChoose a plane license: ")
+            return input("Enter {}'s license, 1 for NAFokkerF100, 2 for NAFokkerF28, 3 for NABAE146: ".format(emp_type)).capitalize()
         else:
             return "N/A"
 
@@ -46,7 +46,7 @@ class UserInput:
         loc_data_list.append(loc_airport_name)
         loc_flight_time_hours = input("\nEnter the new location's flight time (Hours): ")
         loc_flight_time_mins = input("\nEnter the new location's flight time (Minutes): ")
-        loc_flight_time = '.'.join(loc_flight_time_hours, loc_flight_time_mins)
+        loc_flight_time = '.'.join([loc_flight_time_hours, loc_flight_time_mins])
         loc_data_list.append(loc_flight_time)
         loc_distance = input("\nEnter the distance from Iceland (Kilometers): ")
         loc_data_list.append(loc_distance)
@@ -64,32 +64,48 @@ class UserInput:
     
     def addWorkTrip(self):
         work_trip_data_list = []
-        work_destination = input("\nEnter a destination: ")
+        work_destination = input("\nDeparting from: ")
         work_trip_data_list.append(work_destination)
 
-        work_departure_date = input("Enter a departure date (DD/MM/YYYY): ")
+        work_departure_date = input("arriving at: ")
+
+        if work_departure_date == "LYR":
+            flight_time = datetime.timedelta(hours=2,minutes=53)
+        elif work_departure_date == "GOH":
+            flight_time = datetime.timedelta(hours=2,minutes=9)
+        elif work_departure_date == "KUS":
+            flight_time = datetime.timedelta(hours=1,minutes=20)
+        elif work_departure_date == "FAE":
+            flight_time = datetime.timedelta(hours=1,minutes=26)
+        elif work_departure_date == "LWK":
+            flight_time = datetime.timedelta(hours=1,minutes=53)
+        else:
+            print("invalid")
+
         work_trip_data_list.append(work_departure_date)
-        work_departure_time = input("\nEnter a departure time (hh:mm): ")
-        work_trip_data_list.append(work_departure_time)
+        work_departure_time = input("\nEnter a departure time (YYYY-MM-DD HH:MM:SS): ")
+        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+        work_trip_data_list.append(dep_time_obj)
+        
+
+        work_arrival_time = dep_time_obj
+        arr_time_obj = work_arrival_time + flight_time
+        work_trip_data_list.append(arr_time_obj)
+
+        planeID = input("Enter planeID: ")
+        work_trip_data_list.append(planeID)
 
         work_pilot_ssn = input("Enter the Pilot's SSN: ")
         work_trip_data_list.append(work_pilot_ssn)
         work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
         work_trip_data_list.append(work_copilot_ssn)
-        more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
-        while more_pilots == "Y":
-            work_extra_pilot_ssn = input("\nEnter another pilot's SSN")
-            work_trip_data_list.append(work_extra_pilot_ssn)
-            more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
+
         work_attendant = input("\nEnter a flight attendant's SSN: ")
         work_trip_data_list.append(work_attendant)
-        more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
-        while more_attendants == "Y":
-            work_extra_attendant_ssn = input("\nEnter another flight attendant's SSN: ")
-            more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
-            work_trip_data_list.append(work_extra_attendant_ssn)
+        work_trip_data_list.append(flight_time)
         print(work_trip_data_list)
         input("\nPress enter to continue...")
+
         return work_trip_data_list
 
     def addPlane(self):
@@ -148,6 +164,12 @@ class UserInput:
         input("Press enter to continue...")
         return edit_emp_list
         
-
+    def askForDate(self):
+        '''Asking for a specific date to show work trips by day'''
+        day = input("Enter day (DD): ")
+        month = input("Enter month (MM): ")
+        year = input("Enter year (YYYY): ")
+        date = year + "-" + month + "-" + day
+        return date
 
 

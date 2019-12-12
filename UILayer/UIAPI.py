@@ -152,7 +152,7 @@ class UIAPI:
         email_input = self.__inputter.addEmpEmail(emp_type)
         email = self.__logic.checkEmail(email_input)
         while not(email):
-            email_input = self.__inputter.addEmpAddress(emp_type)
+            email_input = self.__inputter.addEmpEmail(emp_type)
             email = self.__logic.checkEmail(email_input)
         else:
             return email
@@ -165,7 +165,6 @@ class UIAPI:
             licens_input = self.__inputter.addEmpLicens(emp_type)
             licens = self.__logic.checkLicens(licens_input)
         else:
-            print(licens)
             return licens
 
     def checkAddress(self, emp_type): #Virkar 
@@ -192,13 +191,12 @@ class UIAPI:
         """ This checks if number is only digit and length of 7 """
         home_phone_num = self.__inputter.addHomePhone(emp_type)
         while not(self.__logic.checkPhone(home_phone_num)):
-            mobile = self.__inputter.addEmpHomePhone(emp_type)
-
+            home_phone_num = self.__inputter.addHomePhone(emp_type)
         else:
             print(home_phone_num)
             return home_phone_num
 
-<<<<<<< HEAD
+
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
@@ -207,15 +205,31 @@ class UIAPI:
     def addWorkTrip(self):
         """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
         data_list = self.__inputter.addWorkTrip()
+        self.__logic.addWorkTrip(data_list)
+
         
-=======
+
     def addLocation(self):
         pass
 
-    def addWorkTrip(self):
-        pass
     
-    def showAllWorkTrips(self):
-        data_list = self.__logic.showAllWorkTrips()
+    def showEmpsWorkTrips(self, ssn):
+        ''' This calls a function print out work trips that are included in the data list '''
+        data_list = self.__logic.showEmpsWorkTrips(ssn)
         self.__data_printer.printAllWorkTrips(data_list)
->>>>>>> 1b9734f83ddafb5f0cd233bc0b19ad718aa54de6
+
+    def showWorkTripsByDay(self):
+        '''Getting work trips by day '''
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByDay(date)
+        self.__data_printer.printAllWorkTrips(data_list)
+
+    def showWorkTripsLastWeek(self):
+        '''Getting work trips for last 7 days'''
+        pass
+
+    def checktripinp(self,data):
+        data1 = self.__logic.checktripinp(data)
+        return data1
+        
+

@@ -1,3 +1,6 @@
+import dateutil
+import datetime
+from datetime import time
 class SortData:
     def __init__(self):
         pass
@@ -48,4 +51,23 @@ class SortData:
         return ret_list
 
     def sortworkTripNumber(self):
+        pass
+    
+    def sortEmpTrips(self, data_list, ssn):
+        ret_list = []
+        for item in data_list:
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+                ret_list.append(item)
+        return ret_list
+
+    def dateSorter(self, data, date):
+        ret_list = []
+        for item in data:
+            parsed_item_date = dateutil.parser.parse(item['departure'])
+            item_date = str(parsed_item_date.date())
+            if item_date == date:
+                ret_list.append(item)
+        return ret_list
+
+    
         
