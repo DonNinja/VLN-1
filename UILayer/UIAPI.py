@@ -86,8 +86,15 @@ class UIAPI:
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
         else:
+<<<<<<< HEAD
             self.__logic.updateEmp(data, address, 'address')
             self.showSpecificEmp(data['ssn'])
+=======
+            print(address)
+            return address
+        self.__logic.updateEmp(data, new_var, 'address')
+        self.showSpecificEmp(data['ssn'])
+>>>>>>> cfa55eca0353fad58fe99a010ced54d36e1c8758
     
     def editHomePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
@@ -227,4 +234,25 @@ class UIAPI:
     
     def showAllWorkTrips(self):
         data_list = self.__logic.showAllWorkTrips()
+<<<<<<< HEAD
         self.__data_printer.printAllWorkTrips(data_list)
+=======
+        self.__data_printer.printAllWorkTrips(data_list)
+    
+    def showEmpsWorkTrips(self, ssn):
+        ''' This calls a function print out work trips that are included in the data list '''
+        data_list = self.__logic.showEmpsWorkTrips(ssn)
+        self.__data_printer.printAllWorkTrips(data_list)
+
+    def showWorkTripsByDay(self):
+        '''Getting work trips by day '''
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByDay(date)
+        self.__data_printer.printAllWorkTrips(data_list)
+
+    def showWorkTripsByWeek(self):
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByWeek(date)
+        self.__data_printer.printAllWorkTrips(data_list)
+        
+>>>>>>> cfa55eca0353fad58fe99a010ced54d36e1c8758
