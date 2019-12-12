@@ -53,11 +53,28 @@ class UIAPI:
         emp = self.__logic.showEmpSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
     
+    def showSpecificTrip(self, flight_num):
+        flight_num_check = self.__logic.checkFlightNum(flight_num)
+        while not(flight_num_check):
+            print("Flight number must be 4 digits")
+            flight_num = input("Enter a flight number (4 digits): ")
+            flight_num_check = self.__logic.checkFlightNum(flight_num)
+        dep_flight_num = "NA" + flight_num
+        ret_flight_num = "NA" + str(int(flight_num) + 1).zfill(4)
+        flight_num_list = [dep_flight_num, ret_flight_num]
+        trip_list = self.__logic.sortTrips(flight_num_list)
+        if len(trip_list) > 0:
+            self.__data_printer.printAllWorkTrips(trip_list)
+            return True
+        else:
+            print("There are no trips with that Flight number.")
+            return False
+
     def showSpecificPilot(self, ssn):
         """ This gets a single pilot and calls the printer to print them out """
         emp = self.__logic.showPilotSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
-    
+
     def showSpecificAttendant(self, ssn):
         """ This gets a single attendant and calls the printer to print them out """
         emp = self.__logic.showAttendantSSN(ssn)
@@ -238,7 +255,6 @@ class UIAPI:
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
         self.__data_printer.printAllWorkTrips(data_list)
-        self.__data_printer.printAllWorkTrips(data_list)
     
     def addWorkTrip(self):
         """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
@@ -268,10 +284,8 @@ class UIAPI:
         pass
 
     def checktripinp(self,data):
-        data1 = self.__logic.checktripinp(data)
-        return data1
-        
-
+        # data = self.__logic.checktripinp(data)
+        return data
 
     def showWorkTripsByWeek(self):
         date = self.__inputter.askForDate()

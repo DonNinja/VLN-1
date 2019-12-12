@@ -64,6 +64,7 @@ class UserInput:
         ssn = input("\nEnter a{}'s SSN: ".format(emp_type))
         #Check hvort að kennitalan tilheyri einhverjum starfsmanni
         return ssn
+
     
     def addWorkTrip(self):
         work_trip_data_list = []

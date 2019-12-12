@@ -102,7 +102,6 @@ class LogicAPI():
 
     def addWorkTrip(self,data_list):
         self.__data.registerWorkTrip(data_list)
-
     
     def showWorkTripsByWeek(self, date):
         all_trips = self.__data.getTrips()
@@ -114,3 +113,10 @@ class LogicAPI():
     def sortPilotByPlane(self):
         data_list = self.__data.getEmps()
         return self.__data_sorter.sortOrderByPlane(data_list)
+    
+    def checkFlightNum(self, num):
+        return self.__user_check.checkNum(num)
+    
+    def sortTrips(self, flight_num_list):
+        data_list = self.__data.getTrips()
+        return self.__data_sorter.sortForTrip(flight_num_list, data_list)
