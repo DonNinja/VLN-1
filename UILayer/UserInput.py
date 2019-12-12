@@ -45,7 +45,7 @@ class UserInput:
         loc_data_list.append(loc_airport_name)
         loc_flight_time_hours = input("\nEnter the new location's flight time (Hours): ")
         loc_flight_time_mins = input("\nEnter the new location's flight time (Minutes): ")
-        loc_flight_time = '.'.join(loc_flight_time_hours, loc_flight_time_mins)
+        loc_flight_time = '.'.join([loc_flight_time_hours, loc_flight_time_mins])
         loc_data_list.append(loc_flight_time)
         loc_distance = input("\nEnter the distance from Iceland (Kilometers): ")
         loc_data_list.append(loc_distance)
@@ -147,6 +147,12 @@ class UserInput:
         input("Press enter to continue...")
         return edit_emp_list
         
-
+    def askForDate(self):
+        '''Asking for a specific date to show work trips by day'''
+        day = input("Enter day (DD): ")
+        month = input("Enter month (MM): ")
+        year = input("Enter year (YYYY): ")
+        date = year + "-" + month + "-" + day
+        return date
 
 
