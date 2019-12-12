@@ -81,7 +81,7 @@ class UIAPI:
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
-        address, error_msg = self.__logic.checkAddress(new_var)
+        address = self.__logic.checkAddress(new_var)
         while not(address):
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
@@ -120,8 +120,6 @@ class UIAPI:
         else:
             self.__logic.updateEmp(data, licens, 'licence')
             self.showSpecificEmp(data['ssn'])
-        
-
     
     def addEmp(self, role):
         """ This add all items to list after they pass checks """
@@ -136,8 +134,6 @@ class UIAPI:
         data_list.append(self.checkMobile(role))
         data_list.append(self.checkHomenum(role))
         self.__logic.addEmpLL(data_list) #List with all of the employee info
-
-    
 
     def checkSSN(self, emp_type): #Virkar
         """ This checks if SSN is in valid format """
