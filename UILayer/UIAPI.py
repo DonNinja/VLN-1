@@ -70,31 +70,65 @@ class UIAPI:
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('email')
-        self.__logic.updateEmp(data, new_var, 'email')
-        self.showSpecificEmp(data['ssn'])
+        email = self.__logic.checkEmail(new_var)
+        while not(email):
+            new_var = self.__inputter.enterVariable('email')
+            email = self.__logic.checkEmail(new_var)
+        else:
+            self.__logic.updateEmp(data, new_var, 'email')
+            self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
+        address = self.__logic.checkAddress(new_var)
+        while not(address):
+            new_var = self.__inputter.enterVariable('address')
+            address = self.__logic.checkAddress(new_var)
+        else:
+<<<<<<< HEAD
+            self.__logic.updateEmp(data, address, 'address')
+            self.showSpecificEmp(data['ssn'])
+=======
+            print(address)
+            return address
         self.__logic.updateEmp(data, new_var, 'address')
         self.showSpecificEmp(data['ssn'])
+>>>>>>> cfa55eca0353fad58fe99a010ced54d36e1c8758
     
     def editHomePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('home phone number')
-        self.__logic.updateEmp(data, new_var, 'homephonenumber')
-        self.showSpecificEmp(data['ssn'])
+        phone_check = self.__logic.checkPhone(new_var)
+        while not(phone_check):
+            new_var = self.__inputter.enterVariable('home phone number')
+            phone_check = self.__logic.checkPhone(new_var)
+        else:
+            self.__logic.updateEmp(data, new_var, 'homephonenumber')
+            self.showSpecificEmp(data['ssn'])
     
     def editMobilePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('mobile phone number')
-        self.__logic.updateEmp(data, new_var, 'mobilephonenumber')
-        self.showSpecificEmp(data['ssn'])
+        phone_check = self.__logic.checkPhone(new_var)
+        while not(phone_check):
+            new_var = self.__inputter.enterVariable('mobile phone number')
+            phone_check = self.__logic.checkPhone(new_var)
+        else:
+            self.__logic.updateEmp(data, new_var, 'mobilephonenumber')
+            self.showSpecificEmp(data['ssn'])
     
     def editLicense(self, data):
-        new_var = self.__inputter.enterVariable('plane license')
-        self.__logic.updateEmp(data, new_var, 'licence')
-        self.showSpecificEmp(data['ssn'])
+        new_var = self.__inputter.addEmpLicens('plane license')
+        licens = self.__logic.checkLicens(new_var)
+        while not(licens):
+            new_var = self.__inputter.addEmpLicens('plane license')
+            licens = self.__logic.checkLicens(new_var)
+        else:
+            self.__logic.updateEmp(data, licens, 'licence')
+            self.showSpecificEmp(data['ssn'])
+        
+
     
     def addEmp(self, role):
         """ This add all items to list after they pass checks """
@@ -108,10 +142,9 @@ class UIAPI:
         data_list.append(self.checkAddress(role))
         data_list.append(self.checkMobile(role))
         data_list.append(self.checkHomenum(role))
-        #
-        #
-        #
-        self.__logic.addEmpLL(data_list)
+        self.__logic.addEmpLL(data_list) #List with all of the employee info
+
+    
 
     def checkSSN(self, emp_type): #Virkar
         """ This checks if SSN is in valid format """
@@ -144,7 +177,6 @@ class UIAPI:
             rank_input = self.__inputter.addEmpRank(emp_type)
             rank = self.__logic.checkRank(rank_input, emp_type)
         else:
-            print(rank)
             return rank
 
     def checkEmail(self, emp_type):
@@ -175,7 +207,6 @@ class UIAPI:
             address_input = self.__inputter.addEmpAddress(emp_type)
             address = self.__logic.checkAddress(address_input)
         else:
-            print(address)
             return address
 
     def checkMobile(self, emp_type): # Virkar
@@ -184,22 +215,24 @@ class UIAPI:
         while not(self.__logic.checkPhone(mobile)):
             mobile = self.__inputter.addEmpMobile(emp_type)
         else:
-            print(mobile)
             return mobile
 
     def checkHomenum(self,emp_type): # Virkar
         """ This checks if number is only digit and length of 7 """
         home_phone_num = self.__inputter.addHomePhone(emp_type)
         while not(self.__logic.checkPhone(home_phone_num)):
-            home_phone_num = self.__inputter.addHomePhone(emp_type)
+            mobile = self.__inputter.addEmpHomePhone(emp_type)
+
         else:
-            print(home_phone_num)
             return home_phone_num
 
 
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
+<<<<<<< HEAD
+        self.__data_printer.printAllWorkTrips(data_list)
+=======
         self.__data_printer.printAllWorkTrips(data_list)
     
     def addWorkTrip(self):
@@ -224,6 +257,7 @@ class UIAPI:
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
 
+<<<<<<< HEAD
     def showWorkTripsLastWeek(self):
         '''Getting work trips for last 7 days'''
         pass
@@ -233,3 +267,11 @@ class UIAPI:
         return data1
         
 
+=======
+    def showWorkTripsByWeek(self):
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showWorkTripsByWeek(date)
+        self.__data_printer.printAllWorkTrips(data_list)
+        
+>>>>>>> cfa55eca0353fad58fe99a010ced54d36e1c8758
+>>>>>>> d79619c7ef5d93c971daf64246b7e42b1676b110

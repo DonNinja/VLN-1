@@ -1,6 +1,10 @@
 import dateutil
 import datetime
+<<<<<<< HEAD
 from datetime import time
+=======
+
+>>>>>>> d79619c7ef5d93c971daf64246b7e42b1676b110
 class SortData:
     def __init__(self):
         pass
@@ -38,7 +42,7 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
+            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     
@@ -69,5 +73,20 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
+<<<<<<< HEAD
     
         
+=======
+    def weekSorter(self, data , start_date):
+        ret_list = []
+        date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        for i in range(8):
+            i = i
+            for item in data:
+                parsed_item_date = dateutil.parser.parse(item['departure'])
+                item_date = str(parsed_item_date.date())
+                if item_date == str(date_obj.date()):
+                    ret_list.append(item)
+            date_obj += datetime.timedelta(days=1)
+        return ret_list
+>>>>>>> d79619c7ef5d93c971daf64246b7e42b1676b110

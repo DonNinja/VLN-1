@@ -58,6 +58,7 @@ class UserInput:
         return loc_data_list
 
     def enterSSN(self, emp_type):
+        print("hæ")
         ssn = input("\nEnter a{}'s SSN: ".format(emp_type))
         #Check hvort að kennitalan tilheyri einhverjum starfsmanni
         return ssn
@@ -171,5 +172,6 @@ class UserInput:
         year = input("Enter year (YYYY): ")
         date = year + "-" + month + "-" + day
         return date
+
 
 
