@@ -13,13 +13,20 @@ class UserInputCheck:
 
     def checkSSN(self, ssn, data):
         """ This checks for multiple varies of SSN """
-        # check_data = self.checking_if_in_data(data, ssn)
         check_int = self.digitCheck(ssn)
         check_len = self.lenSSN(ssn)
         check_date = self.dateCheckSSN(ssn)
-        if check_int and check_len and check_date:# and check_data:
+        #check_ssn = self.checkingSSN(data, ssn)
+        if check_int and check_len and check_date: # and checkingSSN:
             return True
-        return False
+        else:
+            return False
+
+
+# def checkingSSN(self, data, ssn):
+#     for line in data:
+#         if line['ssn'] == ssn:
+#             return False
     
     def checkName(self,name):
         """ This forwards to a function for check """
@@ -27,6 +34,7 @@ class UserInputCheck:
         if check:
             return check
         else:
+            print("Name not in the right format")
             return False
 
     def checkPhone(self, num):
@@ -47,13 +55,8 @@ class UserInputCheck:
     def checkLicens(self, licens):
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
-<<<<<<< HEAD
-                return licens
-        if self.digit_check(licens):
-=======
             return licens
         if self.digitCheck(licens):
->>>>>>> e2948b863770372bce1e8fe5c647fc19714748c5
             if licens == '1':
                 licens = LICENSE_FOKKER100
                 return licens
@@ -64,7 +67,10 @@ class UserInputCheck:
                 licens = LICENSE_NABAE146
                 return licens
             if licens != '1' or '2' or '3':
+                print("Must be 1, 2 or 3")
                 return False
+        else:
+           print("Must be 1, 2 or 3")
 
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
@@ -76,10 +82,10 @@ class UserInputCheck:
             if len(email_list) < 20:
                 return email
             else:
-                print("Email is in wrong format")
+                print("Email is in the wrong format")
                 return False
         else:
-            print("Email is in wrong format")
+            print("Email is in the wrong format")
             return False
        
 
@@ -99,8 +105,10 @@ class UserInputCheck:
                 rank = FLIGHTSMANAGER
                 return rank
             if rank != '1' or '2':
+                print("Must be 1 or 2")
                 return False
-
+        else:
+            print("Must be 1 or 2")
 
     def checkAddress(self, address):
         """ This forwards to a check function """
@@ -108,6 +116,7 @@ class UserInputCheck:
         if check:
             return check
         else:
+            print("Address is not in the right format")
             return False
 
     def digitCheck(self, data):
@@ -117,7 +126,6 @@ class UserInputCheck:
             return True
         except:
             ValueError
-            print('Error, only numbers allowed')
             return False
 
     def lenSSN(self, check):
@@ -149,11 +157,9 @@ class UserInputCheck:
                 print("Address is invalid")
                 return False
             else:
-                full_address = first_address.capitalize() + " " + digit_address 
-                print("Address is valid")  
+                full_address = first_address.capitalize() + " " + digit_address  
                 return full_address
         else:
-            print("Address is invalid")
             return False
 
     def nameCheck(self, name):
@@ -164,25 +170,13 @@ class UserInputCheck:
         full_name = ''
         if first_name.isalpha() and last_name.isalpha():
             if first_name == last_name:
-                print("Name is invalid")
                 return False
             else:
                 full_name = first_name.capitalize() + " " + last_name.capitalize() 
                 print("Name is valid")  
                 return full_name
         else:
-            print("Name is invalid")
             return False
-<<<<<<< HEAD
-                
-
-
-
-
-
-    def addLocationCountry(self):
-=======
 
     def checkPilotAvailability(self):
->>>>>>> e2948b863770372bce1e8fe5c647fc19714748c5
         pass
