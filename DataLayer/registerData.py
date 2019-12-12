@@ -25,15 +25,14 @@ class RegisterData:
         """ This gets a data list from the user and writes a new plane into the Aircraft.csv file with the data in the list """
         self.insignia = data_list[0]
         self.planeID = data_list[1]
-
-        with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the plane into it
+        with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as file_stream:
+            # This opens the file and inserts the plane into it
             newFileWriter = csv.writer(file_stream)
             newFileWriter.writerow([self.planeID,self.insignia])
         file_stream.close()
 
-    def registerWorkTrip(self,data_list):
+    def registerWorkTrip(self, data_list):
         ''' this function registers worktrip with data list and gives new flights a new flight number'''
-
         counter = 0
         with open("./STUDENTDATA/Flights.csv", 'r') as file_stream: 
             newFileWriter = csv.writer(file_stream)
@@ -48,7 +47,6 @@ class RegisterData:
         else:
             flightnr = "NA" + str(counter)
 
-
         self.flight_num = flightnr
         self.Depfrom = data_list[0]
         self.Arrat = data_list[1]
@@ -58,7 +56,6 @@ class RegisterData:
         self.capssn = data_list[5]
         self.copssn = data_list[6]
         self.flightsmssn = data_list[7]
-        
 
         with open("./STUDENTDATA/Flights.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the user into it
             newFileWriter = csv.writer(file_stream)
@@ -76,12 +73,13 @@ class RegisterData:
         self.arrtime = self.deptime + data_list[8]
         self.Depfrom = data_list[1]
         self.Arrat = data_list[0]
-
         
         with open("./STUDENTDATA/Flights.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the user into it
             newFileWriter = csv.writer(file_stream)
             newFileWriter.writerow([self.flight_num,self.Depfrom,self.Arrat,self.deptime,self.arrtime,self.aircID,self.capssn,self.copssn,self.flightsmssn])
         file_stream.close()
 
-
-        
+    def registerLocation(self, data_list):
+        with open('./STUDENTDATA/Destinations.csv', 'a', newline='\n') as file_stream:
+            newFileWriter = csv.writer(file_stream)
+            newFileWriter.writerow(data_list)

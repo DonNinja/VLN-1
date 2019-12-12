@@ -1,7 +1,7 @@
 id,destination,country,airport,flightTime,distanceFromIceland,contactName,contactPhone
 LYR,Longyearbyean,Norway,Svalbard Airport,2.53,2027,Arvid Anders,5523834
-GOH,Nuuk,Greenland,Nuuk Airport,2.9,1406,Aanta Kleist,8371998
+GOH,Nuuk,Greenland,Nuuk Airport,2.09,1406,Aanta Kleist,8371998
 KUS,Kulusuk,Greenland,Kulusuk Airport,1.20,711,Mukki Rasmussen,8152244
-FAE,Thorshavn,Faroe Islands,Vágar Airport,1.26,803,Kristin Joensen,5237987
+FAE,Thorshavn,Faroe Islands,Vagar Airport,1.26,803,Kristin Joensen,5237987
 LWK,Tingwall,Scotland,Tingwall Airport,1.53,1186,Joan Acledge,8459732
 KEF,Keflavik,Iceland,Keflavik Airport,0.0,0,Jon Jonsson,8593753

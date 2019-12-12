@@ -257,11 +257,19 @@ class UIAPI:
         data_list = self.__inputter.addWorkTrip()
         self.__logic.addWorkTrip(data_list)
 
-        
-
     def addLocation(self):
-        pass
-
+        loc_name = self.__inputter.addLocName()
+        country = self.__inputter.addLocCountry()
+        loc_id = self.__inputter.addLocCountryAbbrev()
+        airport = self.__inputter.addLocAirport()
+        flight_time_hours = self.__inputter.addLocFlightTimeHour()
+        flight_time_mins = self.__inputter.addLocFlightTimeMin()
+        flight_time = '.'.join([flight_time_hours, flight_time_mins])
+        distance = self.__inputter.addLocDist()
+        contact_name = self.__inputter.addLocContactName()
+        contact_phone = self.__inputter.addLocContactNum()
+        data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone]
+        self.__logic.addLocation(data_list)
     
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''

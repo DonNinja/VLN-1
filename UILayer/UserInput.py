@@ -40,24 +40,32 @@ class UserInput:
     def addHomePhone(self, emp_type):
         return input("\nEnter the new {}'s home phone number (7 digits): ".format(emp_type)).capitalize()
     
-    def addLocationCountry(self):
-        loc_data_list = []
-        loc_country = input("\nEnter the new location's country: ").capitalize()
-        loc_data_list.append(loc_country)
-        loc_airport_name = input("\nEnter the new location's aiport's name: ").capitalize()
-        loc_data_list.append(loc_airport_name)
-        loc_flight_time_hours = input("\nEnter the new location's flight time (Hours): ")
-        loc_flight_time_mins = input("\nEnter the new location's flight time (Minutes): ")
-        loc_flight_time = '.'.join([loc_flight_time_hours, loc_flight_time_mins])
-        loc_data_list.append(loc_flight_time)
-        loc_distance = input("\nEnter the distance from Iceland (Kilometers): ")
-        loc_data_list.append(loc_distance)
-        loc_contact_name = input("\nEnter the new location's contact's name: ")
-        loc_data_list.append(loc_contact_name)
-        loc_emer_num = input("\nEnter the new location's emergency phone number: ")
-        loc_data_list.append(loc_emer_num)
-        input("\nPress enter to continue...")
-        return loc_data_list
+    def addLocCountry(self):
+        return input("\nEnter the new location's country (Non-Icelandic characters): ").capitalize()
+    
+    def addLocCountryAbbrev(self):
+        return input("\nEnter the new location's country's abbreviation (ex.: Iceland = ICE): ").upper()
+
+    def addLocName(self):
+        return input("\nEnter the new location's internal name (Non-Icelandic characters): ").capitalize()
+
+    def addLocAirport(self):
+        return input("\nEnter the new location's aiport's name (Non-Icelandic characters): ").capitalize()
+        
+    def addLocFlightTimeHour(self):
+        return input("\nEnter the new location's flight time (Hours): ")
+    
+    def addLocFlightTimeMin(self):
+        return input("\nEnter the new location's flight time (Minutes): ")
+
+    def addLocDist(self):
+        return input("\nEnter the distance from Iceland (est. kilometers): ")
+
+    def addLocContactName(self):
+        return input("\nEnter the new location's contact's name (Non-Icelandic characters): ")
+    
+    def addLocContactNum(self):
+        return input("\nEnter the new location's emergency phone number (Non-Icelandic characters): ")
 
     def enterSSN(self, emp_type):
         print("hæ")
@@ -70,9 +78,7 @@ class UserInput:
         work_trip_data_list = []
         work_destination = input("\nDeparting from: ")
         work_trip_data_list.append(work_destination)
-
-        work_departure_date = input("arriving at: ")
-
+        work_departure_date = input("\nArriving at: ")
         if work_departure_date == "LYR":
             flight_time = datetime.timedelta(hours=2,minutes=53)
         elif work_departure_date == "GOH":
@@ -96,10 +102,10 @@ class UserInput:
         arr_time_obj = work_arrival_time + flight_time
         work_trip_data_list.append(arr_time_obj)
 
-        planeID = input("Enter planeID: ")
+        planeID = input("\nEnter planeID: ")
         work_trip_data_list.append(planeID)
 
-        work_pilot_ssn = input("Enter the Pilot's SSN: ")
+        work_pilot_ssn = input("\nEnter the Pilot's SSN: ")
         work_trip_data_list.append(work_pilot_ssn)
         work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
         work_trip_data_list.append(work_copilot_ssn)

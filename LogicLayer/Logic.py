@@ -117,3 +117,6 @@ class LogicAPI():
     def sortTrips(self, flight_num_list):
         data_list = self.__data.getTrips()
         return self.__data_sorter.sortForTrip(flight_num_list, data_list)
+    
+    def addLocation(self, data_list):
+        self.__data.registerLocation(data_list)
