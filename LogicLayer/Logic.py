@@ -104,6 +104,9 @@ class LogicAPI():
     def showWorkTripsByWeek(self, date):
         all_trips = self.__data.getTrips()
         return self.__data_sorter.weekSorter(all_trips, date)
+
+    def updateFlightAircraftID(self, data, new_var, field):
+        self.__data.updateWorkTrip(data, new_var, field)
         
         
 
