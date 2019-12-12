@@ -1,6 +1,5 @@
 import dateutil
 import datetime
-
 class SortData:
     def __init__(self):
         pass
@@ -49,6 +48,9 @@ class SortData:
             if item['role'] == "Pilot" and item['licence'] == plane_type: # Checks if employee is pilot and if they have an active licence for the chosen plane
                 ret_list.append(item)
         return ret_list
+
+    def sortworkTripNumber(self):
+        pass
     
     def sortEmpTrips(self, data_list, ssn):
         ret_list = []
@@ -65,18 +67,6 @@ class SortData:
             if item_date == date:
                 ret_list.append(item)
         return ret_list
-    
-    def sortOrderByPlane(self, data):
-        ret_list = []
-        for item in data:
-            if item['licence'] == 'NABAE146':
-                ret_list.append(item)
-        for item in data:
-            if item['licence'] == 'NAFokkerF28':
-                ret_list.append(item)
-        for item in data:
-            if item['licence'] == 'NAFokkerF100':
-                ret_list.append(item)
 
     def weekSorter(self, data , start_date):
         ret_list = []

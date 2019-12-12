@@ -84,7 +84,7 @@ class UIAPI:
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
-        address, error_msg = self.__logic.checkAddress(new_var)
+        address = self.__logic.checkAddress(new_var)
         while not(address):
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
@@ -236,16 +236,23 @@ class UIAPI:
         else:
             return home_phone_num
 
-    def addLocation(self):
-        pass
 
-    def addWorkTrip(self):
-        pass
-    
     def showAllWorkTrips(self):
+        """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
         self.__data_printer.printAllWorkTrips(data_list)
         self.__data_printer.printAllWorkTrips(data_list)
+    
+    def addWorkTrip(self):
+        """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
+        data_list = self.__inputter.addWorkTrip()
+        self.__logic.addWorkTrip(data_list)
+
+        
+
+    def addLocation(self):
+        pass
+
     
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''
@@ -258,11 +265,24 @@ class UIAPI:
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
 
+
+    def showWorkTripsLastWeek(self):
+        '''Getting work trips for last 7 days'''
+        pass
+
+    def checktripinp(self,data):
+        data1 = self.__logic.checktripinp(data)
+        return data1
+        
+
+
     def showWorkTripsByWeek(self):
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByWeek(date)
         self.__data_printer.printAllWorkTrips(data_list)
         
+
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
+
