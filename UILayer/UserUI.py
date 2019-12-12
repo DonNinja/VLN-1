@@ -432,7 +432,7 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
-                
+
     def whileEditingWorkTripsScreen(self):
         ''' This screen shows the user what choices he has for editing work trip'''
         inp = ""
@@ -485,4 +485,8 @@ class UserUI:
             else:
                 print("Input is invalid!")
         pass
-        
+    
+    def enterFN(self):
+        flight_num = "NA"
+        flight_num += input("Enter a flight number (4 digits): ")
+        # self.__ui_api.

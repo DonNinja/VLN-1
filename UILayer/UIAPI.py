@@ -53,6 +53,9 @@ class UIAPI:
         emp = self.__logic.showEmpSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
     
+    def showSpecificTrip(self, ):
+        pass
+
     def showSpecificPilot(self, ssn):
         """ This gets a single pilot and calls the printer to print them out """
         emp = self.__logic.showPilotSSN(ssn)
