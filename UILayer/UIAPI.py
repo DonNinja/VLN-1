@@ -297,3 +297,28 @@ class UIAPI:
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
 
+
+    def editFlightAircraftID(self, data):
+        new_var = self.__inputter.enterVariable('Flight Aircraft ID')
+        self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
+        self.showSpecificWorktrip(data['flight number'])
+        
+
+    def editFlightCaptain(self, data):
+        new_var = self.__inputter.enterVariable('Flight Captain')
+        blabla = self.__logic.updateFlightCaptain(data, new_var, 'captain')
+        self.showSpecificWorktrip(data['flight number'])
+
+    def editFlightCopilot():
+        pass
+
+    def editFlightFSM():
+        pass
+
+    def editFlightFA():
+        pass
+
+    def showSpecificWorktrip(self, flight_num):
+        flight_list = self.__logic.showSpecificWorktrip(flightnumber)
+        self.__data_printer.printWorkTrip(flight_list)
+        
