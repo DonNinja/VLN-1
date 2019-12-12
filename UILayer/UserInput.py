@@ -5,10 +5,10 @@ class UserInput:
     
     def addEmpSSN(self, emp_type):
         print()
-        return input("Enter the new {}'s ssn: ".format(emp_type)).capitalize()
+        return input("\nEnter the new {}'s ssn: ".format(emp_type)).capitalize()
 
     def addEmpName(self, emp_type):
-        return input("Enter {} first and last name (Non-Icelandic characters): ".format(emp_type))
+        return input("\nEnter {} first and last name (Non-Icelandic characters): ".format(emp_type))
 
     def addEmpRank(self, emp_type):
         if emp_type == "Pilot":
@@ -20,25 +20,24 @@ class UserInput:
                 
 
     def addEmpEmail(self, emp_type):
-        return input("Enter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
+        return input("\nEnter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
 
     def addEmpLicens(self, emp_type):          
         if emp_type != "Cabincrew":
             print("\n1: FokkerF100\n2: FokkerF28\n3: BAE146")
             choice = input("\nChoose a plane type: ")
-            planedict = {"1":"NAFokkerF100","2":"NAFokkerF28","3":"NABAE146"}
-            plane_type = planedict[choice]
+            return choice
         else:
             return "N/A"
 
     def addEmpAddress(self, emp_type):
-        return input("Enter the new {}'s address (Non-Icelandic characters): ".format(emp_type)).capitalize()
+        return input("\nEnter the new {}'s address (Non-Icelandic characters): ".format(emp_type)).capitalize()
 
     def addEmpMobile(self, emp_type):
-        return input("Enter the new {}'s mobile number (7 digits): ".format(emp_type)).capitalize()
+        return input("\nEnter the new {}'s mobile number (7 digits): ".format(emp_type)).capitalize()
     
     def addHomePhone(self, emp_type):
-        return input("Enter the new {}'s home phone number (7 digits): ".format(emp_type)).capitalize()
+        return input("\nEnter the new {}'s home phone number (7 digits): ".format(emp_type)).capitalize()
     
     def addLocationCountry(self):
         loc_data_list = []
