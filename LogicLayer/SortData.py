@@ -147,3 +147,11 @@ class SortData:
             if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
                 return item
         return None
+    
+    def sortEmpTripsForWeek(self, data, start_date, ssn):
+        ret_list = []
+        all_week_trips = self.weekSorter(data, start_date)
+        for item in all_week_trips:
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+                ret_list.append(item)
+        return ret_list

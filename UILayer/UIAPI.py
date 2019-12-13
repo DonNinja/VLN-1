@@ -438,3 +438,9 @@ class UIAPI:
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
+    
+    def showEmpWeekTrips(self):
+        ssn = self.__inputter.enterVariable('SSN')
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showEmpWeekTrips(ssn, date)
+        self.__data_printer.printAllWorkTrips(data_list)

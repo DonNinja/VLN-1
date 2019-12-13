@@ -227,3 +227,7 @@ class LogicAPI():
             return True
         else:
             return False
+    
+    def showEmpWeekTrips(self, ssn, start_date):
+        all_trips = self.showAllWorkTrips()
+        return self.__data_sorter.sortEmpTripsForWeek(all_trips, start_date, ssn)
