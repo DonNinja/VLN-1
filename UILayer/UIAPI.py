@@ -494,24 +494,30 @@ class UIAPI:
 
     def editFlightAircraftID(self, data):
         new_var = self.__inputter.enterVariable('Flight Aircraft ID')
+        flight_list = self.__logic.showSpecificWorktrip(data)
         self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
         self.showSpecificWorktrip(data['flightNumber'])
 
     def editFlightCaptain(self, data):
-        flight_capt = self.__inputter.enterVariable('Flight Captain')
+        flight_capt = self.__inputter.enterVariable('Flight Captain SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
         self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
-    def editFlightCopilot(self):
-        pass
+    def editFlightCopilot(self, data):
+        flight_copilot = self.__inputter.enterVariable('Flight Copilot SSN')
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, flight_copilot, 'copilot')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightFSM(self):
-        pass
+        flight_capt = self.__inputter.enterVariable('Flight Service Manager SSN')
 
     def editFlightFA(self):
-        pass
+        new_var = self.__inputter.enterVariable('Flight Aircraft ID')
+
 
     def showSpecificWorktrip(self, flight_num):
         flight_list = self.__logic.showSpecificWorktrip(flight_num)
