@@ -2,6 +2,7 @@ from LogicLayer.Logic import LogicAPI
 from UILayer.UserInput import UserInput
 from UILayer.UIDataPrinter import UIDataPrinter
 from UILayer.UIPrinter import UIPrinter
+import dateutil
 
 class UIAPI:
     def __init__(self):
@@ -33,9 +34,24 @@ class UIAPI:
         data_list = self.__logic.showAllPilots()
         self.__data_printer.printAllEmps(data_list)
     
+    def showAllCaptains(self):
+        ''' This gets a list of every captain from logicAPI, then calls the printer to print them out for the user '''
+        data_list = self.__logic.showAllCaptains()
+        self.__data_printer.printAllEmps(data_list)
+    
+    def showAllCopilots(self):
+        ''' This gets a list of every copilot from logicAPI, then calls the printer to print them out for the user '''
+        data_list = self.__logic.showAllCopilots()
+        self.__data_printer.printAllEmps(data_list)
+    
     def showAllAttendants(self):
         """ This gets a list of every flight attendant from logicAPI, then calls the printer to print out every flight attendant for the user """
         data_list = self.__logic.showAllAttendants()
+        self.__data_printer.printAllEmps(data_list)
+    
+    def showAllFSM(self):
+        ''' This gets a list of every flight service manager from logicAPI, then calls the printer to print them out for the user '''
+        data_list = self.__logic.showAllFSM()
         self.__data_printer.printAllEmps(data_list)
     
     def showAllPlanes(self):
@@ -188,7 +204,7 @@ class UIAPI:
         """ This checks if employee rank is valid and returs valid rank """
         rank_input = self.__inputter.addEmpRank(emp_type)
         rank = self.__logic.checkRank(rank_input, emp_type)
-        while not (rank):
+        while not(rank):
             print("Invalid choice")
             rank_input = self.__inputter.addEmpRank(emp_type)
             rank = self.__logic.checkRank(rank_input, emp_type)
@@ -258,55 +274,115 @@ class UIAPI:
     def addWorkTrip(self):
         """ This calls the inputter so the user can input the work trip's data, then calls logicAPI to add both flights to the flight.csv file """
         data_list = []
-        trip_dep_loc = "KEF"
-        trip_arr_loc = self.__inputter.addTripDest()
-        while not(self.__logic.checkLocID(trip_arr_loc)):
-            print("\nLocation does not exist or is written incorrectly, also can't be KEF")
-            trip_arr_loc = self.__inputter.addTripDest()
-        trip_dep_time = self.__inputter.addTripDepTime()
-        trip_arr_time = self.__logic.calcFlightTime(trip_dep_time, trip_arr_loc)
-        trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
-        while self.__logic.checkIfEmpty(trip_plane_id) or not(self.__logic.checkIfPlane(trip_plane_id)):
-            if self.__logic.checkIfEmpty(trip_plane_id):
-                trip_plane_id = "X"
-                break
+        trip_dep_loc = "KEF" # The departure flight is always from KEF
+
+        while True:
+            trip_arr_loc = self.__inputter.addTripDest() # calls the inputter for the destination
+            if trip_arr_loc.upper() == "HELP":
+                self.showAllLocations()
             else:
-                trip_plane_id = "TF-" + trip_plane_id
-                if self.__logic.checkIfPlane(trip_plane_id):
+                if self.__logic.checkLocID(trip_arr_loc):
                     break
-            print("That is not a correct plane insignia")
+                else:
+                    print("\nLocation does not exist or is written incorrectly, also can't be KEF")
+
+        trip_dep_time = self.__inputter.addTripDepTime()
+        trip_dep_date = trip_dep_time.date()
+        trip_arr_time = self.__logic.calcFlightTime(trip_dep_time, trip_arr_loc)
+
+        while True:
             trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
-        trip_captain = self.__inputter.addTripPilot() # Can be empty
-        while self.__logic.checkIfEmpty(trip_captain) or not(self.__logic.checkIfCaptain(trip_captain)):
-            if self.__logic.checkIfEmpty(trip_captain):
-                trip_captain = "X"
-                break
-            print("That is not a correct captain's ssn")
-            trip_captain = self.__inputter.addTripPilot() # Can be empty
-        trip_copilot = self.__inputter.addTripCopilot() # Can be empty
-        while self.__logic.checkIfEmpty(trip_copilot) or not(self.__logic.checkIfCopilot(trip_copilot)):
-            if self.__logic.checkIfEmpty(trip_copilot):
-                trip_copilot = "X"
-                break
-            print("That is not a correct copilot's ssn")
+            if trip_plane_id.upper() == "HELP":
+                self.showAllPlanes()
+            else:
+                if self.__logic.checkIfEmpty(trip_plane_id):
+                    trip_plane_id = "X"
+                    break
+                else:
+                    trip_plane_id = "TF-" + trip_plane_id
+                    if self.__logic.checkIfPlane(trip_plane_id):
+                        if not(self.__logic.checkIfIsWorking(trip_plane_id, trip_dep_date)):
+                            break
+                        else:
+                            print("Plane is being used on that day")
+                    else:
+                        print("That is not a correct plane insignia")
+
+        while True:
+            trip_captain = self.__inputter.addTripCaptain() # Can be empty
+            if trip_captain.upper() == "HELP":
+                self.showAllCaptains()
+            else:
+                if self.__logic.checkIfEmpty(trip_captain):
+                    trip_captain = "X"
+                    break
+                if self.__logic.checkIfCaptain(trip_captain):
+                    if self.__logic.checkIfMayFly(trip_captain, trip_plane_id):
+                        if not(self.__logic.checkIfIsWorking(trip_captain, trip_dep_date)):
+                            break
+                        else:
+                            print("Employee is working on that day")
+                    else:
+                        print("This pilot may not fly a {}".format(trip_plane_id))
+                else:
+                    print("That is not a correct captain's ssn")
+
+        while True:
             trip_copilot = self.__inputter.addTripCopilot() # Can be empty
-        trip_fsm = self.__inputter.addTripFSM() # Can be empty
-        while self.__logic.checkIfEmpty(trip_fsm) or not(self.__logic.checkIfFSM(trip_fsm)):
-            if self.__logic.checkIfEmpty(trip_fsm):
-                trip_fsm = "X"
-                break
-            print("That is not a correct flight service manager's ssn")
+            if trip_copilot.upper() == "HELP":
+                self.showAllCopilots()
+            else:
+                if self.__logic.checkIfEmpty(trip_copilot):
+                    trip_copilot = "X"
+                    break
+                if self.__logic.checkIfCopilot(trip_copilot):
+                    if self.__logic.checkIfMayFly(trip_copilot, trip_plane_id):
+                        if not(self.__logic.checkIfIsWorking(trip_copilot, trip_dep_date)):
+                            break
+                        else:
+                            print("Employee is working on that day")
+                    else:
+                        print("This pilot may not fly a {}".format(trip_plane_id))
+                else:
+                    print("That is not a correct copilot's ssn")
+            
+
+
+        while True:
             trip_fsm = self.__inputter.addTripFSM() # Can be empty
+            if trip_fsm.upper() == "HELP":
+                self.showAllFSM()
+            else:
+                if self.__logic.checkIfEmpty(trip_fsm):
+                    trip_fsm = "X"
+                    break
+                if self.__logic.checkIfFSM(trip_fsm):
+                    if not(self.__logic.checkIfIsWorking(trip_fsm, trip_dep_date)):
+                        break
+                    else:
+                        print("Employee is working on that day")
+                else:
+                    print("That is not a correct flight service manager's ssn")
+            
         data_list = [trip_dep_loc, trip_arr_loc, trip_dep_time, trip_arr_time, trip_plane_id, trip_captain, trip_copilot, trip_fsm] # 0 - 7
         for i in range(2):
-            add_more = input("Would you like to enter more flight attendants ('Y' if yes): ").upper()
+            add_more = input("\nWould you like to enter more flight attendants ('Y' if yes): ").upper()
             if add_more == "Y":
-                trip_fa = self.__inputter.addTripFA()
-                while self.__logic.checkIfEmpty(trip_fa) or not(self.__logic.checkIfFA(trip_fa)):
+                while True:
                     trip_fa = self.__inputter.addTripFA()
-                    if self.__logic.checkIfEmpty(trip_fa):
-                        trip_fa = "X"
-                        break
+                    if trip_fa.upper() == "HELP":
+                        self.showAllAttendants()
+                    else:
+                        if self.__logic.checkIfEmpty(trip_fa):
+                            trip_fa = "X"
+                            break
+                        if self.__logic.checkIfFA(trip_fa):
+                            if not(self.__logic.checkIfIsWorking(trip_fa, trip_dep_date)):
+                                break
+                            else:
+                                print("Employee is working on that day")
+                        else:
+                            print("That is not a correct flight attendant's ssn")
                 data_list.append(trip_fa) # 8 & 9
             else:
                 trip_fa = "X"
@@ -317,11 +393,12 @@ class UIAPI:
                 else:
                     data_list.append(trip_fa) # Can be empty 9
                     break
-        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time)
+        
+        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time) # This just adds 1 hour to the return trip after landing
         data_list.append(ret_trip) # 10
-        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc)
+        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc) # This calculates the time it takes to fly from A to B by looking at the csv file
         data_list.append(ret_flight_time) # 11
-        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm)
+        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm) # This does a check and sees if it's fully manned
         data_list.append(flight_fully_manned) # 12
         self.__logic.addWorkTrip(data_list)
 
@@ -414,3 +491,35 @@ class UIAPI:
         self.__data_printer.printempsworking(emp)
 
 
+    def editFlightAircraftID(self, data):
+        new_var = self.__inputter.enterVariable('Flight Aircraft ID')
+        self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
+        self.showSpecificWorktrip(data['flight number'])
+        
+
+    def editFlightCaptain(self, data):
+        new_var = self.__inputter.enterVariable('Flight Captain')
+        flight = self.__logic.showSpecificWorktrip(data)
+        self.__logic.updateWorkTrip(flight, new_var, 'captain')
+        self.showSpecificWorktrip(flight['flight number'])
+
+    def editFlightCopilot():
+        pass
+
+    def editFlightFSM():
+        pass
+
+    def editFlightFA():
+        pass
+
+    def showSpecificWorktrip(self, flight_num):
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        self.__data_printer.printWorkTrip(flight_list)
+        
+        self.__data_printer.printAllEmps(data_list)
+    
+    def showEmpWeekTrips(self):
+        ssn = self.__inputter.enterVariable('SSN')
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showEmpWeekTrips(ssn, date)
+        self.__data_printer.printAllWorkTrips(data_list)

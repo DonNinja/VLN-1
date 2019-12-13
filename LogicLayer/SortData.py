@@ -12,11 +12,35 @@ class SortData:
                 ret_list.append(item)
         return ret_list
     
+    def sortCaptains(self, data):
+        ''' This searches through every employee and returns a list of only captains '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Captain":
+                ret_list.append(item)
+        return ret_list
+    
+    def sortCopilots(self, data):
+        ''' This searches through every employee and returns a list of only copilots '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Copilot":
+                ret_list.append(item)
+        return ret_list
+    
     def sortAttendants(self, data):
         """ Takes all crew and only keeps the flight attendants """
         ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['rank'] == "Flight Attendant": # Checks if the rank == Flight Attendant and adds it to the return list if so
+                ret_list.append(item)
+        return ret_list
+    
+    def sortFSM(self, data):
+        ''' This searches through every employee and returns a list of only flight service managers '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Flight Service Manager":
                 ret_list.append(item)
         return ret_list
     
@@ -89,11 +113,11 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-    def weekSorter(self, data , start_date):
+    def weekSorter(self, data, start_date):
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
         for i in range(8):
-            i = i
+            i = i # Bara svo það komi ekki upp error
             for item in data:
                 parsed_item_date = dateutil.parser.parse(item['departure'])
                 item_date = str(parsed_item_date.date())
@@ -159,6 +183,13 @@ class SortData:
             if item['flightNumber'] == flight_num_list[0] or item['flightNumber'] == flight_num_list[1]:
                 ret_list.append(item)
         return ret_list
+
+    def flightNumberSorter(self, data, all_trips):
+        ret_list = []
+        for line in all_trips:
+            if line['flightNumber'] == 'NA' + data:
+                    ret_list.append(line)
+        return ret_list
     
     def sortForLocation(self, loc_id, data):
         ret_list = []
@@ -169,9 +200,9 @@ class SortData:
                 return item
         return None
     
-    def sortSpecificPlane(self, data, plane_id):
+    def sortSpecificPlane(self, data, plane_insignia):
         for item in data:
-            if item['planeInsignia'] == plane_id:
+            if item['planeInsignia'] == plane_insignia:
                 return item
         return None
     
@@ -198,3 +229,11 @@ class SortData:
             if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
                 return item
         return None
+    
+    def sortEmpTripsForWeek(self, data, start_date, ssn):
+        ret_list = []
+        all_week_trips = self.weekSorter(data, start_date)
+        for item in all_week_trips:
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+                ret_list.append(item)
+        return ret_list

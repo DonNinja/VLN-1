@@ -39,6 +39,7 @@ class UserUI:
                 nextScreen() # This calls the function the user asked for
             else:
                 print("Input is invalid!") # Prints out an error message if the inputted choice isn't valid, then loops the function again
+                # The screens are pretty repetetive, so I don't feel the need to comment on every single screen
 
     def employeeScreen(self):
         ''' Displays the choices of the employee screen and asks the user for an input '''
@@ -84,6 +85,9 @@ class UserUI:
         # att_data_list = 
         self.__ui_api.addEmp("Cabincrew")
         pass
+
+    def showEmpWorkTripsWeek(self):
+        self.__ui_api.showEmpWeekTrips()
 
         
     def editEmpScreen(self):
@@ -173,8 +177,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Show employees screen")
-            choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
-            choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen,"B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show an employee's work trips for a week", BACK_STR, QUIT_STR]
+            choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen, "4" : self.showEmpWorkTripsWeek, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -469,14 +473,14 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Add pilot to work trip screen")
             choice_list = ["1 - Add Captain", "2 - Add Copilot",BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editFlightCaptain, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
             checking = self.inputCheck(inp,choice_dict)
             if checking:
                 nextScreen = choice_dict.get(inp)
-                nextScreen()
+                nextScreen(flight_num)
             else:
                 print("Input is invalid!")
 

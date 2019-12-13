@@ -1,5 +1,4 @@
 import datetime
-
 class UserInput:
     def __init__(self):
         pass
@@ -67,13 +66,12 @@ class UserInput:
         return input("\nEnter the new location's emergency phone number (Non-Icelandic characters): ")
 
     def enterSSN(self, emp_type):
-        print("hæ")
         ssn = input("\nEnter a{}'s SSN: ".format(emp_type))
         #Check hvort að kennitalan tilheyri einhverjum starfsmanni
         return ssn
 
     def addTripDest(self):
-        return input("\nEnter trip destination id (Not KEF): ").upper()
+        return input("\nEnter trip destination id (Not KEF) 'HELP' to show all destinations: ").upper()
     
     def addTripDepTime(self):
         print("\nNow entering a departure time and date:")
@@ -92,16 +90,16 @@ class UserInput:
                 print("There was something wrong with your input, please try again")
     
     def addTripPlaneID(self):
-        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one): ").upper()
+        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one) 'HELP' to show all planes: TF-").upper()
     
-    def addTripPilot(self):
-        return input("\nEnter the Pilot's SSN (Keep empty if you don't want to enter one): ")
+    def addTripCaptain(self):
+        return input("\nEnter the Captain's SSN (Keep empty if you don't want to enter one) 'HELP' to show all captains: ")
     
     def addTripCopilot(self):
-        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one): ")
+        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one) 'HELP' to show all copilots: ")
     
     def addTripFSM(self):
-        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one): ")
+        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one) 'HELP' to show all flight service managers: ")
     
     def addTripFA(self):
         return input("\nEnter a flight attendant's SSN (Keep empty if you don't want to enter one): ")
@@ -148,6 +146,7 @@ class UserInput:
         input("\nPress enter to continue...")
 
         return work_trip_data_list
+    
 
     def addPlane(self):
         plane_data_list = []

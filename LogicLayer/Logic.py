@@ -1,6 +1,7 @@
 from DataLayer.Data import DataAPI
 from LogicLayer.SortData import SortData
 from LogicLayer.UserInputCheck import UserInputCheck
+from LogicLayer.CheckData import CheckData
 import datetime
 TURNAROUNDTIME = 1
 
@@ -9,6 +10,7 @@ class LogicAPI():
         self.__data = DataAPI()
         self.__data_sorter = SortData()
         self.__user_check = UserInputCheck()
+        self.__data_check = CheckData()
 
     def showAllEmps(self):
         """ This returns a collection of every employee to the UI so it can print them out """
@@ -17,12 +19,27 @@ class LogicAPI():
     def showAllPilots(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just pilots and returns that """
         all_emps = self.__data.getEmps()
-        return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only flight attendants
+        return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only pilots
+    
+    def showAllCaptains(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just captains and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortCaptains(all_emps)
+    
+    def showAllCopilots(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just copilots and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortCopilots(all_emps)
     
     def showAllAttendants(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just flight attendants and returns that """
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
+    
+    def showAllFSM(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just flight service managers and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortFSM(all_emps)
     
     def showAllCabincrew(self):
         all_emps = self.__data.getEmps()
@@ -31,6 +48,11 @@ class LogicAPI():
     def showAllPlanes(self):
         """ This returns a list of every plane so the UI can print them out """
         return self.__data.getAirplanes()
+    
+    def showSpecificPlane(self, insignia):
+        ''' This returns a specific plane item from the ordered dictionary '''
+        all_planes = self.__data.getAirplanes()
+        return self.__data_sorter.sortSpecificPlane(all_planes, insignia)
     
     def showPilotSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that is both a pilot and has the inputted SSN and returns him if it finds him, but returns None if he finds nothing """
@@ -68,7 +90,11 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
     def checkSSN(self, ssn, data):
-        return self.__user_check.checkSSN(ssn, data)
+        check_ssn, err_msg = self.__user_check.checkSSN(ssn, data)
+        if check_ssn:
+            check_ssn, err_msg = self.__data_check.checkIfExists(ssn, 'ssn', data)
+        return check_ssn, err_msg
+
 
     def checkName(self, name):
         return self.__user_check.checkName(name)
@@ -77,7 +103,16 @@ class LogicAPI():
         return self.__user_check.checkRank(rank, emp_type)
 
     def checkEmail(self, email):
-        return self.__user_check.checkEmail(email)
+        all_emps = self.showAllEmps()
+        email_check, err_msg_list = self.__user_check.checkEmail(email)
+        if email_check:
+            email_check, err_msg_str = self.__data_check.checkIfExists(email+"@NaNAir.is", 'email', all_emps) # Checks if the email already exists in the file, as 2 employees can't have the same email address
+            if type(err_msg_list) == list: # The SSN check returns an error list, so this is a check to see if it's returning a list or a string and returns the appropriate thing for the appropriate print
+                err_msg_list = [err_msg_str]
+                return email_check, err_msg_list
+            else:
+                return email_check, err_msg_str
+        return email_check, err_msg_list
 
     def checkLicens(self, licens):
         return self.__user_check.checkLicens(licens)
@@ -105,14 +140,83 @@ class LogicAPI():
         '''Gets all trips and sends to get sorted by date input'''
         all_trips = self.__data.getTrips()
         return self.__data_sorter.dateSorter(all_trips, date)
-
-    def addWorkTrip(self,data_list):
-        self.__data.registerWorkTrip(data_list)
     
     def showWorkTripsByWeek(self, date):
         all_trips = self.__data.getTrips()
         return self.__data_sorter.weekSorter(all_trips, date)
+
+    def updateFlightCaptain(self, data, new_var, field):
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.flightNumberSorter(data, all_trips, new_var, field)
+
+    def updateFlightAircraftID(self, data, new_var, field):
+        self.__data.updateWorkTrip(data, new_var, field)
+
+    def showSpecificWorktrip(self, flightnumber):
+        all_trips = self.__data.getTrips()
+        return self.__data_sorter.flightNumberSorter(flightnumber, all_trips)
         
+
+# import re
+# class Employee:
+
+#     def __init__(self, file_stream, choice):
+#         self.__choice = choice
+#         self.__file = file_stream
+#         self.__emp = self.createEmp(choice)
+#         self.__name = self.nameEmp()
+
+
+#     def __str__(self):
+#         str_emp = str(self.__emp)
+#         return "{}".format(str_emp)
+
+
+#     def createEmp(self, choice):
+#         dict_employees = {}
+#         if choice == '1':
+#             ssn = input("Enter ssn:")
+#             check = self.digit_ssn(ssn)
+#             length = self.len_ssn(check)
+#             date = self.date_check_ssn(ssn)
+#             if check and length:
+#                 print("hæ")
+#             else:
+#                 print("bæ")
+
+#         return dict_employees
+
+#     def digit_ssn(self, ssn):
+#         list_num = []
+#         try:
+#             number = [str(int(i)) for i in ssn.split()]
+#             for line in number:
+#                 for i in line:
+#                     list_num.append(i)
+#             return list_num
+#         except:
+#             ValueError
+#             print('Error, only numbers allowed')
+#             return False
+
+#     def len_ssn(self, check):
+#         if len(check) == 10:
+#             return True
+
+#     def date_check_ssn(self, ssn):
+#         ssn_ints = [int(i) for i in ssn]
+#         dates = ssn_ints[0] + ssn_ints[1]
+#         month = ssn_ints[2] + ssn_ints[3]
+#         if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
+#             print("SSN is valid")
+#         else:
+#             print("SSN is invalid")
+
+
+#     def nameEmp(self):
+#         name = str(input("What is your name? "))
+#         print(name.isalpha()) 
+#         return name.isalpha()
     def sortPilotByPlane(self):
         data_list = self.__data.getEmps()
         return self.__data_sorter.sortOrderByPlane(data_list)
@@ -140,6 +244,9 @@ class LogicAPI():
     
     def addLocation(self, data_list):
         self.__data.registerLocation(data_list)
+
+    def updateWorkTrip(self, data, new_var, field):
+        self.__data.updateWorkTrip(data, new_var, field)
     
     def checkLocID(self, loc_id):
         data_list = self.showAllLocations()
@@ -174,17 +281,17 @@ class LogicAPI():
     
     def checkAddIfFullyManned(self, aircraftID, captain, copilot, fsm):
         if aircraftID != "X" and captain != "X" and copilot != "X" and fsm != "X":
-            return "Yes"
+            return "Y"
         else:
-            return "No"
+            return "N"
 
     def checkItemsIfFullyManned(self, item_list):
         for item in item_list:
             #aircraftID,captain,copilot
             if item['aircraftID'] != "X" and item['captain'] != "X" and item['copilot'] != "X" and item['fsm'] != "X":
-                item['fullyManned'] = "Yes"
+                item['fullyManned'] = "Y"
             else:
-                item['fullyManned'] = "No"
+                item['fullyManned'] = "N"
         
     def checkIfPlane(self, plane_id):
         all_planes = self.showAllPlanes()
@@ -220,3 +327,20 @@ class LogicAPI():
             return True
         else:
             return False
+    
+    def checkIfIsWorking(self, ssn, date):
+        all_trips = self.showAllWorkTrips()
+        if self.__data_check.checkIfWorkedOnDay(ssn, date, all_trips):
+            return True
+        else:
+            return False
+    
+    def showEmpWeekTrips(self, ssn, start_date):
+        all_trips = self.showAllWorkTrips()
+        return self.__data_sorter.sortEmpTripsForWeek(all_trips, start_date, ssn)
+    
+    def checkIfMayFly(self, ssn, aircraft_insignia):
+        ''' This returns true or false depending on if the employee is allowed to fly the chosen plane '''
+        plane = self.showSpecificPlane(aircraft_insignia)
+        employee = self.showEmpSSN(ssn)
+        return self.__data_check.checkIfMayFly(employee, plane)
