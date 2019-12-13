@@ -1,4 +1,4 @@
-
+from datetime import datetime
 class UserInput:
     def __init__(self):
         pass
@@ -84,7 +84,7 @@ class UserInput:
             work_dep_sec = "00"
             work_departure_time = "{}-{}-{} {}:{}:{}".format(work_dep_year, work_dep_month, work_dep_day, work_dep_hour, work_dep_min, work_dep_sec)
             try:
-                work_date = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+                work_date = datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
                 return work_date
             except:
                 print("There was something wrong with your input, please try again")
