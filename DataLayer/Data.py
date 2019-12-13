@@ -56,13 +56,16 @@ class DataAPI:
         self.__register.registerLocation(data_list)
 
     def updateWorkTrip(self, new_flight_list, new_var, field):
+        check_list = []
         for new_flight in new_flight_list:
             new_flight[field] = new_var
             flight_list = self.__reader.readAllFlights()
             for flight in flight_list:
                 if flight['flightNumber'] == new_flight['flightNumber']:
                     flight.update(new_flight)
+                    check_list.append(flight)
             self.__updater.updateWorkTrip(flight_list)
+        return check_list
     
     def updateLocation(self, loc, new_data, field):
         loc[field] = new_data

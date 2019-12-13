@@ -78,12 +78,15 @@ class LogicAPI():
         """ This gets a list of every location and returns it """
         return self.__data.getLocations()
 
-    def addEmpLL(self,data_list):
+    def addEmpLL(self, data_list):
         """ This calls the dataAPI to add a new employee to the crew.csv file """
         self.__data.registerNewEmp(data_list)
 
-    def addPlane(self,data_list):
+    def addPlane(self, data_list):
         self.__data.registerPlanes(data_list)
+    
+    def addWorkTrip(self, data_list):
+        self.__data.registerWorkTrip(data_list)
 
     def editPilot(self,ssn):
         all_emps = self.__data.getEmps()
@@ -155,25 +158,22 @@ class LogicAPI():
         all_trips = self.__data.getTrips()
         return self.__data_sorter.tripNumberSorter(flightnumber, all_trips)
 
-
     def sortPilotByPlane(self):
         data_list = self.__data.getEmps()
         return self.__data_sorter.sortOrderByPlane(data_list)
 
-    
-    def showempnotworking(self,data):
+    def showEmpNotAtWork(self, date):
         trips = self.showAllWorkTrips()
-        emp = self.__data_sorter.empsnotatwork(trips,data)
-        return emp
+        working_emp_dict = self.__data_sorter.empsAtWork(trips, date)
+        all_emps = self.showAllEmps()
+        not_working_emp_list = self.__data_sorter.empsNotAtWork(all_emps, working_emp_dict)
+        return not_working_emp_list
 
-    def showempatwork(self,data):
+    def showEmpAtWork(self, date):
         trips = self.showAllWorkTrips()
-        emp = self.__data_sorter.empsatwork(trips,data)
-        return emp
+        working_emp_dict = self.__data_sorter.empsAtWork(trips, date)
+        return working_emp_dict
 
-
-
-    
     def checkFlightNum(self, num):
         return self.__user_check.checkNum(num)
     
@@ -185,7 +185,9 @@ class LogicAPI():
         self.__data.registerLocation(data_list)
 
     def updateWorkTrip(self, data, new_var, field):
-        self.__data.updateWorkTrip(data, new_var, field)
+        check_list = self.__data.updateWorkTrip(data, new_var, field)
+        if self.checkItemsIfFullyManned(check_list) == "Y":
+            self.__data.updateWorkTrip(data, "Y", 'fullyManned')
     
     def checkLocID(self, loc_id):
         data_list = self.showAllLocations()
@@ -226,12 +228,11 @@ class LogicAPI():
 
     def checkItemsIfFullyManned(self, item_list):
         for item in item_list:
-            #aircraftID,captain,copilot
             if item['aircraftID'] != "X" and item['captain'] != "X" and item['copilot'] != "X" and item['fsm'] != "X":
-                item['fullyManned'] = "Y"
+                return "Y"
             else:
-                item['fullyManned'] = "N"
-        
+                return "N"
+
     def checkIfPlane(self, plane_id):
         all_planes = self.showAllPlanes()
         if self.__data_sorter.sortSpecificPlane(all_planes, plane_id):

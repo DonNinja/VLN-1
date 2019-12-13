@@ -211,10 +211,17 @@ class UserUI:
         ''' This is the flight attendant show screen, here a user can choose what he wants to display, whether it's every flight attendant or a specific flight attendant (searched by SSN) '''
         inp = ""
         while inp != "B":
+<<<<<<< HEAD
             self.__ui_api.UIHeaderDisplay("Display Flight Attendant Screen")  # Displays the header with the appropriate screen name
             choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day", "3 - Show attendants not at work on day", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR] # Lists choices available
             choice_dict = {"1" : self.__ui_api.showAllAttendants , "2" : self.__ui_api.showempatwork, "3" : self.__ui_api.showempnotatwork, "4" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
             self.__ui_api.UIDisplay(choice_list) # Displays the choices
+=======
+            self.__ui_api.UIHeaderDisplay("Filter flight attendant screen")
+            choice_list = ["1 - Show all attendants", "2 - Look for attendant by SSN", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.showAllAttendants, "2" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+>>>>>>> a32fc11a548e91343f52807963d6ebe358fbea70
             inp = self.askForInput()
             #Check if input is valid
             checking = self.inputCheck(inp,choice_dict) # This finds whether the inputted choice is valid or not, that is if the input is in the choice_dict and returns True if so, else it returns False
@@ -233,10 +240,17 @@ class UserUI:
         ''' This is the pilot show screen, here a user can choose what he wants to display, whether it's every pilot or a specific pilot (searched by SSN) '''
         inp = ""
         while inp != "B":
+<<<<<<< HEAD
             self.__ui_api.UIHeaderDisplay("Display Pilot Screen")  # Displays the header with the appropriate screen name
             choice_list = ["1 - Show all pilots", "2 - Show pilots at work on day", "3 - Show pilots not at work on day", "4 - Look for pilot by SSN", BACK_STR, QUIT_STR] # Lists choices available
             choice_dict = {"1" : self.__ui_api.showAllPilots , "2" : self.__ui_api.showempatwork, "3" : self.__ui_api.showempnotatwork, "4" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
             self.__ui_api.UIDisplay(choice_list) # Displays the choices
+=======
+            self.__ui_api.UIHeaderDisplay("Filter pilot screen")
+            choice_list = ["1 - Show all pilots", "2 - Look for pilot by SSN", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.showAllPilots, "2" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+>>>>>>> a32fc11a548e91343f52807963d6ebe358fbea70
             inp = self.askForInput()
             #Check if input is valid
             checking = self.inputCheck(inp,choice_dict) # This finds whether the inputted choice is valid or not, that is if the input is in the choice_dict and returns True if so, else it returns False
@@ -251,6 +265,56 @@ class UserUI:
         ssn = input("Enter a pilot's SSN (kennitala): ")
         return self.__ui_api.showSpecificPilot(ssn)
         
+<<<<<<< HEAD
+=======
+    def dayWeekScreen(self):
+        ''' This asks the user if he wants to display employees working or not working for day or for week '''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Day/Week screen")
+            choice_list = ["1 - Show by day", "2 - Show by week", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+
+    def atWorkScreen(self):
+        ''' This is the screen that leads to displaying every employee/pilot/flight attendant that's at work on a chosen day or a chosen week '''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("At work screen")
+            choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.showEmpAtWork , "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+        
+    def notAtWorkScreen(self):
+        ''' This is the screen that leads to displaying every employee/pilot/flight attendant that's not at work on a chosen day or a chosen week '''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Not at work screen")
+            choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.showEmpNotAtWork, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+>>>>>>> a32fc11a548e91343f52807963d6ebe358fbea70
         
     def airplaneScreen(self):
         ''' This screen shows the user what he can do with airplanes, then asks for an input '''

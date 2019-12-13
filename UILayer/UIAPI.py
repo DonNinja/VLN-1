@@ -476,16 +476,15 @@ class UIAPI:
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
 
-    def showempnotatwork(self):
+    def showEmpNotAtWork(self):
         date = self.__inputter.askForDate()
-        emp = self.__logic.showempnotworking(date)
+        emp = self.__logic.showEmpNotAtWork(date)
+        self.__data_printer.printEmpsNotWorking(emp)
 
-        self.__data_printer.printempsnotworking(emp)
-
-    def showempatwork(self):
+    def showEmpAtWork(self):
         date = self.__inputter.askForDate()
-        emp = self.__logic.showempatwork(date)
-        self.__data_printer.printempsworking(emp)
+        emp = self.__logic.showEmpAtWork(date)
+        self.__data_printer.printEmpsWorking(emp)
 
     def editFlightAircraftID(self, data):
         while True:
@@ -500,6 +499,7 @@ class UIAPI:
                 if self.__logic.checkIfPlane(aircraft_id):
                     if not(self.__logic.checkIfIsWorking(aircraft_id, dep_date)):
                         self.__logic.updateWorkTrip(flight_list, aircraft_id, 'aircraftID')
+                        break
                     else:
                         print("Plane is being used on that day")
                 else:
@@ -522,6 +522,7 @@ class UIAPI:
                         if self.__logic.checkIfMayFly(flight_capt, trip_plane_id):
                             if not(self.__logic.checkIfIsWorking(flight_capt, dep_date)):
                                 self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+                                break
                             else:
                                 print("Employee is working on that day")
                         else:
@@ -529,6 +530,7 @@ class UIAPI:
                     else:
                         if not(self.__logic.checkIfIsWorking(flight_capt, dep_date)):
                             self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+                            break
                         else:
                             print("Employee is working on that day")
                 else:
@@ -551,6 +553,7 @@ class UIAPI:
                         if self.__logic.checkIfMayFly(flight_copilot, trip_plane_id):
                             if not(self.__logic.checkIfIsWorking(flight_copilot, dep_date)):
                                 self.__logic.updateWorkTrip(flight_list, flight_copilot, 'captain')
+                                break
                             else:
                                 print("Employee is working on that day")
                         else:
@@ -558,6 +561,7 @@ class UIAPI:
                     else:
                         if not(self.__logic.checkIfIsWorking(flight_copilot, dep_date)):
                             self.__logic.updateWorkTrip(flight_list, flight_copilot, 'captain')
+                            break
                         else:
                             print("Employee is working on that day")
                 else:
@@ -577,12 +581,12 @@ class UIAPI:
                 dep_date = parsed_dep_flight.date()
                 if self.__logic.checkIfFSM(flight_fsm):
                     if not(self.__logic.checkIfIsWorking(flight_fsm, dep_date)):
+                        self.__logic.updateWorkTrip(flight_list, flight_fsm, 'fsm')
                         break
                     else:
                         print("Employee is working on that day")
                 else:
                     print("That is not a correct flight service manager's ssn")
-                self.__logic.updateWorkTrip(flight_list, flight_fsm, 'fsm')
         self.showSpecificWorktrip(dep_flight['flightNumber'])
         
     def editFlightFA_1(self, data):
@@ -598,6 +602,7 @@ class UIAPI:
                 if self.__logic.checkIfFA(flight_fa):
                     if not(self.__logic.checkIfIsWorking(flight_fa, dep_date)):
                         self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa1')
+                        break
                     else:
                         print("Employee is working on that day")
                 else:
@@ -617,6 +622,7 @@ class UIAPI:
                 if self.__logic.checkIfFA(flight_fa):
                     if not(self.__logic.checkIfIsWorking(flight_fa, dep_date)):
                         self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa2')
+                        break
                     else:
                         print("Employee is working on that day")
                 else:
@@ -627,8 +633,6 @@ class UIAPI:
         ''' Shows a specific work trip by flight number '''
         flight_list = self.__logic.showSpecificWorktrip(flight_num)
         self.__data_printer.printAllWorkTrips(flight_list)
-        
-        # self.__data_printer.printAllEmps(data_list)
     
     def showEmpWeekTrips(self):
         ssn = self.__inputter.enterVariable('SSN')
