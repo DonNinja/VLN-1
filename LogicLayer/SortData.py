@@ -74,7 +74,7 @@ class SortData:
         return None
     
     def sortPilotsByPlane(self, data, plane_type):
-        """ This  """
+        """ This checks if pilot has license for set plane """
         ret_list = []
         for item in data:
             if item['role'] == "Pilot" and item['licence'] == plane_type: # Checks if employee is pilot and if they have an active licence for the chosen plane
@@ -85,13 +85,15 @@ class SortData:
         pass
     
     def sortEmpTrips(self, data_list, ssn):
+        ''' This sorts emps that are on flight trip '''
         ret_list = []
         for item in data_list:
-            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn: # Checks if emp is on the trip
                 ret_list.append(item)
         return ret_list
 
     def dateSorter(self, data, date):
+        ''' This sorts by date '''
         ret_list = []
         for item in data:
             parsed_item_date = dateutil.parser.parse(item['departure'])
@@ -101,6 +103,7 @@ class SortData:
         return ret_list
 
     def sortOrderByPlane(self, data):
+        ''' This sorts by plane '''
         ret_list = []
         for item in data:
             if item['licence'] == 'NABAE146':
@@ -114,6 +117,7 @@ class SortData:
         return ret_list
 
     def weekSorter(self, data, start_date):
+        ''' This returns a week starting from starting date input '''
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
         for i in range(8):
@@ -178,6 +182,7 @@ class SortData:
         return emps_working
 
     def sortForTrip(self, flight_num_list, data):
+        ''' This returns a trip with the input flight number '''
         ret_list = []
         for item in data:
             if item['flightNumber'] == flight_num_list[0] or item['flightNumber'] == flight_num_list[1]:
@@ -185,7 +190,8 @@ class SortData:
         return ret_list
 
     def tripNumberSorter(self, flight_num, all_trips):
-        if flight_num[:2] == "NA":
+        ''' This returns both flights to and from'''
+        if flight_num[:2] == "NA": # All flightNumbers start with NA
             flight_num = flight_num[2:]
         flight_num = int(flight_num)
         ret_list = []
@@ -198,6 +204,7 @@ class SortData:
         return ret_list
     
     def sortForLocation(self, loc_id, data):
+        ''' This takes in location id from user and checks if it is in the file '''
         ret_list = []
         if loc_id == "KEF":
             return None
@@ -207,36 +214,42 @@ class SortData:
         return None
     
     def sortSpecificPlane(self, data, plane_insignia):
+        ''' This checks if plane in signa is in the file '''
         for item in data:
             if item['planeInsignia'] == plane_insignia:
                 return item
         return None
     
     def sortSpecificCaptain(self, data, ssn):
+        ''' This checks if a specific captain is in the file '''
         for item in data:
             if item['ssn'] == ssn and item['rank'] == 'Captain':
                 return item
         return None
     
     def sortSpecificCopilot(self, data, ssn):
+        ''' This checks if a specific copilot is in the file '''
         for item in data:
             if item['ssn'] == ssn and item['rank'] == 'Copilot':
                 return item
         return None
     
     def sortSpecificFSM(self, data, ssn):
+        ''' This checks if a specific flight service manager is in the file '''
         for item in data:
             if item['ssn'] == ssn and item['rank'] == 'Flight Service Manager':
                 return item
         return None
     
     def sortSpecificAttendant(self, data, ssn):
+        ''' This checks if a specific flight attendant is in the file '''
         for item in data:
             if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
                 return item
         return None
     
     def sortEmpTripsForWeek(self, data, start_date, ssn):
+        ''' This checks if a certain employee is working that week '''
         ret_list = []
         all_week_trips = self.weekSorter(data, start_date)
         for item in all_week_trips:
