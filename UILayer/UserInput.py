@@ -43,7 +43,7 @@ class UserInput:
         return input("\nEnter the new location's country (Non-Icelandic characters): ").capitalize()
     
     def addLocCountryAbbrev(self):
-        return input("\nEnter the new location's country's abbreviation (ex.: Iceland = ICE): ").upper()
+        return input("\nEnter the new location's airport's id (3 letters, ex.: Keflavik = KEF): ").upper()
 
     def addLocName(self):
         return input("\nEnter the new location's internal name (Non-Icelandic characters): ").capitalize()
@@ -130,53 +130,22 @@ class UserInput:
                 print("Input invalid")
         plane_data_list.append(plane_type)
 
-        planeinsignia = input("\nEnter plane Insignia (3 letters): ")
+        planeinsignia = input("\nEnter plane Insignia (3 letters): ").upper()
         #if __checker.planeinsignia(planeinsignia)
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
         return plane_data_list
 
     def enterVariable(self, to_enter):
-        return input("Enter a new {}: ".format(to_enter))
-
-    def editemp(self,pilot_list,emp_type):
-        edit_emp_list = []
-        print()
-        ssn = pilot_list[0]
-        #if __checker.checkSSN(ssn):
-        edit_emp_list.append(ssn)
-        name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        # self.__checker.checkName(name)
-        edit_emp_list.append(name)
-        role = emp_type.capitalize()
-        #if __checker.checkRole(role)
-        edit_emp_list.append(role)
-        rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
-        #if __checker.checkRank(rank)
-        edit_emp_list.append(rank)
-        if emp_type != "flight attendant":
-            licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
-            #if __checker.checkLicense(licens)
-            edit_emp_list.append(licens)
-        else:
-            licens = "N/A"
-        address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        #if __checker.checkAddress(address)
-        edit_emp_list.append(address)
-        mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        #if __checker.checkMobile(mobile)
-        edit_emp_list.append(mobile)
-        home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        #if __checker.checkHomePhone(home_phone)
-        edit_emp_list.append(home_phone)
-        print(edit_emp_list)
-        input("Press enter to continue...")
-        return edit_emp_list
+        return input("\nEnter a new {}: ".format(to_enter))
 
     def askForDate(self):
         '''Asking for a specific date to show work trips by day'''
-        day = input("Enter day (DD): ")
-        month = input("Enter month (MM): ")
-        year = input("Enter year (YYYY): ")
+        day = input("\nEnter day (DD): ")
+        month = input("\nEnter month (MM): ")
+        year = input("\nEnter year (YYYY): ")
         date = year + "-" + month + "-" + day
         return date
+
+    def askForLocID(self):
+        return input("\nEnter a location's ID (ex.: KEF): ").upper()

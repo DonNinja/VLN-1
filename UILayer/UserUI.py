@@ -390,7 +390,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.addLocation, "2" : self.whileEditingLocScreen, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.addLocation, "2" : self.enterLocID, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -400,19 +400,31 @@ class UserUI:
             else:
                 print("Input is invalid!")
 
-    def whileEditingLocScreen(self):
+    def enterLocID(self):
+        is_loc, loc_id = self.__ui_api.checkLocID()
+        if is_loc:
+            self.__ui_api.showSpecificLocation(loc_id)
+            self.whileEditingLocScreen(loc_id)
+        else:
+            print("That is not a location ID!")
+
+    def whileEditingLocScreen(self, loc_id):
         ''' This screen shows what the user can change about locations '''
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing location screen")
             choice_list = ["1 - Change emergency contact name", "2 - Change emergency contact phone number", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editLocContName, "2" : self.__ui_api.editLocContPhone, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                nextScreen = choice_dict.get(inp)
-                nextScreen()
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(loc_id)
             else:
                 print("Input is invalid!")
         
@@ -445,8 +457,12 @@ class UserUI:
             choice_dict.get(inp)
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                nextScreen = choice_dict.get(inp)
-                nextScreen(flight_num)
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(flight_num)
             else:
                 print("Input is invalid!")
 

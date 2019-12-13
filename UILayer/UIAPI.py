@@ -87,8 +87,9 @@ class UIAPI:
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('email')
-        email = self.__logic.checkEmail(new_var)
+        email, error_msg = self.__logic.checkEmail(new_var)
         while not(email):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('email')
             email = self.__logic.checkEmail(new_var)
         else:
@@ -98,8 +99,9 @@ class UIAPI:
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
-        address = self.__logic.checkAddress(new_var)
+        address, error_msg = self.__logic.checkAddress(new_var)
         while not(address):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
         else:
@@ -109,8 +111,9 @@ class UIAPI:
     def editHomePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('home phone number')
-        phone_check = self.__logic.checkPhone(new_var)
+        phone_check, error_msg = self.__logic.checkPhone(new_var)
         while not(phone_check):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('home phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
@@ -120,8 +123,9 @@ class UIAPI:
     def editMobilePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('mobile phone number')
-        phone_check = self.__logic.checkPhone(new_var)
+        phone_check, error_msg = self.__logic.checkPhone(new_var)
         while not(phone_check):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('mobile phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
@@ -130,8 +134,9 @@ class UIAPI:
     
     def editLicense(self, data):
         new_var = self.__inputter.addEmpLicens('plane license')
-        licens = self.__logic.checkLicens(new_var)
+        licens, error_msg = self.__logic.checkLicens(new_var)
         while not(licens):
+            print(error_msg)
             new_var = self.__inputter.addEmpLicens('plane license')
             licens = self.__logic.checkLicens(new_var)
         else:
@@ -270,8 +275,38 @@ class UIAPI:
         data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone]
         self.__logic.addLocation(data_list)
     
-    def editLocContName(self):
-        pass
+    def checkLocID(self):
+        loc_id = self.__inputter.askForLocID()
+        loc_data = self.__logic.showLocationID(loc_id)
+        return self.__logic.checkLocID(loc_id), loc_id
+    
+    def showSpecificLocation(self, loc_id):
+        data = self.__logic.showLocationID(loc_id)
+        self.__data_printer.printSingleLocation(data)
+
+    def editLocContPhone(self, loc_id):
+        cont_phone = self.__inputter.enterVariable('contact phone')
+        data = self.__logic.showLocationID(loc_id)
+        phone_check, error_msg = self.__logic.checkPhone(cont_phone)
+        while not(phone_check):
+            print(error_msg)
+            cont_phone = self.__inputter.enterVariable('contact phone')
+            phone_check, error_msg = self.__logic.checkPhone(cont_phone)
+        else:
+            self.__logic.updateLocation(data, cont_phone, 'contactPhone')
+            self.__data_printer.printSingleLocation(data) #show location by ID
+
+    def editLocContName(self, loc_id):
+        cont_name = self.__inputter.enterVariable('contact name')
+        data = self.__logic.showLocationID(loc_id)
+        name_check, error_msg = self.__logic.checkName(cont_name)
+        while not(name_check):
+            print(error_msg)
+            cont_name = self.__inputter.enterVariable('contact name')
+            name_check, error_msg = self.__logic.checkName(cont_name)
+        else:
+            self.__logic.updateLocation(data, cont_name, 'contactName')
+            self.__data_printer.printSingleLocation(data) #show location by ID
     
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''
@@ -296,7 +331,6 @@ class UIAPI:
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByWeek(date)
         self.__data_printer.printAllWorkTrips(data_list)
-        
 
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()

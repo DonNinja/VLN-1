@@ -120,3 +120,14 @@ class LogicAPI():
     
     def addLocation(self, data_list):
         self.__data.registerLocation(data_list)
+    
+    def checkLocID(self, loc_id):
+        data_list = self.showAllLocations()
+        return self.__data_sorter.sortForLocation(loc_id, data_list)
+    
+    def showLocationID(self, loc_id):
+        all_locations = self.__data.getLocations()
+        return self.__data_sorter.sortForLocation(loc_id, all_locations)
+    
+    def updateLocation(self, data, new_data, field):
+        self.__data.updateLocation(data, new_data, field)

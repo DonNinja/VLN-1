@@ -54,3 +54,12 @@ class DataAPI:
 
     def registerLocation(self, data_list):
         self.__register.registerLocation(data_list)
+    
+    def updateLocation(self, data, new_data, field):
+        data[field] = new_data
+        loc_list = self.__reader.readDestinations()
+        for item in loc_list:
+            if item['id'] == data['id']:
+                item.update(data)
+                break
+        self.__updater.updateLocation(loc_list)
