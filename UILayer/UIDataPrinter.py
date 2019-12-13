@@ -133,3 +133,14 @@ class UIDataPrinter:
             print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2'], trip['fullyManned']))
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
+
+
+    def printempsnotworking(self,emp_list):
+        print("employees not working")
+        for i in emp_list:
+            print(i)
+
+    def printempsworking(self,emp_list):
+        print("employees working")
+        for i in emp_list:
+            print(i)

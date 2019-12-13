@@ -126,6 +126,57 @@ class SortData:
             date_obj += datetime.timedelta(days=1)
         return ret_list
 
+
+    def empsnotatwork(self,trips,data):
+        emps_notworking = []
+
+        for line in trips:
+            comparedate = line["departure"]
+            comparedate = comparedate.split("T")
+            comparedate1 = line["arrival"]
+            comparedate1 = comparedate1.split("T")
+            if comparedate[0] != data or comparedate1[0] != data:
+                if line["captain"] != "X":
+                    emps_notworking.append(line["captain"])
+                elif line["copilot"] != "X":
+                    emps_notworking.append(line["copilot"])
+                elif line["fsm"] != "X":
+                    emps_notworking.append(line["fsm"])
+                elif line["fa1"] != "X":
+                    emps_notworking.append(line["fa1"])
+                elif line["fa2"] != "X":
+                    emps_notworking.append(line["fa2"])
+
+        return emps_notworking
+
+
+
+    def empsatwork(self,trips,data):
+        emps_working = []
+        
+        
+        for line in trips:
+            comparedate = line["departure"]
+            comparedate = comparedate.split("T")
+            comparedate1 = line["arrival"]
+            comparedate1 = comparedate1.split("T")
+            if comparedate[0] == data or comparedate1[0] == data:
+                if line["arrivingAt"] != "KEF":
+                    emps_working.append(line["arrivingAt"])
+                    if line["captain"] != "X":
+                        emps_working.append(line["captain"])
+                        if line["copilot"] != "X":
+                            emps_working.append(line["copilot"])
+                            if line["fsm"] != "X":
+                                emps_working.append(line["fsm"])
+                                if line["fa1"] != "X":
+                                    emps_working.append(line["fa1"])
+                                    if line["fa2"] != "X":
+                                        emps_working.append(line["fa2"])
+            
+
+        return emps_working
+
     def sortForTrip(self, flight_num_list, data):
         ret_list = []
         for item in data:
