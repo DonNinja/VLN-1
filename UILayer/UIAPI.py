@@ -493,6 +493,7 @@ class UIAPI:
 
 
     def editFlightAircraftID(self, data):
+        ''' This edits flight aircraft ID in work trip'''
         aircraft_id = self.__inputter.enterVariable('Flight Aircraft ID')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -500,6 +501,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightCaptain(self, data):
+        ''' This edits flight captain in work trip '''
         flight_capt = self.__inputter.enterVariable('Flight Captain SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -507,6 +509,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightCopilot(self, data):
+        ''' This edits flight copilot in work trip '''
         flight_copilot = self.__inputter.enterVariable('Flight Copilot SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -514,6 +517,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightFSM(self, data):
+        ''' This edits flight service manager in work trip '''
         flight_fsm = self.__inputter.enterVariable('Flight Service Manager SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -521,6 +525,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
         
     def editFlightFA_1(self, data):
+        ''' This edits flight attendant 1 in work trip '''
         flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -528,6 +533,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightFA_2(self, data):
+        ''' This edits flight attendant 2 in work trip '''
         flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
         flight_list = self.__logic.showSpecificWorktrip(data)
         dep_flight = flight_list[0]
@@ -535,6 +541,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def showSpecificWorktrip(self, flight_num):
+        ''' Shows a specific work trip by flight number '''
         flight_list = self.__logic.showSpecificWorktrip(flight_num)
         self.__data_printer.printAllWorkTrips(flight_list)
         
