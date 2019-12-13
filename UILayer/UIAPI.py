@@ -478,6 +478,19 @@ class UIAPI:
         self.__data_printer.printAllEmps(data_list)
 
 
+    def showempnotatwork(self):
+        date = self.__inputter.askForDate()
+        emp = self.__logic.showempnotworking(date)
+
+        self.__data_printer.printempsnotworking(emp)
+
+
+    def showempatwork(self):
+        date = self.__inputter.askForDate()
+        emp = self.__logic.showempatwork(date)
+        self.__data_printer.printempsworking(emp)
+
+
     def editFlightAircraftID(self, data):
         new_var = self.__inputter.enterVariable('Flight Aircraft ID')
         self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
