@@ -55,20 +55,20 @@ class DataAPI:
     def registerLocation(self, data_list):
         self.__register.registerLocation(data_list)
 
-    def updateWorkTrip(self, data, new_var, field):
-        data[field] = new_var
-        flight_list = self.__reader.readAllFlights()
-        for item in flight_list:
-            if item['flightNumber'] == data['flightNumber']:
-                item.update(data)
-            break
-        self.__updater.updateWorkTrip(flight_list)
+    def updateWorkTrip(self, new_flight_list, new_var, field):
+        for new_flight in new_flight_list:
+            new_flight[field] = new_var
+            flight_list = self.__reader.readAllFlights()
+            for flight in flight_list:
+                if flight['flightNumber'] == new_flight['flightNumber']:
+                    flight.update(new_flight)
+            self.__updater.updateWorkTrip(flight_list)
     
-    def updateLocation(self, data, new_data, field):
-        data[field] = new_data
+    def updateLocation(self, loc, new_data, field):
+        loc[field] = new_data
         loc_list = self.__reader.readDestinations()
         for item in loc_list:
-            if item['id'] == data['id']:
-                item.update(data)
+            if item['id'] == loc['id']:
+                item.update(loc)
                 break
         self.__updater.updateLocation(loc_list)

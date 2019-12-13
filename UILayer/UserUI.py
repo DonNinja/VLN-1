@@ -479,8 +479,12 @@ class UserUI:
             choice_dict.get(inp)
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                nextScreen = choice_dict.get(inp)
-                nextScreen(flight_num)
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(flight_num)
             else:
                 print("Input is invalid!")
 
@@ -496,12 +500,16 @@ class UserUI:
             choice_dict.get(inp)
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                nextScreen = choice_dict.get(inp)
-                nextScreen()
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(flight_num)
             else:
                 print("Input is invalid!")
     
     def enterFN(self):
-        flight_num = input("Enter a flight number (4 digits): ")
+        flight_num = input("Enter a flight number (4 digits): ").zfill(4)
         if self.__ui_api.showSpecificTrip(flight_num):
             self.whileEditingWorkTripsScreen(flight_num)
