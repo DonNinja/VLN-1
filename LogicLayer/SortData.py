@@ -32,7 +32,7 @@ class SortData:
         """ Takes all crew and only keeps the flight attendants """
         ret_list = []
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant": # Checks if the rank == Flight Attendant and adds it to the return list if so
+            if item['role'] == "Cabincrew": # Checks if the rank == Flight Attendant and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
@@ -69,7 +69,7 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
+            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     

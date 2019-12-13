@@ -347,8 +347,6 @@ class UIAPI:
                 else:
                     print("That is not a correct copilot's ssn")
             
-
-
         while True:
             trip_fsm = self.__inputter.addTripFSM() # Can be empty
             if trip_fsm.upper() == "HELP":
@@ -478,63 +476,155 @@ class UIAPI:
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
 
-
     def showempnotatwork(self):
         date = self.__inputter.askForDate()
         emp = self.__logic.showempnotworking(date)
 
         self.__data_printer.printempsnotworking(emp)
 
-
     def showempatwork(self):
         date = self.__inputter.askForDate()
         emp = self.__logic.showempatwork(date)
         self.__data_printer.printempsworking(emp)
 
-
     def editFlightAircraftID(self, data):
-        aircraft_id = self.__inputter.enterVariable('Flight Aircraft ID')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, aircraft_id, 'aircraftID')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            aircraft_id = self.__inputter.enterEditTripPlaneID()
+            if aircraft_id.upper() == "HELP":
+                self.showAllPlanes()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfPlane(aircraft_id):
+                    if not(self.__logic.checkIfIsWorking(aircraft_id, dep_date)):
+                        self.__logic.updateWorkTrip(flight_list, aircraft_id, 'aircraftID')
+                    else:
+                        print("Plane is being used on that day")
+                else:
+                    print("That is not a correct plane insignia")
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightCaptain(self, data):
-        flight_capt = self.__inputter.enterVariable('Flight Captain SSN')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            flight_capt = self.__inputter.enterEditTripCaptain()
+            if flight_capt.upper() == "HELP":
+                self.showAllCaptains()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                trip_plane_id = dep_flight['aircraftID']
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfCaptain(flight_capt):
+                    if trip_plane_id != "X":
+                        if self.__logic.checkIfMayFly(flight_capt, trip_plane_id):
+                            if not(self.__logic.checkIfIsWorking(flight_capt, dep_date)):
+                                self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+                            else:
+                                print("Employee is working on that day")
+                        else:
+                            print("This pilot may not fly a {}".format(trip_plane_id))
+                    else:
+                        if not(self.__logic.checkIfIsWorking(flight_capt, dep_date)):
+                            self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+                        else:
+                            print("Employee is working on that day")
+                else:
+                    print("That is not a correct captain's ssn")
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightCopilot(self, data):
-        flight_copilot = self.__inputter.enterVariable('Flight Copilot SSN')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, flight_copilot, 'copilot')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            flight_copilot = self.__inputter.enterEditTripCopilot()
+            if flight_copilot.upper() == "HELP":
+                self.showAllCopilots()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                trip_plane_id = dep_flight['aircraftID']
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfCopilot(flight_copilot):
+                    if trip_plane_id != "X":
+                        if self.__logic.checkIfMayFly(flight_copilot, trip_plane_id):
+                            if not(self.__logic.checkIfIsWorking(flight_copilot, dep_date)):
+                                self.__logic.updateWorkTrip(flight_list, flight_copilot, 'captain')
+                            else:
+                                print("Employee is working on that day")
+                        else:
+                            print("This pilot may not fly a {}".format(trip_plane_id))
+                    else:
+                        if not(self.__logic.checkIfIsWorking(flight_copilot, dep_date)):
+                            self.__logic.updateWorkTrip(flight_list, flight_copilot, 'captain')
+                        else:
+                            print("Employee is working on that day")
+                else:
+                    print("That is not a correct copilot's ssn")
+                self.__logic.updateWorkTrip(flight_list, flight_copilot, 'copilot')
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightFSM(self, data):
-        flight_fsm = self.__inputter.enterVariable('Flight Service Manager SSN')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, flight_fsm, 'fsm')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            flight_fsm = self.__inputter.enterEditTripFSM()
+            if flight_fsm.upper() == "HELP":
+                self.showAllFSM()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfFSM(flight_fsm):
+                    if not(self.__logic.checkIfIsWorking(flight_fsm, dep_date)):
+                        break
+                    else:
+                        print("Employee is working on that day")
+                else:
+                    print("That is not a correct flight service manager's ssn")
+                self.__logic.updateWorkTrip(flight_list, flight_fsm, 'fsm')
         self.showSpecificWorktrip(dep_flight['flightNumber'])
         
     def editFlightFA_1(self, data):
-        flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa1')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            flight_fa = self.__inputter.enterEditTripFA()
+            if flight_fa.upper() == "HELP":
+                self.showAllAttendants()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfFA(flight_fa):
+                    if not(self.__logic.checkIfIsWorking(flight_fa, dep_date)):
+                        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa1')
+                    else:
+                        print("Employee is working on that day")
+                else:
+                    print("That is not a correct flight attendant's ssn")
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightFA_2(self, data):
-        flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        dep_flight = flight_list[0]
-        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa2')
+        while True:
+            flight_list = self.__logic.showSpecificWorktrip(data)
+            flight_fa = self.__inputter.enterEditTripFA()
+            if flight_fa.upper() == "HELP":
+                self.showAllAttendants()
+            else:
+                dep_flight = flight_list[0]
+                parsed_dep_flight = dateutil.parser.parse(dep_flight['departure'])
+                dep_date = parsed_dep_flight.date()
+                if self.__logic.checkIfFA(flight_fa):
+                    if not(self.__logic.checkIfIsWorking(flight_fa, dep_date)):
+                        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa2')
+                    else:
+                        print("Employee is working on that day")
+                else:
+                    print("That is not a correct flight attendant's ssn")
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def showSpecificWorktrip(self, flight_num):
+        ''' Shows a specific work trip by flight number '''
         flight_list = self.__logic.showSpecificWorktrip(flight_num)
         self.__data_printer.printAllWorkTrips(flight_list)
         
