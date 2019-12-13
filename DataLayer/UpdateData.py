@@ -24,6 +24,7 @@ class UpdateData:
         file_stream.close()
 
     def updateWorkTrip(self, flight_list):
+        ''' This writes every value of data into the flight file, updating it '''
         with open("./STUDENTDATA/Flights.csv", 'w',newline='\n') as file_stream:
             newFileWriter = csv.writer(file_stream)
             newFileWriter.writerow(['flightNumber', 'departingFrom', 'arrivingAt', 'departure', 'arrival', 'aircraftID', 'captain', 'copilot', 'fsm', 'fa1', 'fa2', 'fullyManned'])

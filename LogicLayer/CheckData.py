@@ -14,12 +14,14 @@ class CheckData:
         return False
     
     def checkIfExists(self, inp, field, data):
+        ''' Check if employee exists '''
         for item in data:
             if item[field] == inp:
                 return False, "{} already exists".format(field.capitalize())
         return True, None
     
     def checkIfMayFly(self, emp_item, plane_item):
+        ''' Checks if pilot may fly plane '''
         if emp_item['licence'] == plane_item['planeTypeId']:
             return True
         return False

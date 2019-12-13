@@ -53,17 +53,17 @@ class UserInputCheck:
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
             return licens
-        if self.digitCheck(licens):
-            if licens == '1':
-                licens = LICENSE_FOKKER100
+        if self.digitCheck(licens): # Checks input for digits
+            if licens == '1': # return varies on input
+                licens = LICENSE_FOKKER100 
                 return licens
-            if licens == '2':
+            if licens == '2': # return varies on input
                 licens = LICENSE_FOKKER28
                 return licens
-            if licens == '3':
+            if licens == '3': # return varies on input
                 licens = LICENSE_NABAE146
                 return licens
-            if licens != '1' or '2' or '3':
+            if licens != '1' or '2' or '3': # Only valid inputs are 1, 2 and 3 
                 return False
         else:
             return False
@@ -75,7 +75,7 @@ class UserInputCheck:
             for ch in line:
                 email_list.append(ch)
         if email.isalnum():
-            if len(email_list) < 20:
+            if len(email_list) < 20: # Checks the length of list
                 return email + "@NaNAir.is", None
             else:
                 return False, "Email is too long, must be under 20 characters"
@@ -84,20 +84,20 @@ class UserInputCheck:
 
     def checkRank(self, rank, role):
         """ This takes input int from user and turns it into the desired rank """
-        if self.digitCheck(rank):
-            if rank == '1' and role == 'Pilot':
+        if self.digitCheck(rank): # checks if input was a digit
+            if rank == '1' and role == 'Pilot': # If input was 1 we return the rank Captain
                 rank = CAPTAIN
                 return rank
-            if rank == '2' and role == 'Pilot':
+            if rank == '2' and role == 'Pilot': # Same as a above but 2 returns Copilot
                 rank = COPILOT
                 return rank
-            if rank == '1' and role == 'Cabincrew':
+            if rank == '1' and role == 'Cabincrew': # If input was 1 we return flight attendant
                 rank = FLIGHTATT
                 return rank
-            if rank == '2' and role == 'Cabincrew':
+            if rank == '2' and role == 'Cabincrew': # If input was 2 we return flight service manager
                 rank = FLIGHTSMANAGER
                 return rank
-            if rank != '1' or '2':
+            if rank != '1' or '2': # If rank was not 1 or 2 input was invalid
                 return False
         else:
             return False
@@ -113,7 +113,7 @@ class UserInputCheck:
     def digitCheck(self, data):
         """ This checks for int """
         try:
-            [str(int(i)) for i in data.split()]
+            [str(int(i)) for i in data.split()] # splits the str and trys for ints
             return True, None
         except:
             ValueError
@@ -132,7 +132,7 @@ class UserInputCheck:
 
     def dateCheckSSN(self, ssn):
         """ This checks if SSN date is valid """
-        if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn):
+        if re.match(r"^[0-7]\d[01]\d{3}[-]*\d{3}[09]$", ssn): # Checks if ssn is in valid format
             return True, None
         else:
             return False, "The date is invalid."
@@ -143,11 +143,11 @@ class UserInputCheck:
         first_address = address_list[0]
         digit_address = address_list[-1]
         full_address = ''
-        if first_address.isalpha() and digit_address.isdigit():
+        if first_address.isalpha() and digit_address.isdigit(): # Checks for letters
             if first_address == digit_address:
                 return False, "First and last address can not be same"
             else:
-                full_address = first_address.capitalize() + " " + digit_address 
+                full_address = first_address.capitalize() + " " + digit_address # Fixes the address if its not capitalized
                 return full_address, None
         else:
             return False, "Invalid address (example: Fellsmuli 20)"
@@ -171,6 +171,7 @@ class UserInputCheck:
         pass
 
     def checkNum(self, num):
+        ''' Cheks if it contains digits '''
         try:
             num = int(num)
             return True
