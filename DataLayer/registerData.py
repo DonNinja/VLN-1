@@ -18,7 +18,7 @@ class RegisterData:
 
         with open("./STUDENTDATA/Crew.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the user into it
             newFileWriter = csv.writer(file_stream)
-            newFileWriter.writerow([self.ssn,self.name,self.role,self.rank,self.email,self.licence,self.address,self.mobile_phone_number,self.home_phone_number])
+            newFileWriter.writerow([self.ssn, self.name, self.role, self.rank, self.email, self.licence, self.address, self.mobile_phone_number, self.home_phone_number])
         file_stream.close()
 
     def registerPlane(self, data_list):
@@ -28,7 +28,7 @@ class RegisterData:
         with open("./STUDENTDATA/Aircraft.csv", 'a',newline='\n') as file_stream:
             # This opens the file and inserts the plane into it
             newFileWriter = csv.writer(file_stream)
-            newFileWriter.writerow([self.planeID,self.insignia])
+            newFileWriter.writerow([self.planeID, self.insignia])
         file_stream.close()
 
     def registerWorkTrip(self, data_list):
@@ -56,10 +56,15 @@ class RegisterData:
         self.capssn = data_list[5]
         self.copssn = data_list[6]
         self.flightsmssn = data_list[7]
+        self.flight_fa1 = data_list[8]
+        self.flight_fa2 = data_list[9]
+        self.ret_dep_time = data_list[10]
+        self.ret_arr_time = data_list[11]
+        self.fully_manned = data_list[12]
 
         with open("./STUDENTDATA/Flights.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the user into it
             newFileWriter = csv.writer(file_stream)
-            newFileWriter.writerow([self.flight_num,self.Depfrom,self.Arrat,self.deptime,self.arrtime,self.aircID,self.capssn,self.copssn,self.flightsmssn])
+            newFileWriter.writerow([self.flight_num, self.Depfrom, self.Arrat, self.deptime, self.arrtime, self.aircID, self.capssn, self.copssn, self.flightsmssn, self.flight_fa1, self.flight_fa2, self.fully_manned])
         file_stream.close()
         counter = counter+1
         if counter < 100:
@@ -69,14 +74,12 @@ class RegisterData:
         else:
             self.flight_num = "NA" + str(counter)
 
-        self.deptime = self.arrtime + datetime.timedelta(hours=1)
-        self.arrtime = self.deptime + data_list[8]
         self.Depfrom = data_list[1]
         self.Arrat = data_list[0]
-        
+
         with open("./STUDENTDATA/Flights.csv", 'a',newline='\n') as file_stream: # This opens the file and inserts the user into it
             newFileWriter = csv.writer(file_stream)
-            newFileWriter.writerow([self.flight_num,self.Depfrom,self.Arrat,self.deptime,self.arrtime,self.aircID,self.capssn,self.copssn,self.flightsmssn])
+            newFileWriter.writerow([self.flight_num, self.Depfrom, self.Arrat, self.ret_dep_time, self.ret_arr_time, self.aircID, self.capssn, self.copssn, self.flightsmssn, self.flight_fa1, self.flight_fa2, self.fully_manned])
         file_stream.close()
 
     def registerLocation(self, data_list):

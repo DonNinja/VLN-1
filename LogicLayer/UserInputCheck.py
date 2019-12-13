@@ -83,7 +83,6 @@ class UserInputCheck:
                 return False, "Email is too long, must be under 20 characters"
         else:
             return False, "Email can not be only numbers, or includes forbidden characters"
-       
 
     def checkRank(self, rank, role):
         """ This takes input int from user and turns it into the desired rank """

@@ -2,7 +2,7 @@
 class UserInput:
     def __init__(self):
         pass
-    
+
     def addEmpSSN(self, emp_type):
         print()
         return input("\nEnter the new {}'s ssn: ".format(emp_type)).capitalize()
@@ -17,7 +17,6 @@ class UserInput:
         else:
             print("\n1: Flight Service Manager\n2: Flight Attendant")
             return input("\nChoose a rank: ")
-                
 
     def addEmpEmail(self, emp_type):
         return input("\nEnter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
@@ -43,7 +42,7 @@ class UserInput:
         return input("\nEnter the new location's country (Non-Icelandic characters): ").capitalize()
     
     def addLocCountryAbbrev(self):
-        return input("\nEnter the new location's country's abbreviation (ex.: Iceland = ICE): ").upper()
+        return input("\nEnter the new location's airport's id (3 letters, ex.: Keflavik = KEF): ").upper()
 
     def addLocName(self):
         return input("\nEnter the new location's internal name (Non-Icelandic characters): ").capitalize()
@@ -70,7 +69,41 @@ class UserInput:
         ssn = input("\nEnter a{}'s SSN: ".format(emp_type))
         #Check hvort að kennitalan tilheyri einhverjum starfsmanni
         return ssn
+
+    def addTripDest(self):
+        return input("\nEnter trip destination id (Not KEF): ").upper()
     
+    def addTripDepTime(self):
+        print("\nNow entering a departure time and date:")
+        while True:
+            work_dep_day = input("\nEnter a day (dd): ").zfill(2)
+            work_dep_month = input("Enter a month (mm): ").zfill(2)
+            work_dep_year = input("Enter a year (yyyy): ")
+            work_dep_hour = input("Enter an hour (HH): ")
+            work_dep_min = input("Enter minutes (MM): ")
+            work_dep_sec = "00"
+            work_departure_time = "{}-{}-{} {}:{}:{}".format(work_dep_year, work_dep_month, work_dep_day, work_dep_hour, work_dep_min, work_dep_sec)
+            try:
+                work_date = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+                return work_date
+            except:
+                print("There was something wrong with your input, please try again")
+    
+    def addTripPlaneID(self):
+        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one): ").upper()
+    
+    def addTripPilot(self):
+        return input("\nEnter the Pilot's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripCopilot(self):
+        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripFSM(self):
+        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripFA(self):
+        return input("\nEnter a flight attendant's SSN (Keep empty if you don't want to enter one): ")
+
     def addWorkTrip(self):
         work_trip_data_list = []
         work_destination = input("\nEnter a destination: ")
@@ -96,12 +129,10 @@ class UserInput:
 
         work_trip_data_list.append(work_departure_date)
         work_departure_time = input("\nEnter a departure time (YYYY-MM-DD HH:MM:SS): ")
-        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%dT%H:%M:%S')
         work_trip_data_list.append(dep_time_obj)
         
-
-        work_arrival_time = dep_time_obj
-        arr_time_obj = work_arrival_time + flight_time
+        arr_time_obj = dep_time_obj + flight_time
         work_trip_data_list.append(arr_time_obj)
 
         planeID = input("\nEnter planeID: ")
@@ -111,19 +142,12 @@ class UserInput:
         work_trip_data_list.append(work_pilot_ssn)
         work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
         work_trip_data_list.append(work_copilot_ssn)
-        more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
-        while more_pilots == "Y":
-            work_extra_pilot_ssn = input("\nEnter another pilot's SSN")
-            work_trip_data_list.append(work_extra_pilot_ssn)
-            more_pilots = input("Would you like to enter more pilots? (Y/N): ").upper()
-        work_attendant = input("\nEnter a flight attendant's SSN: ")
+
+        work_attendant = input("\nEnter a flight service manager's SSN: ")
         work_trip_data_list.append(work_attendant)
-        more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
-        while more_attendants == "Y":
-            work_extra_attendant_ssn = input("\nEnter another flight attendant's SSN: ")
-            more_attendants = input("Would you like to enter more flight attendants? (Y/N): ").upper()
-            work_trip_data_list.append(work_extra_attendant_ssn)
-        print(work_trip_data_list)
+        work_trip_data_list.append(flight_time)
+        work_trip_data_list.append("X")
+        work_trip_data_list.append("X")
         input("\nPress enter to continue...")
         return work_trip_data_list
 
@@ -140,57 +164,25 @@ class UserInput:
                 print("Input invalid")
         plane_data_list.append(plane_type)
 
-        planeinsignia = input("\nEnter plane Insignia (3 letters): ")
+        planeinsignia = input("\nEnter plane Insignia (3 letters): ").upper()
         #if __checker.planeinsignia(planeinsignia)
         planeinsignia = "TF-" + planeinsignia
         plane_data_list.append(planeinsignia)
         return plane_data_list
 
     def enterVariable(self, to_enter):
-        return input("Enter a new {}: ".format(to_enter))
+        return input("\nEnter a new {}: ".format(to_enter))
 
-    def editemp(self,pilot_list,emp_type):
-        edit_emp_list = []
-        print()
-        ssn = pilot_list[0]
-        #if __checker.checkSSN(ssn):
-        edit_emp_list.append(ssn)
-        name = input("Enter the new {}'s name: ".format(emp_type)).capitalize()
-        # self.__checker.checkName(name)
-        edit_emp_list.append(name)
-        role = emp_type.capitalize()
-        #if __checker.checkRole(role)
-        edit_emp_list.append(role)
-        rank = input("Enter the new {}'s rank: ".format(emp_type)).capitalize()
-        #if __checker.checkRank(rank)
-        edit_emp_list.append(rank)
-        if emp_type != "flight attendant":
-            licens = input("Enter the new {}'s license: ".format(emp_type)).capitalize()
-            #if __checker.checkLicense(licens)
-            edit_emp_list.append(licens)
-        else:
-            licens = "N/A"
-        address = input("Enter the new {}'s address: ".format(emp_type)).capitalize()
-        #if __checker.checkAddress(address)
-        edit_emp_list.append(address)
-        mobile = input("Enter the new {}'s mobile number: ".format(emp_type)).capitalize()
-        #if __checker.checkMobile(mobile)
-        edit_emp_list.append(mobile)
-        home_phone = input("Enter the new {}'s home phone number: ".format(emp_type)).capitalize()
-        #if __checker.checkHomePhone(home_phone)
-        edit_emp_list.append(home_phone)
-        print(edit_emp_list)
-        input("Press enter to continue...")
-        return edit_emp_list
-        
+    def enterEmail(self):
+        return input("\nEnter a new email (@NaNAir.is will be added to it): ")
+
     def askForDate(self):
         '''Asking for a specific date to show work trips by day'''
-        day = input("Enter day (DD): ")
-        month = input("Enter month (MM): ")
-        year = input("Enter year (YYYY): ")
+        day = input("\nEnter day (DD): ")
+        month = input("\nEnter month (MM): ")
+        year = input("\nEnter year (YYYY): ")
         date = year + "-" + month + "-" + day
         return date
-    
-    def askForFlightNumber(self):
-        flightnumber = input("Enter FlightNumber")
-        return flightnumber
+
+    def askForLocID(self):
+        return input("\nEnter a location's ID (ex.: KEF): ").upper()

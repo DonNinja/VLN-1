@@ -41,4 +41,21 @@ class UpdateData:
                 self.fa2 = item['fa2']
                 
                 newFileWriter.writerow([self.flightNumber,self.departingFrom,self.arrivingAt,self.departure,self.arrival,self.aircraftID,self.captain,self.copilot,self.fsm, self.fa1, self.fa2])
+    
+    def updateLocation(self, data):
+        """ This writes every value of the data into the destinations file, upating it. """
+        with open("./STUDENTDATA/Destinations.csv", 'w',newline='\n') as file_stream:
+            newFileWriter = csv.writer(file_stream)
+            newFileWriter.writerow(['id', 'destination', 'country', 'airport', 'flightTime', 'distanceFromIceland', 'contactName', 'contactPhone'])
+            for item in data:
+                self.loc_id = item['id']
+                self.destination = item['destination']
+                self.country = item['country']
+                self.airport = item['airport']
+                self.flight_time = item['flightTime']
+                self.distance = item['distanceFromIceland']
+                self.contact_name = item['contactName']
+                self.contact_phone = item['contactPhone']
+
+                newFileWriter.writerow([self.loc_id, self.destination, self.country, self.airport, self.flight_time, self.distance, self.contact_name, self.contact_phone])
         file_stream.close()

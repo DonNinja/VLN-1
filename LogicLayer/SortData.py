@@ -20,8 +20,16 @@ class SortData:
                 ret_list.append(item)
         return ret_list
     
+    def sortCabincrew(self, data):
+        ret_list = []
+        for item in data:
+            if item['role'] == "Cabincrew":
+                ret_list.append(item)
+        return ret_list
+    
     def sortEmployeeSSN(self, data, ssn):
         """ This returns the employee with the inputted SSN, else None if the employee is not found """
+        ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['ssn'] == ssn: # Checks if the SSN is correct and returns it if so, else returns none
                 return item
@@ -37,7 +45,7 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Cabincrew and the SSN is correct and returns it if so, else returns none
+            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     
@@ -81,11 +89,11 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-    def weekSorter(self, data , start_date):
+    def weekSorter(self, data, start_date):
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
         for i in range(8):
-            i = i
+            i = i # Bara svo það komi ekki upp error
             for item in data:
                 parsed_item_date = dateutil.parser.parse(item['departure'])
                 item_date = str(parsed_item_date.date())
@@ -101,10 +109,48 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-    def flightNumberSorter(self, data, all_trips, new_var, field):
+    def flightNumberSorter(self, data, all_trips):
         ret_list = []
         for line in all_trips:
             if line['flightNumber'] == 'NA' + data:
-                if line[field] == 'X':
                     ret_list.append(line)
         return ret_list
+    
+    def sortForLocation(self, loc_id, data):
+        ret_list = []
+        if loc_id == "KEF":
+            return None
+        for item in data:
+            if item['id'] == loc_id:
+                return item
+        return None
+    
+    def sortSpecificPlane(self, data, plane_id):
+        for item in data:
+            if item['planeInsignia'] == plane_id:
+                return item
+        return None
+    
+    def sortSpecificCaptain(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Captain':
+                return item
+        return None
+    
+    def sortSpecificCopilot(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Copilot':
+                return item
+        return None
+    
+    def sortSpecificFSM(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Flight Service Manager':
+                return item
+        return None
+    
+    def sortSpecificAttendant(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
+                return item
+        return None

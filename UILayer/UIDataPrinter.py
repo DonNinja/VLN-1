@@ -79,21 +79,38 @@ class UIDataPrinter:
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
     
-    def printLocations(self, data_list):
+    def printLocations(self, location):
         """ This prints every location from the data list """
-        line = '║{:^13}│{:^13}│{:^20}│{:^11}│{:^19}│{:^20}│{:^20}║'.format('City', 'Country', 'Airport name', 'Flight time', 'Flight distance(km)', 'Contact name', 'Contact phone number')
+        line = '║{:^3}│{:^13}│{:^13}│{:^20}│{:^11}│{:^19}│{:^20}│{:^20}║'.format('ID', 'City', 'Country', 'Airport name', 'Flight time', 'Flight distance(km)', 'Contact name', 'Contact phone number')
         self.printTopLine(len(line))
         print(line)
         self.printSeparator(len(line))
-        for dest in data_list:
-            dest_hour, dest_min = dest['flightTime'].split(".")
-            print('║{:^13}│{:^13}│{:^20}│   {}h{:02d}m   │{:^19}│{:^20}│{:^20}║'.format(dest['destination'], dest['country'], dest['airport'], dest_hour, int(dest_min), dest['distanceFromIceland'], dest['contactName'], dest['contactPhone']))
+        if location:
+            for loc in location:
+                loc_hour, loc_min = loc['flightTime'].split(".")
+                print('║{:^3}│{:^13}│{:^13}│{:^20}│   {}h{:02d}m   │{:^19}│{:^20}│{:^20}║'.format(loc['id'], loc['destination'], loc['country'], loc['airport'], loc_hour, int(loc_min), loc['distanceFromIceland'], loc['contactName'], loc['contactPhone']))
+            self.printBotLine(len(line))
+            return True
+        else:
+            return False
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
     
+    def printSingleLocation(self, location):
+        """ This prints every location from the data list """
+        line = '║{:^3}│{:^13}│{:^13}│{:^20}│{:^11}│{:^19}│{:^20}│{:^20}║'.format('ID', 'City', 'Country', 'Airport name', 'Flight time', 'Flight distance(km)', 'Contact name', 'Contact phone number')
+        self.printTopLine(len(line))
+        print(line)
+        self.printSeparator(len(line))
+        if location:
+            loc_hour, loc_min = location['flightTime'].split(".")
+            print('║{:^3}│{:^13}│{:^13}│{:^20}│   {}h{:02d}m   │{:^19}│{:^20}│{:^20}║'.format(location['id'], location['destination'], location['country'], location['airport'], loc_hour, int(loc_min), location['distanceFromIceland'], location['contactName'], location['contactPhone']))
+        self.printBotLine(len(line))
+        input("\nPress enter to continue...")
+
     def printAllWorkTrips(self, data_list):
         """ This receives a list of every flight and prints them out neatly """
-        line = '║{:^13}│{:^14}│{:^11}│{:^19}│{:^19}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}║'.format('Flight number', 'Departing from', 'Arriving at', 'Departure time', 'Arrival time', 'Aircraft ID', 'Captain SSN', 'Copilot SSN', 'Flight SM SSN', 'Flight att 1 SSN', 'Flight att 2 SSN')
+        line = '║{:^13}│{:^14}│{:^11}│{:^19}│{:^19}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format('Flight number', 'Departing from', 'Arriving at', 'Departure time', 'Arrival time', 'Aircraft ID', 'Captain SSN', 'Copilot SSN', 'Flight SM SSN', 'Flight att 1 SSN', 'Flight att 2 SSN', 'Fully manned')
         self.printTopLine(len(line))
         print(line)
         self.printSeparator(len(line))
@@ -104,7 +121,7 @@ class UIDataPrinter:
             dep_time_month = parsed_dep_time.month
             dep_time_year = parsed_dep_time.year
             dep_time_clock = parsed_dep_time.time()
-            correct_dep_time = "{:02d}.{}.{} {}".format(dep_time_day, dep_time_month, dep_time_year, dep_time_clock)
+            correct_dep_time = "{:02d}.{:02d}.{} {}".format(dep_time_day, dep_time_month, dep_time_year, dep_time_clock)
 
             arr_time = trip['arrival']
             parsed_arr_time = dateutil.parser.parse(arr_time)
@@ -112,8 +129,8 @@ class UIDataPrinter:
             arr_time_month = parsed_arr_time.month
             arr_time_year = parsed_arr_time.year
             arr_time_clock = parsed_arr_time.time()
-            correct_arr_time = "{:02d}.{}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
+            correct_arr_time = "{:02d}.{:02d}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
             
-            print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2']))
+            print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2'], trip['fullyManned']))
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
