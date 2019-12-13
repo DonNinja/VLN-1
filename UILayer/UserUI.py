@@ -212,8 +212,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Display Flight Attendant Screen")  # Displays the header with the appropriate screen name
-            choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day", "3 - Show attendants not at work on day", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR] # Lists choices available
-            choice_dict = {"1" : self.__ui_api.showAllAttendants , "2" : self.__ui_api.showEmpAtWork, "3" : self.__ui_api.showEmpNotAtWork, "4" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
+            choice_list = ["1 - Show all attendants", "2 - Look for attendant by SSN", BACK_STR, QUIT_STR] # Lists choices available
+            choice_dict = {"1" : self.__ui_api.showAllAttendants , "2" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
             self.__ui_api.UIDisplay(choice_list) # Displays the choices
             inp = self.askForInput()
             #Check if input is valid
@@ -234,8 +234,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Display Pilot Screen")  # Displays the header with the appropriate screen name
-            choice_list = ["1 - Show all pilots", "2 - Show pilots at work on day", "3 - Show pilots not at work on day", "4 - Look for pilot by SSN", BACK_STR, QUIT_STR] # Lists choices available
-            choice_dict = {"1" : self.__ui_api.showAllPilots , "2" : self.__ui_api.showEmpAtWork, "3" : self.__ui_api.showEmpNotAtWork, "4" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
+            choice_list = ["1 - Show all pilots", "2 - Look for pilot by SSN", BACK_STR, QUIT_STR] # Lists choices available
+            choice_dict = {"1" : self.__ui_api.showAllPilots , "2" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit} # The dictionary values are function names, which are then called when one of the keys is entered
             self.__ui_api.UIDisplay(choice_list) # Displays the choices
             inp = self.askForInput()
             #Check if input is valid
