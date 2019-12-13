@@ -102,14 +102,15 @@ class UIAPI:
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
-        new_var = self.__inputter.enterEmail()
-        email, error_msg = self.__logic.checkEmail(new_var)
-        while not(email):
+        new_email = self.__inputter.enterEmail()
+        email_check, error_msg = self.__logic.checkEmail(new_email)
+        while not(email_check):
             print(error_msg)
-            new_var = self.__inputter.enterEmail()
-            email = self.__logic.checkEmail(new_var)
+            new_email = self.__inputter.enterEmail()
+            email_check, error_msg = self.__logic.checkEmail(new_email)
         else:
-            self.__logic.updateEmp(data, email, 'email')
+            new_email += "@NaNAir.is"
+            self.__logic.updateEmp(data, new_email, 'email')
             self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
@@ -220,7 +221,7 @@ class UIAPI:
             email_input = self.__inputter.addEmpEmail(emp_type)
             email, error_msg = self.__logic.checkEmail(email_input)
         else:
-            return email
+            return email_input
 
     def checkLicens(self,emp_type): #Virkar
         """ This checks if licens is valid and returns right licens"""
@@ -481,29 +482,29 @@ class UIAPI:
     def editFlightAircraftID(self, data):
         new_var = self.__inputter.enterVariable('Flight Aircraft ID')
         self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
-        self.showSpecificWorktrip(data['flight number'])
-        
+        self.showSpecificWorktrip(data['flightNumber'])
 
     def editFlightCaptain(self, data):
-        new_var = self.__inputter.enterVariable('Flight Captain')
-        flight = self.__logic.showSpecificWorktrip(data)
-        self.__logic.updateWorkTrip(flight, new_var, 'captain')
-        self.showSpecificWorktrip(flight['flight number'])
+        flight_capt = self.__inputter.enterVariable('Flight Captain')
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, flight_capt, 'captain')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
 
-    def editFlightCopilot():
+    def editFlightCopilot(self):
         pass
 
-    def editFlightFSM():
+    def editFlightFSM(self):
         pass
 
-    def editFlightFA():
+    def editFlightFA(self):
         pass
 
     def showSpecificWorktrip(self, flight_num):
-        flight_list = self.__logic.showSpecificWorktrip(data)
-        self.__data_printer.printWorkTrip(flight_list)
+        flight_list = self.__logic.showSpecificWorktrip(flight_num)
+        self.__data_printer.printAllWorkTrips(flight_list)
         
-        self.__data_printer.printAllEmps(data_list)
+        # self.__data_printer.printAllEmps(data_list)
     
     def showEmpWeekTrips(self):
         ssn = self.__inputter.enterVariable('SSN')

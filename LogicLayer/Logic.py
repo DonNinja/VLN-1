@@ -95,7 +95,6 @@ class LogicAPI():
             check_ssn, err_msg = self.__data_check.checkIfExists(ssn, 'ssn', data)
         return check_ssn, err_msg
 
-
     def checkName(self, name):
         return self.__user_check.checkName(name)
     
@@ -154,8 +153,7 @@ class LogicAPI():
 
     def showSpecificWorktrip(self, flightnumber):
         all_trips = self.__data.getTrips()
-        return self.__data_sorter.flightNumberSorter(flightnumber, all_trips)
-        
+        return self.__data_sorter.tripNumberSorter(flightnumber, all_trips)
 
 # import re
 # class Employee:

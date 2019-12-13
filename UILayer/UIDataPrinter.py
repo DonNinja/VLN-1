@@ -121,7 +121,6 @@ class UIDataPrinter:
             dep_time_year = parsed_dep_time.year
             dep_time_clock = parsed_dep_time.time()
             correct_dep_time = "{:02d}.{:02d}.{} {}".format(dep_time_day, dep_time_month, dep_time_year, dep_time_clock)
-
             arr_time = trip['arrival']
             parsed_arr_time = dateutil.parser.parse(arr_time)
             arr_time_day = parsed_arr_time.day

@@ -133,11 +133,17 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-    def flightNumberSorter(self, data, all_trips):
+    def tripNumberSorter(self, flight_num, all_trips):
+        if flight_num[:2] == "NA":
+            flight_num = flight_num[2:]
+        flight_num = int(flight_num)
         ret_list = []
-        for line in all_trips:
-            if line['flightNumber'] == 'NA' + data:
-                    ret_list.append(line)
+        for i in range(2):
+            if i == 1:
+                flight_num += 1
+            for line in all_trips:
+                if line['flightNumber'] == 'NA' + str(flight_num).zfill(4):
+                        ret_list.append(line)
         return ret_list
     
     def sortForLocation(self, loc_id, data):
