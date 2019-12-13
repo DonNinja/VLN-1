@@ -493,10 +493,11 @@ class UIAPI:
 
 
     def editFlightAircraftID(self, data):
-        new_var = self.__inputter.enterVariable('Flight Aircraft ID')
+        aircraft_id = self.__inputter.enterVariable('Flight Aircraft ID')
         flight_list = self.__logic.showSpecificWorktrip(data)
-        self.__logic.updateFlightAircraftID(data, new_var, 'aircraftID')
-        self.showSpecificWorktrip(data['flightNumber'])
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, aircraft_id, 'aircraftID')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def editFlightCaptain(self, data):
         flight_capt = self.__inputter.enterVariable('Flight Captain SSN')
@@ -512,12 +513,26 @@ class UIAPI:
         self.__logic.updateWorkTrip(flight_list, flight_copilot, 'copilot')
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
-    def editFlightFSM(self):
-        flight_capt = self.__inputter.enterVariable('Flight Service Manager SSN')
+    def editFlightFSM(self, data):
+        flight_fsm = self.__inputter.enterVariable('Flight Service Manager SSN')
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, flight_fsm, 'fsm')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
+        
+    def editFlightFA_1(self, data):
+        flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa1')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
 
-    def editFlightFA(self):
-        new_var = self.__inputter.enterVariable('Flight Aircraft ID')
-
+    def editFlightFA_2(self, data):
+        flight_fa = self.__inputter.enterVariable('Flight Attendant SSN')
+        flight_list = self.__logic.showSpecificWorktrip(data)
+        dep_flight = flight_list[0]
+        self.__logic.updateWorkTrip(flight_list, flight_fa, 'fa2')
+        self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def showSpecificWorktrip(self, flight_num):
         flight_list = self.__logic.showSpecificWorktrip(flight_num)

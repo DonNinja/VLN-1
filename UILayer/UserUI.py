@@ -451,8 +451,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Edit work trips screen")
-            choice_list = ["1 - Add Aircraft", "2 - Add Pilot", "3 - Add Cabincrew", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" :self.addPilotToWorkTrip, "3" : self.addCCToWorkTrip,"B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Add Aircraft ID", "2 - Add Pilot", "3 - Add Cabincrew", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.editFlightAircraftID, "2" :self.addPilotToWorkTrip, "3" : self.addCCToWorkTrip,"B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
@@ -493,8 +493,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Add cabincrew to work trip screen")
-            choice_list = ["1 - Add Service Manager", "2 - Add Flight Attendant",BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Add Service Manager", "2 - Add Flight Attendant 1", "3 - Add Flight Attendant 2",BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.editFlightFSM, "2" : self.__ui_api.editFlightFA_1,"3" : self.__ui_api.editFlightFA_2, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
