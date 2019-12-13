@@ -53,11 +53,7 @@ class UserInputCheck:
     def checkLicens(self, licens):
         """ This checks if licens is valid. If licens is N/A it returns it right away """
         if licens == 'N/A':
-
             return licens
-
-        return licens
-
         if self.digitCheck(licens):
             if licens == '1':
                 licens = LICENSE_FOKKER100
@@ -69,10 +65,10 @@ class UserInputCheck:
                 licens = LICENSE_NABAE146
                 return licens
             if licens != '1' or '2' or '3':
-                print("Must be 1, 2 or 3")
                 return False
         else:
-           print("Must be 1, 2 or 3")
+            return False
+        #    print("Must be 1, 2 or 3")
 
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
@@ -87,7 +83,6 @@ class UserInputCheck:
                 return False, "Email is too long, must be under 20 characters"
         else:
             return False, "Email can not be only numbers, or includes forbidden characters"
-       
 
     def checkRank(self, rank, role):
         """ This takes input int from user and turns it into the desired rank """
@@ -105,11 +100,10 @@ class UserInputCheck:
                 rank = FLIGHTSMANAGER
                 return rank
             if rank != '1' or '2':
-                print("Must be 1 or 2")
                 return False
         else:
-            print("Must be 1 or 2")
-
+            return False
+            
     def checkAddress(self, address):
         """ This forwards to a check function """
         check, error_msg = self.addressCheck(address)
@@ -177,3 +171,10 @@ class UserInputCheck:
 
     def checkPilotAvailability(self):
         pass
+
+    def checkNum(self, num):
+        try:
+            num = int(num)
+            return True
+        except:
+            return False

@@ -85,9 +85,6 @@ class UserUI:
         self.__ui_api.addEmp("Cabincrew")
         pass
 
-    def showHardestWorking(self):
-        #This just displays the hardest working employee, will be a function call
-        pass
         
     def editEmpScreen(self):
         ''' Displays for the user the types of employees he can change, then asks the user for an input '''
@@ -110,7 +107,7 @@ class UserUI:
         is_emp, data = self.showEmployeeSSN()
         if is_emp:
             self.whileEditingEmpScreen(data, data['role'])
-        else :
+        else:
             pass
 
     def pilotSSN(self):
@@ -176,8 +173,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Show employees screen")
-            choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", "4 - Show Hardest Working Employee", BACK_STR, QUIT_STR]
-            choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen, "4" : self.showHardestWorking, "B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Employees", "2 - Pilots", "3 - Flight Attendants", BACK_STR, QUIT_STR]
+            choice_dict = {"1": self.miscFilterScreen, "2" : self.pilotFilterScreen, "3" : self.attFilterScreen,"B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -271,7 +268,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("At work screen")
             choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing , "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showempatwork , "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -287,7 +284,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Not at work screen")
             choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.showempnotatwork, "2" : self.doNothing, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showempnotatwork, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -369,8 +366,8 @@ class UserUI:
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Work trips screen")
-            choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.showEmpsWorkTrips, "B" : self.back, "Q" : sys.exit}
+            choice_list = ["1 - Add Work Trip", "2 - Show Work Trips", "3 - Show An Employee's Work Trip", "4 - Edit Work Trip", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.__ui_api.addWorkTrip, "2" : self.filterWorkTripsScreen, "3" : self.showEmpsWorkTrips,"4" : self.enterFN , "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -390,7 +387,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Locations screen")
             choice_list = ["1 - Add Location", "2 - Edit Location", "3 - Show All Locations", "4 - Show Most Popular Location", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.__ui_api.addLocation, "2" : self.whileEditingLocScreen, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.addLocation, "2" : self.enterLocID, "3" : self.__ui_api.showAllLocations, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -400,19 +397,31 @@ class UserUI:
             else:
                 print("Input is invalid!")
 
-    def whileEditingLocScreen(self):
+    def enterLocID(self):
+        is_loc, loc_id = self.__ui_api.checkLocID()
+        if is_loc:
+            self.__ui_api.showSpecificLocation(loc_id)
+            self.whileEditingLocScreen(loc_id)
+        else:
+            print("That is not a location ID!")
+
+    def whileEditingLocScreen(self, loc_id):
         ''' This screen shows what the user can change about locations '''
         inp = ""
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Editing location screen")
             choice_list = ["1 - Change emergency contact name", "2 - Change emergency contact phone number", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editLocContName, "2" : self.__ui_api.editLocContPhone, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
             if checking:
-                nextScreen = choice_dict.get(inp)
-                nextScreen()
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(loc_id)
             else:
                 print("Input is invalid!")
         
@@ -432,3 +441,63 @@ class UserUI:
                 nextScreen()
             else:
                 print("Input is invalid!")
+
+    def whileEditingWorkTripsScreen(self, flight_num):
+        ''' This screen shows the user what choices he has for editing work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Edit work trips screen")
+            choice_list = ["1 - Add Aircraft", "2 - Add Pilot", "3 - Add Cabincrew", BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.addPilotToWorkTrip, "3" : self.addCCToWorkTrip,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                if inp == "B" or inp == "Q":
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen()
+                else:
+                    nextScreen = choice_dict.get(inp)
+                    nextScreen(flight_num)
+            else:
+                print("Input is invalid!")
+
+    def addPilotToWorkTrip(self, flight_num):
+        ''' This screen shows the user what choices he has for adding pilot/s to work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Add pilot to work trip screen")
+            choice_list = ["1 - Add Captain", "2 - Add Copilot",BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+
+    def addCCToWorkTrip(self, flight_num):
+        ''' This screen shows the user what choices he has for adding Cabincrew to work trip'''
+        inp = ""
+        while inp != "B":
+            self.__ui_api.UIHeaderDisplay("Add cabincrew to work trip screen")
+            choice_list = ["1 - Add Service Manager", "2 - Add Flight Attendant",BACK_STR, QUIT_STR]
+            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            self.__ui_api.UIDisplay(choice_list)
+            inp = self.askForInput()
+            choice_dict.get(inp)
+            checking = self.inputCheck(inp,choice_dict)
+            if checking:
+                nextScreen = choice_dict.get(inp)
+                nextScreen()
+            else:
+                print("Input is invalid!")
+    
+    def enterFN(self):
+        flight_num = input("Enter a flight number (4 digits): ")
+        if self.__ui_api.showSpecificTrip(flight_num):
+            self.whileEditingWorkTripsScreen(flight_num)

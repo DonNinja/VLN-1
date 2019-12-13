@@ -20,8 +20,16 @@ class SortData:
                 ret_list.append(item)
         return ret_list
     
+    def sortCabincrew(self, data):
+        ret_list = []
+        for item in data:
+            if item['role'] == "Cabincrew":
+                ret_list.append(item)
+        return ret_list
+    
     def sortEmployeeSSN(self, data, ssn):
         """ This returns the employee with the inputted SSN, else None if the employee is not found """
+        ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['ssn'] == ssn: # Checks if the SSN is correct and returns it if so, else returns none
                 return item
@@ -37,7 +45,7 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
+            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     
@@ -68,6 +76,19 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
+    def sortOrderByPlane(self, data):
+        ret_list = []
+        for item in data:
+            if item['licence'] == 'NABAE146':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF28':
+                ret_list.append(item)
+        for item in data:
+            if item['licence'] == 'NAFokkerF100':
+                ret_list.append(item)
+        return ret_list
+
     def weekSorter(self, data , start_date):
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
@@ -84,11 +105,96 @@ class SortData:
 
     def empsnotatwork(self,trips,data):
         emps_notworking = []
-        data = str(data)
+
         for line in trips:
-            if line["departure"] == data:
-                emps_notworking.append(line["captain"])
-                emps_notworking.append(line["copilot"])
-                emps_notworking.append(line["fsm"])
+            comparedate = line["departure"]
+            comparedate = comparedate.split("T")
+            comparedate1 = line["arrival"]
+            comparedate1 = comparedate1.split("T")
+            if comparedate[0] != data or comparedate1[0] != data:
+                if line["captain"] != "X":
+                    emps_notworking.append(line["captain"])
+                elif line["copilot"] != "X":
+                    emps_notworking.append(line["copilot"])
+                elif line["fsm"] != "X":
+                    emps_notworking.append(line["fsm"])
+                elif line["fa1"] != "X":
+                    emps_notworking.append(line["fa1"])
+                elif line["fa2"] != "X":
+                    emps_notworking.append(line["fa2"])
+
         return emps_notworking
 
+
+
+    def empsatwork(self,trips,data):
+        emps_working = []
+        
+        
+        for line in trips:
+            comparedate = line["departure"]
+            comparedate = comparedate.split("T")
+            comparedate1 = line["arrival"]
+            comparedate1 = comparedate1.split("T")
+            if comparedate[0] == data or comparedate1[0] == data:
+                if line["arrivingAt"] != "KEF":
+                    emps_working.append(line["arrivingAt"])
+                    if line["captain"] != "X":
+                        emps_working.append(line["captain"])
+                        if line["copilot"] != "X":
+                            emps_working.append(line["copilot"])
+                            if line["fsm"] != "X":
+                                emps_working.append(line["fsm"])
+                                if line["fa1"] != "X":
+                                    emps_working.append(line["fa1"])
+                                    if line["fa2"] != "X":
+                                        emps_working.append(line["fa2"])
+            
+
+        return emps_working
+
+    def sortForTrip(self, flight_num_list, data):
+        ret_list = []
+        for item in data:
+            if item['flightNumber'] == flight_num_list[0] or item['flightNumber'] == flight_num_list[1]:
+                ret_list.append(item)
+        return ret_list
+    
+    def sortForLocation(self, loc_id, data):
+        ret_list = []
+        if loc_id == "KEF":
+            return None
+        for item in data:
+            if item['id'] == loc_id:
+                return item
+        return None
+    
+    def sortSpecificPlane(self, data, plane_id):
+        for item in data:
+            if item['planeInsignia'] == plane_id:
+                return item
+        return None
+    
+    def sortSpecificCaptain(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Captain':
+                return item
+        return None
+    
+    def sortSpecificCopilot(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Copilot':
+                return item
+        return None
+    
+    def sortSpecificFSM(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Flight Service Manager':
+                return item
+        return None
+    
+    def sortSpecificAttendant(self, data, ssn):
+        for item in data:
+            if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
+                return item
+        return None

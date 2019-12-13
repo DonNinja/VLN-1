@@ -1,6 +1,8 @@
 from DataLayer.Data import DataAPI
 from LogicLayer.SortData import SortData
 from LogicLayer.UserInputCheck import UserInputCheck
+import datetime
+TURNAROUNDTIME = 1
 
 class LogicAPI():
     def __init__(self):
@@ -21,6 +23,10 @@ class LogicAPI():
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just flight attendants and returns that """
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
+    
+    def showAllCabincrew(self):
+        all_emps = self.__data.getEmps()
+        return self.__data_sorter.sortCabincrew(all_emps) # Sorts through all emps and returns cabincrew
     
     def showAllPlanes(self):
         """ This returns a list of every plane so the UI can print them out """
@@ -102,7 +108,6 @@ class LogicAPI():
 
     def addWorkTrip(self,data_list):
         self.__data.registerWorkTrip(data_list)
-
     
     def showWorkTripsByWeek(self, date):
         all_trips = self.__data.getTrips()
@@ -118,4 +123,100 @@ class LogicAPI():
         emp = self.__data_sorter.empsnotatwork(trips,data)
         return emp
 
+    def showempatwork(self,data):
+        trips = self.showAllWorkTrips()
+        emp = self.__data_sorter.empsatwork(trips,data)
+        return emp
 
+
+
+    
+    def checkFlightNum(self, num):
+        return self.__user_check.checkNum(num)
+    
+    def sortTrips(self, flight_num_list):
+        data_list = self.__data.getTrips()
+        return self.__data_sorter.sortForTrip(flight_num_list, data_list)
+    
+    def addLocation(self, data_list):
+        self.__data.registerLocation(data_list)
+    
+    def checkLocID(self, loc_id):
+        data_list = self.showAllLocations()
+        return self.__data_sorter.sortForLocation(loc_id, data_list)
+    
+    def showLocationID(self, loc_id):
+        all_locations = self.__data.getLocations()
+        return self.__data_sorter.sortForLocation(loc_id, all_locations)
+    
+    def updateLocation(self, data, new_data, field):
+        self.__data.updateLocation(data, new_data, field)
+    
+    def calcFlightTime(self, dep_time, loc_id):
+        all_locs = self.__data.getLocations()
+        location = self.__data_sorter.sortForLocation(loc_id, all_locs)
+        loc_hour, loc_min = location['flightTime'].split(".")
+        loc_hour = int(loc_hour)
+        loc_min = int(loc_min)
+        dep_time += datetime.timedelta(hours=loc_hour, minutes=loc_min)
+        return dep_time
+
+    def calcTurnAroundTime(self, arr_time):
+        arr_time += datetime.timedelta(hours=TURNAROUNDTIME)
+        return arr_time
+    
+    def checkIfEmpty(self, inp):
+        ''' This checks if the inputted string is empty and returns True if so, else return False '''
+        if inp == "":
+            return True
+        else:
+            return False
+    
+    def checkAddIfFullyManned(self, aircraftID, captain, copilot, fsm):
+        if aircraftID != "X" and captain != "X" and copilot != "X" and fsm != "X":
+            return "Yes"
+        else:
+            return "No"
+
+    def checkItemsIfFullyManned(self, item_list):
+        for item in item_list:
+            #aircraftID,captain,copilot
+            if item['aircraftID'] != "X" and item['captain'] != "X" and item['copilot'] != "X" and item['fsm'] != "X":
+                item['fullyManned'] = "Yes"
+            else:
+                item['fullyManned'] = "No"
+        
+    def checkIfPlane(self, plane_id):
+        all_planes = self.showAllPlanes()
+        if self.__data_sorter.sortSpecificPlane(all_planes, plane_id):
+            return True
+        else:
+            return False
+
+    def checkIfCaptain(self, ssn):
+        all_pilots = self.showAllPilots()
+        if self.__data_sorter.sortSpecificCaptain(all_pilots, ssn):
+            return True
+        else:
+            return False
+        
+    def checkIfCopilot(self, ssn):
+        all_pilots = self.showAllPilots()
+        if self.__data_sorter.sortSpecificCopilot(all_pilots, ssn):
+            return True
+        else:
+            return False
+    
+    def checkIfFSM(self, ssn):
+        all_cabincrew = self.showAllCabincrew()
+        if self.__data_sorter.sortSpecificFSM(all_cabincrew, ssn):
+            return True
+        else:
+            return False
+        
+    def checkIfFA(self, ssn):
+        all_attendants = self.showAllAttendants()
+        if self.__data_sorter.sortSpecificAttendant(all_attendants, ssn):
+            return True
+        else:
+            return False

@@ -53,11 +53,28 @@ class UIAPI:
         emp = self.__logic.showEmpSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
     
+    def showSpecificTrip(self, flight_num):
+        flight_num_check = self.__logic.checkFlightNum(flight_num)
+        while not(flight_num_check):
+            print("Flight number must be 4 digits")
+            flight_num = input("Enter a flight number (4 digits): ")
+            flight_num_check = self.__logic.checkFlightNum(flight_num)
+        dep_flight_num = "NA" + flight_num
+        ret_flight_num = "NA" + str(int(flight_num) + 1).zfill(4)
+        flight_num_list = [dep_flight_num, ret_flight_num]
+        trip_list = self.__logic.sortTrips(flight_num_list)
+        if len(trip_list) > 0:
+            self.__data_printer.printAllWorkTrips(trip_list)
+            return True
+        else:
+            print("There are no trips with that Flight number.")
+            return False
+
     def showSpecificPilot(self, ssn):
         """ This gets a single pilot and calls the printer to print them out """
         emp = self.__logic.showPilotSSN(ssn)
         return self.__data_printer.printEmpSSN(emp), emp
-    
+
     def showSpecificAttendant(self, ssn):
         """ This gets a single attendant and calls the printer to print them out """
         emp = self.__logic.showAttendantSSN(ssn)
@@ -69,20 +86,22 @@ class UIAPI:
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
-        new_var = self.__inputter.enterVariable('email')
-        email = self.__logic.checkEmail(new_var)
+        new_var = self.__inputter.enterEmail()
+        email, error_msg = self.__logic.checkEmail(new_var)
         while not(email):
-            new_var = self.__inputter.enterVariable('email')
+            print(error_msg)
+            new_var = self.__inputter.enterEmail()
             email = self.__logic.checkEmail(new_var)
         else:
-            self.__logic.updateEmp(data, new_var, 'email')
+            self.__logic.updateEmp(data, email, 'email')
             self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
-        address = self.__logic.checkAddress(new_var)
+        address, error_msg = self.__logic.checkAddress(new_var)
         while not(address):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
         else:
@@ -92,8 +111,9 @@ class UIAPI:
     def editHomePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('home phone number')
-        phone_check = self.__logic.checkPhone(new_var)
+        phone_check, error_msg = self.__logic.checkPhone(new_var)
         while not(phone_check):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('home phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
@@ -103,8 +123,9 @@ class UIAPI:
     def editMobilePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('mobile phone number')
-        phone_check = self.__logic.checkPhone(new_var)
+        phone_check, error_msg = self.__logic.checkPhone(new_var)
         while not(phone_check):
+            print(error_msg)
             new_var = self.__inputter.enterVariable('mobile phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
@@ -120,8 +141,6 @@ class UIAPI:
         else:
             self.__logic.updateEmp(data, licens, 'licence')
             self.showSpecificEmp(data['ssn'])
-        
-
     
     def addEmp(self, role):
         """ This add all items to list after they pass checks """
@@ -136,8 +155,6 @@ class UIAPI:
         data_list.append(self.checkMobile(role))
         data_list.append(self.checkHomenum(role))
         self.__logic.addEmpLL(data_list) #List with all of the employee info
-
-    
 
     def checkSSN(self, emp_type): #Virkar
         """ This checks if SSN is in valid format """
@@ -233,23 +250,127 @@ class UIAPI:
         else:
             return home_phone_num
 
-
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
         self.__data_printer.printAllWorkTrips(data_list)
-        self.__data_printer.printAllWorkTrips(data_list)
     
     def addWorkTrip(self):
-        """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
-        data_list = self.__inputter.addWorkTrip()
+        """ This calls the inputter so the user can input the work trip's data, then calls logicAPI to add both flights to the flight.csv file """
+        data_list = []
+        trip_dep_loc = "KEF"
+        trip_arr_loc = self.__inputter.addTripDest()
+        while not(self.__logic.checkLocID(trip_arr_loc)):
+            print("\nLocation does not exist or is written incorrectly, also can't be KEF")
+            trip_arr_loc = self.__inputter.addTripDest()
+        trip_dep_time = self.__inputter.addTripDepTime()
+        trip_arr_time = self.__logic.calcFlightTime(trip_dep_time, trip_arr_loc)
+        trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
+        while self.__logic.checkIfEmpty(trip_plane_id) or not(self.__logic.checkIfPlane(trip_plane_id)):
+            if self.__logic.checkIfEmpty(trip_plane_id):
+                trip_plane_id = "X"
+                break
+            else:
+                trip_plane_id = "TF-" + trip_plane_id
+                if self.__logic.checkIfPlane(trip_plane_id):
+                    break
+            print("That is not a correct plane insignia")
+            trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
+        trip_captain = self.__inputter.addTripPilot() # Can be empty
+        while self.__logic.checkIfEmpty(trip_captain) or not(self.__logic.checkIfCaptain(trip_captain)):
+            if self.__logic.checkIfEmpty(trip_captain):
+                trip_captain = "X"
+                break
+            print("That is not a correct captain's ssn")
+            trip_captain = self.__inputter.addTripPilot() # Can be empty
+        trip_copilot = self.__inputter.addTripCopilot() # Can be empty
+        while self.__logic.checkIfEmpty(trip_copilot) or not(self.__logic.checkIfCopilot(trip_copilot)):
+            if self.__logic.checkIfEmpty(trip_copilot):
+                trip_copilot = "X"
+                break
+            print("That is not a correct copilot's ssn")
+            trip_copilot = self.__inputter.addTripCopilot() # Can be empty
+        trip_fsm = self.__inputter.addTripFSM() # Can be empty
+        while self.__logic.checkIfEmpty(trip_fsm) or not(self.__logic.checkIfFSM(trip_fsm)):
+            if self.__logic.checkIfEmpty(trip_fsm):
+                trip_fsm = "X"
+                break
+            print("That is not a correct flight service manager's ssn")
+            trip_fsm = self.__inputter.addTripFSM() # Can be empty
+        data_list = [trip_dep_loc, trip_arr_loc, trip_dep_time, trip_arr_time, trip_plane_id, trip_captain, trip_copilot, trip_fsm] # 0 - 7
+        for i in range(2):
+            add_more = input("Would you like to enter more flight attendants ('Y' if yes): ").upper()
+            if add_more == "Y":
+                trip_fa = self.__inputter.addTripFA()
+                while self.__logic.checkIfEmpty(trip_fa) or not(self.__logic.checkIfFA(trip_fa)):
+                    trip_fa = self.__inputter.addTripFA()
+                    if self.__logic.checkIfEmpty(trip_fa):
+                        trip_fa = "X"
+                        break
+                data_list.append(trip_fa) # 8 & 9
+            else:
+                trip_fa = "X"
+                if i == 0:
+                    data_list.append(trip_fa) # Can be empty 8
+                    data_list.append(trip_fa) # Can be empty 9
+                    break
+                else:
+                    data_list.append(trip_fa) # Can be empty 9
+                    break
+        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time)
+        data_list.append(ret_trip) # 10
+        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc)
+        data_list.append(ret_flight_time) # 11
+        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm)
+        data_list.append(flight_fully_manned) # 12
         self.__logic.addWorkTrip(data_list)
 
-        
-
     def addLocation(self):
-        pass
+        loc_name = self.__inputter.addLocName()
+        country = self.__inputter.addLocCountry()
+        loc_id = self.__inputter.addLocCountryAbbrev()
+        airport = self.__inputter.addLocAirport()
+        flight_time_hours = self.__inputter.addLocFlightTimeHour()
+        flight_time_mins = self.__inputter.addLocFlightTimeMin()
+        flight_time = '.'.join([flight_time_hours, flight_time_mins])
+        distance = self.__inputter.addLocDist()
+        contact_name = self.__inputter.addLocContactName()
+        contact_phone = self.__inputter.addLocContactNum()
+        data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone]
+        self.__logic.addLocation(data_list)
+    
+    def checkLocID(self):
+        loc_id = self.__inputter.askForLocID()
+        loc_data = self.__logic.showLocationID(loc_id)
+        return self.__logic.checkLocID(loc_id), loc_id
+    
+    def showSpecificLocation(self, loc_id):
+        data = self.__logic.showLocationID(loc_id)
+        self.__data_printer.printSingleLocation(data)
 
+    def editLocContPhone(self, loc_id):
+        cont_phone = self.__inputter.enterVariable('contact phone')
+        data = self.__logic.showLocationID(loc_id)
+        phone_check, error_msg = self.__logic.checkPhone(cont_phone)
+        while not(phone_check):
+            print(error_msg)
+            cont_phone = self.__inputter.enterVariable('contact phone')
+            phone_check, error_msg = self.__logic.checkPhone(cont_phone)
+        else:
+            self.__logic.updateLocation(data, cont_phone, 'contactPhone')
+            self.__data_printer.printSingleLocation(data) #show location by ID
+
+    def editLocContName(self, loc_id):
+        cont_name = self.__inputter.enterVariable('contact name')
+        data = self.__logic.showLocationID(loc_id)
+        name_check, error_msg = self.__logic.checkName(cont_name)
+        while not(name_check):
+            print(error_msg)
+            cont_name = self.__inputter.enterVariable('contact name')
+            name_check, error_msg = self.__logic.checkName(cont_name)
+        else:
+            self.__logic.updateLocation(data, cont_name, 'contactName')
+            self.__data_printer.printSingleLocation(data) #show location by ID
     
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''
@@ -262,22 +383,18 @@ class UIAPI:
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
 
-
     def showWorkTripsLastWeek(self):
         '''Getting work trips for last 7 days'''
         pass
 
     def checktripinp(self,data):
-        data1 = self.__logic.checktripinp(data)
-        return data1
-        
-
+        # data = self.__logic.checktripinp(data)
+        return data
 
     def showWorkTripsByWeek(self):
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByWeek(date)
         self.__data_printer.printAllWorkTrips(data_list)
-        
 
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
@@ -285,6 +402,15 @@ class UIAPI:
 
 
     def showempnotatwork(self):
-        data = self.__inputter.empnotatwork()
-        emp = self.__logic.showempnotworking(data)
+        date = self.__inputter.askForDate()
+        emp = self.__logic.showempnotworking(date)
+
+        self.__data_printer.printempsnotworking(emp)
+
+
+    def showempatwork(self):
+        date = self.__inputter.askForDate()
+        emp = self.__logic.showempatwork(date)
+        self.__data_printer.printempsworking(emp)
+
 
