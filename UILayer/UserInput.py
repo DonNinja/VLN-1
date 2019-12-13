@@ -71,7 +71,7 @@ class UserInput:
         return ssn
 
     def addTripDest(self):
-        return input("\nEnter trip destination id (Not KEF): ").upper()
+        return input("\nEnter trip destination id (Not KEF) 'HELP' to show all destinations: ").upper()
     
     def addTripDepTime(self):
         print("\nNow entering a departure time and date:")
@@ -90,66 +90,19 @@ class UserInput:
                 print("There was something wrong with your input, please try again")
     
     def addTripPlaneID(self):
-        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one): ").upper()
+        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one) 'HELP' to show all planes: TF-").upper()
     
-    def addTripPilot(self):
-        return input("\nEnter the Pilot's SSN (Keep empty if you don't want to enter one): ")
+    def addTripCaptain(self):
+        return input("\nEnter the Captain's SSN (Keep empty if you don't want to enter one) 'HELP' to show all captains: ")
     
     def addTripCopilot(self):
-        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one): ")
+        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one) 'HELP' to show all copilots: ")
     
     def addTripFSM(self):
-        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one): ")
+        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one) 'HELP' to show all flight service managers: ")
     
     def addTripFA(self):
-        return input("\nEnter a flight attendant's SSN (Keep empty if you don't want to enter one): ")
-
-    def addWorkTrip(self):
-        work_trip_data_list = []
-        work_destination = input("\nEnter a destination: ")
-        work_trip_data_list.append(work_destination)
-
-        work_departure_date = input("Enter a departure date (DD/MM/YYYY): ")
-        work_trip_data_list.append(work_departure_date)
-        work_departure_time = input("\nEnter a departure time (hh:mm): ")
-        work_trip_data_list.append(work_departure_time)
-        work_departure_date = input("\nArriving at: ")
-        if work_departure_date == "LYR":
-            flight_time = datetime.timedelta(hours=2,minutes=53)
-        elif work_departure_date == "GOH":
-            flight_time = datetime.timedelta(hours=2,minutes=9)
-        elif work_departure_date == "KUS":
-            flight_time = datetime.timedelta(hours=1,minutes=20)
-        elif work_departure_date == "FAE":
-            flight_time = datetime.timedelta(hours=1,minutes=26)
-        elif work_departure_date == "LWK":
-            flight_time = datetime.timedelta(hours=1,minutes=53)
-        else:
-            print("invalid")
-
-        work_trip_data_list.append(work_departure_date)
-        work_departure_time = input("\nEnter a departure time (YYYY-MM-DD HH:MM:SS): ")
-        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%dT%H:%M:%S')
-        work_trip_data_list.append(dep_time_obj)
-        
-        arr_time_obj = dep_time_obj + flight_time
-        work_trip_data_list.append(arr_time_obj)
-
-        planeID = input("\nEnter planeID: ")
-        work_trip_data_list.append(planeID)
-
-        work_pilot_ssn = input("\nEnter the Pilot's SSN: ")
-        work_trip_data_list.append(work_pilot_ssn)
-        work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
-        work_trip_data_list.append(work_copilot_ssn)
-
-        work_attendant = input("\nEnter a flight service manager's SSN: ")
-        work_trip_data_list.append(work_attendant)
-        work_trip_data_list.append(flight_time)
-        work_trip_data_list.append("X")
-        work_trip_data_list.append("X")
-        input("\nPress enter to continue...")
-        return work_trip_data_list
+        return input("\nEnter a flight attendant's SSN (Keep empty if you don't want to enter one) 'HELP' to show all flight attendants: ")
 
     def addPlane(self):
         plane_data_list = []

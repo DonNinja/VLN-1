@@ -12,11 +12,35 @@ class SortData:
                 ret_list.append(item)
         return ret_list
     
+    def sortCaptains(self, data):
+        ''' This searches through every employee and returns a list of only captains '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Captain":
+                ret_list.append(item)
+        return ret_list
+    
+    def sortCopilots(self, data):
+        ''' This searches through every employee and returns a list of only copilots '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Copilot":
+                ret_list.append(item)
+        return ret_list
+    
     def sortAttendants(self, data):
         """ Takes all crew and only keeps the flight attendants """
         ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['rank'] == "Flight Attendant": # Checks if the rank == Flight Attendant and adds it to the return list if so
+                ret_list.append(item)
+        return ret_list
+    
+    def sortFSM(self, data):
+        ''' This searches through every employee and returns a list of only flight service managers '''
+        ret_list = []
+        for item in data:
+            if item['rank'] == "Flight Service Manager":
                 ret_list.append(item)
         return ret_list
     
@@ -125,9 +149,9 @@ class SortData:
                 return item
         return None
     
-    def sortSpecificPlane(self, data, plane_id):
+    def sortSpecificPlane(self, data, plane_insignia):
         for item in data:
-            if item['planeInsignia'] == plane_id:
+            if item['planeInsignia'] == plane_insignia:
                 return item
         return None
     

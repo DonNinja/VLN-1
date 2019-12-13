@@ -19,12 +19,27 @@ class LogicAPI():
     def showAllPilots(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just pilots and returns that """
         all_emps = self.__data.getEmps()
-        return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only flight attendants
+        return self.__data_sorter.sortPilots(all_emps) # Sorts through all_emps and returns only pilots
+    
+    def showAllCaptains(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just captains and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortCaptains(all_emps)
+    
+    def showAllCopilots(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just copilots and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortCopilots(all_emps)
     
     def showAllAttendants(self):
         """ This gets a collection of every employee, then calls a function to sort the collection into a collection of just flight attendants and returns that """
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
+    
+    def showAllFSM(self):
+        ''' his gets a collection of every employee, then calls a function to sort the collection into a collection of just flight service managers and returns that '''
+        all_emps = self.showAllEmps()
+        return self.__data_sorter.sortFSM(all_emps)
     
     def showAllCabincrew(self):
         all_emps = self.__data.getEmps()
@@ -33,6 +48,11 @@ class LogicAPI():
     def showAllPlanes(self):
         """ This returns a list of every plane so the UI can print them out """
         return self.__data.getAirplanes()
+    
+    def showSpecificPlane(self, insignia):
+        ''' This returns a specific plane item from the ordered dictionary '''
+        all_planes = self.__data.getAirplanes()
+        return self.__data_sorter.sortSpecificPlane(all_planes, insignia)
     
     def showPilotSSN(self, ssn):
         """ This gets a list of every employee then looks for the employee that is both a pilot and has the inputted SSN and returns him if it finds him, but returns None if he finds nothing """
@@ -247,17 +267,17 @@ class LogicAPI():
     
     def checkAddIfFullyManned(self, aircraftID, captain, copilot, fsm):
         if aircraftID != "X" and captain != "X" and copilot != "X" and fsm != "X":
-            return "Yes"
+            return "Y"
         else:
-            return "No"
+            return "N"
 
     def checkItemsIfFullyManned(self, item_list):
         for item in item_list:
             #aircraftID,captain,copilot
             if item['aircraftID'] != "X" and item['captain'] != "X" and item['copilot'] != "X" and item['fsm'] != "X":
-                item['fullyManned'] = "Yes"
+                item['fullyManned'] = "Y"
             else:
-                item['fullyManned'] = "No"
+                item['fullyManned'] = "N"
         
     def checkIfPlane(self, plane_id):
         all_planes = self.showAllPlanes()
@@ -304,3 +324,9 @@ class LogicAPI():
     def showEmpWeekTrips(self, ssn, start_date):
         all_trips = self.showAllWorkTrips()
         return self.__data_sorter.sortEmpTripsForWeek(all_trips, start_date, ssn)
+    
+    def checkIfMayFly(self, ssn, aircraft_insignia):
+        ''' This returns true or false depending on if the employee is allowed to fly the chosen plane '''
+        plane = self.showSpecificPlane(aircraft_insignia)
+        employee = self.showEmpSSN(ssn)
+        return self.__data_check.checkIfMayFly(employee, plane)

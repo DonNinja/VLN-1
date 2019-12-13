@@ -18,3 +18,8 @@ class CheckData:
             if item[field] == inp:
                 return False, "{} already exists".format(field.capitalize())
         return True, None
+    
+    def checkIfMayFly(self, emp_item, plane_item):
+        if emp_item['licence'] == plane_item['planeTypeId']:
+            return True
+        return False
