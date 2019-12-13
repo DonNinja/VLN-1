@@ -16,5 +16,5 @@ class CheckData:
     def checkIfExists(self, inp, field, data):
         for item in data:
             if item[field] == inp:
-                return False, ["User already exists"]
+                return False, "{} already exists".format(field.capitalize())
         return True, None

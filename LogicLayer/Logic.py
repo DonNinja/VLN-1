@@ -83,10 +83,15 @@ class LogicAPI():
 
     def checkEmail(self, email):
         all_emps = self.showAllEmps()
-        email_check, err_msg = self.__user_check.checkEmail(email)
+        email_check, err_msg_list = self.__user_check.checkEmail(email)
         if email_check:
-            email_check, err_msg = self.__data_check.checkIfExists(email, 'email', all_emps)
-        return email_check, err_msg
+            email_check, err_msg_str = self.__data_check.checkIfExists(email+"@NaNAir.is", 'email', all_emps) # Checks if the email already exists in the file, as 2 employees can't have the same email address
+            if type(err_msg_list) == list: # The SSN check returns an error list, so this is a check to see if it's returning a list or a string and returns the appropriate thing for the appropriate print
+                err_msg_list = [err_msg_str]
+                return email_check, err_msg_list
+            else:
+                return email_check, err_msg_str
+        return email_check, err_msg_list
 
     def checkLicens(self, licens):
         return self.__user_check.checkLicens(licens)
