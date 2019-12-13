@@ -192,7 +192,7 @@ class UserUI:
         ''' This is the any employee show screen, here a user can choose what he wants to display, whether it's every employee or a specific employee (searched by SSN) '''
         inp = ""
         while inp != "B":
-            self.__ui_api.UIHeaderDisplay("Filter employee screen")
+            self.__ui_api.UIHeaderDisplay("Display Employee Screen")
             choice_list = ["1 - Show all employees", "2 - Show employees at work on day/week", "3 - Show employees not at work on day/week", "4 - Look for employee by SSN", BACK_STR, QUIT_STR]
             choice_dict = {"1" : self.__ui_api.showAllEmps , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showEmployeeSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
@@ -212,7 +212,7 @@ class UserUI:
         ''' This is the flight attendant show screen, here a user can choose what he wants to display, whether it's every flight attendant or a specific flight attendant (searched by SSN) '''
         inp = ""
         while inp != "B":
-            self.__ui_api.UIHeaderDisplay("Filter flight attendant screen")
+            self.__ui_api.UIHeaderDisplay("Display Flight Attendant Screen")
             choice_list = ["1 - Show all attendants", "2 - Show attendants at work on day/week", "3 - Show attendants not at work on day/week", "4 - Look for attendant by SSN", BACK_STR, QUIT_STR]
             choice_dict = {"1" : self.__ui_api.showAllAttendants , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showAttendantSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
@@ -233,7 +233,7 @@ class UserUI:
         ''' This is the pilot show screen, here a user can choose what he wants to display, whether it's every pilot or a specific pilot (searched by SSN) '''
         inp = ""
         while inp != "B":
-            self.__ui_api.UIHeaderDisplay("Filter pilot screen")
+            self.__ui_api.UIHeaderDisplay("Display Pilot Screen")
             choice_list = ["1 - Show all pilots", "2 - Show pilots at work on day/week", "3 - Show pilots not at work on day/week", "4 - Look for pilot by SSN", BACK_STR, QUIT_STR]
             choice_dict = {"1" : self.__ui_api.showAllPilots , "2" : self.atWorkScreen, "3" : self.notAtWorkScreen, "4" : self.showPilotSSN, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
