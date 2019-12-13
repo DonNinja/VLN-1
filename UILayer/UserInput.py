@@ -3,7 +3,7 @@ import datetime
 class UserInput:
     def __init__(self):
         pass
-    
+
     def addEmpSSN(self, emp_type):
         print()
         return input("\nEnter the new {}'s ssn: ".format(emp_type)).capitalize()
@@ -18,7 +18,6 @@ class UserInput:
         else:
             print("\n1: Flight Service Manager\n2: Flight Attendant")
             return input("\nChoose a rank: ")
-                
 
     def addEmpEmail(self, emp_type):
         return input("\nEnter {}'s email address (@NaNAir.com will be added to it): ".format(emp_type))
@@ -94,10 +93,9 @@ class UserInput:
 
         work_trip_data_list.append(work_departure_date)
         work_departure_time = input("\nEnter a departure time (YYYY-MM-DD HH:MM:SS): ")
-        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+        dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%dT%H:%M:%S')
         work_trip_data_list.append(dep_time_obj)
         
-
         work_arrival_time = dep_time_obj
         arr_time_obj = work_arrival_time + flight_time
         work_trip_data_list.append(arr_time_obj)
@@ -110,10 +108,11 @@ class UserInput:
         work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
         work_trip_data_list.append(work_copilot_ssn)
 
-        work_attendant = input("\nEnter a flight attendant's SSN: ")
+        work_attendant = input("\nEnter a flight service manager's SSN: ")
         work_trip_data_list.append(work_attendant)
         work_trip_data_list.append(flight_time)
-        print(work_trip_data_list)
+        work_trip_data_list.append("X")
+        work_trip_data_list.append("X")
         input("\nPress enter to continue...")
 
         return work_trip_data_list
@@ -173,7 +172,7 @@ class UserInput:
         print(edit_emp_list)
         input("Press enter to continue...")
         return edit_emp_list
-        
+
     def askForDate(self):
         '''Asking for a specific date to show work trips by day'''
         day = input("Enter day (DD): ")

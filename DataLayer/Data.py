@@ -32,7 +32,7 @@ class DataAPI:
         self.__register.registerPlane(data_list)
     
     def updateEmp(self, data, new_data, field):
-        ''' This  '''
+        ''' This replaces the old employee item with a new, updated item '''
         data[field] = new_data
         crew_list = self.__reader.readCrew()
         for item in crew_list:
@@ -46,11 +46,11 @@ class DataAPI:
         return self.__reader.readDestinations()
     
     def getTrips(self):
-        return self.__reader.readPastFlights()
+        ''' Returns a list of every flight '''
+        return self.__reader.readAllFlights()
 
     def registerWorkTrip(self,data_list):
         self.__register.registerWorkTrip(data_list)
-        ''' Returns a list of every flight '''
 
     def registerLocation(self, data_list):
         self.__register.registerLocation(data_list)

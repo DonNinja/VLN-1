@@ -246,7 +246,6 @@ class UIAPI:
         else:
             return home_phone_num
 
-
     def showAllWorkTrips(self):
         """ This gets a list of every flight from logicAPI, then calls the printer to print it out for the user """
         data_list = self.__logic.showAllWorkTrips()
@@ -271,6 +270,9 @@ class UIAPI:
         data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone]
         self.__logic.addLocation(data_list)
     
+    def editLocContName(self):
+        pass
+    
     def showEmpsWorkTrips(self, ssn):
         ''' This calls a function print out work trips that are included in the data list '''
         data_list = self.__logic.showEmpsWorkTrips(ssn)
@@ -281,7 +283,6 @@ class UIAPI:
         date = self.__inputter.askForDate()
         data_list = self.__logic.showWorkTripsByDay(date)
         self.__data_printer.printAllWorkTrips(data_list)
-
 
     def showWorkTripsLastWeek(self):
         '''Getting work trips for last 7 days'''
@@ -300,4 +301,3 @@ class UIAPI:
     def showSortPilotsByPlane(self):
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
-
