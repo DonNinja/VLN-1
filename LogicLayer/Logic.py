@@ -1,6 +1,7 @@
 from DataLayer.Data import DataAPI
 from LogicLayer.SortData import SortData
 from LogicLayer.UserInputCheck import UserInputCheck
+from LogicLayer.CheckData import CheckData
 import datetime
 TURNAROUNDTIME = 1
 
@@ -9,6 +10,7 @@ class LogicAPI():
         self.__data = DataAPI()
         self.__data_sorter = SortData()
         self.__user_check = UserInputCheck()
+        self.__data_check = CheckData()
 
     def showAllEmps(self):
         """ This returns a collection of every employee to the UI so it can print them out """
@@ -203,6 +205,13 @@ class LogicAPI():
     def checkIfFA(self, ssn):
         all_attendants = self.showAllAttendants()
         if self.__data_sorter.sortSpecificAttendant(all_attendants, ssn):
+            return True
+        else:
+            return False
+    
+    def checkIfIsWorking(self, ssn, date):
+        all_trips = self.showAllWorkTrips()
+        if self.__data_check.checkIfWorkedOnDay(ssn, date, all_trips):
             return True
         else:
             return False

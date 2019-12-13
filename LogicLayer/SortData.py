@@ -89,11 +89,11 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
-    def weekSorter(self, data , start_date):
+    def weekSorter(self, data, start_date):
         ret_list = []
         date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
         for i in range(8):
-            i = i
+            i = i # Bara svo það komi ekki upp error
             for item in data:
                 parsed_item_date = dateutil.parser.parse(item['departure'])
                 item_date = str(parsed_item_date.date())
