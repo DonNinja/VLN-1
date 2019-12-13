@@ -70,20 +70,20 @@ class UIAPI:
         return self.__data_printer.printEmpSSN(emp), emp
     
     def showSpecificTrip(self, flight_num):
-        flight_num_check = self.__logic.checkFlightNum(flight_num)
-        while not(flight_num_check):
+        flight_num_check = self.__logic.checkFlightNum(flight_num) # Sends flight num to logic to check if flight number is valid
+        while not(flight_num_check): # If flight number is not valid it asks again for a 4 digits
             print("Flight number must be 4 digits")
             flight_num = input("Enter a flight number (4 digits): ")
             flight_num_check = self.__logic.checkFlightNum(flight_num)
-        dep_flight_num = "NA" + flight_num
-        ret_flight_num = "NA" + str(int(flight_num) + 1).zfill(4)
-        flight_num_list = [dep_flight_num, ret_flight_num]
-        trip_list = self.__logic.sortTrips(flight_num_list)
-        if len(trip_list) > 0:
-            self.__data_printer.printAllWorkTrips(trip_list)
+        dep_flight_num = "NA" + flight_num # Completes departure flight number
+        ret_flight_num = "NA" + str(int(flight_num) + 1).zfill(4) # Completes return flight number 
+        flight_num_list = [dep_flight_num, ret_flight_num] # Puts both flights in one list
+        trip_list = self.__logic.sortTrips(flight_num_list) # Goes into logic which confirms if flight number is in lists of all flights
+        if len(trip_list) > 0: 
+            self.__data_printer.printAllWorkTrips(trip_list) # Sends list into a printing function
             return True
         else:
-            print("There are no trips with that Flight number.")
+            print("There are no trips with that Flight number.") # Prints an error
             return False
 
     def showSpecificPilot(self, ssn):
@@ -97,70 +97,72 @@ class UIAPI:
         return self.__data_printer.printEmpSSN(emp), emp
     
     def showAllLocations(self):
+        """This gets a list of all locations and calls the printer to print them out"""
         data_list = self.__logic.showAllLocations()
         self.__data_printer.printLocations(data_list)
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_email = self.__inputter.enterEmail()
-        email_check, error_msg = self.__logic.checkEmail(new_email)
-        while not(email_check):
+        email_check, error_msg = self.__logic.checkEmail(new_email) # Calls a check to see if email is valid
+        while not(email_check): # If email is not valid it prints an error message and asks again
             print(error_msg)
             new_email = self.__inputter.enterEmail()
             email_check, error_msg = self.__logic.checkEmail(new_email)
         else:
-            new_email += "@NaNAir.is"
-            self.__logic.updateEmp(data, new_email, 'email')
-            self.showSpecificEmp(data['ssn'])
+            new_email += "@NaNAir.is" # Adds @NaNAir.is to the username chosen
+            self.__logic.updateEmp(data, new_email, 'email') # Updates email
+            self.showSpecificEmp(data['ssn']) # Prints out employees new info
 
     def editAddress(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('address')
-        address, error_msg = self.__logic.checkAddress(new_var)
-        while not(address):
+        address, error_msg = self.__logic.checkAddress(new_var) # Calls a check to see if address is valid
+        while not(address): # If address is not valid it prints an error message and asks again
             print(error_msg)
             new_var = self.__inputter.enterVariable('address')
             address = self.__logic.checkAddress(new_var)
         else:
-            self.__logic.updateEmp(data, address, 'address')
-            self.showSpecificEmp(data['ssn'])
+            self.__logic.updateEmp(data, address, 'address') # Updates address
+            self.showSpecificEmp(data['ssn']) # Prints out employees new info
     
     def editHomePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('home phone number')
-        phone_check, error_msg = self.__logic.checkPhone(new_var)
-        while not(phone_check):
+        phone_check, error_msg = self.__logic.checkPhone(new_var) # Calls a check to see if Home number is valid
+        while not(phone_check): # If Home number is not valid it prints out an error message and asks again
             print(error_msg)
             new_var = self.__inputter.enterVariable('home phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
-            self.__logic.updateEmp(data, new_var, 'homephonenumber')
-            self.showSpecificEmp(data['ssn'])
+            self.__logic.updateEmp(data, new_var, 'homephonenumber') # Updates Home number
+            self.showSpecificEmp(data['ssn']) # Prints out employees new info
     
     def editMobilePhone(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.enterVariable('mobile phone number')
-        phone_check, error_msg = self.__logic.checkPhone(new_var)
-        while not(phone_check):
+        phone_check, error_msg = self.__logic.checkPhone(new_var) # Calls a check to see if Mobile number is valid
+        while not(phone_check): # If Mobile number is not valid it prints out an error message and asks again
             print(error_msg)
             new_var = self.__inputter.enterVariable('mobile phone number')
             phone_check = self.__logic.checkPhone(new_var)
         else:
-            self.__logic.updateEmp(data, new_var, 'mobilephonenumber')
-            self.showSpecificEmp(data['ssn'])
+            self.__logic.updateEmp(data, new_var, 'mobilephonenumber') # Updates Mobile number
+            self.showSpecificEmp(data['ssn']) # Prints out employees new info
     
     def editLicense(self, data):
+        """ This calls the _inputter and calls __logic to update the file, then calls a function to show the updated employee """
         new_var = self.__inputter.addEmpLicens('plane license')
-        licens = self.__logic.checkLicens(new_var)
-        while not(licens):
+        licens = self.__logic.checkLicens(new_var) # Checks if license is valid
+        while not(licens): # If License is not valid it prints out an error message and asks again
             new_var = self.__inputter.addEmpLicens('plane license')
             licens = self.__logic.checkLicens(new_var)
         else:
-            self.__logic.updateEmp(data, licens, 'licence')
-            self.showSpecificEmp(data['ssn'])
+            self.__logic.updateEmp(data, licens, 'licence') # Updates Liecense
+            self.showSpecificEmp(data['ssn']) # Prints our employees new info
     
     def addEmp(self, role):
-        """ This add all items to list after they pass checks """
+        """ This will add all items to a list after they pass checks """
         data_list = []
         data_list.append(self.checkSSN(role))
         data_list.append(self.checkName(role))
@@ -173,24 +175,24 @@ class UIAPI:
         data_list.append(self.checkHomenum(role))
         self.__logic.addEmpLL(data_list) #List with all of the employee info
 
-    def checkSSN(self, emp_type): #Virkar
+    def checkSSN(self, emp_type): 
         """ This checks if SSN is in valid format """
-        data = self.__logic.showAllEmps()
-        ssn = self.__inputter.addEmpSSN(emp_type)
-        ssn_check, error_list = self.__logic.checkSSN(ssn, data)
-        while not(ssn_check):
+        data = self.__logic.showAllEmps() # Gets a list of all employees
+        ssn = self.__inputter.addEmpSSN(emp_type) # Gets input for SSN
+        ssn_check, error_list = self.__logic.checkSSN(ssn, data) # Checks if SSN is Valid
+        while not(ssn_check): # Prints Error if SSN is not valid
             for error in error_list:
-                print(error)
-            ssn = self.__inputter.addEmpSSN(emp_type)
+                print(error) 
+            ssn = self.__inputter.addEmpSSN(emp_type) 
             ssn_check, error_list = self.__logic.checkSSN(ssn, data)
         else:
             return ssn
 
-    def checkName(self, emp_type): #Virkar semi
+    def checkName(self, emp_type): 
         """ This checks if name is in valid format (first and last name), also capitilizes first letters in seperate names """
-        name_input = self.__inputter.addEmpName(emp_type)
-        name, error_msg = self.__logic.checkName(name_input)
-        while not (name):
+        name_input = self.__inputter.addEmpName(emp_type) 
+        name, error_msg = self.__logic.checkName(name_input) # Checks if name is valid
+        while not (name): # If name is not valid it will print an error message and ask again
             print(error_msg)
             name_input = self.__inputter.addEmpName(emp_type)
             name, error_msg = self.__logic.checkName(name_input)
@@ -201,11 +203,11 @@ class UIAPI:
         """ This adds employ type to the list cabincrew/pilot (already been selcted through employee screen) """
         return emp_type
 
-    def checkRank(self, emp_type): #Virkar
+    def checkRank(self, emp_type):
         """ This checks if employee rank is valid and returs valid rank """
         rank_input = self.__inputter.addEmpRank(emp_type)
-        rank = self.__logic.checkRank(rank_input, emp_type)
-        while not(rank):
+        rank = self.__logic.checkRank(rank_input, emp_type) # Checks if rank is valid
+        while not(rank):# If rank is not valid it will print an error message and ask again
             print("Invalid choice")
             rank_input = self.__inputter.addEmpRank(emp_type)
             rank = self.__logic.checkRank(rank_input, emp_type)
@@ -215,8 +217,8 @@ class UIAPI:
     def checkEmail(self, emp_type):
         """ This checks if email is in valid format """
         email_input = self.__inputter.addEmpEmail(emp_type)
-        email, error_msg = self.__logic.checkEmail(email_input)
-        while not(email):
+        email, error_msg = self.__logic.checkEmail(email_input) # Checks if email is valid
+        while not(email): # If email is not valid it will print an error message and ask again
             print(error_msg)
             email_input = self.__inputter.addEmpEmail(emp_type)
             email, error_msg = self.__logic.checkEmail(email_input)
@@ -226,41 +228,41 @@ class UIAPI:
     def checkLicens(self,emp_type): #Virkar
         """ This checks if licens is valid and returns right licens"""
         licens_input = self.__inputter.addEmpLicens(emp_type)
-        licens = self.__logic.checkLicens(licens_input)
-        while not(licens):
+        licens = self.__logic.checkLicens(licens_input) # Checks if license is valid
+        while not(licens): # If license is not valid it will print an error message and ask again
             print("Invalid choice")
             licens_input = self.__inputter.addEmpLicens(emp_type)
             licens = self.__logic.checkLicens(licens_input)
         else:
             return licens
 
-    def checkAddress(self, emp_type): #Virkar 
+    def checkAddress(self, emp_type):
         """ This checks if address is valid and returns it in the right format if street name is not capitalized """
         address_input = self.__inputter.addEmpAddress(emp_type)
-        address, error_msg = self.__logic.checkAddress(address_input)
-        while not(address):
+        address, error_msg = self.__logic.checkAddress(address_input) # Checks if license is valid
+        while not(address): # If license is not valid it will print an error message and ask again
             print(error_msg)
             address_input = self.__inputter.addEmpAddress(emp_type)
             address, error_msg = self.__logic.checkAddress(address_input)
         else:
             return address
 
-    def checkMobile(self, emp_type): # Virkar
+    def checkMobile(self, emp_type):
         """ This checks if number is only digit and length of 7 """
         mobile = self.__inputter.addEmpMobile(emp_type)
-        phone_check, error_msg = self.__logic.checkPhone(mobile)
-        while not(phone_check):
+        phone_check, error_msg = self.__logic.checkPhone(mobile) # Checks if Mobile phone number is valid
+        while not(phone_check): # If Mobile phone number is not valid it will print an error message and ask again
             print(error_msg)
             mobile = self.__inputter.addEmpMobile(emp_type)
             phone_check, error_msg = self.__logic.checkPhone(mobile)
         else:
             return mobile
 
-    def checkHomenum(self,emp_type): # Virkar
+    def checkHomenum(self,emp_type):
         """ This checks if number is only digit and length of 7 """
         home_phone_num = self.__inputter.addHomePhone(emp_type)
-        phone_check, error_msg = self.__logic.checkPhone(home_phone_num)
-        while not(phone_check):
+        phone_check, error_msg = self.__logic.checkPhone(home_phone_num) # Checks if Home phone number is valid
+        while not(phone_check): # If Mobile phone number is not valid it will print an error message and ask again
             print(error_msg)
             home_phone_num = self.__inputter.addHomePhone(emp_type)
             phone_check, error_msg = self.__logic.checkPhone(home_phone_num)
@@ -402,6 +404,7 @@ class UIAPI:
         self.__logic.addWorkTrip(data_list)
 
     def addLocation(self):
+        ''' This will add all items to a list '''
         loc_name = self.__inputter.addLocName()
         country = self.__inputter.addLocCountry()
         loc_id = self.__inputter.addLocCountryAbbrev()
@@ -412,10 +415,11 @@ class UIAPI:
         distance = self.__inputter.addLocDist()
         contact_name = self.__inputter.addLocContactName()
         contact_phone = self.__inputter.addLocContactNum()
-        data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone]
+        data_list = [loc_id, loc_name, country, airport, flight_time, distance, contact_name, contact_phone] # Adds all items to list
         self.__logic.addLocation(data_list)
     
     def checkLocID(self):
+        ''' This will check if location ID is valid'''
         loc_id = self.__inputter.askForLocID()
         loc_data = self.__logic.showLocationID(loc_id)
         return self.__logic.checkLocID(loc_id), loc_id
