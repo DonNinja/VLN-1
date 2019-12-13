@@ -473,14 +473,14 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Add pilot to work trip screen")
             choice_list = ["1 - Add Captain", "2 - Add Copilot",BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.editFlightCaptain, "2" :self.doNothing,"B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             choice_dict.get(inp)
             checking = self.inputCheck(inp,choice_dict)
             if checking:
                 nextScreen = choice_dict.get(inp)
-                nextScreen()
+                nextScreen(flight_num)
             else:
                 print("Input is invalid!")
 
