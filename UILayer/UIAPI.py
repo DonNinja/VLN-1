@@ -296,7 +296,8 @@ class UIAPI:
         data_list.append(ret_trip) # 10
         ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc)
         data_list.append(ret_flight_time) # 11
-        data_list.append("No") # 12
+        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm)
+        data_list.append(flight_fully_manned) # 12
         self.__logic.addWorkTrip(data_list)
 
     def addLocation(self):

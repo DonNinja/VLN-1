@@ -121,7 +121,7 @@ class UIDataPrinter:
             dep_time_month = parsed_dep_time.month
             dep_time_year = parsed_dep_time.year
             dep_time_clock = parsed_dep_time.time()
-            correct_dep_time = "{:02d}.{}.{} {}".format(dep_time_day, dep_time_month, dep_time_year, dep_time_clock)
+            correct_dep_time = "{:02d}.{:02d}.{} {}".format(dep_time_day, dep_time_month, dep_time_year, dep_time_clock)
 
             arr_time = trip['arrival']
             parsed_arr_time = dateutil.parser.parse(arr_time)
@@ -129,7 +129,7 @@ class UIDataPrinter:
             arr_time_month = parsed_arr_time.month
             arr_time_year = parsed_arr_time.year
             arr_time_clock = parsed_arr_time.time()
-            correct_arr_time = "{:02d}.{}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
+            correct_arr_time = "{:02d}.{:02d}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
             
             print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2'], trip['fullyManned']))
         self.printBotLine(len(line))

@@ -152,3 +152,18 @@ class LogicAPI():
             return "X"
         else:
             return inp
+    
+    def checkAddIfFullyManned(self, aircraftID, captain, copilot, fsm):
+        if aircraftID != "X" and captain != "X" and copilot != "X" and fsm != "X":
+            return "Yes"
+        else:
+            return "No"
+
+    def checkItemsIfFullyManned(self, item_list):
+        for item in item_list:
+            #aircraftID,captain,copilot
+            if item['aircraftID'] != "X" and item['captain'] != "X" and item['copilot'] != "X" and item['fsm'] != "X":
+                item['fullyManned'] = "Yes"
+            else:
+                item['fullyManned'] = "No"
+        

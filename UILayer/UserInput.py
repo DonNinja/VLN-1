@@ -77,14 +77,19 @@ class UserInput:
     
     def addTripDepTime(self):
         print("\nNow entering a departure time and date:")
-        work_dep_day = input("Enter a day (dd): ")
-        work_dep_month = input("Enter a month (mm): ")
-        work_dep_year = input("Enter a year (yyyy): ")
-        work_dep_hour = input("Enter an hour (HH): ")
-        work_dep_min = input("Enter minutes (MM): ")
-        work_dep_sec = "00"
-        work_departure_time = "{}-{}-{} {}:{}:{}".format(work_dep_year, work_dep_month, work_dep_day, work_dep_hour, work_dep_min, work_dep_sec)
-        return datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+        while True:
+            work_dep_day = input("\nEnter a day (dd): ").zfill(2)
+            work_dep_month = input("Enter a month (mm): ").zfill(2)
+            work_dep_year = input("Enter a year (yyyy): ")
+            work_dep_hour = input("Enter an hour (HH): ")
+            work_dep_min = input("Enter minutes (MM): ")
+            work_dep_sec = "00"
+            work_departure_time = "{}-{}-{} {}:{}:{}".format(work_dep_year, work_dep_month, work_dep_day, work_dep_hour, work_dep_min, work_dep_sec)
+            try:
+                work_date = datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+                return work_date
+            except:
+                print("There was something wrong with your input, please try again")
     
     def addTripPlaneID(self):
         return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one): ").upper()
