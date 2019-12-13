@@ -13,18 +13,17 @@ class UserInputCheck:
 
     def checkSSN(self, ssn, data):
         """ This checks for multiple varies of SSN """
-        # check_data = self.checking_if_in_data(data, ssn)
         error_list = []
-        check_int, int_error = self.digitCheck(ssn)
-        check_len, length_error = self.lenSSN(ssn)
-        check_date, date_error = self.dateCheckSSN(ssn)
+        check_int, int_error = self.digitCheck(ssn) # Checks if input is digits
+        check_len, length_error = self.lenSSN(ssn) # Checks length if input
+        check_date, date_error = self.dateCheckSSN(ssn) # Checks if dates are valid
         if int_error:
             error_list.append(int_error)
         if length_error:
             error_list.append(length_error)
         if date_error:
             error_list.append(date_error)
-        if check_int and check_len and check_date:# and check_data:
+        if check_int and check_len and check_date: # If all these return True SSN is valid
             return True, None
         return False, error_list
     
@@ -68,7 +67,6 @@ class UserInputCheck:
                 return False
         else:
             return False
-        #    print("Must be 1, 2 or 3")
 
     def checkEmail(self, email):
         """ This checks validation for email (only numbers and alphabet) no longer then 20 letters """
@@ -156,8 +154,8 @@ class UserInputCheck:
 
     def nameCheck(self, name):
         """ This splits name and checks in two parts (only takes first and last name) only alpha """
-        name_list = name.split(" ")
-        first_name = name_list[0]
+        name_list = name.split(" ") # Splits name on spaces
+        first_name = name_list[0] # Takes the first 
         last_name = name_list[-1]
         full_name = ''
         if first_name.isalpha() and last_name.isalpha():

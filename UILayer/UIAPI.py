@@ -630,6 +630,7 @@ class UIAPI:
         self.showSpecificWorktrip(dep_flight['flightNumber'])
 
     def showSpecificWorktrip(self, flight_num):
+        ''' Shows a specific work trip by flight number '''
         flight_list = self.__logic.showSpecificWorktrip(flight_num)
         self.__data_printer.printAllWorkTrips(flight_list)
     

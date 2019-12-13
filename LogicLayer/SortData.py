@@ -15,16 +15,16 @@ class SortData:
     def sortCaptains(self, data):
         ''' This searches through every employee and returns a list of only captains '''
         ret_list = []
-        for item in data:
-            if item['rank'] == "Captain":
+        for item in data: # Iterates through every item in the crew list
+            if item['rank'] == "Captain": # Checks if the rank == Captain and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
     def sortCopilots(self, data):
         ''' This searches through every employee and returns a list of only copilots '''
         ret_list = []
-        for item in data:
-            if item['rank'] == "Copilot":
+        for item in data: # Iterates through every item in the crew list
+            if item['rank'] == "Copilot": # Checks if the rank == Copilot and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
@@ -32,22 +32,22 @@ class SortData:
         """ Takes all crew and only keeps the flight attendants """
         ret_list = []
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant": # Checks if the rank == Flight Attendant and adds it to the return list if so
+            if item['role'] == "Cabincrew": # Checks if the rank == Flight Attendant and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
     def sortFSM(self, data):
         ''' This searches through every employee and returns a list of only flight service managers '''
         ret_list = []
-        for item in data:
-            if item['rank'] == "Flight Service Manager":
+        for item in data: # Iterates through every item in the crew list
+            if item['rank'] == "Flight Service Manager": # Checks if the rank == Flight Service Manager and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
     def sortCabincrew(self, data):
         ret_list = []
-        for item in data:
-            if item['role'] == "Cabincrew":
+        for item in data: # Iterates through every item in the crew list
+            if item['role'] == "Cabincrew": # Checks if the role == Cabincrew and adds it to the return list if so
                 ret_list.append(item)
         return ret_list
     
@@ -69,14 +69,14 @@ class SortData:
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
         for item in data: # Iterates through every item in the crew list
-            if item['rank'] == "Flight Attendant" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
+            if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
                 return item
         return None
     
     def sortPilotsByPlane(self, data, plane_type):
-        """ This  """
+        """ This checks if pilot has license for set plane """
         ret_list = []
-        for item in data:
+        for item in data: # Iterates through every item in the aircraft list
             if item['role'] == "Pilot" and item['licence'] == plane_type: # Checks if employee is pilot and if they have an active licence for the chosen plane
                 ret_list.append(item)
         return ret_list
@@ -85,15 +85,17 @@ class SortData:
         pass
     
     def sortEmpTrips(self, data_list, ssn):
+        ''' This sorts emps that are on flight trip '''
         ret_list = []
-        for item in data_list:
-            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+        for item in data_list: # Iterates through every item in the flight list
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn: # Checks if emp is on the trip
                 ret_list.append(item)
         return ret_list
 
     def dateSorter(self, data, date):
+        ''' This sorts by date '''
         ret_list = []
-        for item in data:
+        for item in data: # Iterates through every item in the flight list 
             parsed_item_date = dateutil.parser.parse(item['departure'])
             item_date = str(parsed_item_date.date())
             if item_date == date:
@@ -101,6 +103,7 @@ class SortData:
         return ret_list
 
     def sortOrderByPlane(self, data):
+        ''' This sorts by plane '''
         ret_list = []
         for item in data:
             if item['licence'] == 'NABAE146':
@@ -113,17 +116,19 @@ class SortData:
                 ret_list.append(item)
         return ret_list
 
+
     def weekSorter(self, data, start_date):
+        ''' This returns a week starting from starting date input '''
         ret_list = []
-        date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d')
-        for i in range(8):
+        date_obj = datetime.datetime.strptime(start_date, '%Y-%m-%d') # Turns start date into usable format
+        for i in range(8): # 7 days so we go up to 8
             i = i # Bara svo það komi ekki upp error
-            for item in data:
-                parsed_item_date = dateutil.parser.parse(item['departure'])
-                item_date = str(parsed_item_date.date())
-                if item_date == str(date_obj.date()):
-                    ret_list.append(item)
-            date_obj += datetime.timedelta(days=1)
+            for item in data: # Iterates through every item in the flight list 
+                parsed_item_date = dateutil.parser.parse(item['departure']) # Takes in the departure date and turns it into usable format
+                item_date = str(parsed_item_date.date()) # Make the var above a str
+                if item_date == str(date_obj.date()): # If our start date == item in flight list
+                    ret_list.append(item) # Append item
+            date_obj += datetime.timedelta(days=1) # Add one to our counter
         return ret_list
 
 
@@ -159,68 +164,77 @@ class SortData:
         return emps_working_dict
 
     def sortForTrip(self, flight_num_list, data):
+        ''' This returns a trip with the input flight number '''
         ret_list = []
-        for item in data:
+        for item in data: # Iterates through every item in the flight list 
             if item['flightNumber'] == flight_num_list[0] or item['flightNumber'] == flight_num_list[1]:
                 ret_list.append(item)
         return ret_list
 
     def tripNumberSorter(self, flight_num, all_trips):
-        if flight_num[:2] == "NA":
+        ''' This returns both flights to and from'''
+        if flight_num[:2] == "NA": # All flightNumbers start with NA
             flight_num = flight_num[2:]
         flight_num = int(flight_num)
         ret_list = []
         for i in range(2):
             if i == 1:
                 flight_num += 1
-            for line in all_trips:
+            for line in all_trips: # Iterates through every item in the flight list 
                 if line['flightNumber'] == 'NA' + str(flight_num).zfill(4):
                         ret_list.append(line)
         return ret_list
 
     def sortForLocation(self, loc_id, data):
+        ''' This takes in location id from user and checks if it is in the file '''
         ret_list = []
         if loc_id == "KEF":
             return None
-        for item in data:
+        for item in data: # Iterates through every item in the location list
             if item['id'] == loc_id:
                 return item
         return None
 
     def sortSpecificPlane(self, data, plane_insignia):
+        ''' This checks if plane in signa is in the file '''
         for item in data:
-            if item['planeInsignia'] == plane_insignia:
+            if item['planeInsignia'] == plane_insignia:  # Iterates through every item in the aircraft list
                 return item
         return None
     
     def sortSpecificCaptain(self, data, ssn):
+        ''' This checks if a specific captain is in the file '''
         for item in data:
-            if item['ssn'] == ssn and item['rank'] == 'Captain':
+            if item['ssn'] == ssn and item['rank'] == 'Captain':  # Iterates through every item in the crew list
                 return item
         return None
     
     def sortSpecificCopilot(self, data, ssn):
-        for item in data:
-            if item['ssn'] == ssn and item['rank'] == 'Copilot':
+        ''' This checks if a specific copilot is in the file '''
+        for item in data: # Iterates through every item in the crew list
+            if item['ssn'] == ssn and item['rank'] == 'Copilot':  
                 return item
         return None
     
     def sortSpecificFSM(self, data, ssn):
-        for item in data:
-            if item['ssn'] == ssn and item['rank'] == 'Flight Service Manager':
+        ''' This checks if a specific flight service manager is in the file '''
+        for item in data: # Iterates through every item in the crew list
+            if item['ssn'] == ssn and item['rank'] == 'Flight Service Manager': 
                 return item
         return None
     
     def sortSpecificAttendant(self, data, ssn):
-        for item in data:
+        ''' This checks if a specific flight attendant is in the file '''
+        for item in data: # Iterates through every item in the crew list
             if item['ssn'] == ssn and item['rank'] == 'Flight Attendant':
                 return item
         return None
     
     def sortEmpTripsForWeek(self, data, start_date, ssn):
+        ''' This checks if a certain employee is working that week '''
         ret_list = []
         all_week_trips = self.weekSorter(data, start_date)
-        for item in all_week_trips:
-            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn:
+        for item in all_week_trips: # Iterates through every item in the flight list
+            if item['captain'] == ssn or item['copilot'] == ssn or item['fsm'] == ssn or item['fa1'] == ssn or item['fa2'] == ssn: # Returns every employee on that trip
                 ret_list.append(item)
         return ret_list
