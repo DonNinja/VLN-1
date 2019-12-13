@@ -127,55 +127,36 @@ class SortData:
         return ret_list
 
 
-    def empsnotatwork(self,trips,data):
-        emps_notworking = []
+    def empsNotAtWork(self, all_emps, emps_at_work):
+        ret_list = []
+        for emp in all_emps:
+            if emp['ssn'] not in emps_at_work:
+                ret_list.append(emp['ssn'])
+        return ret_list
 
-        for line in trips:
-            comparedate = line["departure"]
-            comparedate = comparedate.split("T")
-            comparedate1 = line["arrival"]
-            comparedate1 = comparedate1.split("T")
-            if comparedate[0] != data or comparedate1[0] != data:
-                if line["captain"] != "X":
-                    emps_notworking.append(line["captain"])
-                elif line["copilot"] != "X":
-                    emps_notworking.append(line["copilot"])
-                elif line["fsm"] != "X":
-                    emps_notworking.append(line["fsm"])
-                elif line["fa1"] != "X":
-                    emps_notworking.append(line["fa1"])
-                elif line["fa2"] != "X":
-                    emps_notworking.append(line["fa2"])
-
-        return emps_notworking
-
-
-
-    def empsatwork(self,trips,data):
-        emps_working = []
+    def empsAtWork(self, trips, date):
+        emps_working_dict = {}
         
-        
-        for line in trips:
-            comparedate = line["departure"]
-            comparedate = comparedate.split("T")
-            comparedate1 = line["arrival"]
-            comparedate1 = comparedate1.split("T")
-            if comparedate[0] == data or comparedate1[0] == data:
-                if line["arrivingAt"] != "KEF":
-                    emps_working.append(line["arrivingAt"])
-                    if line["captain"] != "X":
-                        emps_working.append(line["captain"])
-                        if line["copilot"] != "X":
-                            emps_working.append(line["copilot"])
-                            if line["fsm"] != "X":
-                                emps_working.append(line["fsm"])
-                                if line["fa1"] != "X":
-                                    emps_working.append(line["fa1"])
-                                    if line["fa2"] != "X":
-                                        emps_working.append(line["fa2"])
-            
-
-        return emps_working
+        for item in trips:
+            dict_list = []
+            dep_compare_date = item["departure"]
+            dep_compare_date = dep_compare_date.split("T")
+            arr_compare_date = item["arrival"]
+            arr_compare_date = arr_compare_date.split("T")
+            if dep_compare_date[0] == date or arr_compare_date[0] == date:
+                if item["arrivingAt"] != "KEF":
+                    if item["captain"] != "X":
+                        dict_list.append(item['captain'])
+                    if item["copilot"] != "X":
+                        dict_list.append(item['copilot'])
+                    if item["fsm"] != "X":
+                        dict_list.append(item['fsm'])
+                    if item["fa1"] != "X":
+                        dict_list.append(item['fa1'])
+                    if item["fa2"] != "X":
+                        dict_list.append(item['fa2'])
+                    emps_working_dict[item['arrivingAt']] = dict_list
+        return emps_working_dict
 
     def sortForTrip(self, flight_num_list, data):
         ret_list = []
@@ -196,7 +177,7 @@ class SortData:
                 if line['flightNumber'] == 'NA' + str(flight_num).zfill(4):
                         ret_list.append(line)
         return ret_list
-    
+
     def sortForLocation(self, loc_id, data):
         ret_list = []
         if loc_id == "KEF":
@@ -205,7 +186,7 @@ class SortData:
             if item['id'] == loc_id:
                 return item
         return None
-    
+
     def sortSpecificPlane(self, data, plane_insignia):
         for item in data:
             if item['planeInsignia'] == plane_insignia:

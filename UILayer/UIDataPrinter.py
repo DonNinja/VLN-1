@@ -134,12 +134,28 @@ class UIDataPrinter:
         input("\nPress enter to continue...")
 
 
-    def printempsnotworking(self,emp_list):
-        print("employees not working")
-        for i in emp_list:
-            print(i)
+    def printEmpsNotWorking(self, emp_list):
+        print("\nThese employees are not working on the inputted date")
+        line = "║{:^14}║".format("Employee SSN")
+        self.printTopLine(len(line))
+        print(line)
+        self.printSeparator(len(line))
+        for val in emp_list:
+            print("║{:^14}║".format(val))
+        # for key in emp_dict:
+        #     for val in emp_dict[key]:
+        #         print('║{:^14}║'.format(val))
+        self.printBotLine(len(line))
+        input("\nPress enter to continue...")
 
-    def printempsworking(self,emp_list):
-        print("employees working")
-        for i in emp_list:
-            print(i)
+    def printEmpsWorking(self, emp_dict):
+        print("\nThese employees are working on the inputted date")
+        line = "║{:^14}│{:^14}║".format("Employee SSN", "Destination ID")
+        self.printTopLine(len(line))
+        print(line)
+        self.printSeparator(len(line))
+        for key in emp_dict:
+            for val in emp_dict[key]:
+                print('║{:^14}│{:^14}║'.format(val, key))
+        self.printBotLine(len(line))
+        input("\nPress enter to continue...")
