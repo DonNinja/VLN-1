@@ -110,7 +110,7 @@ class UserUI:
         is_emp, data = self.showEmployeeSSN()
         if is_emp:
             self.whileEditingEmpScreen(data, data['role'])
-        else :
+        else:
             pass
 
     def pilotSSN(self):

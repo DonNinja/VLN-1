@@ -25,26 +25,21 @@ class SortData:
         ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['ssn'] == ssn: # Checks if the SSN is correct and returns it if so, else returns none
-                ret_list.append(item)
-                return ret_list
+                return item
         return None
     
     def sortPilotSSN(self, data, ssn):
         """ This returns the pilot with the inputted SSN, else None if the pilot is not found """
-        ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['role'] == "Pilot" and item['ssn'] == ssn: # Checks if the role == Pilot and the SSN is correct and returns it if so, else returns none
-                ret_list.append(item)
-                return ret_list
+                return item
         return None
     
     def sortAttendantSSN(self, data, ssn):
         """ This returns the flight attendant with the inputted SSN, else None if the flight attendant is not found """
-        ret_list = []
         for item in data: # Iterates through every item in the crew list
             if item['role'] == "Cabincrew" and item['ssn'] == ssn: # Checks if the rank == Flight Attendant and the SSN is correct and returns it if so, else returns none
-                ret_list.append(item)
-                return ret_list
+                return item
         return None
     
     def sortPilotsByPlane(self, data, plane_type):
@@ -109,8 +104,9 @@ class SortData:
     
     def sortForLocation(self, loc_id, data):
         ret_list = []
+        if loc_id == "KEF":
+            return None
         for item in data:
             if item['id'] == loc_id:
-                ret_list.append(item)
                 return item
         return None

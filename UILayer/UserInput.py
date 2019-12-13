@@ -72,7 +72,35 @@ class UserInput:
         #Check hvort að kennitalan tilheyri einhverjum starfsmanni
         return ssn
 
+    def addTripDest(self):
+        return input("\nEnter trip destination id (Not KEF): ").upper()
     
+    def addTripDepTime(self):
+        print("\nNow entering a departure time and date:")
+        work_dep_day = input("Enter a day (dd): ")
+        work_dep_month = input("Enter a month (mm): ")
+        work_dep_year = input("Enter a year (yyyy): ")
+        work_dep_hour = input("Enter an hour (HH): ")
+        work_dep_min = input("Enter minutes (MM): ")
+        work_dep_sec = "00"
+        work_departure_time = "{}-{}-{} {}:{}:{}".format(work_dep_year, work_dep_month, work_dep_day, work_dep_hour, work_dep_min, work_dep_sec)
+        return datetime.datetime.strptime(work_departure_time, '%Y-%m-%d %H:%M:%S')
+    
+    def addTripPlaneID(self):
+        return input("\nEnter plane insignia (3 letters) (Keep empty if you don't want to enter one): ").upper()
+    
+    def addTripPilot(self):
+        return input("\nEnter the Pilot's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripCopilot(self):
+        return input("\nEnter the Co-Pilot's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripFSM(self):
+        return input("\nEnter a flight service manager's SSN (Keep empty if you don't want to enter one): ")
+    
+    def addTripFA(self):
+        return input("\nEnter a flight attendant's SSN (Keep empty if you don't want to enter one): ")
+
     def addWorkTrip(self):
         work_trip_data_list = []
         work_destination = input("\nDeparting from: ")
@@ -96,8 +124,7 @@ class UserInput:
         dep_time_obj = datetime.datetime.strptime(work_departure_time, '%Y-%m-%dT%H:%M:%S')
         work_trip_data_list.append(dep_time_obj)
         
-        work_arrival_time = dep_time_obj
-        arr_time_obj = work_arrival_time + flight_time
+        arr_time_obj = dep_time_obj + flight_time
         work_trip_data_list.append(arr_time_obj)
 
         planeID = input("\nEnter planeID: ")
@@ -138,6 +165,9 @@ class UserInput:
 
     def enterVariable(self, to_enter):
         return input("\nEnter a new {}: ".format(to_enter))
+
+    def enterEmail(self):
+        return input("\nEnter a new email (@NaNAir.is will be added to it): ")
 
     def askForDate(self):
         '''Asking for a specific date to show work trips by day'''

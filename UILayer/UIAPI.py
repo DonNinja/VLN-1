@@ -86,14 +86,14 @@ class UIAPI:
 
     def editEmail(self, data):
         """ This calls the __inputter and calls __logic to update the file, then calls a function to show the updated employee """
-        new_var = self.__inputter.enterVariable('email')
+        new_var = self.__inputter.enterEmail()
         email, error_msg = self.__logic.checkEmail(new_var)
         while not(email):
             print(error_msg)
-            new_var = self.__inputter.enterVariable('email')
+            new_var = self.__inputter.enterEmail()
             email = self.__logic.checkEmail(new_var)
         else:
-            self.__logic.updateEmp(data, new_var, 'email')
+            self.__logic.updateEmp(data, email, 'email')
             self.showSpecificEmp(data['ssn'])
 
     def editAddress(self, data):
@@ -134,9 +134,8 @@ class UIAPI:
     
     def editLicense(self, data):
         new_var = self.__inputter.addEmpLicens('plane license')
-        licens, error_msg = self.__logic.checkLicens(new_var)
+        licens = self.__logic.checkLicens(new_var)
         while not(licens):
-            print(error_msg)
             new_var = self.__inputter.addEmpLicens('plane license')
             licens = self.__logic.checkLicens(new_var)
         else:
@@ -258,7 +257,46 @@ class UIAPI:
     
     def addWorkTrip(self):
         """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
-        data_list = self.__inputter.addWorkTrip()
+        data_list = []
+        # flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2,fullyManned
+        trip_dep_loc = "KEF"
+        trip_arr_loc = self.__inputter.addTripDest()
+        while not(self.__logic.checkLocID(trip_arr_loc)):
+            print("\nLocation does not exist or is written incorrectly, also can't be KEF")
+            trip_arr_loc = self.__inputter.addTripDest()
+        trip_dep_time = self.__inputter.addTripDepTime()
+        trip_arr_time = self.__logic.calcFlightTime(trip_dep_time, trip_arr_loc)
+        trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
+        trip_plane_id = self.__logic.checkIfEmpty(trip_plane_id)
+        if trip_plane_id != "X":
+            trip_plane_id = "NA-" + trip_plane_id
+        trip_captain = self.__inputter.addTripPilot() # Can be empty
+        trip_captain = self.__logic.checkIfEmpty(trip_captain)
+        trip_copilot = self.__inputter.addTripCopilot() # Can be empty
+        trip_copilot = self.__logic.checkIfEmpty(trip_copilot)
+        trip_fsm = self.__inputter.addTripFSM() # Can be empty
+        trip_fsm = self.__logic.checkIfEmpty(trip_fsm)
+        data_list = [trip_dep_loc, trip_arr_loc, trip_dep_time, trip_arr_time, trip_plane_id, trip_captain, trip_copilot, trip_fsm] # 0 - 7
+        for i in range(2):
+            add_more = input("Would you like to enter more flight attendants ('Y' if yes): ").upper()
+            if add_more == "Y":
+                trip_fa = self.__inputter.addTripFA()
+                trip_fa = self.__logic.checkIfEmpty(trip_fa)
+                data_list.append(trip_fa) # 8 & 9
+            else:
+                trip_fa = "X"
+                if i == 0:
+                    data_list.append(trip_fa) # Can be empty 8
+                    data_list.append(trip_fa) # Can be empty 9
+                    break
+                else:
+                    data_list.append(trip_fa) # Can be empty 9
+                    break
+        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time)
+        data_list.append(ret_trip) # 10
+        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc)
+        data_list.append(ret_flight_time) # 11
+        data_list.append("No") # 12
         self.__logic.addWorkTrip(data_list)
 
     def addLocation(self):

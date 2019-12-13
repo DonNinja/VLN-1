@@ -1,6 +1,8 @@
 from DataLayer.Data import DataAPI
 from LogicLayer.SortData import SortData
 from LogicLayer.UserInputCheck import UserInputCheck
+import datetime
+TURNAROUNDTIME = 1
 
 class LogicAPI():
     def __init__(self):
@@ -131,3 +133,22 @@ class LogicAPI():
     
     def updateLocation(self, data, new_data, field):
         self.__data.updateLocation(data, new_data, field)
+    
+    def calcFlightTime(self, dep_time, loc_id):
+        all_locs = self.__data.getLocations()
+        location = self.__data_sorter.sortForLocation(loc_id, all_locs)
+        loc_hour, loc_min = location['flightTime'].split(".")
+        loc_hour = int(loc_hour)
+        loc_min = int(loc_min)
+        dep_time += datetime.timedelta(hours=loc_hour, minutes=loc_min)
+        return dep_time
+
+    def calcTurnAroundTime(self, arr_time):
+        arr_time += datetime.timedelta(hours=TURNAROUNDTIME)
+        return arr_time
+    
+    def checkIfEmpty(self, inp):
+        if inp == "":
+            return "X"
+        else:
+            return inp

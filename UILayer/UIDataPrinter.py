@@ -110,7 +110,7 @@ class UIDataPrinter:
 
     def printAllWorkTrips(self, data_list):
         """ This receives a list of every flight and prints them out neatly """
-        line = '║{:^13}│{:^14}│{:^11}│{:^19}│{:^19}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}║'.format('Flight number', 'Departing from', 'Arriving at', 'Departure time', 'Arrival time', 'Aircraft ID', 'Captain SSN', 'Copilot SSN', 'Flight SM SSN', 'Flight att 1 SSN', 'Flight att 2 SSN')
+        line = '║{:^13}│{:^14}│{:^11}│{:^19}│{:^19}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format('Flight number', 'Departing from', 'Arriving at', 'Departure time', 'Arrival time', 'Aircraft ID', 'Captain SSN', 'Copilot SSN', 'Flight SM SSN', 'Flight att 1 SSN', 'Flight att 2 SSN', 'Fully manned')
         self.printTopLine(len(line))
         print(line)
         self.printSeparator(len(line))
@@ -131,6 +131,6 @@ class UIDataPrinter:
             arr_time_clock = parsed_arr_time.time()
             correct_arr_time = "{:02d}.{}.{} {}".format(arr_time_day, arr_time_month, arr_time_year, arr_time_clock)
             
-            print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2']))
+            print('║{:^13}│{:^14}│{:^11}│{:^14}│{:^12}│{:^11}│{:^11}│{:^11}│{:^13}│{:^16}│{:^16}│{:^12}║'.format(trip['flightNumber'], trip['departingFrom'], trip['arrivingAt'], correct_dep_time, correct_arr_time, trip['aircraftID'], trip['captain'], trip['copilot'], trip['fsm'], trip['fa1'], trip['fa2'], trip['fullyManned']))
         self.printBotLine(len(line))
         input("\nPress enter to continue...")
