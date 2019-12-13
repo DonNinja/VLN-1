@@ -90,11 +90,10 @@ class UIDataPrinter:
                 loc_hour, loc_min = loc['flightTime'].split(".")
                 print('║{:^3}│{:^13}│{:^13}│{:^20}│   {}h{:02d}m   │{:^19}│{:^20}│{:^20}║'.format(loc['id'], loc['destination'], loc['country'], loc['airport'], loc_hour, int(loc_min), loc['distanceFromIceland'], loc['contactName'], loc['contactPhone']))
             self.printBotLine(len(line))
+            input("\nPress enter to continue...")
             return True
         else:
             return False
-        self.printBotLine(len(line))
-        input("\nPress enter to continue...")
     
     def printSingleLocation(self, location):
         """ This prints every location from the data list """
