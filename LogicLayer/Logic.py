@@ -70,7 +70,10 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
     def checkSSN(self, ssn, data):
-        return self.__user_check.checkSSN(ssn, data)
+        check_ssn, err_msg = self.__user_check.checkSSN(ssn, data)
+        if check_ssn:
+            check_ssn, err_msg = self.__data_check.checkIfExists(ssn, 'ssn', data)
+        return check_ssn, err_msg
 
 
     def checkName(self, name):
@@ -80,7 +83,16 @@ class LogicAPI():
         return self.__user_check.checkRank(rank, emp_type)
 
     def checkEmail(self, email):
-        return self.__user_check.checkEmail(email)
+        all_emps = self.showAllEmps()
+        email_check, err_msg_list = self.__user_check.checkEmail(email)
+        if email_check:
+            email_check, err_msg_str = self.__data_check.checkIfExists(email+"@NaNAir.is", 'email', all_emps) # Checks if the email already exists in the file, as 2 employees can't have the same email address
+            if type(err_msg_list) == list: # The SSN check returns an error list, so this is a check to see if it's returning a list or a string and returns the appropriate thing for the appropriate print
+                err_msg_list = [err_msg_str]
+                return email_check, err_msg_list
+            else:
+                return email_check, err_msg_str
+        return email_check, err_msg_list
 
     def checkLicens(self, licens):
         return self.__user_check.checkLicens(licens)
@@ -288,3 +300,7 @@ class LogicAPI():
             return True
         else:
             return False
+    
+    def showEmpWeekTrips(self, ssn, start_date):
+        all_trips = self.showAllWorkTrips()
+        return self.__data_sorter.sortEmpTripsForWeek(all_trips, start_date, ssn)

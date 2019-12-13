@@ -355,11 +355,12 @@ class UIAPI:
                 else:
                     data_list.append(trip_fa) # Can be empty 9
                     break
-        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time)
+        
+        ret_trip = self.__logic.calcTurnAroundTime(trip_arr_time) # This just adds 1 hour to the return trip after landing
         data_list.append(ret_trip) # 10
-        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc)
+        ret_flight_time = self.__logic.calcFlightTime(ret_trip, trip_arr_loc) # This calculates the time it takes to fly from A to B by looking at the csv file
         data_list.append(ret_flight_time) # 11
-        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm)
+        flight_fully_manned = self.__logic.checkAddIfFullyManned(trip_plane_id, trip_captain, trip_copilot, trip_fsm) # This does a check and sees if it's fully manned
         data_list.append(flight_fully_manned) # 12
         self.__logic.addWorkTrip(data_list)
 
@@ -465,3 +466,9 @@ class UIAPI:
         self.__data_printer.printWorkTrip(flight_list)
         
         self.__data_printer.printAllEmps(data_list)
+    
+    def showEmpWeekTrips(self):
+        ssn = self.__inputter.enterVariable('SSN')
+        date = self.__inputter.askForDate()
+        data_list = self.__logic.showEmpWeekTrips(ssn, date)
+        self.__data_printer.printAllWorkTrips(data_list)
