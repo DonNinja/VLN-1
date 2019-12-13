@@ -70,7 +70,10 @@ class LogicAPI():
         return self.__data_sorter.sortPilotSSN(all_emps, ssn)
 
     def checkSSN(self, ssn, data):
-        return self.__user_check.checkSSN(ssn, data)
+        check_ssn, err_msg = self.__user_check.checkSSN(ssn, data)
+        if check_ssn:
+            check_ssn, err_msg = self.__data_check.checkIfExists(ssn, 'ssn', data)
+        return check_ssn, err_msg
 
     def checkName(self, name):
         return self.__user_check.checkName(name)
@@ -79,7 +82,11 @@ class LogicAPI():
         return self.__user_check.checkRank(rank, emp_type)
 
     def checkEmail(self, email):
-        return self.__user_check.checkEmail(email)
+        all_emps = self.showAllEmps()
+        email_check, err_msg = self.__user_check.checkEmail(email)
+        if email_check:
+            email_check, err_msg = self.__data_check.checkIfExists(email, 'email', all_emps)
+        return email_check, err_msg
 
     def checkLicens(self, licens):
         return self.__user_check.checkLicens(licens)
