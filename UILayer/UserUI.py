@@ -272,7 +272,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("At work screen")
             choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing , "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showempatwork , "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
@@ -288,7 +288,7 @@ class UserUI:
         while inp != "B":
             self.__ui_api.UIHeaderDisplay("Not at work screen")
             choice_list = ["1 - Show By Day", "2 - Show By Week", BACK_STR, QUIT_STR]
-            choice_dict = {"1" : self.doNothing, "2" : self.doNothing, "3" : self.doNothing, "4" : self.doNothing, "B" : self.back, "Q" : sys.exit}
+            choice_dict = {"1" : self.__ui_api.showempnotatwork, "2" : self.doNothing, "B" : self.back, "Q" : sys.exit}
             self.__ui_api.UIDisplay(choice_list)
             inp = self.askForInput()
             checking = self.inputCheck(inp,choice_dict)
