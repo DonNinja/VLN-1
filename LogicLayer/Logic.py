@@ -111,3 +111,11 @@ class LogicAPI():
     def sortPilotByPlane(self):
         data_list = self.__data.getEmps()
         return self.__data_sorter.sortOrderByPlane(data_list)
+
+    
+    def showempnotworking(self,data):
+        trips = self.showAllWorkTrips()
+        emp = self.__data_sorter.empsnotatwork(trips,data)
+        return emp
+
+

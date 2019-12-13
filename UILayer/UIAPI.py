@@ -283,3 +283,8 @@ class UIAPI:
         data_list = self.__logic.sortPilotByPlane()
         self.__data_printer.printAllEmps(data_list)
 
+
+    def showempnotatwork(self):
+        data = self.__inputter.empnotatwork()
+        emp = self.__logic.showempnotworking(data)
+

@@ -98,12 +98,12 @@ class UserInput:
         planeID = input("Enter planeID: ")
         work_trip_data_list.append(planeID)
 
-        work_pilot_ssn = input("Enter the Pilot's SSN: ")
+        work_pilot_ssn = input("Enter the Pilot's SSN or X if you wish to do it later: ")
         work_trip_data_list.append(work_pilot_ssn)
-        work_copilot_ssn = input("\nEnter the Co-Pilot's SSN: ")
+        work_copilot_ssn = input("\nEnter the Co-Pilot's SSN or X if you wish to do it later: ")
         work_trip_data_list.append(work_copilot_ssn)
 
-        work_attendant = input("\nEnter a flight attendant's SSN: ")
+        work_attendant = input("\nEnter a flight attendant's SSN or X if you wish to do it later: ")
         work_trip_data_list.append(work_attendant)
         work_trip_data_list.append(flight_time)
         print(work_trip_data_list)
@@ -174,3 +174,10 @@ class UserInput:
         year = input("Enter year (YYYY): ")
         date = year + "-" + month + "-" + day
         return date
+
+
+    def empnotatwork(self):
+        date = input("\nEnter a date (YYYY-MM-DDTHH:MM:SS): ")
+        
+        return date
+

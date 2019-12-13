@@ -80,3 +80,15 @@ class SortData:
                     ret_list.append(item)
             date_obj += datetime.timedelta(days=1)
         return ret_list
+
+
+    def empsnotatwork(self,trips,data):
+        emps_notworking = []
+        data = str(data)
+        for line in trips:
+            if line["departure"] == data:
+                emps_notworking.append(line["captain"])
+                emps_notworking.append(line["copilot"])
+                emps_notworking.append(line["fsm"])
+        return emps_notworking
+
