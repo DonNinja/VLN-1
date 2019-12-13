@@ -190,3 +190,6 @@ class LogicAPI():
     
     def addLocation(self, data_list):
         self.__data.registerLocation(data_list)
+
+    def updateWorkTrip(self, data, new_var, field):
+        self.__data.updateWorkTrip(data, new_var, field)

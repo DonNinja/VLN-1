@@ -106,5 +106,5 @@ class SortData:
         for line in all_trips:
             if line['flightNumber'] == 'NA' + data:
                 if line[field] == 'X':
-                    ret_list.append(new_var)
+                    ret_list.append(line)
         return ret_list

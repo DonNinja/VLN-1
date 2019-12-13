@@ -46,7 +46,7 @@ class DataAPI:
         return self.__reader.readDestinations()
     
     def getTrips(self):
-        return self.__reader.readPastFlights()
+        return self.__reader.readAllFlights()
 
     def registerWorkTrip(self,data_list):
         self.__register.registerWorkTrip(data_list)
@@ -54,3 +54,12 @@ class DataAPI:
 
     def registerLocation(self, data_list):
         self.__register.registerLocation(data_list)
+
+    def updateWorkTrip(self, data, new_var, field):
+        data[field] = new_var
+        flight_list = self.__reader.readAllFlights()
+        for item in flight_list:
+            if item['flightNumber'] == data['flightNumber']:
+                item.update(data)
+            break
+        self.__updater.updateWorkTrip(flight_list)

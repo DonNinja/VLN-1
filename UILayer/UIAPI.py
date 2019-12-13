@@ -310,8 +310,8 @@ class UIAPI:
 
     def editFlightCaptain(self, data):
         new_var = self.__inputter.enterVariable('Flight Captain')
-        self.__logic.updateFlightCaptain(data, new_var, 'captain')
-        self.showSpecificWorktrip(data['flight number'])
+        self.__logic.updateWorkTrip(data, new_var, 'captain')
+        self.showSpecificWorktrip(flight_num['flight number'])
 
     def editFlightCopilot():
         pass
