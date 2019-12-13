@@ -24,6 +24,10 @@ class LogicAPI():
         all_emps = self.__data.getEmps()
         return self.__data_sorter.sortAttendants(all_emps) # Sorts through all_emps and returns only flight attendants
     
+    def showAllCabincrew(self):
+        all_emps = self.__data.getEmps()
+        return self.__data_sorter.sortCabincrew(all_emps) # Sorts through all emps and returns cabincrew
+    
     def showAllPlanes(self):
         """ This returns a list of every plane so the UI can print them out """
         return self.__data.getAirplanes()
@@ -148,10 +152,11 @@ class LogicAPI():
         return arr_time
     
     def checkIfEmpty(self, inp):
+        ''' This checks if the inputted string is empty and returns True if so, else return False '''
         if inp == "":
-            return "X"
+            return True
         else:
-            return inp
+            return False
     
     def checkAddIfFullyManned(self, aircraftID, captain, copilot, fsm):
         if aircraftID != "X" and captain != "X" and copilot != "X" and fsm != "X":
@@ -167,3 +172,37 @@ class LogicAPI():
             else:
                 item['fullyManned'] = "No"
         
+    def checkIfPlane(self, plane_id):
+        all_planes = self.showAllPlanes()
+        if self.__data_sorter.sortSpecificPlane(all_planes, plane_id):
+            return True
+        else:
+            return False
+
+    def checkIfCaptain(self, ssn):
+        all_pilots = self.showAllPilots()
+        if self.__data_sorter.sortSpecificCaptain(all_pilots, ssn):
+            return True
+        else:
+            return False
+        
+    def checkIfCopilot(self, ssn):
+        all_pilots = self.showAllPilots()
+        if self.__data_sorter.sortSpecificCopilot(all_pilots, ssn):
+            return True
+        else:
+            return False
+    
+    def checkIfFSM(self, ssn):
+        all_cabincrew = self.showAllCabincrew()
+        if self.__data_sorter.sortSpecificFSM(all_cabincrew, ssn):
+            return True
+        else:
+            return False
+        
+    def checkIfFA(self, ssn):
+        all_attendants = self.showAllAttendants()
+        if self.__data_sorter.sortSpecificAttendant(all_attendants, ssn):
+            return True
+        else:
+            return False

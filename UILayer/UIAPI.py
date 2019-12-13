@@ -256,9 +256,8 @@ class UIAPI:
         self.__data_printer.printAllWorkTrips(data_list)
     
     def addWorkTrip(self):
-        """ This calls the inputter so the user can input the work trips's data, then calls logicAPI to add both flights to the flight.csv file """
+        """ This calls the inputter so the user can input the work trip's data, then calls logicAPI to add both flights to the flight.csv file """
         data_list = []
-        # flightNumber,departingFrom,arrivingAt,departure,arrival,aircraftID,captain,copilot,fsm,fa1,fa2,fullyManned
         trip_dep_loc = "KEF"
         trip_arr_loc = self.__inputter.addTripDest()
         while not(self.__logic.checkLocID(trip_arr_loc)):
@@ -267,21 +266,47 @@ class UIAPI:
         trip_dep_time = self.__inputter.addTripDepTime()
         trip_arr_time = self.__logic.calcFlightTime(trip_dep_time, trip_arr_loc)
         trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
-        trip_plane_id = self.__logic.checkIfEmpty(trip_plane_id)
-        if trip_plane_id != "X":
-            trip_plane_id = "NA-" + trip_plane_id
+        while self.__logic.checkIfEmpty(trip_plane_id) or not(self.__logic.checkIfPlane(trip_plane_id)):
+            if self.__logic.checkIfEmpty(trip_plane_id):
+                trip_plane_id = "X"
+                break
+            else:
+                trip_plane_id = "TF-" + trip_plane_id
+                if self.__logic.checkIfPlane(trip_plane_id):
+                    break
+            print("That is not a correct plane insignia")
+            trip_plane_id = self.__inputter.addTripPlaneID() # Can be empty
         trip_captain = self.__inputter.addTripPilot() # Can be empty
-        trip_captain = self.__logic.checkIfEmpty(trip_captain)
+        while self.__logic.checkIfEmpty(trip_captain) or not(self.__logic.checkIfCaptain(trip_captain)):
+            if self.__logic.checkIfEmpty(trip_captain):
+                trip_captain = "X"
+                break
+            print("That is not a correct captain's ssn")
+            trip_captain = self.__inputter.addTripPilot() # Can be empty
         trip_copilot = self.__inputter.addTripCopilot() # Can be empty
-        trip_copilot = self.__logic.checkIfEmpty(trip_copilot)
+        while self.__logic.checkIfEmpty(trip_copilot) or not(self.__logic.checkIfCopilot(trip_copilot)):
+            if self.__logic.checkIfEmpty(trip_copilot):
+                trip_copilot = "X"
+                break
+            print("That is not a correct copilot's ssn")
+            trip_copilot = self.__inputter.addTripCopilot() # Can be empty
         trip_fsm = self.__inputter.addTripFSM() # Can be empty
-        trip_fsm = self.__logic.checkIfEmpty(trip_fsm)
+        while self.__logic.checkIfEmpty(trip_fsm) or not(self.__logic.checkIfFSM(trip_fsm)):
+            if self.__logic.checkIfEmpty(trip_fsm):
+                trip_fsm = "X"
+                break
+            print("That is not a correct flight service manager's ssn")
+            trip_fsm = self.__inputter.addTripFSM() # Can be empty
         data_list = [trip_dep_loc, trip_arr_loc, trip_dep_time, trip_arr_time, trip_plane_id, trip_captain, trip_copilot, trip_fsm] # 0 - 7
         for i in range(2):
             add_more = input("Would you like to enter more flight attendants ('Y' if yes): ").upper()
             if add_more == "Y":
                 trip_fa = self.__inputter.addTripFA()
-                trip_fa = self.__logic.checkIfEmpty(trip_fa)
+                while self.__logic.checkIfEmpty(trip_fa) or not(self.__logic.checkIfFA(trip_fa)):
+                    trip_fa = self.__inputter.addTripFA()
+                    if self.__logic.checkIfEmpty(trip_fa):
+                        trip_fa = "X"
+                        break
                 data_list.append(trip_fa) # 8 & 9
             else:
                 trip_fa = "X"
